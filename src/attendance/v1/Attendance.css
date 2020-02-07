@@ -40,7 +40,7 @@ and open the template in the editor.
 
 .coursebtn {
 	-fx-background-color: white; 
- 	-fx-border: none
+ 	-fx-border: none;
   	-fx-color: white;
 	-fx-padding: 15px 32px;
  	-fx-text-align: center;
@@ -60,6 +60,23 @@ and open the template in the editor.
 }
 
 
+.textsm1 {
+	-fx-background-color: f4f4f4; 
+    	-fx-font: sans-serif;
+    	-fx-font-size: 12;
+    	-fx-alignment: center;
+}
+
+
+.textsm2 {
+	-fx-background-color: f4f4f4; 
+    	-fx-font: sans-serif;
+    	-fx-font-size: 12;
+	-fx-text-fill: grey;
+    	-fx-alignment: center;
+}
+
+
 #header1 {
     -fx-background-color: #EEEEEEE;
     -fx-color: blue;
@@ -74,23 +91,6 @@ and open the template in the editor.
 	-fx-background-color: white; 
     	-fx-font: sans-serif;
     	-fx-font-size: 24;
-    	-fx-alignment: center;
-}
-
-
-.textsm1 {
-	-fx-background-color: f4f4f4; 
-    	-fx-font: sans-serif;
-    	-fx-font-size: 12;
-    	-fx-alignment: center;
-}
-
-
-.textsm2 {
-	-fx-background-color: f4f4f4; 
-    	-fx-font: sans-serif;
-    	-fx-font-size: 12;
-	-fx-text-fill: grey;
     	-fx-alignment: center;
 }
 
