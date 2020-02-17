@@ -10,5 +10,5 @@ package attendance.v1.bll;
  * @author Trigger
  */
 public interface IBLL {
-    
+   // Get to work allan
 }
