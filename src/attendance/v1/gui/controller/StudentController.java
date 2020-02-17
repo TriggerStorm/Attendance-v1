@@ -10,8 +10,12 @@ import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.chart.BarChart;
+import javafx.scene.chart.PieChart;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
@@ -49,6 +53,26 @@ public class StudentController implements Initializable {
     private TextField attendance;
     @FXML
     private Button button;
+    @FXML
+    private TextField TF_code;
+    @FXML
+    private Button Bn_submit;
+    @FXML
+    private TableView<?> TBV_attendance;
+    @FXML
+    private TableColumn<?, ?> TBV_monday;
+    @FXML
+    private TableColumn<?, ?> TBV_tuesday;
+    @FXML
+    private TableColumn<?, ?> tbv_wednesday;
+    @FXML
+    private TableColumn<?, ?> TBV_thursday;
+    @FXML
+    private TableColumn<?, ?> TBV_friday;
+    @FXML
+    private BarChart<?, ?> TBV_graph;
+    @FXML
+    private PieChart TBV_pieChart;
 
     /**
      * Initializes the controller class.

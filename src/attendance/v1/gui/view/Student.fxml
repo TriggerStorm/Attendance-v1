@@ -111,13 +111,13 @@
                                     </Pane>
                                     <Pane prefHeight="100.0" prefWidth="200.0">
                                        <children>
-                                          <TextField layoutX="34.0" layoutY="50.0" prefHeight="18.0" prefWidth="91.0" promptText="Enter Code" />
+                                          <TextField fx:id="TF_code" layoutX="34.0" layoutY="50.0" prefHeight="18.0" prefWidth="91.0" promptText="Enter Code" />
                                           <Label layoutX="40.0" layoutY="-26.0" prefHeight="67.0" prefWidth="79.0" styleClass="h2" text="SCO" textAlignment="CENTER">
                                              <font>
                                                 <Font size="24.0" />
                                              </font>
                                           </Label>
-                                          <Button layoutX="49.0" layoutY="87.0" mnemonicParsing="false" text="Submit" />
+                                          <Button fx:id="Bn_submit" layoutX="49.0" layoutY="87.0" mnemonicParsing="false" text="Submit" />
                                        </children>
                                     </Pane>
                                     <Pane prefHeight="67.0" prefWidth="105.0" />
@@ -138,14 +138,14 @@
                                 <tabs>
                                   <Tab text="Calendar">
                                        <content>
-                                          <TableView prefHeight="200.0" prefWidth="200.0">
+                                          <TableView fx:id="TBV_attendance" prefHeight="200.0" prefWidth="200.0">
                                             <columns>
                                                 <TableColumn prefWidth="75.0" />
-                                              <TableColumn prefWidth="75.0" text="Monday" />
-                                              <TableColumn prefWidth="75.0" text="Tuesday" />
-                                                <TableColumn prefWidth="75.0" text="Wednesday" />
-                                                <TableColumn prefWidth="75.0" text="Thursday" />
-                                                <TableColumn prefWidth="75.0" text="Friday" />
+                                              <TableColumn fx:id="TBV_monday" prefWidth="75.0" text="Monday" />
+                                              <TableColumn fx:id="TBV_tuesday" prefWidth="75.0" text="Tuesday" />
+                                                <TableColumn fx:id="tbv_wednesday" prefWidth="75.0" text="Wednesday" />
+                                                <TableColumn fx:id="TBV_thursday" prefWidth="75.0" text="Thursday" />
+                                                <TableColumn fx:id="TBV_friday" prefWidth="75.0" text="Friday" />
                                             </columns>
                                           </TableView>
                                        </content></Tab>
@@ -153,7 +153,7 @@
                                       <content>
                                         <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                                              <children>
-                                                <BarChart>
+                                                <BarChart fx:id="TBV_graph">
                                                   <xAxis>
                                                     <CategoryAxis side="BOTTOM" />
                                                   </xAxis>
@@ -168,7 +168,7 @@
                                        <content>
                                           <AnchorPane prefHeight="200.0" prefWidth="200.0">
                                              <children>
-                                                <PieChart prefHeight="394.0" prefWidth="554.0" />
+                                                <PieChart fx:id="TBV_pieChart" prefHeight="394.0" prefWidth="554.0" />
                                              </children>
                                           </AnchorPane>
                                        </content>
