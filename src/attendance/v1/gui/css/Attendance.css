@@ -1,0 +1,125 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : Feb 3, 2020, 1:06:14 PM
+    Author     : admin
+*/
+
+
+.top-header { -fx-background-color: #eee; }
+.background { -fx-background-color: #f4f4f4; }
+.menu { -fx-background-color: #f5f5f5; }
+
+
+.banner1 {
+  	-fx-background-color: light grey
+}
+
+
+.label1 {
+  	-fx-background-color: white
+ }
+
+
+.h2 {
+   	-fx-background-color: white;
+	-fx-alignment:center;
+ 	-fx-text-align:center;
+    	-fx-font: sans-serif;
+  	-fx-font-size: 22;
+}
+
+
+.button: hover{
+        -fx-background-color: bright white; 
+}
+
+
+.coursebtn {
+	-fx-background-color: white; 
+ 	-fx-border: none;
+  	-fx-color: white;
+	-fx-padding: 15px 32px;
+ 	-fx-text-align: center;
+ 	-fx-text-decoration: none;
+ 	-fx-display: inline-block;
+  	-fx-font-size: 16px;
+}
+
+
+.space1 {
+	-fx-background-color: #EEEEEEE; 
+}
+
+
+.tabs {
+	-fx-background-color: red; 
+}
+
+
+.textsm1 {
+	-fx-background-color: f4f4f4; 
+    	-fx-font: sans-serif;
+    	-fx-font-size: 12;
+    	-fx-alignment: center;
+}
+
+
+.textsm2 {
+	-fx-background-color: f4f4f4; 
+    	-fx-font: sans-serif;
+    	-fx-font-size: 12;
+	-fx-text-fill: grey;
+    	-fx-alignment: center;
+}
+
+
+#header1 {
+    -fx-background-color: #EEEEEEE;
+    -fx-color: blue;
+    -fx-font: sans-serif;
+    -fx-font-size: 30;
+    -fx-alignment: center;
+    -fx-background-image: 
+}
+
+
+#text1 {
+	-fx-background-color: white; 
+    	-fx-font: sans-serif;
+    	-fx-font-size: 24;
+    	-fx-alignment: center;
+}
+
+
+#title{
+    	-fx-background-color: #EEEEEE;
+    	-fx-color: blue;
+    	-fx-font: sans-serif;
+    	-fx-font-size: 30;
+    	-fx-text-alignment: center;
+    	-fx-background-image: 
+}
+
+
+#message {
+    	-fx-background-color: #whitesmoke;
+}
+
+
+#logo {
+	-fx-background-image: 
+    	-fx-background-color: green;
+}
+
+
+#attendance {
+    	-fx-background-color: #f5f5f5;
+    	-fx-font: sans-serif;
+	-fx-font-size: 36;
+	-fx-text-fill: light green;
+}
+
