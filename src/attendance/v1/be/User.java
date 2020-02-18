@@ -12,7 +12,7 @@ package attendance.v1.be;
 public class User {
     private int userKey;
     private String userName;
-    private int password;
+    private String password;
     private String email;
     private int phoneNr;
     private String address;
@@ -20,7 +20,7 @@ public class User {
     private String userIMG;
     
     
- public User (int userKey, String userName,int password,String email,int phoneNr,String address,String teacher,String userIMG){
+ public User (int userKey, String userName,String password,String email,int phoneNr,String address,String teacher,String userIMG){
  
      this.userKey = userKey;
      this.userName = userName;
@@ -50,11 +50,11 @@ public class User {
         this.userName = userName;
     }
 
-    public int getPassword() {
+    public String getPassword() {
         return password;
     }
 
-    public void setPassword(int password) {
+    public void setPassword(String password) {
         this.password = password;
     }
 
