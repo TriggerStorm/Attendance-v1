@@ -5,10 +5,19 @@
  */
 package attendance.v1.bll;
 
+import attendance.v1.be.User;
+import attendance.v1.dal.IDAL;
+
 /**
  *
  * @author Trigger
  */
-public class BllManager {
+public class BllManager implements IBLL {
+    private IDAL dalManager;
+
     
+     @Override
+    public User CheckUser (String user) {
+        return dalManager.CheckUser(user);
+    }
 }
