@@ -9,6 +9,6 @@ package attendance.v1.dal;
  *
  * @author Trigger
  */
-public class MokDao {
+public class MockDao {
     //insert mok stuff
 }
