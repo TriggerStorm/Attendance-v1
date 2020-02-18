@@ -5,10 +5,13 @@
  */
 package attendance.v1.bll;
 
+import attendance.v1.be.User;
+
 /**
  *
  * @author Trigger
  */
 public interface IBLL {
-    
+        User CheckUser(String user);
+
 }
