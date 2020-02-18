@@ -10,5 +10,6 @@ package attendance.v1.dal;
  * @author Trigger
  */
 public class SomeDallClass {
-    
+   // Master dall
+           
 }
