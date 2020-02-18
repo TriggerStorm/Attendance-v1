@@ -10,5 +10,6 @@ package attendance.v1.gui.model;
  * @author Trigger
  */
 public class AttendanceModle {
+    private BllManager = new bllManager;
     
 }
