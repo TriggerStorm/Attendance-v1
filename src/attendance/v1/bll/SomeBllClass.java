@@ -10,5 +10,5 @@ package attendance.v1.bll;
  * @author Trigger
  */
 public class SomeBllClass {
-    
+    // work wrok
 }
