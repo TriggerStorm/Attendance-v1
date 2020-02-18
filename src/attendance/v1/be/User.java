@@ -9,6 +9,6 @@ package attendance.v1.be;
  *
  * @author Trigger
  */
-public class SomeBeClass {
+public class User {
     
 }
