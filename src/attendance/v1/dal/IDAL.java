@@ -5,10 +5,12 @@
  */
 package attendance.v1.dal;
 
+import attendance.v1.be.User;
+
 /**
  *
  * @author Trigger
  */
 public interface IDAL {
-    
+    User CheckUser(String user);
 }
