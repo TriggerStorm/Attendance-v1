@@ -47,8 +47,8 @@ public class LogInController implements Initializable {
     @FXML
     private void handle_login(ActionEvent event) throws IOException {
        
-        userModle.CheckUser(
-                TF_email.getText().trim(),TF_pasword.getText().trim());
+        /*userModle.CheckUser(
+                TF_email.getText().trim(),TF_pasword.getText().trim());*/
         
         Parent root1;
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/attendance/v1/gui/view/Student.fxml"));
