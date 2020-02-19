@@ -27,13 +27,13 @@ import javafx.stage.Stage;
 public class UserController implements Initializable {
 
     @FXML
-    private TextField TF_email;
+    private TextField TF_email; 
     @FXML
-    private Button Bn_ok;
+    private Button Bn_ok; // go to edit or new user scean //filp
     @FXML
-    private Button Bn_cansel;
+    private Button Bn_cansel; // done
     @FXML
-    private JFXButton bn_edit;
+    private JFXButton bn_edit; // this is a mock butten need to be remove
 
     /**
      * Initializes the controller class.
@@ -46,7 +46,8 @@ public class UserController implements Initializable {
     @FXML
     private void handle_ok(ActionEvent event) throws IOException {
         Parent root1;
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/attendance/v1/gui/view/newUser.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/attendance/v1/gui/view/newUser.fxml")); // handle_ok and handle_edit need to be 1 butten if email is new new user if its in system edit user scean. //filp
+        
         root1 = (Parent) fxmlLoader.load();
         
         fxmlLoader.<StudentController>getController();
@@ -65,7 +66,7 @@ public class UserController implements Initializable {
     @FXML
     private void handle_edit(ActionEvent event) throws IOException {
         Parent root1;
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/attendance/v1/gui/view/editUser.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/attendance/v1/gui/view/editUser.fxml")); // if email exsist it need to edit if not have to go to new user scean // filp
         root1 = (Parent) fxmlLoader.load();
         
         fxmlLoader.<StudentController>getController();
@@ -78,6 +79,12 @@ public class UserController implements Initializable {
         addStage.show();
         
         Stage stage = (Stage) bn_edit.getScene().getWindow();
+        stage.close();
+    }
+
+    @FXML
+    private void Handle_cansel(ActionEvent event) {
+        Stage stage = (Stage) Bn_cansel.getScene().getWindow();
         stage.close();
     }
     

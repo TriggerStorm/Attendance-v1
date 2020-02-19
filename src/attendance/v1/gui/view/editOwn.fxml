@@ -45,7 +45,7 @@
       <TextField fx:id="TF_confirmPassword" layoutX="354.0" layoutY="121.0" />
       <TextField fx:id="TF_email" layoutX="354.0" layoutY="166.0" />
       <TextField fx:id="TF_mobileNr" layoutX="354.0" layoutY="200.0" />
-      <Button fx:id="Bn_close" layoutX="533.0" layoutY="268.0" mnemonicParsing="false" text="Close" />
-      <Button fx:id="Bn_save" layoutX="474.0" layoutY="268.0" mnemonicParsing="false" text="Save" />
+      <Button fx:id="Bn_close" layoutX="533.0" layoutY="268.0" mnemonicParsing="false" onAction="#handle_close" text="Close" />
+      <Button fx:id="Bn_save" layoutX="474.0" layoutY="268.0" mnemonicParsing="false" onAction="#handle_save" text="Save" />
    </children>
 </AnchorPane>

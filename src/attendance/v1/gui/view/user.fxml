@@ -24,7 +24,7 @@
          </font>
       </TextField>
       <Button fx:id="Bn_ok" layoutX="209.0" layoutY="60.0" mnemonicParsing="false" onAction="#handle_ok" text="OK" />
-      <Button fx:id="Bn_cansel" layoutX="253.0" layoutY="60.0" mnemonicParsing="false" text="Cansel" />
+      <Button fx:id="Bn_cansel" layoutX="253.0" layoutY="60.0" mnemonicParsing="false" onAction="#Handle_cansel" text="Cansel" />
       <JFXButton fx:id="bn_edit" buttonType="RAISED" layoutX="202.0" layoutY="95.0" onAction="#handle_edit" style="-fx-background-color: Red;" text="edit mok" />
    </children>
 </AnchorPane>

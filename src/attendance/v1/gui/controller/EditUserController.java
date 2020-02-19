@@ -13,6 +13,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.TextField;
+import javafx.stage.Stage;
 
 /**
  * FXML Controller class
@@ -22,19 +23,19 @@ import javafx.scene.control.TextField;
 public class EditUserController implements Initializable {
 
     @FXML
-    private TextField TF_name;
+    private TextField TF_name; // need to get name of user and show in TF. // filp
     @FXML
     private TextField TF_showPassWord;
     @FXML
-    private ChoiceBox<?> CB_classes;
+    private ChoiceBox<?> CB_classes; // need to make mok date for course computersi and make it pickeble in choice box. // filp
     @FXML
-    private Button Bn_resetPassWord;
+    private Button Bn_resetPassWord; // need to reset and random gen new pass and show it in TF_showPassWord // filp
     @FXML
-    private Button Bn_add;
+    private Button Bn_add; // dont think its needed only need to select it in CB_classes(courses)// filp
     @FXML
-    private Button bn_cansel;
+    private Button bn_cansel; // done
     @FXML
-    private Button Bn_save;
+    private Button Bn_save; // need to add edit stuff to user. // filp
 
     /**
      * Initializes the controller class.
@@ -46,14 +47,18 @@ public class EditUserController implements Initializable {
 
     @FXML
     private void handle_add(ActionEvent event) {
+        // filp
     }
 
     @FXML
     private void handle_cansel(ActionEvent event) {
+        Stage stage = (Stage) bn_cansel.getScene().getWindow();
+        stage.close();
     }
 
     @FXML
     private void handle_save(ActionEvent event) {
+        // filp
     }
     
 }
