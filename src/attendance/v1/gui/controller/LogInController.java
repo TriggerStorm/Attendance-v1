@@ -5,6 +5,8 @@
  */
 package attendance.v1.gui.controller;
 
+import attendance.v1.be.User;
+import attendance.v1.gui.model.UserModel;
 import com.jfoenix.controls.JFXButton;
 import java.io.IOException;
 import java.net.URL;
@@ -32,6 +34,8 @@ public class LogInController implements Initializable {
     @FXML
     private JFXButton Bn_login;
 
+    private UserModel userModle;
+    private User user;
     /**
      * Initializes the controller class.
      */
@@ -43,7 +47,8 @@ public class LogInController implements Initializable {
     @FXML
     private void handle_login(ActionEvent event) throws IOException {
        
-       
+        userModle.CheckUser(
+                TF_email.getText().trim(),TF_pasword.getText().trim());
         
         Parent root1;
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/attendance/v1/gui/view/Student.fxml"));

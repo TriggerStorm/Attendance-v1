@@ -21,14 +21,16 @@ public class MockDao {
     }
     
     
-    public User CheckUser(String user) {
+    public User CheckUser(String user, String password) {
         if(user == mockuser1.getUserName()) {
-//          if(password == mockuser1.  getPassword {    
+          if(password == mockuser1.getPassword()) {    
             return mockuser1;
 //            {
         }
-        return null;
+        return null; // fail log in ?
     }
+        return null;
     
     
+ }
 }

@@ -12,6 +12,6 @@ import attendance.v1.be.User;
  * @author Trigger
  */
 public interface IBLL {
-        User CheckUser(String user);
+        User CheckUser(String user, String Password);
 
 }

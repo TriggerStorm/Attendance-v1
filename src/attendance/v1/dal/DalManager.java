@@ -20,7 +20,7 @@ public class DalManager implements IDAL {
     
     
     @Override
-    public User CheckUser (String user) {
-        return mockdao.CheckUser(user);
+    public User CheckUser (String user, String password) {
+        return mockdao.CheckUser(user,password);
     }
 }

@@ -17,7 +17,7 @@ public class BllManager implements IBLL {
 
     
      @Override
-    public User CheckUser (String user) {
-        return dalManager.CheckUser(user);
+    public User CheckUser (String user, String password) {
+        return dalManager.CheckUser(user, password);
     }
 }
