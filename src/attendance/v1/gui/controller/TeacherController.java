@@ -6,11 +6,15 @@
 package attendance.v1.gui.controller;
 
 import com.jfoenix.controls.JFXButton;
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
@@ -18,6 +22,7 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
+import javafx.stage.Stage;
 
 /**
  * FXML Controller class
@@ -67,7 +72,7 @@ public class TeacherController implements Initializable {
     @FXML
     private TableColumn<?, ?> TBV_Attendance;
     @FXML
-    private Button button;
+    private Button Bn_user;
 
     /**
      * Initializes the controller class.
@@ -78,19 +83,49 @@ public class TeacherController implements Initializable {
     }    
 
     @FXML
-    private void handle_editown(ActionEvent event) {
+    private void handle_editown(ActionEvent event) throws IOException {
+        Parent root1;
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/attendance/v1/gui/view/editOwn.fxml"));
+        root1 = (Parent) fxmlLoader.load();
+        
+        fxmlLoader.<StudentController>getController();
+
+        Stage addStage = new Stage();
+        Scene addScene = new Scene(root1);
+
+        
+        addStage.setScene(addScene);
+        addStage.show();
+        
+        Stage stage = (Stage) Bn_EditOwn.getScene().getWindow();
+        stage.close();
     }
 
     @FXML
     private void handleButtonAction(MouseEvent event) {
     }
 
-    @FXML
-    private void handleButtonAction(ActionEvent event) {
-    }
 
     @FXML
     private void handle_attendancecode(ActionEvent event) {
+    }
+
+    @FXML
+    private void Handle_user(ActionEvent event) throws IOException {
+        Parent root1;
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/attendance/v1/gui/view/user.fxml"));
+        root1 = (Parent) fxmlLoader.load();
+        
+        fxmlLoader.<StudentController>getController();
+
+        Stage addStage = new Stage();
+        Scene addScene = new Scene(root1);
+
+        
+        addStage.setScene(addScene);
+        addStage.show();
+        
+        
     }
     
 }

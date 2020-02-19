@@ -7,6 +7,7 @@ package attendance.v1.gui.controller;
 
 import java.net.URL;
 import java.util.ResourceBundle;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
@@ -42,5 +43,17 @@ public class EditUserController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
     }    
+
+    @FXML
+    private void handle_add(ActionEvent event) {
+    }
+
+    @FXML
+    private void handle_cansel(ActionEvent event) {
+    }
+
+    @FXML
+    private void handle_save(ActionEvent event) {
+    }
     
 }

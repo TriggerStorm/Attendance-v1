@@ -150,7 +150,7 @@
             </AnchorPane>
             <AnchorPane prefHeight="55.0" prefWidth="700.0">
                <children>
-                    <Button fx:id="button" layoutX="250.0" layoutY="41.0" onAction="#handleButtonAction" onMouseClicked="#handleButtonAction" prefHeight="37.0" prefWidth="200.0" text="Please Don't Click Me!" />
+                    <Button fx:id="Bn_user" layoutX="14.0" layoutY="23.0" onAction="#Handle_user" onMouseClicked="#handleButtonAction" prefHeight="37.0" prefWidth="123.0" text="new/edit User" />
                </children>
             </AnchorPane>
          </children>
