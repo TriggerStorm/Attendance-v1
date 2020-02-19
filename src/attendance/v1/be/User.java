@@ -18,12 +18,15 @@ public class User {
     private String email;
     private int phoneNr;
     private String address;
-    private String teacher;
+    private boolean teacher;
     private String userIMG;
     private List<String> attendance;
     
     
- public User (int userKey, String userName,String password,String email,int phoneNr,String address,String teacher,String userIMG, List<String> attendance){
+
+ public User (int userKey, String userName,String password,String email,int phoneNr,String address,boolean teacher,String userIMG, List<String> attendance){
+
+ 
  
      this.userKey = userKey;
      this.userName = userName;
@@ -85,11 +88,11 @@ public class User {
         this.address = address;
     }
 
-    public String getTeacher() {
+    public boolean getTeacher() {
         return teacher;
     }
 
-    public void setTeacher(String teacher) {
+    public void setTeacher(boolean teacher) {
         this.teacher = teacher;
     }
 

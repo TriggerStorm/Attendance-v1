@@ -13,12 +13,12 @@ import javafx.collections.ObservableList;
  *
  * @author Trigger
  */
-public class AttendanceModle {
+public class AttendanceModel {
     private BllManager bllManager;
    // private ObservableList<AttSco> ScoList;
     
 
-    public AttendanceModle() {
+    public AttendanceModel() {
         bllManager = new BllManager();
       //  getScoAttendance();
     }

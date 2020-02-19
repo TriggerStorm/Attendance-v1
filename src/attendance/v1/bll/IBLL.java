@@ -13,9 +13,13 @@ import java.util.List;
  * @author Trigger
  */
 public interface IBLL {
+
     
-        User CheckUser(String user);
+        
         List<String> addDayToAttendance(String selectedCourse);
+
+
+        int CheckUser(String email, String Password);
 
 
 }

@@ -5,6 +5,8 @@
  */
 package attendance.v1.gui.controller;
 
+import attendance.v1.be.User;
+import attendance.v1.gui.model.UserModel;
 import com.jfoenix.controls.JFXButton;
 import java.io.IOException;
 import java.net.URL;
@@ -28,10 +30,12 @@ public class LogInController implements Initializable {
     @FXML
     private TextField TF_email;
     @FXML
-    private TextField TF_pasword;
+    private TextField TF_password;
     @FXML
     private JFXButton Bn_login;
 
+    private UserModel userModle;
+    private User user;
     /**
      * Initializes the controller class.
      */
@@ -41,8 +45,25 @@ public class LogInController implements Initializable {
     }    
 
     @FXML
-    private void handle_login(ActionEvent event) throws IOException {
-       
+
+    private void handle_login(ActionEvent event) throws IOException{
+       userModle = new UserModel();
+       String loginmail = TF_email.getText().trim();
+       String passw = TF_password.getText().trim();
+       int loginstate = userModle.CheckUser(loginmail, passw);//returns an int, as it also checks if it is a teacher or a student.
+        switch (loginstate) {
+            case 1:  teacherLogin(loginmail, passw); //teacher login needs creation and then place make something like teacherLogin method in stead.
+                    break;
+            case 2:  studentLogin(loginmail, passw); //student login 
+                    break;
+            default: System.out.println("Sorry wrong authentication"); //Might want to make a popup here in stead....
+       }
+
+    }
+    private void studentLogin(String mail, String password) throws IOException
+    {
+                
+
         Parent root1;
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/attendance/v1/gui/view/Student.fxml"));
         root1 = (Parent) fxmlLoader.load();
@@ -59,5 +80,26 @@ public class LogInController implements Initializable {
         Stage stage = (Stage) Bn_login.getScene().getWindow();
         stage.close();
     }
+
+
     
+    private void teacherLogin(String mail, String password) throws IOException {
+        Parent root1;
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/attendance/v1/gui/view/Teacher.fxml"));
+        root1 = (Parent) fxmlLoader.load();
+        
+        fxmlLoader.<StudentController>getController();
+
+        Stage addStage = new Stage();
+        Scene addScene = new Scene(root1);
+
+        
+        addStage.setScene(addScene);
+        addStage.show();
+        
+        Stage stage = (Stage) Bn_login.getScene().getWindow();
+        stage.close();
+    }
+    
+
 }

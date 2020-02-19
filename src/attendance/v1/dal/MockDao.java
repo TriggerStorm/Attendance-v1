@@ -19,9 +19,11 @@ import java.util.List;
 public class MockDao {
     List<String> attendance = new ArrayList<>(8);
     private User mockuser1;
+    private User mockuser2;
     
     
     public MockDao() {
+
         String[] arr1 = {"SCO", "0", "0", "0", "0", "0", "0", "0"};
         String[] arr2 = {"SDE", "0", "0", "0", "0", "0", "0", "0"};
         String[] arr3 = {"DBOS", "0", "0", "0", "0", "0", "0", "0"};
@@ -31,7 +33,7 @@ public class MockDao {
         attendance.addAll(Arrays.asList(arr3));
         attendance.addAll(Arrays.asList(arr4));
 
-         mockuser1 = new User(1,"admin", "admin","mock@mail.com", 12345678 ,"1 Mock St" , "False", "data/mockuserIMG.jpg", attendance);
+        
     }
     
     
@@ -41,19 +43,36 @@ public class MockDao {
         mockdao.addDayToAttendance("SCO");
         //        launch(args);
 
+
+        // mockuser1 = new User(1,"admin", "admin","admin@test.com", 12345678 ,"1 Mock St" , true, "data/mockuserIMG.jpg"); // add list
+        // mockuser2 = new User(2,"student", "student","student@test.com", 12345678 ,"2 Mock St" , false, "data/mockuserIMG.jpg");//
+
     }
 
     
     
     
     
-    public User CheckUser(String user) {
-        if(user == mockuser1.getUserName()) {
-//          if(password == mockuser1.  getPassword {    
-            return mockuser1;
-//            {
+    public boolean CheckUser(String email, String password) {
+        String name = mockuser1.getEmail();
+        String passw = mockuser1.getPassword();
+        String name2 = mockuser2.getEmail();
+        String passw2 = mockuser2.getPassword();
+        if(email.equals(name) || email.equals(name2)) //remember that to compare two strings you need to use equals()
+        {
+            if(password.equals(passw) || password.equals(passw2)) //remember that to compare two strings you need to use equals()
+            {    
+            return true; //user and password match.
+            }
+            else
+            {
+            return false; // fail log in
+            }
         }
-        return null;
+        else
+        {
+        return false;// fail log in
+        }
     }
     
     
@@ -77,5 +96,22 @@ public class MockDao {
        return null;
     }
     
-    
+
+    public boolean CheckTeacher(String email)
+    {
+        if(email.equals(mockuser1.getEmail()))
+        {
+            return mockuser1.getTeacher();//for now we just return the boolean, later it will probably be easier to have sorted the users into students and teachers beforehand, as the DB can sort this out faster.
+        }
+        else if(email.equals(mockuser1.getEmail()))
+        {
+            return mockuser2.getTeacher();
+        }
+        else
+        {
+            return false;
+        }
+    }
+
+
 }

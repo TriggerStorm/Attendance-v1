@@ -15,8 +15,6 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.chart.BarChart;
-import javafx.scene.chart.PieChart;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
@@ -31,10 +29,12 @@ import javafx.stage.Stage;
  *
  * @author Trigger
  */
-public class StudentController implements Initializable {
+public class TeacherController implements Initializable {
 
     @FXML
     private Label date;
+    @FXML
+    private Button Bn_EditOwn;
     @FXML
     private AnchorPane header;
     @FXML
@@ -52,11 +52,13 @@ public class StudentController implements Initializable {
     @FXML
     private Label header2;
     @FXML
+    private JFXButton Bn_gencode;
+    @FXML
     private TextField attendance;
     @FXML
-    private Button button;
-    @FXML
     private TableView<?> TBV_attendance;
+    @FXML
+    private TableColumn<?, ?> TBV_student;
     @FXML
     private TableColumn<?, ?> TBV_monday;
     @FXML
@@ -68,19 +70,9 @@ public class StudentController implements Initializable {
     @FXML
     private TableColumn<?, ?> TBV_friday;
     @FXML
-    private Button Bn_EditOwn;
+    private TableColumn<?, ?> TBV_Attendance;
     @FXML
-    private TextField message;
-    @FXML
-    private TextField message1;
-    @FXML
-    private TextField TF_code;
-    @FXML
-    private Button Bn_submit;
-    @FXML
-    private BarChart<?, ?> TBV_graph;
-    @FXML
-    private PieChart TBV_pieChart;
+    private Button Bn_user;
 
     /**
      * Initializes the controller class.
@@ -89,14 +81,6 @@ public class StudentController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
     }    
-
-    @FXML
-    private void handleButtonAction(MouseEvent event) {
-    }
-
-    @FXML
-    private void handleButtonAction(ActionEvent event) {
-    }
 
     @FXML
     private void handle_editown(ActionEvent event) throws IOException {
@@ -115,6 +99,33 @@ public class StudentController implements Initializable {
         
         Stage stage = (Stage) Bn_EditOwn.getScene().getWindow();
         stage.close();
+    }
+
+    @FXML
+    private void handleButtonAction(MouseEvent event) {
+    }
+
+
+    @FXML
+    private void handle_attendancecode(ActionEvent event) {
+    }
+
+    @FXML
+    private void Handle_user(ActionEvent event) throws IOException {
+        Parent root1;
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/attendance/v1/gui/view/user.fxml"));
+        root1 = (Parent) fxmlLoader.load();
+        
+        fxmlLoader.<StudentController>getController();
+
+        Stage addStage = new Stage();
+        Scene addScene = new Scene(root1);
+
+        
+        addStage.setScene(addScene);
+        addStage.show();
+        
+        
     }
     
 }
