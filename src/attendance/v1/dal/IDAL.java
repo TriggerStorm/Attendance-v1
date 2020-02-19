@@ -6,11 +6,15 @@
 package attendance.v1.dal;
 
 import attendance.v1.be.User;
+import java.util.List;
 
 /**
  *
  * @author Trigger
  */
 public interface IDAL {
+    
     User CheckUser(String user);
+    List<String> addDayToAttendance(String selectedCourse);
+
 }

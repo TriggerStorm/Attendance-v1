@@ -6,6 +6,7 @@
 package attendance.v1.dal;
 
 import attendance.v1.be.User;
+import java.util.List;
 
 /**
  *
@@ -22,5 +23,11 @@ public class DalManager implements IDAL {
     @Override
     public User CheckUser (String user) {
         return mockdao.CheckUser(user);
+    }
+    
+    
+    @Override
+    public List<String> addDayToAttendance(String selectedCourse) {
+        return mockdao.addDayToAttendance(selectedCourse);
     }
 }

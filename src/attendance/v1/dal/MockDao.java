@@ -47,15 +47,22 @@ public class MockDao {
     
     
     
-    public List<String> addDayToAttendance() {
+    public List<String> addDayToAttendance(String selectedCourse) {
+        selectedCourse = "SCO";  // will come from gui later
         LocalDate now = LocalDate.now();
         int dayOfWeek = now.getDayOfWeek().getValue();
+        int noOfCourses = attendance.size();
+        if (noOfCourses > 0) {
+            for (int i = 0; i < noOfCourses; i++) {
+            
+            String testCourse = attendance.get(i);
+                System.out.println(testCourse);
+        }
  //       attendance(dayOfWeek+1) =+;
         return attendance;
     } 
-   
-    
-    
-
+       return null;
     }
     
+    
+}

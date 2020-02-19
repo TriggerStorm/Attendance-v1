@@ -7,6 +7,7 @@ package attendance.v1.bll;
 
 import attendance.v1.be.User;
 import attendance.v1.dal.IDAL;
+import java.util.List;
 
 /**
  *
@@ -16,8 +17,14 @@ public class BllManager implements IBLL {
     private IDAL dalManager;
 
     
-     @Override
+    @Override
     public User CheckUser (String user) {
         return dalManager.CheckUser(user);
+    }
+    
+    
+    @Override
+    public List<String> addDayToAttendance(String selectedCourse) {
+        return dalManager.addDayToAttendance(selectedCourse);
     }
 }
