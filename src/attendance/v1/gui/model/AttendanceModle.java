@@ -15,44 +15,23 @@ import javafx.collections.ObservableList;
  */
 public class AttendanceModle {
     private BllManager bllManager;
-    private ObservableList<AttSco> ScoList;
-    private ObservableList<AttSde> SdeList;
-    private ObservableList<AttIto> ItoList;
-    private ObservableList<AttDB> DBList;
+   // private ObservableList<AttSco> ScoList;
+    
 
     public AttendanceModle() {
         bllManager = new BllManager();
-        getScoAttendance();
+      //  getScoAttendance();
     }
     
-    public ObservableList<AttSco> getScoAttendance(){
-    
-      List<Sco> allSco = bllManager.fetchAllSco();
-      ScoList = FXCollections.observableArrayList(allSco);
-      return ScoList;
-        
-    }
-    public ObservableList<AttSco> getScoAttendance(){
-    
-      List<Sco> allSco = bllManager.fetchAllSco();
-      SdeList = FXCollections.observableArrayList(allSco);
-      return SdeList;
-        
-    }
-    public ObservableList<AttSco> getScoAttendance(){
+   /* public ObservableList<AttSco> getScoAttendance(){
     
       List<Sco> allSco = bllManager.fetchAllSco();
       ScoList = FXCollections.observableArrayList(allSco);
       return ScoList;
         
     }
-    public ObservableList<AttSco> getScoAttendance(){
-    
-      List<Sco> allSco = bllManager.fetchAllSco();
-      ScoList = FXCollections.observableArrayList(allSco);
-      return ScoList;
+    */
         
-    }
     
     
 }
