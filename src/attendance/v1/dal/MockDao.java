@@ -11,7 +11,6 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import static javafx.application.Application.launch;
 
 /**
  *
@@ -64,7 +63,7 @@ public class MockDao {
         selectedCourse = "SCO";  // will come from gui later
         LocalDate now = LocalDate.now();
         int dayOfWeek = now.getDayOfWeek().getValue();
-        int noOfCourses = attendance.size()/8;
+        int noOfCourses = attendance.size();
         if (noOfCourses > 0) {
             System.out.println("No of courses =" + noOfCourses);
             for (int i = 0; i < noOfCourses; i++) {
