@@ -17,13 +17,13 @@ public class BllManager implements IBLL {
 
     
      @Override
-    public int CheckUser (String user, String password) {//Checks if the user exists, and what kind of user we have.
+    public int CheckUser (String email, String password) {//Checks if the user exists, and what kind of user we have.
 
-        boolean usercheck = dalManager.CheckUser(user, password);
+        boolean usercheck = dalManager.CheckUser(email, password);
         int[] Status  = {1,2,3};//just for easy reference later, might have omitted this and just hardcoded the values.
         if(usercheck) //is a boolean already, so we don't need to use ==. Checks if the user exists.
         {
-            boolean teachercheck = dalManager.CheckTeacher(user);
+            boolean teachercheck = dalManager.CheckTeacher(email);
             if(teachercheck)//is a boolean already, so we dont' need to use ==, checks if the user is a teacher.
             {
                 return Status[0];

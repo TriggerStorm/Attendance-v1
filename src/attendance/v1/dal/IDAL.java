@@ -12,7 +12,7 @@ import attendance.v1.be.User;
  * @author Trigger
  */
 public interface IDAL {
-    boolean CheckUser(String user, String password);
+    boolean CheckUser(String email, String password);
     
-    boolean CheckTeacher(String user);
+    boolean CheckTeacher(String email);
 }

@@ -20,12 +20,12 @@ public class DalManager implements IDAL {
     
     
     @Override
-    public boolean CheckUser (String user, String password) { //checks if our user exsts and the password is correct.
-        return mockdao.CheckUser(user,password);
+    public boolean CheckUser (String email, String password) { //checks if our user exsts and the password is correct.
+        return mockdao.CheckUser(email,password);
     }
     
     @Override
-    public boolean CheckTeacher(String user) {//checks to see if our user is a teacher, doesn't need the password for that.
-        return mockdao.CheckTeacher(user);
+    public boolean CheckTeacher(String email) {//checks to see if our user is a teacher, doesn't need the password for that.
+        return mockdao.CheckTeacher(email);
     }
 }
