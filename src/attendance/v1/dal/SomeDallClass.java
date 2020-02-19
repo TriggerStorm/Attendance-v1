@@ -11,4 +11,6 @@ package attendance.v1.dal;
  */
 public class SomeDallClass {
     
+    //fetch 
+    
 }
