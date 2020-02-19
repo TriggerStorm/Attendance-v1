@@ -88,5 +88,9 @@ public class TeacherController implements Initializable {
     @FXML
     private void handleButtonAction(ActionEvent event) {
     }
+
+    @FXML
+    private void handle_attendancecode(ActionEvent event) {
+    }
     
 }

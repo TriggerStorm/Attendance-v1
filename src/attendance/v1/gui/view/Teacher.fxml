@@ -107,7 +107,7 @@
                                     </Pane>
                                     <Pane prefHeight="100.0" prefWidth="200.0">
                                        <children>
-                                          <JFXButton fx:id="Bn_gencode" buttonType="RAISED" layoutX="27.0" layoutY="25.0" prefHeight="50.0" prefWidth="89.0" style="-fx-background-color: white;" text="Attendance &#10;code" />
+                                          <JFXButton fx:id="Bn_gencode" buttonType="RAISED" layoutX="27.0" layoutY="25.0" onAction="#handle_attendancecode" prefHeight="50.0" prefWidth="89.0" style="-fx-background-color: white;" text="Attendance &#10;code" />
                                        </children>
                                     </Pane>
                                     <Pane prefHeight="67.0" prefWidth="105.0" />
