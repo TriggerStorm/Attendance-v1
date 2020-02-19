@@ -13,13 +13,15 @@ import java.time.format.DateTimeFormatter;
  * @author Trigger
  */
 public class DateUtil {
-
+    private int[] attendance = new int[7];
     
-    public String dateNowToString() {
+    public int[] addDayToAttendance() {
         LocalDate now = LocalDate.now();
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd LLLL yyyy");
-        String dateNowString = now.format(formatter);
-        return dateNowString;
+        int dayOfWeek = now.getDayOfWeek().getValue();
+        
+ //       DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd LLLL yyyy");
+ //       String dateNowString = now.format(formatter);
+        return attendance;
     } 
    
     
