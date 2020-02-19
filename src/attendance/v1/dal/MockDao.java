@@ -25,7 +25,6 @@ public class MockDao {
     
     public MockDao() {
         mockStudentAttendance = new ArrayList<CourseAttendance>();
-                
         
         mockCA.setCourseName("SCO");
         mockCA.setMonday(1);
@@ -35,7 +34,7 @@ public class MockDao {
         mockCA.setFriday(3);
         mockStudentAttendance.add(mockCA);
         
-         mockCA.setCourseName("SDE");
+        mockCA.setCourseName("SDE");
         mockCA.setMonday(4);
         mockCA.setTuesday(5);
         mockCA.setWednesday(0);
@@ -43,7 +42,7 @@ public class MockDao {
         mockCA.setFriday(0);
         mockStudentAttendance.add(mockCA);
         
-         mockCA.setCourseName("DBOS");
+        mockCA.setCourseName("DBOS");
         mockCA.setMonday(0);
         mockCA.setTuesday(0);
         mockCA.setWednesday(0);
@@ -51,7 +50,7 @@ public class MockDao {
         mockCA.setFriday(0);
         mockStudentAttendance.add(mockCA);
         
-         mockCA.setCourseName("ITO");
+        mockCA.setCourseName("ITO");
         mockCA.setMonday(0);
         mockCA.setTuesday(0);
         mockCA.setWednesday(0);
@@ -59,19 +58,15 @@ public class MockDao {
         mockCA.setFriday(0);
         mockStudentAttendance.add(mockCA);
      
-      
+
+System.out.println("no entries in mockStudentAttendance = " + mockStudentAttendance.size());
 
          mockuser1 = new User(1,"admin", "admin","mock@mail.com", 12345678 ,"1 Mock St" , "False", "data/mockuserIMG.jpg", mockStudentAttendance);
     }
     
     
     
-    public static void main(String[] args) {
-        MockDao mockdao = new MockDao();
-        mockdao.addDayToAttendance("SCO");
-        //        launch(args);
-
-    }
+   
 
     
     
