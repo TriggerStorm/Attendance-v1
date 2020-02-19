@@ -36,8 +36,6 @@ public class LogInController implements Initializable {
 
     private UserModel userModle;
     private User user;
-    @FXML
-    private JFXButton Bn_T;
     /**
      * Initializes the controller class.
      */
@@ -54,7 +52,7 @@ public class LogInController implements Initializable {
        String passw = TF_password.getText().trim();
        int loginstate = userModle.CheckUser(loginmail, passw);//returns an int, as it also checks if it is a teacher or a student.
         switch (loginstate) {
-            case 1:  studentLogin(loginmail, passw); //teacher login needs creation and then place make something like teacherLogin method in stead.
+            case 1:  teacherLogin(loginmail, passw); //teacher login needs creation and then place make something like teacherLogin method in stead.
                     break;
             case 2:  studentLogin(loginmail, passw); //student login 
                     break;
@@ -84,8 +82,8 @@ public class LogInController implements Initializable {
     }
 
 
-    @FXML
-    private void handl_T(ActionEvent event) throws IOException {
+    
+    private void teacherLogin(String mail, String password) throws IOException {
         Parent root1;
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/attendance/v1/gui/view/Teacher.fxml"));
         root1 = (Parent) fxmlLoader.load();
