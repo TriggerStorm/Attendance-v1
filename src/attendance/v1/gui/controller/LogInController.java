@@ -36,6 +36,8 @@ public class LogInController implements Initializable {
 
     private UserModel userModle;
     private User user;
+    @FXML
+    private JFXButton Bn_T;
     /**
      * Initializes the controller class.
      */
@@ -47,11 +49,30 @@ public class LogInController implements Initializable {
     @FXML
     private void handle_login(ActionEvent event) throws IOException {
        
-        /*userModle.CheckUser(
+       /* userModle.CheckUser(
                 TF_email.getText().trim(),TF_pasword.getText().trim());*/
         
         Parent root1;
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/attendance/v1/gui/view/Student.fxml"));
+        root1 = (Parent) fxmlLoader.load();
+        
+        fxmlLoader.<StudentController>getController();
+
+        Stage addStage = new Stage();
+        Scene addScene = new Scene(root1);
+
+        
+        addStage.setScene(addScene);
+        addStage.show();
+        
+        Stage stage = (Stage) Bn_login.getScene().getWindow();
+        stage.close();
+    }
+
+    @FXML
+    private void handl_T(ActionEvent event) throws IOException {
+        Parent root1;
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/attendance/v1/gui/view/Teacher.fxml"));
         root1 = (Parent) fxmlLoader.load();
         
         fxmlLoader.<StudentController>getController();
