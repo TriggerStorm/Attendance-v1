@@ -30,7 +30,7 @@ public class LogInController implements Initializable {
     @FXML
     private TextField TF_email;
     @FXML
-    private TextField TF_pasword;
+    private TextField TF_password;
     @FXML
     private JFXButton Bn_login;
 
@@ -45,11 +45,39 @@ public class LogInController implements Initializable {
     }    
 
     @FXML
-    private void handle_login(ActionEvent event) throws IOException {
+    private void handle_login(ActionEvent event) throws IOException{
+       userModle = new UserModel();
+       String loginmail = TF_email.getText().trim();
+       String passw = TF_password.getText().trim();
+       int loginstate = userModle.CheckUser(loginmail, passw);//THIS line won't work for some reason, but i can't work out why, causes NULLPOINT EXCEPTION.
+
+       if(loginstate==1){
+           login(loginmail, passw);
+       }
        
-        /*userModle.CheckUser(
-                TF_email.getText().trim(),TF_pasword.getText().trim());*/
-        
+       else if(loginstate==2) {
+           login(loginmail,passw);
+       }
+       else
+        {
+           System.out.println("Sorry wrong authentication");
+        }
+       
+  /*     switch (loginstate) {
+            case 1:  login(loginmail, passw);
+                    break;
+            case 2:  login(loginmail, passw);
+                    break;
+            case 3: System.out.println("Sorry wrong authentication");
+                    break;
+            
+            default: System.out.println("Sorry wrong authentication");
+       }*/
+
+    }
+    private void login(String mail, String password) throws IOException
+    {
+                
         Parent root1;
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/attendance/v1/gui/view/Student.fxml"));
         root1 = (Parent) fxmlLoader.load();
@@ -66,5 +94,4 @@ public class LogInController implements Initializable {
         Stage stage = (Stage) Bn_login.getScene().getWindow();
         stage.close();
     }
-    
 }

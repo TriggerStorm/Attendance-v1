@@ -17,20 +17,31 @@ public class MockDao {
     
     
     public MockDao() {
-         mockuser1 = new User(1,"admin", "admin","mock@mail.com", 12345678 ,"1 Mock St" , "False", "data/mockuserIMG.jpg");
+         mockuser1 = new User(1,"admin", "admin","mock@mail.com", 12345678 ,"1 Mock St" , true, "data/mockuserIMG.jpg");
     }
     
     
-    public User CheckUser(String user, String password) {
-        if(user == mockuser1.getUserName()) {
-          if(password == mockuser1.getPassword()) {    
-            return mockuser1;
-//            {
+    public boolean CheckUser(String user, String password) {
+        if(user == mockuser1.getUserName()) 
+        {
+            if(password == mockuser1.getPassword()) 
+            {    
+            return true;
+            }
+            else
+            {
+            return false; // fail log in
+            }
         }
-        return null; // fail log in ?
+        else
+        {
+        return false;// fail log in
+        }
     }
-        return null;
     
-    
- }
+    public boolean CheckTeacher(String user, String password)
+    {
+        return mockuser1.getTeacher();
+    }
+
 }
