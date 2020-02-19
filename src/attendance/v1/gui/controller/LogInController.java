@@ -49,32 +49,17 @@ public class LogInController implements Initializable {
        userModle = new UserModel();
        String loginmail = TF_email.getText().trim();
        String passw = TF_password.getText().trim();
-       int loginstate = userModle.CheckUser(loginmail, passw);//THIS line won't work for some reason, but i can't work out why, causes NullPointerException.
-       if(loginstate==1){
-           login(loginmail, passw);
+       int loginstate = userModle.CheckUser(loginmail, passw);//returns an int, as it also checks if it is a teacher or a student.
+        switch (loginstate) {
+            case 1:  studentLogin(loginmail, passw); //teacher login needs creation and then place make something like teacherLogin method in stead.
+                    break;
+            case 2:  studentLogin(loginmail, passw); //student login 
+                    break;
+            default: System.out.println("Sorry wrong authentication"); //Might want to make a popup here in stead....
        }
-       
-       else if(loginstate==2) {
-           login(loginmail,passw);
-       }
-       else
-        {
-           System.out.println("Sorry wrong authentication");
-        }
-       
-  /*     switch (loginstate) {
-            case 1:  login(loginmail, passw);
-                    break;
-            case 2:  login(loginmail, passw);
-                    break;
-            case 3: System.out.println("Sorry wrong authentication");
-                    break;
-            
-            default: System.out.println("Sorry wrong authentication");
-       }*/
 
     }
-    private void login(String mail, String password) throws IOException
+    private void studentLogin(String mail, String password) throws IOException
     {
                 
         Parent root1;

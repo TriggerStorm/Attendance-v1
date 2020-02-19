@@ -22,11 +22,13 @@ public class MockDao {
     
     
     public boolean CheckUser(String user, String password) {
-        if(user.equals(mockuser1.getUserName())) 
+        String name = mockuser1.getUserName();
+        String passw = mockuser1.getPassword();
+        if(user.equals(name)) //remember that to compare two strings you need to use equals()
         {
-            if(password.equals(mockuser1.getPassword())) 
+            if(password.equals(passw)) //remember that to compare two strings you need to use equals()
             {    
-            return true;
+            return true; //user and password match.
             }
             else
             {
@@ -39,9 +41,9 @@ public class MockDao {
         }
     }
     
-    public boolean CheckTeacher(String user, String password)
+    public boolean CheckTeacher(String user)
     {
-        return mockuser1.getTeacher();
+        return mockuser1.getTeacher();//for now we just return the boolean, later it will probably be easier to have sorted the users into students and teachers beforehand, as the DB can sort this out faster.
     }
 
 }

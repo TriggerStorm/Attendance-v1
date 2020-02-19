@@ -14,5 +14,5 @@ import attendance.v1.be.User;
 public interface IDAL {
     boolean CheckUser(String user, String password);
     
-    boolean CheckTeacher(String user, String password);
+    boolean CheckTeacher(String user);
 }
