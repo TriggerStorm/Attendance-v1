@@ -33,7 +33,7 @@ and open the template in the editor.
 }
 
 
-.button: hover{
+.button:hover{
         -fx-background-color: bright white; 
 }
 
