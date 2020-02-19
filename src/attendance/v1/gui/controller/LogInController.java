@@ -43,6 +43,8 @@ public class LogInController implements Initializable {
     @FXML
     private void handle_login(ActionEvent event) throws IOException {
        
+       
+        
         Parent root1;
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/attendance/v1/gui/view/Student.fxml"));
         root1 = (Parent) fxmlLoader.load();
