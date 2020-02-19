@@ -16,19 +16,16 @@ public class CourseAttendance {
     private int wednesday;
     private int thursday;
     private int friday;
-    private int saturday;
-    private int sunday;
+   
     
     
-    public CourseAttendance(String courseName, int monday, int tuesday, int wednesday, int thursday, int friday, int saturday, int sunday) {
+    public CourseAttendance(String courseName, int monday, int tuesday, int wednesday, int thursday, int friday) {
         this.courseName = courseName;
         this.monday = monday;
         this.tuesday = tuesday;
         this.wednesday = wednesday;
         this.thursday = thursday;
         this.friday = friday;
-        this.saturday = saturday;
-        this.sunday = sunday;
     }
 
     
@@ -36,7 +33,7 @@ public class CourseAttendance {
         return courseName;
     }
     
-    public void setCourseName() {
+    public void setCourseName(String courseName) {
         this.courseName = courseName;
     }
     
@@ -44,7 +41,7 @@ public class CourseAttendance {
         return monday;
     }
     
-    public void setMonday() {
+    public void setMonday(int monday) {
         this.monday = monday;
     }
     
@@ -52,7 +49,7 @@ public class CourseAttendance {
         return tuesday;
     }
     
-    public void setTuesday() {
+    public void setTuesday(int tuesday) {
         this.tuesday = tuesday;
     }
     
@@ -60,37 +57,22 @@ public class CourseAttendance {
         return wednesday;
     }
     
-    public void setWednesday() {
+    public void setWednesday(int wednesday) {
         this.wednesday = wednesday;
     }
     public int getThursday() {
         return thursday;
     }
     
-    public void setThursday() {
+    public void setThursday(int thursday) {
         this.thursday = thursday;
     }
     public int getFriday() {
         return friday;
     }
     
-    public void setFriday() {
+    public void setFriday(int friday) {
         this.friday = friday;
-    }
-    public int getSaturday() {
-        return saturday;
-    }
-    
-    public void setSaturday() {
-        this.saturday = saturday;
-    }
-    
-    public int getSunday() {
-        return sunday;
-    }
-    
-    public void setSunday() {
-        this.sunday = sunday;
     }
     
     

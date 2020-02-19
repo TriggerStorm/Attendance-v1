@@ -5,6 +5,7 @@
  */
 package attendance.v1.dal;
 
+import attendance.v1.be.CourseAttendance;
 import attendance.v1.be.User;
 import java.lang.reflect.Array;
 import java.time.LocalDate;
@@ -17,21 +18,50 @@ import java.util.List;
  * @author Trigger
  */
 public class MockDao {
-    List<String> attendance = new ArrayList<>(8);
+    List<String> attendance = new ArrayList<>();
     private User mockuser1;
-    
+    private CourseAttendance mockCA;
+    private List<CourseAttendance> mockStudentAttendance;
     
     public MockDao() {
-        String[] arr1 = {"SCO", "0", "0", "0", "0", "0", "0", "0"};
-        String[] arr2 = {"SDE", "0", "0", "0", "0", "0", "0", "0"};
-        String[] arr3 = {"DBOS", "0", "0", "0", "0", "0", "0", "0"};
-        String[] arr4 = {"ITO", "0", "0", "0", "0", "0", "0", "0"};
-        attendance.addAll(Arrays.asList(arr1));
-        attendance.addAll(Arrays.asList(arr2));
-        attendance.addAll(Arrays.asList(arr3));
-        attendance.addAll(Arrays.asList(arr4));
+        mockStudentAttendance = new ArrayList<CourseAttendance>();
+                
+        
+        mockCA.setCourseName("SCO");
+        mockCA.setMonday(1);
+        mockCA.setTuesday(0);
+        mockCA.setWednesday(2);
+        mockCA.setThursday(0);
+        mockCA.setFriday(3);
+        mockStudentAttendance.add(mockCA);
+        
+         mockCA.setCourseName("SDE");
+        mockCA.setMonday(4);
+        mockCA.setTuesday(5);
+        mockCA.setWednesday(0);
+        mockCA.setThursday(0);
+        mockCA.setFriday(0);
+        mockStudentAttendance.add(mockCA);
+        
+         mockCA.setCourseName("DBOS");
+        mockCA.setMonday(0);
+        mockCA.setTuesday(0);
+        mockCA.setWednesday(0);
+        mockCA.setThursday(6);
+        mockCA.setFriday(0);
+        mockStudentAttendance.add(mockCA);
+        
+         mockCA.setCourseName("ITO");
+        mockCA.setMonday(0);
+        mockCA.setTuesday(0);
+        mockCA.setWednesday(0);
+        mockCA.setThursday(7);
+        mockCA.setFriday(0);
+        mockStudentAttendance.add(mockCA);
+     
+      
 
-         mockuser1 = new User(1,"admin", "admin","mock@mail.com", 12345678 ,"1 Mock St" , "False", "data/mockuserIMG.jpg", attendance);
+         mockuser1 = new User(1,"admin", "admin","mock@mail.com", 12345678 ,"1 Mock St" , "False", "data/mockuserIMG.jpg", mockStudentAttendance);
     }
     
     
