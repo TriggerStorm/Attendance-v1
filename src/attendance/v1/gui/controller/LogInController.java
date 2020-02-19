@@ -49,8 +49,7 @@ public class LogInController implements Initializable {
        userModle = new UserModel();
        String loginmail = TF_email.getText().trim();
        String passw = TF_password.getText().trim();
-       int loginstate = userModle.CheckUser(loginmail, passw);//THIS line won't work for some reason, but i can't work out why, causes NULLPOINT EXCEPTION.
-
+       int loginstate = userModle.CheckUser(loginmail, passw);//THIS line won't work for some reason, but i can't work out why, causes NullPointerException.
        if(loginstate==1){
            login(loginmail, passw);
        }

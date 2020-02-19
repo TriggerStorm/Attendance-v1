@@ -22,9 +22,9 @@ public class MockDao {
     
     
     public boolean CheckUser(String user, String password) {
-        if(user == mockuser1.getUserName()) 
+        if(user.equals(mockuser1.getUserName())) 
         {
-            if(password == mockuser1.getPassword()) 
+            if(password.equals(mockuser1.getPassword())) 
             {    
             return true;
             }
