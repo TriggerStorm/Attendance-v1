@@ -11,6 +11,7 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import static javafx.application.Application.launch;
 
 /**
  *
@@ -35,6 +36,18 @@ public class MockDao {
     }
     
     
+    
+    public static void main(String[] args) {
+        MockDao mockdao = new MockDao();
+        mockdao.addDayToAttendance("SCO");
+        //        launch(args);
+
+    }
+
+    
+    
+    
+    
     public User CheckUser(String user) {
         if(user == mockuser1.getUserName()) {
 //          if(password == mockuser1.  getPassword {    
@@ -51,14 +64,15 @@ public class MockDao {
         selectedCourse = "SCO";  // will come from gui later
         LocalDate now = LocalDate.now();
         int dayOfWeek = now.getDayOfWeek().getValue();
-        int noOfCourses = attendance.size();
+        int noOfCourses = attendance.size()/8;
         if (noOfCourses > 0) {
+            System.out.println("No of courses =" + noOfCourses);
             for (int i = 0; i < noOfCourses; i++) {
             
             String testCourse = attendance.get(i);
+                System.out.println("Course number:" + (i+1));
                 System.out.println(testCourse);
         }
- //       attendance(dayOfWeek+1) =+;
         return attendance;
     } 
        return null;
