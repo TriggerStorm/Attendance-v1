@@ -5,7 +5,9 @@
  */
 package attendance.v1.dal;
 
+import attendance.v1.be.ScoMok;
 import attendance.v1.be.User;
+import java.util.List;
 
 /**
  *
@@ -28,4 +30,21 @@ public class DalManager implements IDAL {
     public boolean CheckTeacher(String email) {//checks to see if our user is a teacher, doesn't need the password for that.
         return mockdao.CheckTeacher(email);
     }
+    
+    public List<ScoMok> getScoAttandance(){
+        return mockdao.getScoAttandance();
+        
+    }
+    public List<ScoMok> getSdeAttandance(){
+        return mockdao.getSdeAttandance();
+    }
+    public List<ScoMok> getItoAttandance(){
+        return mockdao.getItoAttandance();
+    }
+    public List<ScoMok> getDBOSAttandance(){
+        return mockdao.getDBOSAttandance();
+    }
+    
+    
+    
 }

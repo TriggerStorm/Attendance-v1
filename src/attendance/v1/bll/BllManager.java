@@ -5,8 +5,10 @@
  */
 package attendance.v1.bll;
 
+import attendance.v1.be.ScoMok;
 import attendance.v1.be.User;
 import attendance.v1.dal.DalManager;
+import java.util.List;
 
 /**
  *
@@ -39,4 +41,21 @@ public class BllManager implements IBLL {
             return Status[2];
         }
     }
+    
+    public List<ScoMok> getScoAttandance(){
+        return dalManager.getScoAttandance();
+    }
+    public List<ScoMok> getSdeAttandance(){
+        return dalManager.getSdeAttandance();
+    }
+    public List<ScoMok> getItoAttandance(){
+        return dalManager.getItoAttandance();
+    }
+    public List<ScoMok> getDBOSAttandance(){
+        return dalManager.getDBOSAttandance();
+    }
+    
+    
+    
+    
 }

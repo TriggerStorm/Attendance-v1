@@ -77,10 +77,10 @@
                         <Image url="@../assets/Untitled-1.png" />
                      </image>
                   </ImageView>
-                  <JFXButton fx:id="Bn_SCO" buttonType="RAISED" layoutX="191.0" layoutY="17.0" styleClass="coursebtn" stylesheets="@../css/Attendance.css" text="SCO" />
-                  <JFXButton fx:id="Bn_DBOS" buttonType="RAISED" layoutX="430.0" layoutY="17.0" styleClass="coursebtn" stylesheets="@../css/Attendance.css" text="DB/OS" />
-                  <JFXButton fx:id="Bn_ITO" buttonType="RAISED" layoutX="569.0" layoutY="17.0" styleClass="coursebtn" stylesheets="@../css/Attendance.css" text="ITO" />
-                  <JFXButton fx:id="Bn_SDE" buttonType="RAISED" layoutX="314.0" layoutY="17.0" styleClass="coursebtn" stylesheets="@../css/Attendance.css" text="SDE" />
+                  <JFXButton fx:id="Bn_SCO" buttonType="RAISED" layoutX="191.0" layoutY="17.0" onAction="#handle_SCO" styleClass="coursebtn" stylesheets="@../css/Attendance.css" text="SCO" />
+                  <JFXButton fx:id="Bn_DBOS" buttonType="RAISED" layoutX="430.0" layoutY="17.0" onAction="#handle_DBOS" styleClass="coursebtn" stylesheets="@../css/Attendance.css" text="DB/OS" />
+                  <JFXButton fx:id="Bn_ITO" buttonType="RAISED" layoutX="569.0" layoutY="17.0" onAction="#handle_ITO" styleClass="coursebtn" stylesheets="@../css/Attendance.css" text="ITO" />
+                  <JFXButton fx:id="Bn_SDE" buttonType="RAISED" layoutX="314.0" layoutY="17.0" onAction="#handle_SDE" styleClass="coursebtn" stylesheets="@../css/Attendance.css" text="SDE" />
                </children></AnchorPane>
             <AnchorPane fx:id="body1" prefHeight="429.0" prefWidth="700.0" styleClass="label1">
                <children>
@@ -145,11 +145,6 @@
                                        </content></Tab>
                                 </tabs>
                               </TabPane>
-                              <ImageView fitHeight="402.0" fitWidth="554.0" layoutY="30.0" pickOnBounds="true" preserveRatio="true">
-                                 <image>
-                                    <Image url="@../assets/gui%20att%20v1%20v1.png" />
-                                 </image>
-                              </ImageView>
                            </children>
                         </Pane>
                      </children>
