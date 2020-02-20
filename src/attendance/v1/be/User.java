@@ -20,10 +20,10 @@ public class User {
     private String address;
     private String teacher;
     private String userIMG;
-    private List<CourseAttendance> attendance;
+    private List<SubjectAttendance> attendance;
     
     
- public User (int userKey, String userName,String password,String email,int phoneNr,String address,String teacher,String userIMG, List<CourseAttendance> attendance){
+ public User (int userKey, String userName,String password,String email,int phoneNr,String address,String teacher,String userIMG, List<SubjectAttendance> attendance){
  
      this.userKey = userKey;
      this.userName = userName;
@@ -101,11 +101,11 @@ public class User {
         this.userIMG = userIMG;
     }
     
-    public List<CourseAttendance> getAttendance () {
+    public List<SubjectAttendance> getAttendance () {
         return attendance;
     }
 
-    public void setUserIMG(List<CourseAttendance> attendance) {
+    public void setUserIMG(List<SubjectAttendance> attendance) {
         this.attendance = attendance;
     }
  

@@ -5,7 +5,7 @@
  */
 package attendance.v1.dal;
 
-import attendance.v1.be.CourseAttendance;
+import attendance.v1.be.SubjectAttendance;
 import attendance.v1.be.User;
 import java.lang.reflect.Array;
 import java.time.LocalDate;
@@ -18,54 +18,57 @@ import java.util.List;
  * @author Trigger
  */
 public class MockDao {
-    List<String> attendance = new ArrayList<>();
-    private User mockuser1;
-    private CourseAttendance mockCA;
-    private List<CourseAttendance> mockStudentAttendance;
+    public List<String> attendance = new ArrayList<>();
+    public User mockuser1;
+    public static SubjectAttendance mockSA;
+    public List<SubjectAttendance> mockStudentAttendance;
     
     public MockDao() {
-        mockStudentAttendance = new ArrayList<CourseAttendance>();
+        mockStudentAttendance = new ArrayList<SubjectAttendance>();
         
-        mockCA.setCourseName("SCO");
-        mockCA.setMonday(1);
-        mockCA.setTuesday(0);
-        mockCA.setWednesday(2);
-        mockCA.setThursday(0);
-        mockCA.setFriday(3);
-        mockStudentAttendance.add(mockCA);
+        mockSA.setCourseName("SCO");
+        mockSA.setMonday(1);
+        mockSA.setTuesday(0);
+        mockSA.setWednesday(2);
+        mockSA.setThursday(0);
+        mockSA.setFriday(3);
+        mockStudentAttendance.add(mockSA);
         
-        mockCA.setCourseName("SDE");
-        mockCA.setMonday(4);
-        mockCA.setTuesday(5);
-        mockCA.setWednesday(0);
-        mockCA.setThursday(0);
-        mockCA.setFriday(0);
-        mockStudentAttendance.add(mockCA);
+        mockSA.setCourseName("SDE");
+        mockSA.setMonday(4);
+        mockSA.setTuesday(5);
+        mockSA.setWednesday(0);
+        mockSA.setThursday(0);
+        mockSA.setFriday(0);
+        mockStudentAttendance.add(mockSA);
         
-        mockCA.setCourseName("DBOS");
-        mockCA.setMonday(0);
-        mockCA.setTuesday(0);
-        mockCA.setWednesday(0);
-        mockCA.setThursday(6);
-        mockCA.setFriday(0);
-        mockStudentAttendance.add(mockCA);
+        mockSA.setCourseName("DBOS");
+        mockSA.setMonday(0);
+        mockSA.setTuesday(0);
+        mockSA.setWednesday(0);
+        mockSA.setThursday(6);
+        mockSA.setFriday(0);
+        mockStudentAttendance.add(mockSA);
         
-        mockCA.setCourseName("ITO");
-        mockCA.setMonday(0);
-        mockCA.setTuesday(0);
-        mockCA.setWednesday(0);
-        mockCA.setThursday(7);
-        mockCA.setFriday(0);
-        mockStudentAttendance.add(mockCA);
+        mockSA.setCourseName("ITO");
+        mockSA.setMonday(0);
+        mockSA.setTuesday(0);
+        mockSA.setWednesday(0);
+        mockSA.setThursday(7);
+        mockSA.setFriday(0);
+        mockStudentAttendance.add(mockSA);
      
-
-System.out.println("no entries in mockStudentAttendance = " + mockStudentAttendance.size());
-
-         mockuser1 = new User(1,"admin", "admin","mock@mail.com", 12345678 ,"1 Mock St" , "False", "data/mockuserIMG.jpg", mockStudentAttendance);
+        mockuser1 = new User(1,"admin", "admin","mock@mail.com", 12345678 ,"1 Mock St" , "False", "data/mockuserIMG.jpg", mockStudentAttendance);
+   
+    
     }
     
     
     
+    public int mockPrintOut() {
+         int count = mockStudentAttendance.size();
+        return count;
+    }
    
 
     

@@ -10,13 +10,21 @@ package attendance.v1.dal;
  * @author admin
  */
 public class MockTester {
-    MockDao mockdao = new MockDao();
-
+    public static MockDao mockdao = new MockDao();
+    private int mocktest;
         
+    
+    
  public static void main(String[] args) {
-
-//        mockdao.addDayToAttendance("SCO");
-        //        launch(args);
-
+     toRun();
+ }
+ 
+ 
+ 
+    public static void toRun() {
+        int count = mockdao.mockPrintOut();
+        System.out.println("courses = " + count);
     }
+    
+    
 }

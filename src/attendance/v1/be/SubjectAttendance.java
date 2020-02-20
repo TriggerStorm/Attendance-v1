@@ -9,7 +9,7 @@ package attendance.v1.be;
  *
  * @author admin
  */
-public class CourseAttendance {
+public class SubjectAttendance {
     private String courseName;
     private int monday;
     private int tuesday;
@@ -19,7 +19,7 @@ public class CourseAttendance {
    
     
     
-    public CourseAttendance(String courseName, int monday, int tuesday, int wednesday, int thursday, int friday) {
+    public SubjectAttendance(String courseName, int monday, int tuesday, int wednesday, int thursday, int friday) {
         this.courseName = courseName;
         this.monday = monday;
         this.tuesday = tuesday;
