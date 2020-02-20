@@ -5,8 +5,10 @@
  */
 package attendance.v1.gui.controller;
 
+import attendance.v1.be.User;
 import java.net.URL;
 import java.util.ResourceBundle;
+import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -28,28 +30,30 @@ public class NewUserController implements Initializable {
     @FXML
     private TextField TF_name;
     @FXML
-    private ChoiceBox<?> CB_classes;
+    private ChoiceBox<String> CB_classes;
     @FXML
     private Button Bn_add;
     @FXML
     private Button Bn_Save;
     @FXML
-    private Button Bn_cansel;
+    private Button Bn_cancel;
 
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        // TODO
+      CB_classes.setItems(FXCollections.observableArrayList(
+        "SCO","ITO","SDE","DB/OS"));
     }    
 
     @FXML
     private void handle_save(ActionEvent event) {
+        User user1 = new User(1,"","","",1,"","","");
     }
 
     @FXML
-    private void Handle_cancle(ActionEvent event) {
+    private void Handle_cancel(ActionEvent event) {
     }
     
 }

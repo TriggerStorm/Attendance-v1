@@ -30,7 +30,7 @@ public class User {
      this.address = address;
      this.teacher = teacher;
      this.userIMG = userIMG;
-     
+     // things like address/img shouldn't be mandatory to add new user, they should be optional
      
  }
 

@@ -17,7 +17,7 @@
       <TextField fx:id="TF_passWord" layoutX="111.0" layoutY="119.0" />
       <TextField fx:id="TF_name" layoutX="111.0" layoutY="85.0" />
       <Text layoutX="38.0" layoutY="102.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Name" />
-      <Text layoutX="35.0" layoutY="171.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Moblie" />
+      <Text layoutX="35.0" layoutY="171.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Mobile" />
       <Text layoutX="34.0" layoutY="205.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Classes" />
       <Text layoutX="127.0" layoutY="63.0" strokeType="OUTSIDE" strokeWidth="0.0" text="New User">
          <font>
@@ -26,8 +26,8 @@
       </Text>
       <ChoiceBox fx:id="CB_classes" layoutX="110.0" layoutY="188.0" prefWidth="150.0" />
       <Button fx:id="Bn_add" layoutX="274.0" layoutY="188.0" mnemonicParsing="false" text="Add" />
-      <Text layoutX="27.0" layoutY="136.0" strokeType="OUTSIDE" strokeWidth="0.0" text="PassWord" />
+      <Text layoutX="27.0" layoutY="136.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Password" />
       <Button fx:id="Bn_Save" layoutX="304.0" layoutY="244.0" mnemonicParsing="false" onAction="#handle_save" text="Save" />
-      <Button fx:id="Bn_cansel" layoutX="366.0" layoutY="244.0" mnemonicParsing="false" onAction="#Handle_cancle" text="Cansel" />
+      <Button fx:id="Bn_cancel" layoutX="366.0" layoutY="244.0" mnemonicParsing="false" onAction="#Handle_cancel" text="Cancel" />
    </children>
 </AnchorPane>
