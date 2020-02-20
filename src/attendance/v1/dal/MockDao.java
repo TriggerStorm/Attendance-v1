@@ -28,7 +28,7 @@ public class MockDao {
     public MockDao() {
         mockStudentAttendance = new ArrayList<SubjectAttendance>();
         
-        mockSA.setCourseName("SCO");
+        mockSA.setSubjectName("SCO");
         mockSA.setMonday(1);
         mockSA.setTuesday(0);
         mockSA.setWednesday(2);
@@ -36,7 +36,7 @@ public class MockDao {
         mockSA.setFriday(3);
         mockStudentAttendance.add(mockSA);
         
-        mockSA.setCourseName("SDE");
+        mockSA.setSubjectName("SDE");
         mockSA.setMonday(4);
         mockSA.setTuesday(5);
         mockSA.setWednesday(0);
@@ -44,7 +44,7 @@ public class MockDao {
         mockSA.setFriday(0);
         mockStudentAttendance.add(mockSA);
         
-        mockSA.setCourseName("DBOS");
+        mockSA.setSubjectName("DBOS");
         mockSA.setMonday(0);
         mockSA.setTuesday(0);
         mockSA.setWednesday(0);
@@ -52,7 +52,7 @@ public class MockDao {
         mockSA.setFriday(0);
         mockStudentAttendance.add(mockSA);
         
-        mockSA.setCourseName("ITO");
+        mockSA.setSubjectName("ITO");
         mockSA.setMonday(0);
         mockSA.setTuesday(0);
         mockSA.setWednesday(0);

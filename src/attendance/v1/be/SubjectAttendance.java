@@ -10,7 +10,7 @@ package attendance.v1.be;
  * @author admin
  */
 public class SubjectAttendance {
-    private String courseName;
+    private String subjectName;
     private int monday;
     private int tuesday;
     private int wednesday;
@@ -20,7 +20,7 @@ public class SubjectAttendance {
     
     
     public SubjectAttendance(String courseName, int monday, int tuesday, int wednesday, int thursday, int friday) {
-        this.courseName = courseName;
+        this.subjectName = subjectName;
         this.monday = monday;
         this.tuesday = tuesday;
         this.wednesday = wednesday;
@@ -29,12 +29,12 @@ public class SubjectAttendance {
     }
 
     
-    public String getCourseName() {
-        return courseName;
+    public String getSubjectName() {
+        return subjectName;
     }
     
-    public void setCourseName(String courseName) {
-        this.courseName = courseName;
+    public void setSubjectName(String subjectName) {
+        this.subjectName = subjectName;
     }
     
     public int getMonday() {
