@@ -5,13 +5,17 @@
  */
 package attendance.v1.dal;
 
+
+import attendance.v1.be.SubjectAttendance;
+
 /**
  *
  * @author admin
  */
 public class MockTester {
     public static MockDao mockdao = new MockDao();
-    private int mocktest;
+    public static SubjectAttendance mockSA;
+    public int mocktest;
         
     
     

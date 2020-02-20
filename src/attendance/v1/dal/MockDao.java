@@ -22,44 +22,27 @@ public class MockDao {
     public User mockuser1;
     public User mockuser2;
 
-    public static SubjectAttendance mockSA;
+    public SubjectAttendance mockSCO;
+    public SubjectAttendance mockSDE;
+    public SubjectAttendance mockDBOS;
+    public SubjectAttendance mockITO;
+
     public List<SubjectAttendance> mockStudentAttendance;
     
     public MockDao() {
+        
         mockStudentAttendance = new ArrayList<SubjectAttendance>();
-        
-        mockSA.setSubjectName("SCO");
-        mockSA.setMonday(1);
-        mockSA.setTuesday(0);
-        mockSA.setWednesday(2);
-        mockSA.setThursday(0);
-        mockSA.setFriday(3);
-        mockStudentAttendance.add(mockSA);
-        
-        mockSA.setSubjectName("SDE");
-        mockSA.setMonday(4);
-        mockSA.setTuesday(5);
-        mockSA.setWednesday(0);
-        mockSA.setThursday(0);
-        mockSA.setFriday(0);
-        mockStudentAttendance.add(mockSA);
-        
-        mockSA.setSubjectName("DBOS");
-        mockSA.setMonday(0);
-        mockSA.setTuesday(0);
-        mockSA.setWednesday(0);
-        mockSA.setThursday(6);
-        mockSA.setFriday(0);
-        mockStudentAttendance.add(mockSA);
-        
-        mockSA.setSubjectName("ITO");
-        mockSA.setMonday(0);
-        mockSA.setTuesday(0);
-        mockSA.setWednesday(0);
-        mockSA.setThursday(7);
-        mockSA.setFriday(0);
-        mockStudentAttendance.add(mockSA);
-     
+        SubjectAttendance mockSCO = new SubjectAttendance("SCO", 1, 0, 2, 0, 3);
+        SubjectAttendance mockSDE = new SubjectAttendance("SDE", 4, 5, 0, 0, 0);
+        SubjectAttendance mockDBOS = new SubjectAttendance("DBOS", 0, 0, 0, 6, 0);
+        SubjectAttendance mockITO = new SubjectAttendance("ITO", 0, 0, 0, 7, 0);
+
+        mockStudentAttendance.add(mockSCO);
+        mockStudentAttendance.add(mockSDE);
+        mockStudentAttendance.add(mockDBOS);
+        mockStudentAttendance.add(mockITO);
+
+
         mockuser1 = new User(1,"admin", "admin","mock@mail.com", 12345678 ,"1 Mock St" , false, "data/mockuserIMG.jpg", mockStudentAttendance);
    
     
