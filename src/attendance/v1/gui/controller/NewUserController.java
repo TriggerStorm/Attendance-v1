@@ -31,8 +31,6 @@ public class NewUserController implements Initializable {
     @FXML
     private ChoiceBox<?> CB_classes;
     @FXML
-    private Button Bn_add;
-    @FXML
     private Button Bn_Save; //need to save new user info from TF as a new mock user // filp
     @FXML
     private Button Bn_cansel;

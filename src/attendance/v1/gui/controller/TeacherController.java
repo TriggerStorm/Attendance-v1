@@ -50,8 +50,6 @@ public class TeacherController implements Initializable {
     @FXML
     private AnchorPane body1;
     @FXML
-    private Label header2;
-    @FXML
     private JFXButton Bn_gencode;
     @FXML
     private TextField attendance;
@@ -73,6 +71,12 @@ public class TeacherController implements Initializable {
     private TableColumn<?, ?> TBV_Attendance;
     @FXML
     private Button Bn_user;
+    @FXML
+    private Label Lb_loginas;
+    @FXML
+    private Label Lb_logInUser;
+    @FXML
+    private Label Lb_subjet;
 
     /**
      * Initializes the controller class.
@@ -97,13 +101,9 @@ public class TeacherController implements Initializable {
         addStage.setScene(addScene);
         addStage.show();
         
-        Stage stage = (Stage) Bn_EditOwn.getScene().getWindow();
-        stage.close();
+        
     }
 
-    @FXML
-    private void handleButtonAction(MouseEvent event) {
-    }
 
 
     @FXML

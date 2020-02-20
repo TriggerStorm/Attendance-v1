@@ -31,8 +31,6 @@ public class EditUserController implements Initializable {
     @FXML
     private Button Bn_resetPassWord; // need to reset and random gen new pass and show it in TF_showPassWord // filp
     @FXML
-    private Button Bn_add; // dont think its needed only need to select it in CB_classes(courses)// filp
-    @FXML
     private Button bn_cansel; // done
     @FXML
     private Button Bn_save; // need to add edit stuff to user. // filp
@@ -45,12 +43,7 @@ public class EditUserController implements Initializable {
         // TODO
     }    
 
-    @FXML
-    private void handle_add(ActionEvent event) {
-        // filp
-    }
 
-    @FXML
     private void handle_cansel(ActionEvent event) {
         Stage stage = (Stage) bn_cansel.getScene().getWindow();
         stage.close();
@@ -59,6 +52,14 @@ public class EditUserController implements Initializable {
     @FXML
     private void handle_save(ActionEvent event) {
         // filp
+    }
+
+    @FXML
+    private void handle_resetpassword(ActionEvent event) {
+    }
+
+    @FXML
+    private void bn_cansel(ActionEvent event) {
     }
     
 }
