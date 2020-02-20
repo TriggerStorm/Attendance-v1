@@ -23,7 +23,7 @@ public class User {
     private List<SubjectAttendance> attendance;
     
     
- public User (int userKey, String userName,String password,String email,int phoneNr,String address,String teacher,String userIMG, List<SubjectAttendance> attendance){
+ public User (int userKey, String userName,String password,String email,int phoneNr,String address,boolean teacher,String userIMG, List<SubjectAttendance> attendance){
 
  
  

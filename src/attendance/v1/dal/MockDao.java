@@ -20,6 +20,8 @@ import java.util.List;
 public class MockDao {
     public List<String> attendance = new ArrayList<>();
     public User mockuser1;
+    public User mockuser2;
+
     public static SubjectAttendance mockSA;
     public List<SubjectAttendance> mockStudentAttendance;
     
@@ -58,7 +60,7 @@ public class MockDao {
         mockSA.setFriday(0);
         mockStudentAttendance.add(mockSA);
      
-        mockuser1 = new User(1,"admin", "admin","mock@mail.com", 12345678 ,"1 Mock St" , "False", "data/mockuserIMG.jpg", mockStudentAttendance);
+        mockuser1 = new User(1,"admin", "admin","mock@mail.com", 12345678 ,"1 Mock St" , false, "data/mockuserIMG.jpg", mockStudentAttendance);
    
     
 
@@ -69,7 +71,9 @@ public class MockDao {
     public int mockPrintOut() {
          int count = mockStudentAttendance.size();
         return count;
-
+    }
+    
+    
     public static void main(String[] args) {
         MockDao mockdao = new MockDao();
         mockdao.addDayToAttendance("SCO");
@@ -111,7 +115,7 @@ public class MockDao {
     
     
     
-    public List<String> addDayToAttendance(String selectedCourse) {
+    public List<String> addDayToAttendance(String selectedCourse) { // bit rough. Work in progress
         selectedCourse = "SCO";  // will come from gui later
         LocalDate now = LocalDate.now();
         int dayOfWeek = now.getDayOfWeek().getValue();
