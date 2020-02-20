@@ -16,10 +16,16 @@ public interface IBLL {
 
     
         
-        List<String> addDayToAttendance(String selectedCourse);
+    List<String> addDayToAttendance(String selectedCourse);
 
 
-        int CheckUser(String email, String Password);
+    int CheckUser(String email, String Password);
 
-
+    
+    
+    //Mock data methods
+    String[] getSCOsttendance();
+    String[] getSDEsttendance();
+    String[] getDBOSsttendance();
+    String[] getITOsttendance();
 }

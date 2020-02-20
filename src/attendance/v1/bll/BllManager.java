@@ -51,4 +51,30 @@ public class BllManager implements IBLL {
     public List<String> addDayToAttendance(String selectedCourse) {
         return dalManager.addDayToAttendance(selectedCourse);
     }
+    
+    
+    
+         // Mock data methods
+    @Override
+    public String[] getSCOattendance() {
+        return dalManager.getSCOattendance();
+    }
+    
+    @Override
+    public String[] getSDEattendance() {
+        return dalManager.getSDEattendance();
+    }
+    
+    @Override
+    public String[] getDBOSattendance() {
+        return dalManager.getDBOSattendance();
+    }
+    
+    @Override
+    public String[] getITOattendance() {
+        return dalManager.getITOattendance();
+    }
+    
+    
+    
 }

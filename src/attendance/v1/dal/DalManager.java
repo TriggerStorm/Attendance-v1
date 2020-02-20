@@ -35,4 +35,28 @@ public class DalManager implements IDAL {
     public List<String> addDayToAttendance(String selectedCourse) {
         return mockdao.addDayToAttendance(selectedCourse);
     }
+        
+    // Mock data methods
+    @Override
+    public String[] getSCOattendance() {
+        return mockdao.getSCOattendance();
+    }
+    
+    @Override
+    public String[] getSDEattendance() {
+        return mockdao.getSDEattendance();
+    }
+    
+    @Override
+    public String[] getDBOSattendance() {
+        return mockdao.getDBOSattendance();
+    }
+    
+    @Override
+    public String[] getITOattendance() {
+        return mockdao.getITOattendance();
+    }
+    
+    
+    
 }

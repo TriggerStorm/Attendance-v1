@@ -31,7 +31,7 @@ public class MockDao {
     
     public MockDao() {
         
-        mockStudentAttendance = new ArrayList<SubjectAttendance>();
+/*        mockStudentAttendance = new ArrayList<SubjectAttendance>();
         SubjectAttendance mockSCO = new SubjectAttendance("SCO", 1, 0, 2, 0, 3);
         SubjectAttendance mockSDE = new SubjectAttendance("SDE", 4, 5, 0, 0, 0);
         SubjectAttendance mockDBOS = new SubjectAttendance("DBOS", 0, 0, 0, 6, 0);
@@ -42,7 +42,7 @@ public class MockDao {
         mockStudentAttendance.add(mockDBOS);
         mockStudentAttendance.add(mockITO);
 
-
+*/
         mockuser1 = new User(1,"admin", "admin","mock@mail.com", 12345678 ,"1 Mock St" , false, "data/mockuserIMG.jpg", mockStudentAttendance);
    
     
@@ -51,11 +51,11 @@ public class MockDao {
     
     
     
-    public int mockPrintOut() {
+/*    public int mockPrintOut() {
          int count = mockStudentAttendance.size();
         return count;
     }
-    
+ */   
     
     public static void main(String[] args) {
         MockDao mockdao = new MockDao();
@@ -98,8 +98,8 @@ public class MockDao {
     
     
     
-    public List<String> addDayToAttendance(String selectedCourse) { // bit rough. Work in progress
-        selectedCourse = "SCO";  // will come from gui later
+    public List<String> addDayToAttendance(String selectedCourse) { // bit rough. Work in progress. Needs a lot of work
+ /*       selectedCourse = "SCO";  // will come from gui later
         LocalDate now = LocalDate.now();
         int dayOfWeek = now.getDayOfWeek().getValue();
         int noOfCourses = attendance.size();
@@ -112,8 +112,8 @@ public class MockDao {
                 System.out.println(testCourse);
         }
         return attendance;
-    } 
-       return null;
+    } */
+       return null; 
     }
     
 
@@ -132,6 +132,67 @@ public class MockDao {
             return false;
         }
     }
+        
+    
+   
+    
+    public String[] getSubjectAttendance(String subject) {
+ /*       SubjectAttendance subjectCheck;
+        String[] subjectString;
+        int weekdayAttendance = 0;
+        if (mockStudentAttendance.size()>0) {
+            for(int i = 0; i > mockStudentAttendance.size(); i++) {
+                subjectCheck = null; 
+                // need to finish this method later
+            }
+        } */
+        return null;
+    }
 
+    
+        public String[] getSCOattendance() {
+        String mockSubject[] = new String[6];
+        mockSubject[1] = "SCO";
+        mockSubject[1] = "10";
+        mockSubject[1] = "0";
+        mockSubject[1] = "11";
+        mockSubject[1] = "0";
+        mockSubject[1] = "12";
+        return mockSubject;
+        }
+
+        public String[] getSDEattendance() {
+        String mockSubject[] = new String[6];
+        mockSubject[1] = "SDE";
+        mockSubject[1] = "13";
+        mockSubject[1] = "14";
+        mockSubject[1] = "0";
+        mockSubject[1] = "0";
+        mockSubject[1] = "0";
+        return mockSubject;
+        }
+
+        public String[] getDBOSattendance() {
+        String mockSubject[] = new String[6];
+        mockSubject[1] = "DBOS";
+        mockSubject[1] = "0";
+        mockSubject[1] = "0";
+        mockSubject[1] = "0";
+        mockSubject[1] = "15";
+        mockSubject[1] = "0";
+        return mockSubject;
+        }
+
+        public String[] getITOattendance() {
+        String mockSubject[] = new String[6];
+        mockSubject[1] = "ITO";
+        mockSubject[1] = "0";
+        mockSubject[1] = "0";
+        mockSubject[1] = "0";
+        mockSubject[1] = "16";
+        mockSubject[1] = "0";
+        return mockSubject;
+        }
+        
 
 }
