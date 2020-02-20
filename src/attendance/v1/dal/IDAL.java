@@ -13,8 +13,14 @@ import java.util.List;
  * @author Trigger
  */
 public interface IDAL {
+
     
-    User CheckUser(String user);
+   
     List<String> addDayToAttendance(String selectedCourse);
+
+
+    boolean CheckUser(String email, String password);
+    
+    boolean CheckTeacher(String email);
 
 }
