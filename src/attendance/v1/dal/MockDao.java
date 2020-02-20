@@ -51,11 +51,11 @@ public class MockDao {
     
     
     
-/*    public int mockPrintOut() {
+    public int mockPrintOut() {
          int count = mockStudentAttendance.size();
         return count;
     }
- */   
+    
     
     public static void main(String[] args) {
         MockDao mockdao = new MockDao();
