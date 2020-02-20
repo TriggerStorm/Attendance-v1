@@ -67,12 +67,12 @@
             </AnchorPane>
             <AnchorPane prefHeight="90.0" prefWidth="700.0">
                <children>
-                  <Label layoutX="40.0" layoutY="64.0" text="MockUser" textFill="#1c08f8">
+                  <Label layoutX="47.0" layoutY="64.0" text="MockUser" textFill="#1c08f8">
                      <font>
                         <Font size="14.0" />
                      </font>
                   </Label>
-                  <ImageView layoutX="44.0" layoutY="14.0">
+                  <ImageView layoutX="53.0" layoutY="14.0">
                      <image>
                         <Image url="@../assets/Untitled-1.png" />
                      </image>
@@ -93,34 +93,24 @@
                                  <children>
                                     <Pane prefHeight="100.0" prefWidth="200.0" stylesheets="@../css/Attendance.css">
                                        <children>
-                                          <TextField fx:id="message" layoutY="50.0" prefHeight="23.0" prefWidth="159.0" style="-fx-background-color: whitesmoke;" styleClass="textsm2" text="attendance for">
-                                             <font>
-                                                <Font size="10.0" />
-                                             </font>
-                                          </TextField>
-                                          <TextField fx:id="message1" layoutY="32.0" prefHeight="23.0" prefWidth="159.0" style="-fx-background-color: whitesmoke;" styleClass="textsm2" text="To record">
-                                             <font>
-                                                <Font size="10.0" />
-                                             </font>
-                                          </TextField>
-                                       </children>
-                                    </Pane>
-                                    <Pane prefHeight="100.0" prefWidth="200.0">
-                                       <children>
-                                          <TextField fx:id="TF_code" layoutX="34.0" layoutY="50.0" prefHeight="18.0" prefWidth="91.0" promptText="Enter Code" />
-                                          <Label layoutX="40.0" layoutY="-26.0" prefHeight="67.0" prefWidth="79.0" styleClass="h2" text="SCO" textAlignment="CENTER">
+                                          <Label fx:id="Lb_subjet" layoutX="33.0" layoutY="17.0" prefHeight="67.0" prefWidth="95.0" style="-fx-background-color: #F4B041;" styleClass="h2" textAlignment="CENTER">
                                              <font>
                                                 <Font size="24.0" />
                                              </font>
                                           </Label>
-                                          <Button fx:id="Bn_submit" layoutX="49.0" layoutY="87.0" mnemonicParsing="false" text="Submit" />
+                                       </children>
+                                    </Pane>
+                                    <Pane prefHeight="100.0" prefWidth="200.0">
+                                       <children>
+                                          <TextField fx:id="TF_code" layoutX="33.0" layoutY="14.0" prefHeight="25.0" prefWidth="95.0" promptText="Enter Code" />
+                                          <Button fx:id="Bn_submit" layoutX="34.0" layoutY="50.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="95.0" text="Submit" />
                                        </children>
                                     </Pane>
                                     <Pane prefHeight="67.0" prefWidth="105.0" />
                                     <Pane prefHeight="100.0" prefWidth="200.0">
                                        <children>
-                                          <TextField fx:id="attendance" layoutX="9.0" layoutY="52.0" prefHeight="50.0" prefWidth="134.0" text="100%" />
-                                          <TextField layoutX="19.0" layoutY="34.0" prefHeight="23.0" prefWidth="114.0" styleClass="textsm2" text="Attendance Rate" />
+                                          <Label fx:id="LB_AttendanceRate" layoutX="33.0" layoutY="18.0" prefHeight="64.0" prefWidth="95.0" style="-fx-background-color: #F5F5F5;" styleClass="h2" stylesheets="@../css/Attendance.css" text="69%" textAlignment="CENTER" />
+                                          <Label layoutX="32.0" layoutY="11.0" prefHeight="17.0" prefWidth="95.0" styleClass="textsm2" stylesheets="@../css/Attendance.css" text="Attendance Rate" textAlignment="CENTER" />
                                        </children>
                                     </Pane>
                                  </children>

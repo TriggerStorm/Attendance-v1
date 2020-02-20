@@ -53,8 +53,6 @@ public class StudentController implements Initializable {
     @FXML
     private AnchorPane body1;
     @FXML
-    private TextField attendance;
-    @FXML
     private TableView<ScoMok> TBV_attendance;
     @FXML
     private TableColumn<ScoMok, String> TBV_monday;
@@ -69,10 +67,6 @@ public class StudentController implements Initializable {
     @FXML
     private Button Bn_EditOwn;
     @FXML
-    private TextField message;
-    @FXML
-    private TextField message1;
-    @FXML
     private TextField TF_code;
     @FXML
     private Button Bn_submit;
@@ -80,6 +74,10 @@ public class StudentController implements Initializable {
     private AttendanceModel Am;
     @FXML
     private Label TF_logInAss;
+    @FXML
+    private Label Lb_subjet;
+    @FXML
+    private Label LB_AttendanceRate;
     /**
      * Initializes the controller class.
      */
@@ -116,7 +114,7 @@ public class StudentController implements Initializable {
         tbv_wednesday.setCellValueFactory(new PropertyValueFactory<>("wensday"));
         TBV_thursday.setCellValueFactory(new PropertyValueFactory<>("torsdag"));
         TBV_friday.setCellValueFactory(new PropertyValueFactory<>("fredag"));       
-                
+        Lb_subjet.setText("SCO");        
                 
         TBV_attendance.setItems(Am.getScoAttendance());
     }
@@ -129,7 +127,7 @@ public class StudentController implements Initializable {
         tbv_wednesday.setCellValueFactory(new PropertyValueFactory<>("wensday"));
         TBV_thursday.setCellValueFactory(new PropertyValueFactory<>("torsdag"));
         TBV_friday.setCellValueFactory(new PropertyValueFactory<>("fredag"));       
-                
+        Lb_subjet.setText("SDE");        
                 
         TBV_attendance.setItems(Am.getSdeAttendance());
     }
@@ -142,7 +140,7 @@ public class StudentController implements Initializable {
         tbv_wednesday.setCellValueFactory(new PropertyValueFactory<>("wensday"));
         TBV_thursday.setCellValueFactory(new PropertyValueFactory<>("torsdag"));
         TBV_friday.setCellValueFactory(new PropertyValueFactory<>("fredag"));       
-                
+        Lb_subjet.setText("DB/OS");        
                 
         TBV_attendance.setItems(Am.getDBOSAttandance());
     }
@@ -154,7 +152,7 @@ public class StudentController implements Initializable {
         tbv_wednesday.setCellValueFactory(new PropertyValueFactory<>("wensday"));
         TBV_thursday.setCellValueFactory(new PropertyValueFactory<>("torsdag"));
         TBV_friday.setCellValueFactory(new PropertyValueFactory<>("fredag"));       
-                
+        Lb_subjet.setText("ITO");        
                 
         TBV_attendance.setItems(Am.getItoAttandance());
       

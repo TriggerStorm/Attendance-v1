@@ -55,8 +55,6 @@ public class TeacherController implements Initializable {
     @FXML
     private JFXButton Bn_gencode;
     @FXML
-    private TextField attendance;
-    @FXML
     private TableView<ScoMok> TBV_attendance;
     @FXML
     private TableColumn<ScoMok, String> TBV_student;
@@ -81,6 +79,8 @@ public class TeacherController implements Initializable {
     @FXML
     private Label Lb_subjet;
     private AttendanceModel Am;
+    @FXML
+    private Label LB_AttendanceRate;
     /**
      * Initializes the controller class.
      */
@@ -143,6 +143,7 @@ public class TeacherController implements Initializable {
         TBV_student.setCellValueFactory(new PropertyValueFactory<>("Name"));        
         TBV_Attendance.setCellValueFactory(new PropertyValueFactory<>("procent"));        
         TBV_attendance.setItems(Am.getScoAttendance());
+        Lb_subjet.setText("SCO");
     }
 
     @FXML
@@ -154,7 +155,7 @@ public class TeacherController implements Initializable {
         TBV_friday.setCellValueFactory(new PropertyValueFactory<>("fredag"));       
         TBV_student.setCellValueFactory(new PropertyValueFactory<>("Name"));        
         TBV_Attendance.setCellValueFactory(new PropertyValueFactory<>("procent"));        
-                
+        Lb_subjet.setText("DB/OS");        
         TBV_attendance.setItems(Am.getDBOSAttandance());
     }
 
@@ -167,7 +168,7 @@ public class TeacherController implements Initializable {
         TBV_friday.setCellValueFactory(new PropertyValueFactory<>("fredag"));       
         TBV_student.setCellValueFactory(new PropertyValueFactory<>("Name"));        
         TBV_Attendance.setCellValueFactory(new PropertyValueFactory<>("procent"));        
-                
+        Lb_subjet.setText("ITO");        
         TBV_attendance.setItems(Am.getItoAttandance());
     }
 
@@ -180,7 +181,7 @@ public class TeacherController implements Initializable {
         TBV_friday.setCellValueFactory(new PropertyValueFactory<>("fredag"));       
         TBV_student.setCellValueFactory(new PropertyValueFactory<>("Name"));        
         TBV_Attendance.setCellValueFactory(new PropertyValueFactory<>("procent"));        
-                
+        Lb_subjet.setText("SDE");        
         TBV_attendance.setItems(Am.getSdeAttendance());
     }
     
