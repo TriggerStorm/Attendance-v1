@@ -9,6 +9,7 @@ import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 
 /**
@@ -19,14 +20,14 @@ import javafx.scene.control.TextField;
 public class GeneratedCodeController implements Initializable {
 
     @FXML
-    private TextField TF_code;
+    private Label TF_code;
 
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        // TODO
+        TF_code.setText("9W6A");
     }    
     
 }

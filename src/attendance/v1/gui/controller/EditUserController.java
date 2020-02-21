@@ -5,6 +5,7 @@
  */
 package attendance.v1.gui.controller;
 
+import attendance.v1.gui.model.AttendanceModel;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
@@ -27,22 +28,27 @@ public class EditUserController implements Initializable {
     @FXML
     private TextField TF_showPassWord;
     @FXML
-    private ChoiceBox<?> CB_classes; // need to make mok date for course computersi and make it pickeble in choice box. // filp
+    private ChoiceBox<String> CB_classes; // need to make mok date for course computersi and make it pickeble in choice box. // filp
     @FXML
     private Button Bn_resetPassWord; // need to reset and random gen new pass and show it in TF_showPassWord // filp
     @FXML
     private Button bn_cansel; // done
     @FXML
     private Button Bn_save; // need to add edit stuff to user. // filp
-
+    
+    private AttendanceModel Am;
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        // TODO
+        setCB();
     }    
-
+    public void setCB(){
+        Am = new AttendanceModel();
+        //CB_classes.getValue().add("CSS");
+        
+    }
     @FXML
     private void handle_save(ActionEvent event) {
         // filp

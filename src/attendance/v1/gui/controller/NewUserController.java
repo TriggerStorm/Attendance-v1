@@ -29,7 +29,7 @@ public class NewUserController implements Initializable {
     @FXML
     private TextField TF_name;
     @FXML
-    private ChoiceBox<?> CB_classes;
+    private ChoiceBox<String> CB_classes;
     @FXML
     private Button Bn_Save; //need to save new user info from TF as a new mock user // filp
     @FXML

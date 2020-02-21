@@ -203,7 +203,19 @@ public class TeacherController implements Initializable {
     }
 
     @FXML
-    private void handle_showcode(ActionEvent event) {
+    private void handle_showcode(ActionEvent event) throws IOException {
+        Parent root1;
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/attendance/v1/gui/view/generatedCode.fxml"));
+        root1 = (Parent) fxmlLoader.load();
+        
+        fxmlLoader.<StudentController>getController();
+
+        Stage addStage = new Stage();
+        Scene addScene = new Scene(root1);
+
+        
+        addStage.setScene(addScene);
+        addStage.show();
     }
     
 }

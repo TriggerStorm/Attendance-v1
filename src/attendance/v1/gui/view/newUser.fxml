@@ -15,7 +15,7 @@
    <children>
       <Text layoutX="38.0" layoutY="107.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Name" />
       <Text layoutX="35.0" layoutY="175.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Moblie" />
-      <Text layoutX="34.0" layoutY="209.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Classes" />
+      <Text layoutX="34.0" layoutY="209.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Course" />
       <Text layoutX="84.0" layoutY="63.0" strokeType="OUTSIDE" strokeWidth="0.0" text="New User">
          <font>
             <Font name="System Bold" size="45.0" />
