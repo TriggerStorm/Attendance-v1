@@ -40,24 +40,20 @@ public class DalManager implements IDAL {
     // Mock data methods
     
     
-    @Override
     public List<ScoMok> getScoAttandance(){
         return mockdao.getScoAttandance();
     }
     
-    @Override
     public List<ScoMok> getSdeAttandance(){
         return mockdao.getSdeAttandance();
     }
     
-    @Override
     public List<ScoMok> getItoAttandance(){
         return mockdao.getItoAttandance();
     }
         
-    @Override
     public List<ScoMok> getDbosAttandance(){
-        return mockdao.getDBOSAttandance();
+        return mockdao.getDbosAttandance();
     }
     
     
