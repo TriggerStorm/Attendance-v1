@@ -5,7 +5,9 @@
  */
 package attendance.v1.gui.model;
 
+import attendance.v1.be.ScoMok;
 import attendance.v1.bll.BllManager;
+import java.util.List;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
@@ -15,23 +17,41 @@ import javafx.collections.ObservableList;
  */
 public class AttendanceModel {
     private BllManager bllManager;
-   // private ObservableList<AttSco> ScoList;
+    private ObservableList<ScoMok> ScoList;
     
 
     public AttendanceModel() {
         bllManager = new BllManager();
-      //  getScoAttendance();
+        getScoAttendance();
     }
     
-   /* public ObservableList<AttSco> getScoAttendance(){
-    
-      List<Sco> allSco = bllManager.fetchAllSco();
+    public ObservableList<ScoMok> getScoAttendance(){
+      
+      List<ScoMok> allSco = bllManager.getScoAttandance();
       ScoList = FXCollections.observableArrayList(allSco);
       return ScoList;
         
     }
-    */
+    public ObservableList<ScoMok> getSdeAttendance(){
+      
+      List<ScoMok> allSco = bllManager.getSdeAttandance();
+      ScoList = FXCollections.observableArrayList(allSco);
+      return ScoList;
         
-    
-    
+    }
+    public ObservableList<ScoMok> getItoAttandance(){
+      
+      List<ScoMok> allSco = bllManager.getItoAttandance();
+      ScoList = FXCollections.observableArrayList(allSco);
+      return ScoList;
+        
+    }
+    public ObservableList<ScoMok> getDBOSAttandance(){
+      
+      List<ScoMok> allSco = bllManager.getDBOSAttandance();
+      ScoList = FXCollections.observableArrayList(allSco);
+      return ScoList;
+        
+    }
+
 }

@@ -38,13 +38,14 @@ public class EditOwnController implements Initializable {
     private Button Bn_save;
     @FXML
     private ImageView Lb_profilepic;
-
+    
+    private StudentController Sc;
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        // TODO
+        Sc = new StudentController();
     }    
 
     @FXML
@@ -55,6 +56,10 @@ public class EditOwnController implements Initializable {
 
     @FXML
     private void handle_save(ActionEvent event) {
+        TF_name.getText();
+        
+        Stage stage = (Stage) Bn_save.getScene().getWindow();
+        stage.close();
     }
     
 }

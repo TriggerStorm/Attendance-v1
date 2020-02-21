@@ -22,7 +22,6 @@
             <Font size="14.0" />
          </font>
       </TextField>
-      <JFXButton fx:id="bn_edit" buttonType="RAISED" layoutX="202.0" layoutY="95.0" onAction="#handle_edit" style="-fx-background-color: Red;" text="edit mok" />
       <JFXButton fx:id="Bn_ok" buttonType="RAISED" layoutX="217.0" layoutY="59.0" onAction="#handle_ok" style="-fx-background-color: white;" text="OK" />
       <JFXButton fx:id="Bn_cansel" buttonType="RAISED" layoutX="265.0" layoutY="59.0" onAction="#Handle_cansel" style="-fx-background-color: white;" text="Cansel" />
    </children>

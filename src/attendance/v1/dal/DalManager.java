@@ -5,6 +5,7 @@
  */
 package attendance.v1.dal;
 
+import attendance.v1.be.ScoMok;
 import attendance.v1.be.User;
 import java.util.List;
 
@@ -37,24 +38,26 @@ public class DalManager implements IDAL {
     }
         
     // Mock data methods
+    
+    
     @Override
-    public String[] getSCOattendance() {
-        return mockdao.getSCOattendance();
+    public List<ScoMok> getScoAttandance(){
+        return mockdao.getScoAttandance();
     }
     
     @Override
-    public String[] getSDEattendance() {
-        return mockdao.getSDEattendance();
+    public List<ScoMok> getSdeAttandance(){
+        return mockdao.getSdeAttandance();
     }
     
     @Override
-    public String[] getDBOSattendance() {
-        return mockdao.getDBOSattendance();
+    public List<ScoMok> getItoAttandance(){
+        return mockdao.getItoAttandance();
     }
-    
+        
     @Override
-    public String[] getITOattendance() {
-        return mockdao.getITOattendance();
+    public List<ScoMok> getDbosAttandance(){
+        return mockdao.getDBOSAttandance();
     }
     
     

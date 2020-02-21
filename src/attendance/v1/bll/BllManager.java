@@ -5,11 +5,13 @@
  */
 package attendance.v1.bll;
 
+import attendance.v1.be.ScoMok;
 import attendance.v1.be.User;
 
 import java.util.List;
 
 import attendance.v1.dal.DalManager;
+import java.util.List;
 
 
 /**
@@ -55,25 +57,21 @@ public class BllManager implements IBLL {
     
     
          // Mock data methods
-    @Override
-    public String[] getSCOattendance() {
-        return dalManager.getSCOattendance();
+ 
+
+    public List<ScoMok> getScoAttandance(){
+        return dalManager.getScoAttandance();
+    }
+    public List<ScoMok> getSdeAttandance(){
+        return dalManager.getSdeAttandance();
+    }
+    public List<ScoMok> getItoAttandance(){
+        return dalManager.getItoAttandance();
+    }
+    public List<ScoMok> getDbosAttandance(){
+        return dalManager.getDbosAttandance();
     }
     
-    @Override
-    public String[] getSDEattendance() {
-        return dalManager.getSDEattendance();
-    }
-    
-    @Override
-    public String[] getDBOSattendance() {
-        return dalManager.getDBOSattendance();
-    }
-    
-    @Override
-    public String[] getITOattendance() {
-        return dalManager.getITOattendance();
-    }
     
     
     

@@ -9,7 +9,6 @@
 <?import javafx.scene.control.TabPane?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
-<?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -77,10 +76,10 @@
                         <Image url="@../assets/Untitled-1.png" />
                      </image>
                   </ImageView>
-                  <JFXButton fx:id="Bn_SCO" buttonType="RAISED" layoutX="191.0" layoutY="17.0" styleClass="coursebtn" stylesheets="@../css/Attendance.css" text="SCO" />
-                  <JFXButton fx:id="Bn_DBOS" buttonType="RAISED" layoutX="430.0" layoutY="17.0" styleClass="coursebtn" stylesheets="@../css/Attendance.css" text="DB/OS" />
-                  <JFXButton fx:id="Bn_ITO" buttonType="RAISED" layoutX="569.0" layoutY="17.0" styleClass="coursebtn" stylesheets="@../css/Attendance.css" text="ITO" />
-                  <JFXButton fx:id="Bn_SDE" buttonType="RAISED" layoutX="314.0" layoutY="17.0" styleClass="coursebtn" stylesheets="@../css/Attendance.css" text="SDE" />
+                  <JFXButton fx:id="Bn_SCO" buttonType="RAISED" layoutX="191.0" layoutY="17.0" onAction="#handle_SCO" styleClass="coursebtn" stylesheets="@../css/Attendance.css" text="SCO" />
+                  <JFXButton fx:id="Bn_DBOS" buttonType="RAISED" layoutX="430.0" layoutY="17.0" onAction="#handle_DBOS" styleClass="coursebtn" stylesheets="@../css/Attendance.css" text="DB/OS" />
+                  <JFXButton fx:id="Bn_ITO" buttonType="RAISED" layoutX="569.0" layoutY="17.0" onAction="#handle_ITO" styleClass="coursebtn" stylesheets="@../css/Attendance.css" text="ITO" />
+                  <JFXButton fx:id="Bn_SDE" buttonType="RAISED" layoutX="314.0" layoutY="17.0" onAction="#handle_SDE" styleClass="coursebtn" stylesheets="@../css/Attendance.css" text="SDE" />
                </children></AnchorPane>
             <AnchorPane fx:id="body1" prefHeight="429.0" prefWidth="700.0" styleClass="label1">
                <children>
@@ -93,7 +92,7 @@
                                  <children>
                                     <Pane prefHeight="100.0" prefWidth="200.0" stylesheets="@../css/Attendance.css">
                                        <children>
-                                          <Label fx:id="Lb_subjet" layoutX="23.0" layoutY="16.0" prefHeight="64.0" prefWidth="105.0" styleClass="h2" text="SCO" textAlignment="CENTER">
+                                          <Label fx:id="Lb_subjet" layoutX="23.0" layoutY="16.0" prefHeight="64.0" prefWidth="105.0" style="-fx-background-color: #F4B041;" styleClass="h2" textAlignment="CENTER">
                                              <font>
                                                 <Font size="24.0" />
                                              </font>
@@ -103,21 +102,19 @@
                                     <Pane prefHeight="100.0" prefWidth="200.0">
                                        <children>
                                           <JFXButton fx:id="Bn_gencode" buttonType="RAISED" layoutX="24.0" layoutY="14.0" onAction="#handle_attendancecode" prefHeight="50.0" prefWidth="105.0" style="-fx-background-color: white;" stylesheets="@../css/Attendance.css" text="Attendance &#10;code" textAlignment="CENTER" />
-                                          <JFXButton buttonType="RAISED" layoutX="24.0" layoutY="70.0" prefHeight="25.0" prefWidth="105.0" style="-fx-background-color: white;" text="Show code" />
+                                          <JFXButton fx:id="bn_Showcode" buttonType="RAISED" layoutX="24.0" layoutY="70.0" onAction="#handle_showcode" prefHeight="25.0" prefWidth="105.0" style="-fx-background-color: white;" text="Show code" />
                                        </children>
                                     </Pane>
-                                    <Pane prefHeight="67.0" prefWidth="105.0">
-                                       <children>
-                                          <TextField layoutX="14.0" layoutY="20.0" prefHeight="42.0" prefWidth="114.0" styleClass="textsm2" text="Attendance Rate" />
-                                       </children></Pane>
+                                    <Pane prefHeight="67.0" prefWidth="105.0" />
                                     <Pane prefHeight="100.0" prefWidth="200.0">
                                        <children>
-                                          <TextField fx:id="attendance" layoutX="4.0" prefHeight="50.0" prefWidth="134.0" text="100%" />
+                                          <Label fx:id="LB_AttendanceRate" layoutX="23.0" layoutY="17.0" prefHeight="64.0" prefWidth="105.0" style="-fx-background-color: #F5F5F5;" styleClass="h2" stylesheets="@../css/Attendance.css" text="69%" textAlignment="CENTER" />
+                                          <Label layoutX="23.0" layoutY="6.0" prefHeight="17.0" prefWidth="105.0" styleClass="textsm2" stylesheets="@../css/Attendance.css" text="  Attendance Rate" textAlignment="CENTER" />
                                        </children>
                                     </Pane>
                                     <Pane prefHeight="78.0" prefWidth="123.0">
                                        <children>
-                                          <JFXButton fx:id="Bn_user" buttonType="RAISED" layoutX="25.0" layoutY="13.0" onAction="#Handle_user" prefHeight="50.0" prefWidth="105.0" style="-fx-background-color: lightyellow;" text="new/edit User" />
+                                          <JFXButton fx:id="Bn_user" buttonType="RAISED" layoutX="25.0" layoutY="13.0" onAction="#Handle_user" prefHeight="50.0" prefWidth="105.0" style="-fx-background-color: White;" text="new/edit User" />
                                        </children>
                                     </Pane>
                                  </children>
@@ -145,11 +142,6 @@
                                        </content></Tab>
                                 </tabs>
                               </TabPane>
-                              <ImageView fitHeight="402.0" fitWidth="554.0" layoutY="30.0" pickOnBounds="true" preserveRatio="true">
-                                 <image>
-                                    <Image url="@../assets/gui%20att%20v1%20v1.png" />
-                                 </image>
-                              </ImageView>
                            </children>
                         </Pane>
                      </children>

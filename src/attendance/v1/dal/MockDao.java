@@ -5,6 +5,7 @@
  */
 package attendance.v1.dal;
 
+
 import attendance.v1.be.SubjectAttendance;
 import attendance.v1.be.User;
 import java.lang.reflect.Array;
@@ -12,6 +13,24 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import attendance.v1.be.ScoMok;
+import attendance.v1.be.User;
+import java.util.ArrayList;
+import java.util.List;
+import static javax.swing.UIManager.getString;
+
+import attendance.v1.be.ScoMok;
+
+import attendance.v1.be.ScoMok;
+
+import java.util.List;
+
+
+import attendance.v1.be.ScoMok;
+
+import attendance.v1.be.ScoMok;
+
+import attendance.v1.be.ScoMok;
 
 /**
  *
@@ -195,4 +214,33 @@ public class MockDao {
         }
         
 
+    public List<ScoMok> getScoAttandance(){
+        List<ScoMok> allSco = new ArrayList<>();
+        String Name = ("student");
+        allSco.add(new ScoMok(Name,5,8,5,6,8,56));
+        
+        return allSco;
+    }
+    public List<ScoMok> getSdeAttandance(){
+        List<ScoMok> allSco = new ArrayList<>();
+        String Name = ("student");
+        allSco.add(new ScoMok(Name,9,9,9,9,9,99));
+        
+        return allSco;
+    }
+    public List<ScoMok> getItoAttandance(){
+        List<ScoMok> allSco = new ArrayList<>();
+        String Name = ("student");
+        allSco.add(new ScoMok(Name,5,4,2,7,5,69));
+        
+        return allSco;
+    }
+    public List<ScoMok> getDBOSAttandance(){
+        List<ScoMok> allSco = new ArrayList<>();
+        String Name = ("student");
+        allSco.add(new ScoMok(Name,12,0,6,4,7,54));
+        
+        return allSco;
+    }
+    
 }
