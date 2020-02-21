@@ -71,22 +71,30 @@ public class StudentController implements Initializable {
     @FXML
     private Button Bn_submit;
     
-    private AttendanceModel Am;
+    
     @FXML
     private Label TF_logInAss;
     @FXML
     private Label Lb_subjet;
     @FXML
     private Label LB_AttendanceRate;
+    
+    private AttendanceModel Am;
+    private ScoMok Sm;
+    
+    @FXML
+    private Label Lb_logInUser;
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         settingTableView();
+        Lb_logInUser.setText("Student");
+        TF_logInAss.setText("Student");
     }    
     private void settingTableView() {
-        Am = new AttendanceModel();
+        Am = new AttendanceModel(); 
     }
 
     @FXML

@@ -90,6 +90,9 @@ public class TeacherController implements Initializable {
     }    
     private void settingTableView() {
         Am = new AttendanceModel();
+        Lb_loginas.setText("Admin");
+        Lb_logInUser.setText("Admin");
+ 
     }
     @FXML
     private void handle_editown(ActionEvent event) throws IOException {
