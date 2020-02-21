@@ -169,77 +169,38 @@ public class MockDao {
     }
 
     
-        public String[] getSCOattendance() {
-        String mockSubject[] = new String[6];
-        mockSubject[1] = "SCO";
-        mockSubject[1] = "10";
-        mockSubject[1] = "0";
-        mockSubject[1] = "11";
-        mockSubject[1] = "0";
-        mockSubject[1] = "12";
-        return mockSubject;
-        }
-
-        public String[] getSDEattendance() {
-        String mockSubject[] = new String[6];
-        mockSubject[1] = "SDE";
-        mockSubject[1] = "13";
-        mockSubject[1] = "14";
-        mockSubject[1] = "0";
-        mockSubject[1] = "0";
-        mockSubject[1] = "0";
-        return mockSubject;
-        }
-
-        public String[] getDBOSattendance() {
-        String mockSubject[] = new String[6];
-        mockSubject[1] = "DBOS";
-        mockSubject[1] = "0";
-        mockSubject[1] = "0";
-        mockSubject[1] = "0";
-        mockSubject[1] = "15";
-        mockSubject[1] = "0";
-        return mockSubject;
-        }
-
-        public String[] getITOattendance() {
-        String mockSubject[] = new String[6];
-        mockSubject[1] = "ITO";
-        mockSubject[1] = "0";
-        mockSubject[1] = "0";
-        mockSubject[1] = "0";
-        mockSubject[1] = "16";
-        mockSubject[1] = "0";
-        return mockSubject;
-        }
+    public String gCode() {
+        String gCode = "9W6A";
+        return gCode;
+    }
         
-
+     public String course() {
+        String course = "Computer Science";
+        return course;
+    } 
+     
     public List<ScoMok> getScoAttandance(){
         List<ScoMok> allSco = new ArrayList<>();
         String Name = ("student");
         allSco.add(new ScoMok(Name,5,8,5,6,8,56));
-        
         return allSco;
     }
     public List<ScoMok> getSdeAttandance(){
         List<ScoMok> allSco = new ArrayList<>();
         String Name = ("student");
         allSco.add(new ScoMok(Name,9,9,9,9,9,99));
-        
         return allSco;
     }
     public List<ScoMok> getItoAttandance(){
         List<ScoMok> allSco = new ArrayList<>();
         String Name = ("student");
         allSco.add(new ScoMok(Name,5,4,2,7,5,69));
-        
         return allSco;
     }
-    public List<ScoMok> getDBOSAttandance(){
+    public List<ScoMok> getDbosAttandance(){
         List<ScoMok> allSco = new ArrayList<>();
         String Name = ("student");
         allSco.add(new ScoMok(Name,12,0,6,4,7,54));
-        
         return allSco;
     }
     

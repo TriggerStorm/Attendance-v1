@@ -36,10 +36,18 @@ public class DalManager implements IDAL {
     public List<String> addDayToAttendance(String selectedCourse) {
         return mockdao.addDayToAttendance(selectedCourse);
     }
+   
         
+    public String gCode() {
+        return mockdao.gCode();
+    }
+
+    public String course() {
+        return mockdao.course();
+    } 
+    
+    
     // Mock data methods
-    
-    
     public List<ScoMok> getScoAttandance(){
         return mockdao.getScoAttandance();
     }

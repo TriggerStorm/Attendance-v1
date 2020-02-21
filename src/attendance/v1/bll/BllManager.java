@@ -55,10 +55,15 @@ public class BllManager implements IBLL {
     }
     
     
+    public String gCode() {
+        return dalManager.gCode();
+    }
+    
+    public String course() {
+        return dalManager.course();
+    } 
     
          // Mock data methods
- 
-
     public List<ScoMok> getScoAttandance(){
         return dalManager.getScoAttandance();
     }
