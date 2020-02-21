@@ -81,6 +81,8 @@ public class TeacherController implements Initializable {
     private AttendanceModel Am;
     @FXML
     private Label LB_AttendanceRate;
+    @FXML
+    private JFXButton bn_Showcode;
     /**
      * Initializes the controller class.
      */
@@ -115,7 +117,19 @@ public class TeacherController implements Initializable {
 
 
     @FXML
-    private void handle_attendancecode(ActionEvent event) {
+    private void handle_attendancecode(ActionEvent event) throws IOException {
+        Parent root1;
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/attendance/v1/gui/view/generatedCode.fxml"));
+        root1 = (Parent) fxmlLoader.load();
+        
+        fxmlLoader.<StudentController>getController();
+
+        Stage addStage = new Stage();
+        Scene addScene = new Scene(root1);
+
+        
+        addStage.setScene(addScene);
+        addStage.show();
     }
 
     @FXML
@@ -186,6 +200,10 @@ public class TeacherController implements Initializable {
         TBV_Attendance.setCellValueFactory(new PropertyValueFactory<>("procent"));        
         Lb_subjet.setText("SDE");        
         TBV_attendance.setItems(Am.getSdeAttendance());
+    }
+
+    @FXML
+    private void handle_showcode(ActionEvent event) {
     }
     
 }

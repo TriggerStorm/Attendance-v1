@@ -102,7 +102,7 @@
                                     <Pane prefHeight="100.0" prefWidth="200.0">
                                        <children>
                                           <JFXButton fx:id="Bn_gencode" buttonType="RAISED" layoutX="24.0" layoutY="14.0" onAction="#handle_attendancecode" prefHeight="50.0" prefWidth="105.0" style="-fx-background-color: white;" stylesheets="@../css/Attendance.css" text="Attendance &#10;code" textAlignment="CENTER" />
-                                          <JFXButton buttonType="RAISED" layoutX="24.0" layoutY="70.0" prefHeight="25.0" prefWidth="105.0" style="-fx-background-color: white;" text="Show code" />
+                                          <JFXButton fx:id="bn_Showcode" buttonType="RAISED" layoutX="24.0" layoutY="70.0" onAction="#handle_showcode" prefHeight="25.0" prefWidth="105.0" style="-fx-background-color: white;" text="Show code" />
                                        </children>
                                     </Pane>
                                     <Pane prefHeight="67.0" prefWidth="105.0" />
