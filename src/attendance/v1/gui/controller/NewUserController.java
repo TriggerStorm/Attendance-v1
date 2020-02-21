@@ -13,6 +13,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.TextField;
+import javafx.stage.Stage;
 
 /**
  * FXML Controller class
@@ -30,9 +31,7 @@ public class NewUserController implements Initializable {
     @FXML
     private ChoiceBox<?> CB_classes;
     @FXML
-    private Button Bn_add;
-    @FXML
-    private Button Bn_Save;
+    private Button Bn_Save; //need to save new user info from TF as a new mock user // filp
     @FXML
     private Button Bn_cansel;
 
@@ -46,10 +45,13 @@ public class NewUserController implements Initializable {
 
     @FXML
     private void handle_save(ActionEvent event) {
+        // filp
     }
 
     @FXML
     private void Handle_cancle(ActionEvent event) {
+        Stage stage = (Stage) Bn_cansel.getScene().getWindow();
+        stage.close();
     }
     
 }

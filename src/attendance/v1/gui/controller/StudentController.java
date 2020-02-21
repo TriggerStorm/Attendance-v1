@@ -113,8 +113,7 @@ public class StudentController implements Initializable {
         addStage.setScene(addScene);
         addStage.show();
         
-        Stage stage = (Stage) Bn_EditOwn.getScene().getWindow();
-        stage.close();
+        
     }
     
 }

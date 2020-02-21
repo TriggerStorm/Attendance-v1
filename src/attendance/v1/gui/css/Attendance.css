@@ -15,7 +15,7 @@ and open the template in the editor.
 
 
 .banner1 {
-  	-fx-background-color: light grey
+  	-fx-background-color: lightgrey
 }
 
 
@@ -33,9 +33,8 @@ and open the template in the editor.
 }
 
 
-.button:hover{
-        -fx-background-color: bright white; 
-}
+
+
 
 
 .coursebtn {
@@ -119,5 +118,6 @@ and open the template in the editor.
     	-fx-font: sans-serif;
 	-fx-font-size: 36;
 	-fx-text-fill: light green;
+       
 }
 
