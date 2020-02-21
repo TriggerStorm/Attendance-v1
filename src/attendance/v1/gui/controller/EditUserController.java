@@ -43,12 +43,6 @@ public class EditUserController implements Initializable {
         // TODO
     }    
 
-
-    private void handle_cansel(ActionEvent event) {
-        Stage stage = (Stage) bn_cansel.getScene().getWindow();
-        stage.close();
-    }
-
     @FXML
     private void handle_save(ActionEvent event) {
         // filp
@@ -60,6 +54,9 @@ public class EditUserController implements Initializable {
 
     @FXML
     private void bn_cansel(ActionEvent event) {
+        Stage stage = (Stage) bn_cansel.getScene().getWindow();
+        stage.close();
+        
     }
     
 }
