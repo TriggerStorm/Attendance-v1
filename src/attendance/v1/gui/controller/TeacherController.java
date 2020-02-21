@@ -6,11 +6,14 @@
 package attendance.v1.gui.controller;
 
 import attendance.v1.be.ScoMok;
+import attendance.v1.bll.BllManager;
+import attendance.v1.gui.model.DataModel;
 import attendance.v1.gui.model.AttendanceModel;
 import com.jfoenix.controls.JFXButton;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -81,9 +84,15 @@ public class TeacherController implements Initializable {
     private AttendanceModel Am;
     @FXML
     private Label LB_AttendanceRate;
+    private DataModel dm;
+    
     /**
      * Initializes the controller class.
      */
+    public TeacherController()
+    {
+        dm = DataModel.GetInstance();
+    }
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         settingTableView();
@@ -144,8 +153,8 @@ public class TeacherController implements Initializable {
         TBV_thursday.setCellValueFactory(new PropertyValueFactory<>("torsdag"));
         TBV_friday.setCellValueFactory(new PropertyValueFactory<>("fredag"));       
         TBV_student.setCellValueFactory(new PropertyValueFactory<>("Name"));        
-        TBV_Attendance.setCellValueFactory(new PropertyValueFactory<>("procent"));        
-        TBV_attendance.setItems(Am.getScoAttendance());
+        TBV_Attendance.setCellValueFactory(new PropertyValueFactory<>("procent"));
+        TBV_attendance.setItems(dm.getScoList());
         Lb_subjet.setText("SCO");
     }
 

@@ -8,6 +8,7 @@ package attendance.v1.bll;
 import attendance.v1.be.ScoMok;
 import attendance.v1.be.User;
 import attendance.v1.dal.DalManager;
+import attendance.v1.gui.model.DataModel;
 import java.util.List;
 
 /**
@@ -16,7 +17,9 @@ import java.util.List;
  */
 public class BllManager implements IBLL {
     private DalManager dalManager = new DalManager();
+    private DataModel dm;
 
+    
     
      @Override
     public int CheckUser (String email, String password) {//Checks if the user exists, and what kind of user we have.

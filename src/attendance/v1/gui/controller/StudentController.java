@@ -7,6 +7,7 @@ package attendance.v1.gui.controller;
 
 import attendance.v1.be.ScoMok;
 import attendance.v1.gui.model.AttendanceModel;
+import attendance.v1.gui.model.DataModel;
 import com.jfoenix.controls.JFXButton;
 import java.io.IOException;
 import java.net.URL;
@@ -87,6 +88,11 @@ public class StudentController implements Initializable {
     /**
      * Initializes the controller class.
      */
+    private DataModel dm;
+    public StudentController()
+    {
+        dm = DataModel.GetInstance();
+    }
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         settingTableView();
@@ -124,7 +130,7 @@ public class StudentController implements Initializable {
         TBV_friday.setCellValueFactory(new PropertyValueFactory<>("fredag"));       
         Lb_subjet.setText("SCO");        
                 
-        TBV_attendance.setItems(Am.getScoAttendance());
+        TBV_attendance.setItems(dm.getScoList());
     }
 
     @FXML
