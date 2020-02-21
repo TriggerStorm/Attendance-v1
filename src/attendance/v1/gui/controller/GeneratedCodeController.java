@@ -5,6 +5,7 @@
  */
 package attendance.v1.gui.controller;
 
+import attendance.v1.gui.model.AttendanceModel;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.fxml.FXML;
@@ -21,13 +22,16 @@ public class GeneratedCodeController implements Initializable {
 
     @FXML
     private Label TF_code;
-
+    private AttendanceModel Am;
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        TF_code.setText("9W6A");
+        setcode();
     }    
-    
+    public void setcode (){
+        Am = new AttendanceModel();
+        TF_code.setText(Am.gCode());
+    }
 }

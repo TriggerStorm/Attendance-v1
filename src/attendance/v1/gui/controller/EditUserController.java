@@ -46,12 +46,13 @@ public class EditUserController implements Initializable {
     }    
     public void setCB(){
         Am = new AttendanceModel();
-        //CB_classes.getValue().add("CSS");
+        CB_classes.setItems(Am.course());
         
     }
     @FXML
     private void handle_save(ActionEvent event) {
-        // filp
+        Stage stage = (Stage) Bn_save.getScene().getWindow();
+        stage.close();
     }
 
     @FXML

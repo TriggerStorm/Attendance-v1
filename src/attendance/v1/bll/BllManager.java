@@ -54,7 +54,12 @@ public class BllManager implements IBLL {
     public List<ScoMok> getDBOSAttandance(){
         return dalManager.getDBOSAttandance();
     }
-    
+    public String gCode(){
+     return dalManager.gCode();
+    }
+    public String course(){
+     return dalManager.course();
+    }
     
     
     

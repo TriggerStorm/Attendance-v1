@@ -64,7 +64,15 @@ public class MockDao {
             return false;
         }
     }
-
+    public String gCode() {
+        String gCode = "9W6A";
+        return gCode;
+    }
+        
+     public String course() {
+        String course = "Computer Science";
+        return course;
+    } 
     public List<ScoMok> getScoAttandance(){
         List<ScoMok> allSco = new ArrayList<>();
         String Name = ("student");
