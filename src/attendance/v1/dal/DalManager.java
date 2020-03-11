@@ -62,22 +62,22 @@ public class DalManager implements IDAL {
         
     @Override
     public List<ScoMok> getSCOattendance(){
-        return mockdao.getSCOattendance();
+        return attendanceDBDao.getSCOattendance();
     }
         
     @Override
     public List<ScoMok> getSDEattendance(){
-        return mockdao.getSDEattendance();
+        return attendanceDBDao.getSDEattendance();
     }
         
     @Override
     public List<ScoMok> getITOattendance(){
-        return mockdao.getITOattendance();
+        return attendanceDBDao.getITOattendance();
     }
            
     @Override
     public List<ScoMok> getDBOSattendance(){
-        return mockdao.getDBOSattendance();
+        return attendanceDBDao.getDBOSattendance();
     }
 
    

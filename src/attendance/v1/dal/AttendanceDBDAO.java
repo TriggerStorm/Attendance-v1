@@ -24,7 +24,6 @@ public class AttendanceDBDAO {
  *
  * @author Trigger
  */
-public class MockDao {
     public List<String> attendance = new ArrayList<>();
     public User mockuser1;
     public User mockuser2;
@@ -36,7 +35,7 @@ public class MockDao {
 
     public List<SubjectAttendance> mockStudentAttendance;
     
-    public MockDao() {
+    public AttendanceDBDAO() {
         
 /*        mockStudentAttendance = new ArrayList<SubjectAttendance>();
         SubjectAttendance mockSCO = new SubjectAttendance("SCO", 1, 0, 2, 0, 3);
@@ -193,4 +192,4 @@ public class MockDao {
     }
     
 }
-}
+
