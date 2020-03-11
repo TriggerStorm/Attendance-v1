@@ -54,26 +54,39 @@ public class BllManager implements IBLL {
         return dalManager.addDayToAttendance(selectedCourse);
     }
     
-    
+       
+    @Override
     public String gCode() {
         return dalManager.gCode();
     }
     
+        
+    @Override
     public String course() {
         return dalManager.course();
     } 
     
-         // Mock data methods
+         // Mock data methods    
+    @Override
     public List<ScoMok> getSCOattendance(){
         return dalManager.getSCOattendance();
     }
+    
+        
+    @Override
     public List<ScoMok> getSDEattendance(){
         return dalManager.getSDEattendance();
     }
+    
+        
+    @Override
     public List<ScoMok> getITOattendance(){
         return dalManager.getITOattendance();
     }
-    public List<ScoMok> getDbosAttandance(){
+    
+        
+    @Override
+    public List<ScoMok> getDBOSattendance(){
         return dalManager.getDBOSattendance();
     }
 

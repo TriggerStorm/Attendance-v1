@@ -119,12 +119,12 @@ public class StudentController implements Initializable {
     private void handle_SCO(ActionEvent event) {
         TBV_monday.setCellValueFactory(new PropertyValueFactory<>("monday"));
         TBV_tuesday.setCellValueFactory(new PropertyValueFactory<>("tuesday"));
-        tbv_wednesday.setCellValueFactory(new PropertyValueFactory<>("wensday"));
-        TBV_thursday.setCellValueFactory(new PropertyValueFactory<>("torsdag"));
+        tbv_wednesday.setCellValueFactory(new PropertyValueFactory<>("wednesday"));
+        TBV_thursday.setCellValueFactory(new PropertyValueFactory<>("thursdag"));
         TBV_friday.setCellValueFactory(new PropertyValueFactory<>("fredag"));       
         Lb_subjet.setText("SCO");        
                 
-        TBV_attendance.setItems(Am.getScoAttendance());
+        TBV_attendance.setItems(Am.getSCOattendance());
     }
 
     @FXML
@@ -132,12 +132,12 @@ public class StudentController implements Initializable {
         
         TBV_monday.setCellValueFactory(new PropertyValueFactory<>("monday"));
         TBV_tuesday.setCellValueFactory(new PropertyValueFactory<>("tuesday"));
-        tbv_wednesday.setCellValueFactory(new PropertyValueFactory<>("wensday"));
-        TBV_thursday.setCellValueFactory(new PropertyValueFactory<>("torsdag"));
-        TBV_friday.setCellValueFactory(new PropertyValueFactory<>("fredag"));       
+        tbv_wednesday.setCellValueFactory(new PropertyValueFactory<>("wednesday"));
+        TBV_thursday.setCellValueFactory(new PropertyValueFactory<>("thursdag"));
+        TBV_friday.setCellValueFactory(new PropertyValueFactory<>("friday"));       
         Lb_subjet.setText("SDE");        
                 
-        TBV_attendance.setItems(Am.getSdeAttendance());
+        TBV_attendance.setItems(Am.getSDEattendance());
     }
 
     @FXML
@@ -145,12 +145,12 @@ public class StudentController implements Initializable {
         
         TBV_monday.setCellValueFactory(new PropertyValueFactory<>("monday"));
         TBV_tuesday.setCellValueFactory(new PropertyValueFactory<>("tuesday"));
-        tbv_wednesday.setCellValueFactory(new PropertyValueFactory<>("wensday"));
-        TBV_thursday.setCellValueFactory(new PropertyValueFactory<>("torsdag"));
-        TBV_friday.setCellValueFactory(new PropertyValueFactory<>("fredag"));       
+        tbv_wednesday.setCellValueFactory(new PropertyValueFactory<>("wednesday"));
+        TBV_thursday.setCellValueFactory(new PropertyValueFactory<>("thursdag"));
+        TBV_friday.setCellValueFactory(new PropertyValueFactory<>("friday"));       
         Lb_subjet.setText("DB/OS");        
                 
-        TBV_attendance.setItems(Am.getDBOSAttandance());
+        TBV_attendance.setItems(Am.getDBOSattendance());
     }
 
     @FXML
@@ -158,11 +158,11 @@ public class StudentController implements Initializable {
          TBV_monday.setCellValueFactory(new PropertyValueFactory<>("monday"));
         TBV_tuesday.setCellValueFactory(new PropertyValueFactory<>("tuesday"));
         tbv_wednesday.setCellValueFactory(new PropertyValueFactory<>("wensday"));
-        TBV_thursday.setCellValueFactory(new PropertyValueFactory<>("torsdag"));
-        TBV_friday.setCellValueFactory(new PropertyValueFactory<>("fredag"));       
+        TBV_thursday.setCellValueFactory(new PropertyValueFactory<>("thursdag"));
+        TBV_friday.setCellValueFactory(new PropertyValueFactory<>("friday"));       
         Lb_subjet.setText("ITO");        
                 
-        TBV_attendance.setItems(Am.getItoAttandance());
+        TBV_attendance.setItems(Am.getITOattendance());
       
     }
     

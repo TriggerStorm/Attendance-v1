@@ -14,13 +14,14 @@ import java.util.List;
  * @author Trigger
  */
 public interface IBLL {
-        int CheckUser(String email, String Password);
-        public String course();
-        public String gCode();
-        public List<ScoMok> getDBOSattendance();
-        public List<ScoMok> getITOattendance();
-        public List<ScoMok> getSDEattendance();
-        public List<ScoMok> getSCOattendance();
+    
+    int CheckUser(String email, String Password);
+    public String course();
+    public String gCode();
+    public List<ScoMok> getDBOSattendance();
+    public List<ScoMok> getITOattendance();
+    public List<ScoMok> getSDEattendance();
+    public List<ScoMok> getSCOattendance();
         
 
     
@@ -30,10 +31,11 @@ public interface IBLL {
 
 
     
-    
+ /*   
     //Mock data methods
     String[] getSCOsttendance();
     String[] getSDEsttendance();
     String[] getDBOSsttendance();
     String[] getITOsttendance();
+    */
 }
