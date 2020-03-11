@@ -12,6 +12,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import attendance.v1.be.User;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  *
@@ -20,7 +22,31 @@ import attendance.v1.be.User;
 public class UserDBDAO {
         private DBConnection dbc;
 
-    
+   
+    public List<User> getAllUsers(){
+        
+        List<User> = new ArrayList(); //get a list to store the values.
+        
+        try(Connection con = dbc.getConnection()){
+            String SQLStmt = "SELECT * FROM USERS;";
+            
+            Statement statement = con.createStatement();
+            ResultSet rs = statment.executeQuery(SQLStmt);
+            
+            while(rs.next()) //While you have something in the results
+            {
+                //fetch all info
+                
+                int UserKey = rs.getInt("UserId");
+                String UserName = rs.getString("userName");
+                String Password = rs.getString("Password");
+                String email = rs.getString("Email");
+                String address = rs.getString("Address");
+                
+            }    
+        }
+    }
+        
         
     public User getUser() {
         User user = new User();
