@@ -5,6 +5,7 @@
  */
 package attendance.v1.gui.controller;
 
+import attendance.v1.gui.model.AttendanceModel;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
@@ -29,23 +30,30 @@ public class NewUserController implements Initializable {
     @FXML
     private TextField TF_name;
     @FXML
-    private ChoiceBox<?> CB_classes;
+    private ChoiceBox<String> CB_classes;
     @FXML
     private Button Bn_Save; //need to save new user info from TF as a new mock user // filp
     @FXML
     private Button Bn_cansel;
-
+    
+    private AttendanceModel Am;
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        // TODO
+        setCB();
     }    
+    public void setCB(){
+        Am = new AttendanceModel();
+        CB_classes.setItems(Am.course());
+        
+    }
 
     @FXML
     private void handle_save(ActionEvent event) {
-        // filp
+        Stage stage = (Stage) Bn_Save.getScene().getWindow();
+        stage.close();
     }
 
     @FXML

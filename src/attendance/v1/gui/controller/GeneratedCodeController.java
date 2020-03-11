@@ -5,10 +5,12 @@
  */
 package attendance.v1.gui.controller;
 
+import attendance.v1.gui.model.AttendanceModel;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 
 /**
@@ -19,14 +21,17 @@ import javafx.scene.control.TextField;
 public class GeneratedCodeController implements Initializable {
 
     @FXML
-    private TextField TF_code;
-
+    private Label TF_code;
+    private AttendanceModel Am;
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        // TODO
+        setcode();
     }    
-    
+    public void setcode (){
+        Am = new AttendanceModel();
+        TF_code.setText(Am.gCode());
+    }
 }

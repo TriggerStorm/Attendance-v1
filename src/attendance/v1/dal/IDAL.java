@@ -24,15 +24,11 @@ public interface IDAL {
     
     boolean CheckTeacher(String email);
 
-    String gCode();
-
-    String course();
-
-    //Mock data methods
-    List<ScoMok> getScoAttandance();
-    List<ScoMok> getSdeAttandance();
-    List<ScoMok> getDbosAttandance();
-    List<ScoMok> getItoAttandance();
-
-
+ 
+    public String course();
+    public String gCode();
+    public List<ScoMok> getDBOSAttandance();
+    public List<ScoMok> getItoAttandance();
+    public List<ScoMok> getSdeAttandance();
+    public List<ScoMok> getScoAttandance();
 }

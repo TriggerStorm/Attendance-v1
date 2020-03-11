@@ -5,6 +5,7 @@
  */
 package attendance.v1.bll;
 
+import attendance.v1.be.ScoMok;
 import attendance.v1.be.User;
 import java.util.List;
 
@@ -13,6 +14,14 @@ import java.util.List;
  * @author Trigger
  */
 public interface IBLL {
+        int CheckUser(String email, String Password);
+        public String course();
+        public String gCode();
+        public List<ScoMok> getDBOSAttandance();
+        public List<ScoMok> getItoAttandance();
+        public List<ScoMok> getSdeAttandance();
+        public List<ScoMok> getScoAttandance();
+        
 
     
         

@@ -178,7 +178,7 @@ public class MockDao {
         String course = "Computer Science";
         return course;
     } 
-     
+
     public List<ScoMok> getScoAttandance(){
         List<ScoMok> allSco = new ArrayList<>();
         String Name = ("student");

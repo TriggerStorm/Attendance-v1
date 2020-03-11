@@ -63,7 +63,12 @@ public class DalManager implements IDAL {
     public List<ScoMok> getDbosAttandance(){
         return mockdao.getDbosAttandance();
     }
-    
+    public String gCode(){
+     return mockdao.gCode();
+    }
+    public String course(){
+     return mockdao.course();
+    }
     
     
 }

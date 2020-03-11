@@ -18,11 +18,25 @@ import javafx.collections.ObservableList;
 public class AttendanceModel {
     private BllManager bllManager;
     private ObservableList<ScoMok> ScoList;
+    private ObservableList<String> gCode;
+    private ObservableList<String> course;
     
 
     public AttendanceModel() {
         bllManager = new BllManager();
         getScoAttendance();
+    }
+    public String gCode(){
+      
+      return bllManager.gCode();
+      
+    }
+    
+    public ObservableList<String> course(){
+      
+      String allcourse = bllManager.course();
+      course = FXCollections.observableArrayList(allcourse);
+      return course;
     }
     
     public ObservableList<ScoMok> getScoAttendance(){
