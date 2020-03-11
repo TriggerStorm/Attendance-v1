@@ -76,12 +76,32 @@ public class BllManager implements IBLL {
     public List<ScoMok> getDbosAttandance(){
         return dalManager.getDbosAttandance();
     }
-    public String gCode(){
-     return dalManager.gCode();
+
+    @Override
+    public List<ScoMok> getDBOSAttandance() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-    public String course(){
-     return dalManager.course();
+
+    @Override
+    public String[] getSCOsttendance() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
+
+    @Override
+    public String[] getSDEsttendance() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public String[] getDBOSsttendance() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public String[] getITOsttendance() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+  
     
     
     

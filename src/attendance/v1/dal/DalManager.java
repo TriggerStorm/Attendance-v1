@@ -63,12 +63,12 @@ public class DalManager implements IDAL {
     public List<ScoMok> getDbosAttandance(){
         return mockdao.getDbosAttandance();
     }
-    public String gCode(){
-     return mockdao.gCode();
+
+    @Override
+    public List<ScoMok> getDBOSAttandance() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-    public String course(){
-     return mockdao.course();
-    }
+   
     
     
 }

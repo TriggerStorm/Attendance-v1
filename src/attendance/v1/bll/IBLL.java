@@ -28,7 +28,6 @@ public interface IBLL {
     List<String> addDayToAttendance(String selectedCourse);
 
 
-    int CheckUser(String email, String Password);
 
     
     
