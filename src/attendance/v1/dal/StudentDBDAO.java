@@ -8,6 +8,7 @@ import attendance.v1.dal.DBConnection;
 import attendance.v1.be.Classes;
 import attendance.v1.be.User;
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -47,6 +48,20 @@ public class StudentDBDAO {
         }
        return allclasses;
     }
-   
+     
+     public Classes assignStudentCourse(Classes classes, String student) throws SQLException 
+    {
+        db = new DBConnection();
+        
+           
+        try(Connection con = db.getConnection()){
+            String SQLStmt = "UPDATE SUBJECTS SET AssociatedStudents = ? WHERE id = ?;";
+            
+            PreparedStatement pstmt = con.prepareStatement(SQLStmt);
+             pstmt.setString(1,student);
+            pstmt.setInt(2,classes.getClasskey());
+        }
+        return new Classes(classes.getClasskey(),classes.getClassName(),classes.getClassIMG(),student,classes.getAssociatedTeacher());
+}
 }
 
