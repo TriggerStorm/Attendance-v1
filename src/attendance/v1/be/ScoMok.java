@@ -13,80 +13,84 @@ public class ScoMok {
     private String name;
     private int monday;
     private int tuesday;
-    private int wensday;
-    private int torsdag;
-    private int fredag;
-    private int procent;
+    private int wednesday;
+    private int thursday;
+    private int friday;
+    private int percent;
 
-    public ScoMok(String name,int monday,int tuesday,int wensday,int torsdag,int fredag,int procent) {
+    public ScoMok(String name,int monday,int tuesday,int wednesday,int thursday,int friday,int percent) {
         this.name = name;
         this.monday = monday;
         this.tuesday = tuesday;
-        this.wensday = wensday;
-        this.torsdag = torsdag;
-        this.fredag = fredag;
-        this.procent= procent;
+        this.wednesday = wednesday;
+        this.thursday = thursday;
+        this.friday = friday;
+        this.percent= percent;
     }
     
     
-
+    public String getName() {
+        return name;
+    }
+    
     public void setName(String name) {
         this.name = name;
     }
 
+    
+    public int getMonday() {
+        return monday;
+    }
+    
     public void setMonday(int monday) {
         this.monday = monday;
+    }
+
+    
+     public int getTuesday() {
+        return tuesday;
     }
 
     public void setTuesday(int tuesday) {
         this.tuesday = tuesday;
     }
 
-    public void setWensday(int wensday) {
-        this.wensday = wensday;
+    
+     public int getWednesday() {
+        return wednesday;
+    }
+     
+    public void setWednesday(int wednesday) {
+        this.wednesday = wednesday;
     }
 
-    public void setTorsdag(int torsdag) {
-        this.torsdag = torsdag;
+    
+     public int getThursday() {
+        return thursday;
+    }
+     
+    public void setThursdag(int thursdag) {
+        this.thursday = thursdag;
     }
 
-    public void setFredag(int fredag) {
-        this.fredag = fredag;
-    }
-
-    public void setProcent(int procent) {
-        this.procent = procent;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public int getMonday() {
-        return monday;
-    }
-
-    public int getTuesday() {
-        return tuesday;
-    }
-
-    public int getWensday() {
-        return wensday;
-    }
-
-    public int getTorsdag() {
-        return torsdag;
-    }
-
-    public int getFredag() {
-        return fredag;
-    }
-
-    public int getProcent() {
-        return procent;
+    
+    public int getFriday() {
+        return friday;
     }
     
+    public void setFriday(int friday) {
+        this.friday = friday;
+    }
+
     
+    public int getPercent() {
+        return percent;
+    }
     
+    public void setPercent(int percent) {
+        this.percent = percent;
+    }
+
     
+
 }
