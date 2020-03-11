@@ -41,28 +41,28 @@ public class AttendanceModel {
     
     public ObservableList<ScoMok> getScoAttendance(){
       
-      List<ScoMok> allSco = bllManager.getScoAttandance();
+      List<ScoMok> allSco = bllManager.getSCOattendance();
       ScoList = FXCollections.observableArrayList(allSco);
       return ScoList;
         
     }
     public ObservableList<ScoMok> getSdeAttendance(){
       
-      List<ScoMok> allSco = bllManager.getSdeAttandance();
+      List<ScoMok> allSco = bllManager.getSDEattendance();
       ScoList = FXCollections.observableArrayList(allSco);
       return ScoList;
         
     }
     public ObservableList<ScoMok> getItoAttandance(){
       
-      List<ScoMok> allSco = bllManager.getItoAttandance();
+      List<ScoMok> allSco = bllManager.getITOattendance();
       ScoList = FXCollections.observableArrayList(allSco);
       return ScoList;
         
     }
     public ObservableList<ScoMok> getDBOSAttandance(){
       
-      List<ScoMok> allSco = bllManager.getDBOSAttandance();
+      List<ScoMok> allSco = bllManager.getDBOSattendance();
       ScoList = FXCollections.observableArrayList(allSco);
       return ScoList;
         

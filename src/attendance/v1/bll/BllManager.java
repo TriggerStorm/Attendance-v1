@@ -64,45 +64,21 @@ public class BllManager implements IBLL {
     } 
     
          // Mock data methods
-    public List<ScoMok> getScoAttandance(){
-        return dalManager.getScoAttandance();
+    public List<ScoMok> getSCOattendance(){
+        return dalManager.getSCOattendance();
     }
-    public List<ScoMok> getSdeAttandance(){
-        return dalManager.getSdeAttandance();
+    public List<ScoMok> getSDEattendance(){
+        return dalManager.getSDEattendance();
     }
-    public List<ScoMok> getItoAttandance(){
-        return dalManager.getItoAttandance();
+    public List<ScoMok> getITOattendance(){
+        return dalManager.getITOattendance();
     }
     public List<ScoMok> getDbosAttandance(){
-        return dalManager.getDbosAttandance();
+        return dalManager.getDBOSattendance();
     }
 
-    @Override
-    public List<ScoMok> getDBOSAttandance() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public String[] getSCOsttendance() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public String[] getSDEsttendance() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public String[] getDBOSsttendance() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public String[] getITOsttendance() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
+   
   
-    
     
     
 }

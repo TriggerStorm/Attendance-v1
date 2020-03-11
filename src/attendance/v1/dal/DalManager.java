@@ -6,7 +6,11 @@
 package attendance.v1.dal;
 
 import attendance.v1.be.ScoMok;
+import attendance.v1.be.SubjectAttendance;
 import attendance.v1.be.User;
+import attendance.v1.be.Attendance;
+import attendance.v1.bll.BllManager;
+import attendance.v1.be.Classes;
 import java.util.List;
 
 /**
@@ -15,9 +19,13 @@ import java.util.List;
  */
 public class DalManager implements IDAL {
     private MockDao mockdao;
+    private AttendanceDBDAO attendanceDBDao;
+
     
     public DalManager() {
           mockdao = new MockDao();
+          attendanceDBDao = new AttendanceDBDAO();
+
     } 
     
     
@@ -37,37 +45,41 @@ public class DalManager implements IDAL {
         return mockdao.addDayToAttendance(selectedCourse);
     }
    
-        
+           
+    @Override 
     public String gCode() {
         return mockdao.gCode();
     }
-
+    
+    
+    @Override
     public String course() {
         return mockdao.course();
     } 
     
     
     // Mock data methods
-    public List<ScoMok> getScoAttandance(){
-        return mockdao.getScoAttandance();
-    }
-    
-    public List<ScoMok> getSdeAttandance(){
-        return mockdao.getSdeAttandance();
-    }
-    
-    public List<ScoMok> getItoAttandance(){
-        return mockdao.getItoAttandance();
+        
+    @Override
+    public List<ScoMok> getSCOattendance(){
+        return mockdao.getSCOattendance();
     }
         
-    public List<ScoMok> getDbosAttandance(){
-        return mockdao.getDbosAttandance();
+    @Override
+    public List<ScoMok> getSDEattendance(){
+        return mockdao.getSDEattendance();
+    }
+        
+    @Override
+    public List<ScoMok> getITOattendance(){
+        return mockdao.getITOattendance();
+    }
+           
+    @Override
+    public List<ScoMok> getDBOSattendance(){
+        return mockdao.getDBOSattendance();
     }
 
-    @Override
-    public List<ScoMok> getDBOSAttandance() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
    
     
     

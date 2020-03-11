@@ -17,10 +17,10 @@ public interface IBLL {
         int CheckUser(String email, String Password);
         public String course();
         public String gCode();
-        public List<ScoMok> getDBOSAttandance();
-        public List<ScoMok> getItoAttandance();
-        public List<ScoMok> getSdeAttandance();
-        public List<ScoMok> getScoAttandance();
+        public List<ScoMok> getDBOSattendance();
+        public List<ScoMok> getITOattendance();
+        public List<ScoMok> getSDEattendance();
+        public List<ScoMok> getSCOattendance();
         
 
     
