@@ -5,6 +5,12 @@
  */
 package attendance.v1.dal;
 
+import com.microsoft.sqlserver.jdbc.SQLServerException;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 import attendance.v1.be.ScoMok;
 import attendance.v1.be.SubjectAttendance;
 import attendance.v1.be.User;
@@ -22,8 +28,11 @@ public class AttendanceDBDAO {
  
 /**
  *
- * @author Trigger
+ * @author Alan
  */
+    
+    private DBConnection dbc;
+
     public List<String> attendance = new ArrayList<>();
     public User mockuser1;
     public User mockuser2;
