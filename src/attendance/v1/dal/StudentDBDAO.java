@@ -6,6 +6,7 @@
 package attendance.v1.dal;
 import attendance.v1.dal.DBConnection;
 import attendance.v1.be.Classes;
+import attendance.v1.be.StudentSubjects;
 import attendance.v1.be.User;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -49,20 +50,22 @@ public class StudentDBDAO {
        return allclasses;
     }
      
-     public Classes assignStudentCourse(Classes classes, User user) throws SQLException 
+     public StudentSubjects assignStudentCourse(Classes classes, User user) throws SQLException 
     {
         db = new DBConnection();
         
-           
+           int ukey = user.getUserKey();
+           int ckey = classes.getClasskey();
         try(Connection con = db.getConnection()){
             String SQLStmt = "UPDATE STUDENT_SUBJECTS SET SUBJECTKEY = ?,USERKEY = ? WHERE id = ?;";
             
             PreparedStatement pstmt = con.prepareStatement(SQLStmt);
-             pstmt.setInt(1,user.getUserKey());
-             pstmt.setInt(2,classes.getClasskey());
-            pstmt.setInt(3,classes.getClasskey());
+            
+             pstmt.setInt(1,ukey);
+             pstmt.setInt(2,ckey);
+            pstmt.setInt(3,ckey);
         }
-        return new Classes(classes.getClasskey(),classes.getClassName(),classes.getClassIMG(),classes.getAssociatedCourse(),classes.getAssociatedTeacher());
+        return new StudentSubjects(ukey,ckey);
 }
 }
 
