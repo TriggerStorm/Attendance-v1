@@ -68,7 +68,7 @@ public class UserDBDAO {
     }
     
     
-     public User addNewUserToDB(/*int userKey, */String userName, String password, String email, int phoneNr, String address, int postCode, String city, String teacher, String userIMG) { 
+     public User addNewUserToDB(String userName, String password, String email, int phoneNr, String address, int postCode, String city, String teacher, String userIMG) { 
         String sql = "INSERT INTO Users(userName, password, email, phoneNr, address, postCode, city, teacher, userIMG) VALUES (?,?,?,?,?,?,?,?,?)";
         User newUser = new User(postCode, userName, password, email, phoneNr, address, postCode, city, teacher, userIMG);
         try (Connection con = dbc.getConnection()) {
@@ -102,4 +102,41 @@ public class UserDBDAO {
         return null;
     }
      
+     
+      public User editMovie(User userToEdit, String userName, String password, String email, int phoneNr, String address, int postCode, String city, String teacher, String userIMG) { 
+        try (//Get a connection to the database.
+            Connection con = dbc.getConnection()) {
+            //Create a prepared statement.
+            String sql = "UPDATE Users SET userName = ?, password = ?, email = ?, phoneNr = ? , address = ? , postCode = ? , city = ? , teacher = ?, userIMG = ? WHERE id = ?";
+            PreparedStatement pstmt = con.prepareStatement(sql);
+            //Set parameter values.
+           pstmt.setString(1, userName);
+            pstmt.setString(2, password);
+            pstmt.setString(3, email);
+            pstmt.setInt(4, phoneNr);
+            pstmt.setString(5, address);
+            pstmt.setInt(6, postCode);
+            pstmt.setString(7, city);
+            pstmt.setString(8, teacher);
+            pstmt.setString(9, userIMG);
+            //Execute SQL query.
+            pstmt.executeUpdate();
+            userToEdit.setUserName(userName);
+            userToEdit.setPassword(password);   
+            userToEdit.setEmail(email);
+            userToEdit.setPhoneNr(phoneNr);
+            userToEdit.setAddress(address);
+            userToEdit.setPostCode(postCode);
+            userToEdit.setCity(city);
+            userToEdit.setTeacher(teacher);
+            userToEdit.setUserIMG(userIMG);
+            return userToEdit;
+        } catch (SQLServerException ex) {
+            Logger.getLogger(UserDBDAO.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+            Logger.getLogger(UserDBDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
+    }
+
 }

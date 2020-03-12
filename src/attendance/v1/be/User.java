@@ -92,11 +92,11 @@ public class User {
         this.address = address;
     }
 
-    public int getZipCode() {
+    public int getPostCode() {
         return postCode;
     }
     
-    public void setZipCode(String address) {
+    public void setPostCode(String address) {
         this.postCode = postCode;
     }
      
