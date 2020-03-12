@@ -5,12 +5,30 @@
  */
 package attendance.v1.dal;
 
+import attendance.v1.be.ScoMok;
 import attendance.v1.be.User;
+import java.util.List;
 
 /**
  *
  * @author Trigger
  */
 public interface IDAL {
-    User CheckUser(String user, String password);
+
+    
+   
+    List<String> addDayToAttendance(String selectedCourse);
+
+
+    boolean CheckUser(String email, String password);
+    
+    boolean CheckTeacher(String email);
+
+ 
+    public String course();
+    public String gCode();
+     public List<ScoMok> getDBOSattendance();
+        public List<ScoMok> getITOattendance();
+        public List<ScoMok> getSDEattendance();
+        public List<ScoMok> getSCOattendance();
 }

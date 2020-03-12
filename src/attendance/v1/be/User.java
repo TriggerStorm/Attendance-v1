@@ -5,6 +5,8 @@
  */
 package attendance.v1.be;
 
+import java.util.List;
+
 /**
  *
  * @author Trigger
@@ -18,9 +20,12 @@ public class User {
     private String address;
     private String teacher;
     private String userIMG;
+    //private List<SubjectAttendance> attendance;
     
     
- public User (int userKey, String userName,String password,String email,int phoneNr,String address,String teacher,String userIMG){
+ public User (int userKey, String userName, String password, String email, int phoneNr, String address, String teacher, String userIMG) { /*, List<SubjectAttendance> attendance*/
+
+ 
  
      this.userKey = userKey;
      this.userName = userName;
@@ -30,9 +35,13 @@ public class User {
      this.address = address;
      this.teacher = teacher;
      this.userIMG = userIMG;
-     
+     //this.attendance = attendance;
      
  }
+
+    public User() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
 
     public int getUserKey() {
         return userKey;
@@ -97,5 +106,13 @@ public class User {
     public void setUserIMG(String userIMG) {
         this.userIMG = userIMG;
     }
+    
+    /*public List<SubjectAttendance> getAttendance () {
+        return attendance;
+    }
+
+    public void setUserIMG(List<SubjectAttendance> attendance) {
+        this.attendance = attendance;
+    }*/
  
 }

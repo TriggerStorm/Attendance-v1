@@ -27,13 +27,12 @@ import javafx.stage.Stage;
 public class UserController implements Initializable {
 
     @FXML
-    private TextField TF_email;
+    private TextField TF_email; 
     @FXML
-    private Button Bn_ok;
+    private Button Bn_ok; // go to edit or new user scean //filp
     @FXML
-    private Button Bn_cansel;
-    @FXML
-    private JFXButton bn_edit;
+    private Button Bn_cansel; // done
+    private JFXButton bn_edit; // this is a mock butten need to be remove
 
     /**
      * Initializes the controller class.
@@ -42,11 +41,29 @@ public class UserController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
     }    
+    public void checkMail(String email) throws IOException{
+       String name = TF_email.getText();
+       if( email.equals(name) == email.equals("student@test.com"))
+       {
+           editUser();
+       }
+       else
+       {
+           newUser();
+       }
+    }
+    
 
     @FXML
     private void handle_ok(ActionEvent event) throws IOException {
-        Parent root1;
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/attendance/v1/gui/view/newUser.fxml"));
+       String name = TF_email.getText();
+       checkMail(name);
+    }
+    
+    public void newUser() throws IOException{
+    Parent root1;
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/attendance/v1/gui/view/newUser.fxml")); // handle_ok and handle_edit need to be 1 butten if email is new new user if its in system edit user scean. //filp
+        
         root1 = (Parent) fxmlLoader.load();
         
         fxmlLoader.<StudentController>getController();
@@ -62,10 +79,9 @@ public class UserController implements Initializable {
         stage.close();
     }
 
-    @FXML
-    private void handle_edit(ActionEvent event) throws IOException {
+    private void editUser() throws IOException {
         Parent root1;
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/attendance/v1/gui/view/editUser.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/attendance/v1/gui/view/editUser.fxml")); // if email exsist it need to edit if not have to go to new user scean // filp
         root1 = (Parent) fxmlLoader.load();
         
         fxmlLoader.<StudentController>getController();
@@ -78,6 +94,12 @@ public class UserController implements Initializable {
         addStage.show();
         
         Stage stage = (Stage) bn_edit.getScene().getWindow();
+        stage.close();
+    }
+
+    @FXML
+    private void Handle_cansel(ActionEvent event) {
+        Stage stage = (Stage) Bn_cansel.getScene().getWindow();
         stage.close();
     }
     

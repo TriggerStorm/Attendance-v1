@@ -5,38 +5,34 @@
  */
 package attendance.v1.dal;
 
-
+import com.microsoft.sqlserver.jdbc.SQLServerException;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import attendance.v1.be.ScoMok;
 import attendance.v1.be.SubjectAttendance;
 import attendance.v1.be.User;
-import java.lang.reflect.Array;
-import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import attendance.v1.be.ScoMok;
-import attendance.v1.be.User;
+import attendance.v1.be.Attendance;
+import attendance.v1.bll.BllManager;
+import attendance.v1.be.Classes;
 import java.util.ArrayList;
 import java.util.List;
-import static javax.swing.UIManager.getString;
-
-import attendance.v1.be.ScoMok;
-
-import attendance.v1.be.ScoMok;
-
-import java.util.List;
-
-
-import attendance.v1.be.ScoMok;
-
-import attendance.v1.be.ScoMok;
-
-import attendance.v1.be.ScoMok;
 
 /**
  *
- * @author Trigger
+ * @author admin
  */
-public class MockDao {
+public class AttendanceDBDAO {
+ 
+/**
+ *
+ * @author Alan
+ */
+    
+    private DBConnection dbc;
+
     public List<String> attendance = new ArrayList<>();
     public User mockuser1;
     public User mockuser2;
@@ -48,7 +44,7 @@ public class MockDao {
 
     public List<SubjectAttendance> mockStudentAttendance;
     
-    public MockDao() {
+    public AttendanceDBDAO() {
         
 /*        mockStudentAttendance = new ArrayList<SubjectAttendance>();
         SubjectAttendance mockSCO = new SubjectAttendance("SCO", 1, 0, 2, 0, 3);
@@ -76,16 +72,13 @@ public class MockDao {
     }
     
     
-    public static void main(String[] args) {
-        MockDao mockdao = new MockDao();
-        mockdao.addDayToAttendance("SCO");
-        //        launch(args);
+   
+    
 
 
         // mockuser1 = new User(1,"admin", "admin","admin@test.com", 12345678 ,"1 Mock St" , true, "data/mockuserIMG.jpg"); // add list
         // mockuser2 = new User(2,"student", "student","student@test.com", 12345678 ,"2 Mock St" , false, "data/mockuserIMG.jpg");//
 
-    }
    
 
     
@@ -136,8 +129,9 @@ public class MockDao {
     }
     
 
-    public boolean CheckTeacher(String email) {
-/*        if(email.equals(mockuser1.getEmail()))
+    public boolean CheckTeacher(String email)
+    {
+      /*  if(email.equals(mockuser1.getEmail()))
         {
             return mockuser1.getTeacher();//for now we just return the boolean, later it will probably be easier to have sorted the users into students and teachers beforehand, as the DB can sort this out faster.
         }
@@ -179,28 +173,32 @@ public class MockDao {
     } 
 
     public List<ScoMok> getSCOattendance(){
-        List<ScoMok> allSco = new ArrayList<>();
+        List<ScoMok> allSCO = new ArrayList<>();
         String Name = ("student");
-        allSco.add(new ScoMok(Name,5,8,5,6,8,56));
-        return allSco;
+        allSCO.add(new ScoMok(Name,5,8,5,6,8,56));
+        return allSCO;
     }
+    
     public List<ScoMok> getSDEattendance(){
-        List<ScoMok> allSco = new ArrayList<>();
+        List<ScoMok> allSDE = new ArrayList<>();
         String Name = ("student");
-        allSco.add(new ScoMok(Name,9,9,9,9,9,99));
-        return allSco;
+        allSDE.add(new ScoMok(Name,9,9,9,9,9,99));
+        return allSDE;
     }
+    
     public List<ScoMok> getITOattendance(){
-        List<ScoMok> allSco = new ArrayList<>();
+        List<ScoMok> allITO = new ArrayList<>();
         String Name = ("student");
-        allSco.add(new ScoMok(Name,5,4,2,7,5,69));
-        return allSco;
+        allITO.add(new ScoMok(Name,5,4,2,7,5,69));
+        return allITO;
     }
+    
     public List<ScoMok> getDBOSattendance(){
-        List<ScoMok> allSco = new ArrayList<>();
+        List<ScoMok> allDBOS = new ArrayList<>();
         String Name = ("student");
-        allSco.add(new ScoMok(Name,12,0,6,4,7,54));
-        return allSco;
+        allDBOS.add(new ScoMok(Name,12,0,6,4,7,54));
+        return allDBOS;
     }
     
 }
+

@@ -30,14 +30,12 @@ public class LogInController implements Initializable {
     @FXML
     private TextField TF_email;
     @FXML
-    private TextField TF_pasword;
+    private TextField TF_password;
     @FXML
     private JFXButton Bn_login;
 
     private UserModel userModle;
     private User user;
-    @FXML
-    private JFXButton Bn_T;
     /**
      * Initializes the controller class.
      */
@@ -47,11 +45,25 @@ public class LogInController implements Initializable {
     }    
 
     @FXML
-    private void handle_login(ActionEvent event) throws IOException {
-       
-       /* userModle.CheckUser(
-                TF_email.getText().trim(),TF_pasword.getText().trim());*/
-        
+
+    private void handle_login(ActionEvent event) throws IOException{
+       userModle = new UserModel();
+       String loginmail = TF_email.getText().trim();
+       String passw = TF_password.getText().trim();
+       int loginstate = userModle.CheckUser(loginmail, passw);//returns an int, as it also checks if it is a teacher or a student.
+        switch (loginstate) {
+            case 1:  teacherLogin(loginmail, passw); //teacher login needs creation and then place make something like teacherLogin method in stead.
+                    break;
+            case 2:  studentLogin(loginmail, passw); //student login 
+                    break;
+            default: System.out.println("Sorry wrong authentication"); //Might want to make a popup here in stead....
+       }
+
+    }
+    private void studentLogin(String mail, String password) throws IOException
+    {
+                
+
         Parent root1;
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/attendance/v1/gui/view/Student.fxml"));
         root1 = (Parent) fxmlLoader.load();
@@ -69,8 +81,9 @@ public class LogInController implements Initializable {
         stage.close();
     }
 
-    @FXML
-    private void handl_T(ActionEvent event) throws IOException {
+
+    
+    private void teacherLogin(String mail, String password) throws IOException {
         Parent root1;
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/attendance/v1/gui/view/Teacher.fxml"));
         root1 = (Parent) fxmlLoader.load();
@@ -88,4 +101,5 @@ public class LogInController implements Initializable {
         stage.close();
     }
     
+
 }

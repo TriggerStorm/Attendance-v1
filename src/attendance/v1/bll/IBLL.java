@@ -5,13 +5,34 @@
  */
 package attendance.v1.bll;
 
+import attendance.v1.be.ScoMok;
 import attendance.v1.be.User;
+import java.util.List;
 
 /**
  *
  * @author Trigger
  */
 public interface IBLL {
-        User CheckUser(String user, String Password);
+    
+    int CheckUser(String email, String Password);
+    public String course();
+    public String gCode();
+    public List<ScoMok> getDBOSattendance();
+    public List<ScoMok> getITOattendance();
+    public List<ScoMok> getSDEattendance();
+    public List<ScoMok> getSCOattendance();
+  
+    List<String> addDayToAttendance(String selectedCourse);
 
+
+
+    
+ /*   
+    //Mock data methods
+    String[] getSCOsttendance();
+    String[] getSDEsttendance();
+    String[] getDBOSsttendance();
+    String[] getITOsttendance();
+    */
 }

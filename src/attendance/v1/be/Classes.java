@@ -10,7 +10,7 @@ package attendance.v1.be;
  * @author Trigger
  */
 public class Classes {
-    private int classkey;
+    private int classKey;
     private String className;
     private String ClassIMG;
     private String associatedCourse;
@@ -19,7 +19,7 @@ public class Classes {
     
     public Classes (int classkey,String className,String ClassIMG,String associatedCourse,String associatedTeacher ){
     
-        this.classkey = classkey;
+        this.classKey = classKey;
         this.className = className;
         this.ClassIMG = ClassIMG;
         this.associatedCourse = associatedCourse;
@@ -28,11 +28,11 @@ public class Classes {
     }
 
     public int getClasskey() {
-        return classkey;
+        return classKey;
     }
 
     public void setClasskey(int classkey) {
-        this.classkey = classkey;
+        this.classKey = classKey;
     }
 
     public String getClassName() {

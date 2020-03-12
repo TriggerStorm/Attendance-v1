@@ -9,7 +9,6 @@
 <?import javafx.scene.control.TabPane?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
-<?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -18,9 +17,9 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" prefHeight="700.0" prefWidth="700.0" style="-fx-background-color: whitesmoke;" stylesheets="@attendance.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="attendance.v1.gui.controller.TeacherController">
+<AnchorPane id="AnchorPane" prefHeight="638.0" prefWidth="722.0" style="-fx-background-color: whitesmoke;" stylesheets="@attendance.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="attendance.v1.gui.controller.TeacherController">
     <children>
-      <VBox prefHeight="700.0" prefWidth="709.0">
+      <VBox prefHeight="662.0" prefWidth="721.0">
          <children>
             <AnchorPane prefHeight="30.0" prefWidth="700.0">
                <children>
@@ -29,13 +28,13 @@
                         <Font name="AdobeKaitiStd-Regular" size="12.0" />
                      </font>
                   </Label>
-                  <Label layoutX="603.0" layoutY="7.0" text="MockUser" textFill="#1c08f8">
+                  <Label fx:id="Lb_loginas" layoutX="603.0" layoutY="7.0" text="MockUser" textFill="#1c08f8">
                      <font>
                         <Font size="14.0" />
                      </font>
                   </Label>
                   <Label fx:id="date" layoutX="264.0" layoutY="7.0" prefHeight="18.0" prefWidth="182.0" styleClass="textsm2" text="Wednesday 24th February" />
-                  <Button fx:id="Bn_EditOwn" layoutX="679.0" layoutY="1.0" mnemonicParsing="false" onAction="#handle_editown" prefHeight="12.0" prefWidth="10.0" style="-fx-background-color: white;">
+                  <Button fx:id="Bn_EditOwn" layoutX="679.0" layoutY="1.0" mnemonicParsing="false" onAction="#handle_editown" prefHeight="12.0" prefWidth="10.0" style="-fx-background-color: #f5f5f5;">
                      <graphic>
                         <ImageView fitHeight="25.0" fitWidth="27.0" pickOnBounds="true" preserveRatio="true">
                            <image>
@@ -50,13 +49,13 @@
                <children>
                   <HBox prefHeight="50.0" prefWidth="700.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
                      <children>
-                        <Pane prefHeight="50.0" prefWidth="50.0" />
+                        <Pane prefHeight="50.0" prefWidth="17.0" style="-fx-background-color: lightgrey;" />
                         <ImageView>
                            <image>
                               <Image url="@../assets/EASVlogo.png" />
                            </image>
                         </ImageView>
-                        <Label fx:id="title" contentDisplay="CENTER" prefHeight="50.0" prefWidth="595.0" stylesheets="@../css/Attendance.css" text="  Student Attendance" textAlignment="RIGHT">
+                        <Label fx:id="title" contentDisplay="CENTER" prefHeight="50.0" prefWidth="601.0" style="-fx-background-color: lightgrey;" styleClass="banner1" stylesheets="@../css/Attendance.css" text="  Student Attendance" textAlignment="RIGHT">
                            <padding>
                               <Insets left="10.0" />
                            </padding>
@@ -67,24 +66,20 @@
             </AnchorPane>
             <AnchorPane prefHeight="90.0" prefWidth="700.0">
                <children>
-                  <Pane layoutX="279.0" layoutY="14.0" prefHeight="67.0" prefWidth="95.0" stylesheets="@../css/Attendance.css" AnchorPane.leftAnchor="279.0">
-                     <children>
-                        <Button fx:id="Bn_SDE" layoutX="14.0" layoutY="9.0" mnemonicParsing="false" styleClass="coursebtn" text="SDE" />
-                     </children>
-                  </Pane>
-                  <Button fx:id="Bn_SCO" layoutX="171.0" layoutY="23.0" mnemonicParsing="false" styleClass="coursebtn" stylesheets="@../css/Attendance.css" text="SCO" />
-                  <Button fx:id="Bn_ITO" layoutX="551.0" layoutY="23.0" mnemonicParsing="false" styleClass="coursebtn" stylesheets="@../css/Attendance.css" text="ITO" />
-                  <Button fx:id="Bn_DBOS" layoutX="412.0" layoutY="23.0" mnemonicParsing="false" styleClass="coursebtn" stylesheets="@../css/Attendance.css" text="DB/OS" />
-                  <Label layoutX="47.0" layoutY="64.0" text="MockUser" textFill="#1c08f8">
+                  <Label fx:id="Lb_logInUser" layoutX="55.0" layoutY="64.0" text="MockUser" textFill="#1c08f8">
                      <font>
                         <Font size="14.0" />
                      </font>
                   </Label>
-                  <ImageView layoutX="56.0" layoutY="14.0">
+                  <ImageView layoutX="48.0" layoutY="14.0">
                      <image>
                         <Image url="@../assets/Untitled-1.png" />
                      </image>
                   </ImageView>
+                  <JFXButton fx:id="Bn_SCO" buttonType="RAISED" layoutX="191.0" layoutY="17.0" onAction="#handle_SCO" styleClass="coursebtn" stylesheets="@../css/Attendance.css" text="SCO" />
+                  <JFXButton fx:id="Bn_DBOS" buttonType="RAISED" layoutX="430.0" layoutY="17.0" onAction="#handle_DBOS" styleClass="coursebtn" stylesheets="@../css/Attendance.css" text="DB/OS" />
+                  <JFXButton fx:id="Bn_ITO" buttonType="RAISED" layoutX="569.0" layoutY="17.0" onAction="#handle_ITO" styleClass="coursebtn" stylesheets="@../css/Attendance.css" text="ITO" />
+                  <JFXButton fx:id="Bn_SDE" buttonType="RAISED" layoutX="314.0" layoutY="17.0" onAction="#handle_SDE" styleClass="coursebtn" stylesheets="@../css/Attendance.css" text="SDE" />
                </children></AnchorPane>
             <AnchorPane fx:id="body1" prefHeight="429.0" prefWidth="700.0" styleClass="label1">
                <children>
@@ -95,10 +90,9 @@
                            <items>
                               <VBox prefHeight="427.0" prefWidth="0.0" stylesheets="@../css/Attendance.css">
                                  <children>
-                                    <Label fx:id="header2" prefHeight="30.0" prefWidth="94.0" styleClass="h2" text="Today" />
                                     <Pane prefHeight="100.0" prefWidth="200.0" stylesheets="@../css/Attendance.css">
                                        <children>
-                                          <Label layoutX="32.0" layoutY="17.0" prefHeight="67.0" prefWidth="79.0" styleClass="h2" text="SCO" textAlignment="CENTER">
+                                          <Label fx:id="Lb_subjet" layoutX="23.0" layoutY="16.0" prefHeight="64.0" prefWidth="105.0" style="-fx-background-color: #F4B041;" styleClass="h2" textAlignment="CENTER">
                                              <font>
                                                 <Font size="24.0" />
                                              </font>
@@ -107,14 +101,20 @@
                                     </Pane>
                                     <Pane prefHeight="100.0" prefWidth="200.0">
                                        <children>
-                                          <JFXButton fx:id="Bn_gencode" buttonType="RAISED" layoutX="27.0" layoutY="25.0" onAction="#handle_attendancecode" prefHeight="50.0" prefWidth="89.0" style="-fx-background-color: white;" text="Attendance &#10;code" />
+                                          <JFXButton fx:id="Bn_gencode" buttonType="RAISED" layoutX="24.0" layoutY="14.0" onAction="#handle_attendancecode" prefHeight="50.0" prefWidth="105.0" style="-fx-background-color: white;" stylesheets="@../css/Attendance.css" text="Attendance &#10;code" textAlignment="CENTER" />
+                                          <JFXButton fx:id="bn_Showcode" buttonType="RAISED" layoutX="24.0" layoutY="70.0" onAction="#handle_showcode" prefHeight="25.0" prefWidth="105.0" style="-fx-background-color: white;" text="Show code" />
                                        </children>
                                     </Pane>
                                     <Pane prefHeight="67.0" prefWidth="105.0" />
                                     <Pane prefHeight="100.0" prefWidth="200.0">
                                        <children>
-                                          <TextField fx:id="attendance" layoutX="9.0" layoutY="52.0" prefHeight="50.0" prefWidth="134.0" text="100%" />
-                                          <TextField layoutX="19.0" layoutY="14.0" prefHeight="23.0" prefWidth="114.0" styleClass="textsm2" text="Attendance Rate" />
+                                          <Label fx:id="LB_AttendanceRate" layoutX="23.0" layoutY="17.0" prefHeight="64.0" prefWidth="105.0" style="-fx-background-color: #F5F5F5;" styleClass="h2" stylesheets="@../css/Attendance.css" text="69%" textAlignment="CENTER" />
+                                          <Label layoutX="23.0" layoutY="6.0" prefHeight="17.0" prefWidth="105.0" styleClass="textsm2" stylesheets="@../css/Attendance.css" text="  Attendance Rate" textAlignment="CENTER" />
+                                       </children>
+                                    </Pane>
+                                    <Pane prefHeight="78.0" prefWidth="123.0">
+                                       <children>
+                                          <JFXButton fx:id="Bn_user" buttonType="RAISED" layoutX="25.0" layoutY="13.0" onAction="#Handle_user" prefHeight="50.0" prefWidth="105.0" style="-fx-background-color: White;" text="new/edit User" />
                                        </children>
                                     </Pane>
                                  </children>
@@ -148,11 +148,7 @@
                   </HBox>
                </children>
             </AnchorPane>
-            <AnchorPane prefHeight="55.0" prefWidth="700.0">
-               <children>
-                    <Button fx:id="Bn_user" layoutX="14.0" layoutY="23.0" onAction="#Handle_user" onMouseClicked="#handleButtonAction" prefHeight="37.0" prefWidth="123.0" text="new/edit User" />
-               </children>
-            </AnchorPane>
+            <AnchorPane prefHeight="55.0" prefWidth="700.0" />
          </children>
       </VBox>
     </children>

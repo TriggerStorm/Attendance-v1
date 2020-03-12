@@ -19,8 +19,12 @@ public class UserModel {
         bllManager = new BllManager();
     }
     
-    /*public User CheckUser(String userName, String password ){
-        User user = bllManager.CheckUser(userName, password); // its hire it dont work.   it need to send 2 string form gui to the mok dall to varify user log in.
-        return user;
-    }*/
+
+    public int CheckUser(String email, String password ){
+        int loginstate = bllManager.CheckUser(email, password); //This method gets the int.
+
+        return loginstate;
+        
+    }
+
 }
