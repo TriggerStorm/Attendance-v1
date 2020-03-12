@@ -103,7 +103,7 @@ public class UserDBDAO {
     }
      
      
-      public User editMovie(User userToEdit, String userName, String password, String email, int phoneNr, String address, int postCode, String city, String teacher, String userIMG) { 
+      public User editUser (User userToEdit, String userName, String password, String email, int phoneNr, String address, int postCode, String city, String teacher, String userIMG) { 
         try (//Get a connection to the database.
             Connection con = dbc.getConnection()) {
             //Create a prepared statement.
@@ -139,4 +139,17 @@ public class UserDBDAO {
         return null;
     }
 
+       
+      public void removeUserFromDB(User userToDelete) {
+        String stat = "DELETE FROM Users WHERE id =?";      // USE ID HERE??????
+        try (Connection con = dbc.getConnection()) {
+            PreparedStatement stmt = con.prepareStatement(stat);
+            stmt.setInt(1,userToDelete.getUserKey());                      // IS THIS 0 ??
+            stmt.execute();
+        } catch (SQLException ex) {
+            System.out.println("Exception " + ex);
+        }
+    }
+      
+      
 }
