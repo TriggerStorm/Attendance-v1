@@ -85,7 +85,7 @@ public class AttendanceDBDAO {
     
     
     
-    public boolean CheckUser(String email, String password) {
+    public int CheckUser(String email, String password) {
         String name = mockuser1.getEmail();
         String passw = mockuser1.getPassword();
         String name2 = mockuser2.getEmail();
@@ -94,16 +94,16 @@ public class AttendanceDBDAO {
         {
             if(password.equals(passw) || password.equals(passw2)) //remember that to compare two strings you need to use equals()
             {    
-            return true; //user and password match.
+            return 1; //user and password match = true
             }
             else
             {
-            return false; // fail log in
+            return 0; // fail log in = false
             }
         }
         else
         {
-        return false;// fail log in
+        return 0;// fail log in
         }
     }
     

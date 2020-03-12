@@ -13,7 +13,7 @@ import java.time.format.DateTimeFormatter;
  * @author Trigger
  */
 public class DateUtil {
-    private int[] attendance = new int[7];
+    private int[] attendance = new int[5];
     
     public int[] addDayToAttendance() {
         LocalDate now = LocalDate.now();

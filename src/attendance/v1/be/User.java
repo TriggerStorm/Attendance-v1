@@ -96,7 +96,7 @@ public class User {
         return postCode;
     }
     
-    public void setPostCode(String address) {
+    public void setPostCode(int postCode) {
         this.postCode = postCode;
     }
      
@@ -104,7 +104,7 @@ public class User {
         return city;
     }
     
-    public void setCity(String address) {
+    public void setCity(String city) {
         this.city = city;
     }
     public String getTeacher() {

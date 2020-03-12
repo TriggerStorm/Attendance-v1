@@ -19,8 +19,10 @@ import java.util.logging.Logger;
 
 /**
  *
- * @author admin
+ * @author Trigger, Filip, Cecillia and Alan
  */
+
+
 public class UserDBDAO {
         private DBConnection dbc;
 
