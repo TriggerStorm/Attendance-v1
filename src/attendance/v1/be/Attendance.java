@@ -14,6 +14,7 @@ public class Attendance {
         private String studentKey;
         private String classKey;
         private String dateHeld;
+        private int SecretCode;
         
         
 public Attendance(String studentKey, String classKey, String dateHeld){
@@ -21,6 +22,20 @@ public Attendance(String studentKey, String classKey, String dateHeld){
     this.classKey = classKey;
     this.dateHeld = dateHeld;
 }
+public Attendance(String classKey, String dateHeld, int SecretCode)
+{
+    this.classKey = classKey;
+    this.dateHeld = dateHeld;
+    this.SecretCode = SecretCode;
+}
+
+    public void setSecretCode(int SecretCode) {
+        this.SecretCode = SecretCode;
+    }
+
+    public int getSecretCode() {
+        return SecretCode;
+    }
 
     public String getStudentKey() {
         return studentKey;

@@ -19,6 +19,8 @@ import attendance.v1.bll.BllManager;
 import attendance.v1.be.Classes;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -45,7 +47,7 @@ public class AttendanceDBDAO {
     public List<SubjectAttendance> mockStudentAttendance;
     
     public AttendanceDBDAO() {
-        
+        dbc = new DBConnection();
 /*        mockStudentAttendance = new ArrayList<SubjectAttendance>();
         SubjectAttendance mockSCO = new SubjectAttendance("SCO", 1, 0, 2, 0, 3);
         SubjectAttendance mockSDE = new SubjectAttendance("SDE", 4, 5, 0, 0, 0);
@@ -199,6 +201,23 @@ public class AttendanceDBDAO {
         allDBOS.add(new ScoMok(Name,12,0,6,4,7,54));
         return allDBOS;
     }
+    
+    public Attendance setSecretCode (String SubjectKey, String Date, int SecretCode) throws SQLException
+    {
+        String sql = "INSERT INTO SubjectsHeld(SubjectKey, Date, SecretCode,) VALUES (?,?,?)";
+        Attendance a = new Attendance(SubjectKey,Date,SecretCode);
+        try(Connection con = dbc.getConnection()) {
+            PreparedStatement stmt = con.prepareStatement(sql, PreparedStatement.RETURN_GENERATED_KEYS);
+            stmt.setString(1, SubjectKey);
+            stmt.setString(2, Date);
+            stmt.setInt(3, SecretCode);
+            
+            }    catch (SQLException ex) {
+            Logger.getLogger(AttendanceDBDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+            return a;
+    }
+    
     
 }
 
