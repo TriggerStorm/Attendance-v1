@@ -12,6 +12,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import attendance.v1.be.User;
+import java.util.List;
 
 /**
  *
@@ -20,12 +21,19 @@ import attendance.v1.be.User;
 public class UserDBDAO {
         private DBConnection dbc;
 
-    
-        
-    public User getUser() {
-        User user = new User();
-       return user; 
+    public UserDBDAO() {
+        dbc = new DBConnection();
     }
-
-   
+        
+    public User getUser(List<User> allUsers, int userKey) throws SQLException {
+        
+         for (int i = 0; i < allUsers.size(); i++) {
+            User user = allUsers.get(i);
+            int testKey = user.getUserKey();
+            if (testKey == userKey)  {
+            return user;
+            }
+        }
+        return null;
+    }
 }

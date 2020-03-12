@@ -22,10 +22,7 @@ public interface IBLL {
     public List<ScoMok> getITOattendance();
     public List<ScoMok> getSDEattendance();
     public List<ScoMok> getSCOattendance();
-        
-
-    
-        
+  
     List<String> addDayToAttendance(String selectedCourse);
 
 

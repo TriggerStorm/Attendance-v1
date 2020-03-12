@@ -157,7 +157,7 @@ public class StudentController implements Initializable {
     private void handle_ITO(ActionEvent event) {
          TBV_monday.setCellValueFactory(new PropertyValueFactory<>("monday"));
         TBV_tuesday.setCellValueFactory(new PropertyValueFactory<>("tuesday"));
-        tbv_wednesday.setCellValueFactory(new PropertyValueFactory<>("wensday"));
+        tbv_wednesday.setCellValueFactory(new PropertyValueFactory<>("wednesday"));
         TBV_thursday.setCellValueFactory(new PropertyValueFactory<>("thursdag"));
         TBV_friday.setCellValueFactory(new PropertyValueFactory<>("friday"));       
         Lb_subjet.setText("ITO");        
