@@ -8,6 +8,7 @@ package attendance.v1.dal;
 import attendance.v1.be.Classes;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
@@ -19,6 +20,32 @@ import java.util.List;
  */
 public class TeacherDBDAO {
      private DBConnection db;
+      public List<Classes> getSubjects() throws SQLException 
+    {
+        db = new DBConnection();
+        List<Classes> allclasses = new ArrayList();
+           
+        try(Connection con = db.getConnection()){
+            String SQLStmt = "SELECT * FROM SUBJECTS;";
+            
+            Statement statement = con.createStatement();
+            ResultSet rs = statement.executeQuery(SQLStmt);
+            
+            while(rs.next()) 
+            {
+               
+                
+                int SubjectKey = rs.getInt("SubjectKey");
+                String SubjectName = rs.getString("SubjectName");
+                String SubjectIMG = rs.getString("SubjectIMG");
+                String AssociatedCourse = rs.getString("AssociatedCourse");
+                String AssociatedTeacher = rs.getString("AssociatedTeacher");
+                Classes p = new Classes(SubjectKey,SubjectName,SubjectIMG,AssociatedCourse,AssociatedTeacher);
+                allclasses.add(p);
+            }    
+        }
+       return allclasses;
+    }
      public Classes assignTeacherClass(Classes classes, String teacher) throws SQLException 
     {
         db = new DBConnection();

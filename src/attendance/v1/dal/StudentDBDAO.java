@@ -49,19 +49,20 @@ public class StudentDBDAO {
        return allclasses;
     }
      
-     public Classes assignStudentCourse(Classes classes, String student) throws SQLException 
+     public Classes assignStudentCourse(Classes classes, User user) throws SQLException 
     {
         db = new DBConnection();
         
            
         try(Connection con = db.getConnection()){
-            String SQLStmt = "UPDATE SUBJECTS SET AssociatedStudents = ? WHERE id = ?;";
+            String SQLStmt = "UPDATE STUDENT_SUBJECTS SET SUBJECTKEY = ?,USERKEY = ? WHERE id = ?;";
             
             PreparedStatement pstmt = con.prepareStatement(SQLStmt);
-             pstmt.setString(1,student);
-            pstmt.setInt(2,classes.getClasskey());
+             pstmt.setInt(1,user.getUserKey());
+             pstmt.setInt(2,classes.getClasskey());
+            pstmt.setInt(3,classes.getClasskey());
         }
-        return new Classes(classes.getClasskey(),classes.getClassName(),classes.getClassIMG(),student,classes.getAssociatedTeacher());
+        return new Classes(classes.getClasskey(),classes.getClassName(),classes.getClassIMG(),classes.getAssociatedCourse(),classes.getAssociatedTeacher());
 }
 }
 
