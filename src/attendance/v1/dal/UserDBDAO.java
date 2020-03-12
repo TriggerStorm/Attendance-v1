@@ -27,33 +27,31 @@ public class UserDBDAO {
         dbc = new DBConnection();
     }
         
-    public User getUser(List<User> allUsers, int userKey) throws SQLException {
    
-    public List<User> getAllUsers(){
-        
-        List<User> = new ArrayList(); //get a list to store the values.
-        
+    public List<User> getAllUsers() throws SQLException{
+        List<User> allUsers = new ArrayList(); //get a list to store the values.
         try(Connection con = dbc.getConnection()){
             String SQLStmt = "SELECT * FROM USERS;";
-            
             Statement statement = con.createStatement();
-            ResultSet rs = statment.executeQuery(SQLStmt);
-            
+            ResultSet rs = statement.executeQuery(SQLStmt);
             while(rs.next()) //While you have something in the results
             {
-                //fetch all info
-                
-                int UserKey = rs.getInt("UserId");
-                String UserName = rs.getString("userName");
-                String Password = rs.getString("Password");
+                int userKey = rs.getInt("UserId");
+                String userName = rs.getString("userName");
+                String password = rs.getString("Password");
                 String email = rs.getString("Email");
+                int phoneNr = rs.getInt("phoneNr");
                 String address = rs.getString("Address");
-                
+                String teacher = rs.getString("Teacher");
+                String userIMG =  rs.getString("userIMG");
+               allUsers.add(new User(userKey, userName, password, email, phoneNr, address, teacher, userIMG)); 
             }    
         }
+        return allUsers;
     }
         
-        
+    
+    public User getUser(List<User> allUsers, int userKey) throws SQLException {
          for (int i = 0; i < allUsers.size(); i++) {
             User user = allUsers.get(i);
             int testKey = user.getUserKey();
