@@ -12,7 +12,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import attendance.v1.be.User;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -52,13 +51,14 @@ public class UserDBDAO {
         
     
     public User getUser(List<User> allUsers, int userKey) throws SQLException {
-         for (int i = 0; i < allUsers.size(); i++) {
-            User user = allUsers.get(i);
+        User user = new User();
+        for (int i = 0; i < allUsers.size(); i++) {
+            user = allUsers.get(i);
             int testKey = user.getUserKey();
             if (testKey == userKey)  {
             return user;
             }
         }
-        return null;
+        return null;  // User does not exist
     }
 }
