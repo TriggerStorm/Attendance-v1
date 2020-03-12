@@ -26,8 +26,8 @@ public class MockTester {
  
  
     public static void toRun() {
-        int count = mockdao.mockPrintOut();
-        System.out.println("courses = " + count);
+//        int count = mockdao.mockPrintOut();
+ //       System.out.println("courses = " + count);
     }
     
     

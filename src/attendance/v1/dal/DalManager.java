@@ -10,7 +10,7 @@ import attendance.v1.be.SubjectAttendance;
 import attendance.v1.be.User;
 import attendance.v1.be.Attendance;
 import attendance.v1.bll.BllManager;
-import attendance.v1.be.Classes;
+import attendance.v1.be.Subject;
 import java.util.List;
 
 /**
@@ -20,41 +20,47 @@ import java.util.List;
 public class DalManager implements IDAL {
     private MockDao mockdao;
     private AttendanceDBDAO attendanceDBDao;
-
+    private Student_SubjectDBDAO student_SubjectDBDao;
+    private SubjectDBDAO subjectDBDao;
+    private UserDBDAO userDBDao;
+    
+    
     
     public DalManager() {
           mockdao = new MockDao();
           attendanceDBDao = new AttendanceDBDAO();
-
+          student_SubjectDBDao = new Student_SubjectDBDAO();
+          subjectDBDao = new SubjectDBDAO();
+          userDBDao = new UserDBDAO();
     } 
     
     
     @Override
     public boolean CheckUser (String email, String password) { //checks if our user exsts and the password is correct.
-        return mockdao.CheckUser(email,password);
+        return attendanceDBDao.CheckUser(email,password);
     }
     
     @Override
     public boolean CheckTeacher(String email) {//checks to see if our user is a teacher, doesn't need the password for that.
-        return mockdao.CheckTeacher(email);
+        return attendanceDBDao.CheckTeacher(email);
     }
     
     
     @Override
     public List<String> addDayToAttendance(String selectedCourse) {
-        return mockdao.addDayToAttendance(selectedCourse);
+        return attendanceDBDao.addDayToAttendance(selectedCourse);
     }
    
            
     @Override 
     public String gCode() {
-        return mockdao.gCode();
+        return attendanceDBDao.gCode();
     }
     
     
     @Override
     public String course() {
-        return mockdao.course();
+        return attendanceDBDao.course();
     } 
     
     

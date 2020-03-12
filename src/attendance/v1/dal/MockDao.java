@@ -61,7 +61,7 @@ public class MockDao {
         mockStudentAttendance.add(mockDBOS);
         mockStudentAttendance.add(mockITO);
 
-*/
+
         mockuser1 = new User(1,"admin", "admin","mock@mail.com", 12345678 ,"1 Mock St" , "Y", "data/mockuserIMG.jpg");
    
     
@@ -131,7 +131,7 @@ public class MockDao {
                 System.out.println(testCourse);
         }
         return attendance;
-    } */
+    } 
        return null; 
     }
     
@@ -146,7 +146,7 @@ public class MockDao {
             return mockuser2.getTeacher();
         }
         else
-        { */
+        { 
             return false;
         
     }
@@ -163,7 +163,7 @@ public class MockDao {
                 subjectCheck = null; 
                 // need to finish this method later
             }
-        } */
+        } 
         return null;
     }
 
@@ -202,5 +202,6 @@ public class MockDao {
         allSco.add(new ScoMok(Name,12,0,6,4,7,54));
         return allSco;
     }
-    
+    */
+    }
 }

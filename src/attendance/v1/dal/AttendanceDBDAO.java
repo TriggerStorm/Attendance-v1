@@ -16,7 +16,7 @@ import attendance.v1.be.SubjectAttendance;
 import attendance.v1.be.User;
 import attendance.v1.be.Attendance;
 import attendance.v1.bll.BllManager;
-import attendance.v1.be.Classes;
+import attendance.v1.be.Subject;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -58,7 +58,7 @@ public class AttendanceDBDAO {
         mockStudentAttendance.add(mockITO);
 
 */
-        mockuser1 = new User(1,"admin", "admin","mock@mail.com", 12345678 ,"1 Mock St" , "Y", "data/mockuserIMG.jpg");
+        mockuser1 = new User(1,"admin", "admin","mock@mail.com", 12345678 ,"1 Mock St" ,90210, "Esbjerg", "Y", "data/mockuserIMG.jpg");
    
     
 

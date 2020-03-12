@@ -36,21 +36,24 @@ public class UserDBDAO {
             while(rs.next()) //While you have something in the results
             {
                 int userKey = rs.getInt("UserId");
-                String userName = rs.getString("userName");
+                String userName = rs.getString("UserName");
                 String password = rs.getString("Password");
                 String email = rs.getString("Email");
-                int phoneNr = rs.getInt("phoneNr");
+                int phoneNr = rs.getInt("Phonenr");
                 String address = rs.getString("Address");
+                int postCode = rs.getInt("PostCode");
+                String city = rs.getString("City");
                 String teacher = rs.getString("Teacher");
                 String userIMG =  rs.getString("userIMG");
-               allUsers.add(new User(userKey, userName, password, email, phoneNr, address, teacher, userIMG)); 
+               allUsers.add(new User(userKey, userName, password, email, phoneNr, address, postCode, city, teacher, userIMG)); 
             }    
         }
         return allUsers;
     }
         
     
-    public User getUser(List<User> allUsers, int userKey) throws SQLException {
+    public User getUser(int userKey) throws SQLException {
+        List<User> allUsers = getAllUsers();
         User user;
         for (int i = 0; i < allUsers.size(); i++) {
             user = allUsers.get(i);
