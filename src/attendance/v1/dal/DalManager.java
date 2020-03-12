@@ -18,7 +18,6 @@ import java.util.List;
  * @author Trigger
  */
 public class DalManager implements IDAL {
-    private MockDao mockdao;
     private AttendanceDBDAO attendanceDBDao;
     private Student_SubjectDBDAO student_SubjectDBDao;
     private SubjectDBDAO subjectDBDao;
@@ -27,7 +26,6 @@ public class DalManager implements IDAL {
     
     
     public DalManager() {
-          mockdao = new MockDao();
           attendanceDBDao = new AttendanceDBDAO();
           student_SubjectDBDao = new Student_SubjectDBDAO();
           subjectDBDao = new SubjectDBDAO();
