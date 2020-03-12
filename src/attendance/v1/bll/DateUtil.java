@@ -10,8 +10,10 @@ import java.time.format.DateTimeFormatter;
 
 /**
  *
- * @author Trigger
+ * @author Trigger, Filip, Cecillia and Alan
  */
+
+
 public class DateUtil {
     private int[] attendance = new int[5];
     

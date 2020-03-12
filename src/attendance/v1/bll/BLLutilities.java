@@ -10,8 +10,10 @@ import attendance.v1.bll.IBLL;
 
 /**
  *
- * @author admin
+ * @author Trigger, Filip, Cecillia and Alan
  */
+
+
 public class BLLutilities {
     
   /*   public int CheckUser (String email, String password) {//Checks if the user exists, and what kind of user we have.

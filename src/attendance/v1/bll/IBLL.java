@@ -18,7 +18,7 @@ import java.util.List;
 public interface IBLL {
     
     List<String> addDayToAttendance(String selectedCourse);
-    boolean CheckUser(String email, String password);
+    int CheckUser(String email, String password);
     boolean CheckTeacher(String email);
 
 // Mock methods (to delete later)    

@@ -43,13 +43,13 @@ public class DalManager implements IDAL {
     
     @Override
     public int CheckUser (String email, String password) { //checks if our user exsts and the password is correct.
-        return attendanceDBDao.CheckUser(email,password);
+        return attendanceDBDao.checkUser(email,password);
     }
     
     
     @Override
     public boolean CheckTeacher(String email) {//checks to see if our user is a teacher, doesn't need the password for that.
-        return attendanceDBDao.CheckTeacher(email);
+        return attendanceDBDao.checkTeacher(email);
     }
     
     

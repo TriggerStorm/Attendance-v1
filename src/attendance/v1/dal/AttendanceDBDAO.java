@@ -22,8 +22,10 @@ import java.util.List;
 
 /**
  *
- * @author admin
+ * @author Trigger, Filip, Cecillia and Alan
  */
+
+
 public class AttendanceDBDAO {
  
 /**
@@ -85,7 +87,7 @@ public class AttendanceDBDAO {
     
     
     
-    public int CheckUser(String email, String password) {
+    public int checkUser(String email, String password) {
         String name = mockuser1.getEmail();
         String passw = mockuser1.getPassword();
         String name2 = mockuser2.getEmail();
@@ -129,7 +131,7 @@ public class AttendanceDBDAO {
     }
     
 
-    public boolean CheckTeacher(String email)
+    public boolean checkTeacher(String email)
     {
       /*  if(email.equals(mockuser1.getEmail()))
         {
