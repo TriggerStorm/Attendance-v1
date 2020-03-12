@@ -51,7 +51,7 @@ public class UserDBDAO {
         
     
     public User getUser(List<User> allUsers, int userKey) throws SQLException {
-        User user = new User();
+        User user;
         for (int i = 0; i < allUsers.size(); i++) {
             user = allUsers.get(i);
             int testKey = user.getUserKey();
