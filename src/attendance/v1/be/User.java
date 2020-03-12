@@ -18,7 +18,7 @@ public class User {
     private String email;
     private int phoneNr;
     private String address;
-    private int zipCode;
+    private int postCode;
     private String city;
     private String teacher;
     private String userIMG;
@@ -35,7 +35,7 @@ public class User {
      this.email = email;
      this.phoneNr = phoneNr;
      this.address = address;
-     this.zipCode = zipCode;
+     this.postCode = zipCode;
      this.city = city;
      this.teacher = teacher;
      this.userIMG = userIMG;
@@ -93,11 +93,11 @@ public class User {
     }
 
     public int getZipCode() {
-        return zipCode;
+        return postCode;
     }
     
     public void setZipCode(String address) {
-        this.zipCode = zipCode;
+        this.postCode = postCode;
     }
      
     public String getCity() {

@@ -14,6 +14,8 @@ import java.sql.Statement;
 import attendance.v1.be.User;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -64,4 +66,40 @@ public class UserDBDAO {
         }
         return null;  // User does not exist
     }
+    
+    
+     public User addNewUserToDB(/*int userKey, */String userName, String password, String email, int phoneNr, String address, int postCode, String city, String teacher, String userIMG) { 
+        String sql = "INSERT INTO Users(userName, password, email, phoneNr, address, postCode, city, teacher, userIMG) VALUES (?,?,?,?,?,?,?,?,?)";
+        User newUser = new User(postCode, userName, password, email, phoneNr, address, postCode, city, teacher, userIMG);
+        try (Connection con = dbc.getConnection()) {
+            PreparedStatement stmt = con.prepareStatement(sql, PreparedStatement.RETURN_GENERATED_KEYS);
+            stmt.setString(1, userName);
+            stmt.setString(2, password);
+            stmt.setString(3, email);
+            stmt.setInt(4, phoneNr);
+            stmt.setString(5, address);
+            stmt.setInt(6, postCode);
+            stmt.setString(7, city);
+            stmt.setString(8, teacher);
+            stmt.setString(9, userIMG);
+            int affectedRows = stmt.executeUpdate();
+            if (affectedRows == 0) {
+                throw new SQLException("Creating user failed, no rows affected.");
+            }
+            try (ResultSet generatedKeys = stmt.getGeneratedKeys()) {
+                if (generatedKeys.next()) {
+                    newUser.setUserKey((int) generatedKeys.getLong(1));
+                } else {
+                    throw new SQLException("Creating user failed, no ID obtained.");
+                } 
+                return newUser;
+            }
+        } catch (SQLServerException ex) {
+            Logger.getLogger(UserDBDAO.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+            Logger.getLogger(UserDBDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
+    }
+     
 }
