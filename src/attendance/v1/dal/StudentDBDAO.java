@@ -5,7 +5,7 @@
  */
 package attendance.v1.dal;
 import attendance.v1.dal.DBConnection;
-import attendance.v1.be.Classes;
+import attendance.v1.be.Subject;
 import attendance.v1.be.StudentSubjects;
 import attendance.v1.be.User;
 import java.sql.Connection;
@@ -23,10 +23,10 @@ import java.sql.Statement;
  */
 public class StudentDBDAO {
    private DBConnection db;
-     public List<Classes> getSubjects() throws SQLException 
+     public List<Subject> getSubjects() throws SQLException 
     {
         db = new DBConnection();
-        List<Classes> allclasses = new ArrayList();
+        List<Subject> allclasses = new ArrayList();
            
         try(Connection con = db.getConnection()){
             String SQLStmt = "SELECT * FROM SUBJECTS;";
@@ -43,19 +43,19 @@ public class StudentDBDAO {
                 String SubjectIMG = rs.getString("SubjectIMG");
                 String AssociatedCourse = rs.getString("AssociatedCourse");
                 String AssociatedTeacher = rs.getString("AssociatedTeacher");
-                Classes p = new Classes(SubjectKey,SubjectName,SubjectIMG,AssociatedCourse,AssociatedTeacher);
+                Subject p = new Subject(SubjectKey,SubjectName,SubjectIMG,AssociatedCourse,AssociatedTeacher);
                 allclasses.add(p);
             }    
         }
        return allclasses;
     }
      
-     public StudentSubjects assignStudentCourse(Classes classes, User user) throws SQLException 
+     public StudentSubjects assignStudentCourse(Subject subject, User user) throws SQLException 
     {
         db = new DBConnection();
         
            int ukey = user.getUserKey();
-           int ckey = classes.getClasskey();
+           int ckey = subject.getClassKey();
         try(Connection con = db.getConnection()){
             String SQLStmt = "UPDATE STUDENT_SUBJECTS SET SUBJECTKEY = ?,USERKEY = ? WHERE id = ?;";
             

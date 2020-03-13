@@ -5,7 +5,7 @@
  */
 package attendance.v1.dal;
 
-import attendance.v1.be.Classes;
+import attendance.v1.be.Subject;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -20,10 +20,10 @@ import java.util.List;
  */
 public class TeacherDBDAO {
      private DBConnection db;
-      public List<Classes> getSubjects() throws SQLException 
+      public List<Subject> getSubjects() throws SQLException 
     {
         db = new DBConnection();
-        List<Classes> allclasses = new ArrayList();
+        List<Subject> allSubjects = new ArrayList();
            
         try(Connection con = db.getConnection()){
             String SQLStmt = "SELECT * FROM SUBJECTS;";
@@ -40,13 +40,13 @@ public class TeacherDBDAO {
                 String SubjectIMG = rs.getString("SubjectIMG");
                 String AssociatedCourse = rs.getString("AssociatedCourse");
                 String AssociatedTeacher = rs.getString("AssociatedTeacher");
-                Classes p = new Classes(SubjectKey,SubjectName,SubjectIMG,AssociatedCourse,AssociatedTeacher);
-                allclasses.add(p);
+                Subject p = new Subject(SubjectKey,SubjectName,SubjectIMG,AssociatedCourse,AssociatedTeacher);
+                allSubjects.add(p);
             }    
         }
-       return allclasses;
+       return allSubjects;
     }
-     public Classes assignTeacherClass(Classes classes, String teacher) throws SQLException 
+     public Subject assignTeacherClass(Subject subject, String teacher) throws SQLException 
     {
         db = new DBConnection();
         
@@ -56,8 +56,8 @@ public class TeacherDBDAO {
             
             PreparedStatement pstmt = con.prepareStatement(SQLStmt);
              pstmt.setString(1,teacher);
-            pstmt.setInt(2,classes.getClasskey());
+            pstmt.setInt(2,subject.getClassKey());
         }
-        return new Classes(classes.getClasskey(),classes.getClassName(),classes.getClassIMG(),classes.getAssociatedCourse(),teacher);
+        return new Subject(subject.getClassKey(),subject.getClassName(),subject.getClassIMG(),subject.getAssociatedCourse(),teacher);
 }
 }

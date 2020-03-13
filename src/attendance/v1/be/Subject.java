@@ -10,45 +10,45 @@ package attendance.v1.be;
  * @author Trigger
  */
 public class Subject {
-    private int classKey;
-    private String className;
-    private String classIMG;
+    private int subjectKey;
+    private String subjectName;
+    private String subjectIMG;
     private String associatedCourse;
     private String associatedTeacher;
     
     
     public Subject (int classKey, String className,String ClassIMG, String associatedCourse, String associatedTeacher ){
     
-        this.classKey = classKey;
-        this.className = className;
-        this.classIMG = classIMG;
+        this.subjectKey = classKey;
+        this.subjectName = className;
+        this.subjectIMG = subjectIMG;
         this.associatedCourse = associatedCourse;
         this.associatedTeacher = associatedTeacher;
         
     }
 
     public int getClassKey() {
-        return classKey;
+        return subjectKey;
     }
 
     public void setClassKey(int classKey) {
-        this.classKey = classKey;
+        this.subjectKey = classKey;
     }
 
     public String getClassName() {
-        return className;
+        return subjectName;
     }
 
     public void setClassName(String className) {
-        this.className = className;
+        this.subjectName = className;
     }
 
     public String getClassIMG() {
-        return classIMG;
+        return subjectIMG;
     }
 
     public void setClassIMG(String ClassIMG) {
-        this.classIMG = ClassIMG;
+        this.subjectIMG = ClassIMG;
     }
 
     public String getAssociatedCourse() {
