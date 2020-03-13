@@ -56,31 +56,5 @@ public class DalManager implements IDAL {
     public String course() {
         return mockdao.course();
     } 
-    
-    
-    // Mock data methods
-        
-    @Override
-    public List<ScoMok> getSCOattendance(){
-        return attendanceDBDao.getSCOattendance();
-    }
-        
-    @Override
-    public List<ScoMok> getSDEattendance(){
-        return attendanceDBDao.getSDEattendance();
-    }
-        
-    @Override
-    public List<ScoMok> getITOattendance(){
-        return attendanceDBDao.getITOattendance();
-    }
-           
-    @Override
-    public List<ScoMok> getDBOSattendance(){
-        return attendanceDBDao.getDBOSattendance();
-    }
 
-   
-    
-    
 }

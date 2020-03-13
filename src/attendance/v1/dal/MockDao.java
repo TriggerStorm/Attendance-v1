@@ -62,7 +62,7 @@ public class MockDao {
         mockStudentAttendance.add(mockITO);
 
 */
-        mockuser1 = new User(1,"admin", "admin","mock@mail.com", 12345678 ,"1 Mock St" , false, "data/mockuserIMG.jpg", mockStudentAttendance);
+        mockuser1 = new User(1,"admin", "admin","mock@mail.com", 12345678 ,"1 Mock St" , "Y", "data/mockuserIMG.jpg");
    
     
 
@@ -136,9 +136,8 @@ public class MockDao {
     }
     
 
-    public boolean CheckTeacher(String email)
-    {
-        if(email.equals(mockuser1.getEmail()))
+    public boolean CheckTeacher(String email) {
+/*        if(email.equals(mockuser1.getEmail()))
         {
             return mockuser1.getTeacher();//for now we just return the boolean, later it will probably be easier to have sorted the users into students and teachers beforehand, as the DB can sort this out faster.
         }
@@ -147,9 +146,9 @@ public class MockDao {
             return mockuser2.getTeacher();
         }
         else
-        {
+        { */
             return false;
-        }
+        
     }
         
     

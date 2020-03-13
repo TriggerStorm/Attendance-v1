@@ -18,12 +18,12 @@ public class User {
     private String email;
     private int phoneNr;
     private String address;
-    private boolean teacher;
+    private String teacher;
     private String userIMG;
-    private List<SubjectAttendance> attendance;
+    //private List<SubjectAttendance> attendance;
     
     
- public User (int userKey, String userName,String password,String email,int phoneNr,String address,boolean teacher,String userIMG, List<SubjectAttendance> attendance){
+ public User (int userKey, String userName, String password, String email, int phoneNr, String address, String teacher, String userIMG) { /*, List<SubjectAttendance> attendance*/
 
  
  
@@ -35,9 +35,13 @@ public class User {
      this.address = address;
      this.teacher = teacher;
      this.userIMG = userIMG;
-     this.attendance = attendance;
+     //this.attendance = attendance;
      
  }
+
+    public User() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
 
     public int getUserKey() {
         return userKey;
@@ -87,11 +91,11 @@ public class User {
         this.address = address;
     }
 
-    public boolean getTeacher() {
+    public String getTeacher() {
         return teacher;
     }
 
-    public void setTeacher(boolean teacher) {
+    public void setTeacher(String teacher) {
         this.teacher = teacher;
     }
 
@@ -103,12 +107,12 @@ public class User {
         this.userIMG = userIMG;
     }
     
-    public List<SubjectAttendance> getAttendance () {
+    /*public List<SubjectAttendance> getAttendance () {
         return attendance;
     }
 
     public void setUserIMG(List<SubjectAttendance> attendance) {
         this.attendance = attendance;
-    }
+    }*/
  
 }

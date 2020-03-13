@@ -65,33 +65,5 @@ public class BllManager implements IBLL {
     public String course() {
         return dalManager.course();
     } 
-    
-         // Mock data methods    
-    @Override
-    public List<ScoMok> getSCOattendance(){
-        return dalManager.getSCOattendance();
-    }
-    
-        
-    @Override
-    public List<ScoMok> getSDEattendance(){
-        return dalManager.getSDEattendance();
-    }
-    
-        
-    @Override
-    public List<ScoMok> getITOattendance(){
-        return dalManager.getITOattendance();
-    }
-    
-        
-    @Override
-    public List<ScoMok> getDBOSattendance(){
-        return dalManager.getDBOSattendance();
-    }
 
-   
-  
-    
-    
 }
