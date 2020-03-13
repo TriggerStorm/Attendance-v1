@@ -29,7 +29,6 @@ public class DalManager implements IDAL {
     private UserDBDAO userDBDao;
     
     
-    
     public DalManager() {
           attendanceDBDao = new AttendanceDBDAO();
           student_SubjectDBDao = new Student_SubjectDBDAO();

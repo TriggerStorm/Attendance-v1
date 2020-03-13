@@ -7,8 +7,10 @@ package attendance.v1.be;
 
 /**
  *
- * @author Trigger
+ * @author Trigger, Filip, Cecillia and Alan
  */
+
+
 public class Subject {
     private int subjectKey;
     private String subjectName;
@@ -17,38 +19,38 @@ public class Subject {
     private String associatedTeacher;
     
     
-    public Subject (int classKey, String className,String ClassIMG, String associatedCourse, String associatedTeacher ){
+    public Subject (int subjectKey, String subjectName,String subjectIMG, String associatedCourse, String associatedTeacher ){
     
-        this.subjectKey = classKey;
-        this.subjectName = className;
+        this.subjectKey = subjectKey;
+        this.subjectName = subjectName;
         this.subjectIMG = subjectIMG;
         this.associatedCourse = associatedCourse;
         this.associatedTeacher = associatedTeacher;
         
     }
 
-    public int getClassKey() {
+    public int getSubjectKey() {
         return subjectKey;
     }
 
-    public void setClassKey(int classKey) {
-        this.subjectKey = classKey;
+    public void setSubjectKey(int subjectKey) {
+        this.subjectKey = subjectKey;
     }
 
-    public String getClassName() {
+    public String getSubjectName() {
         return subjectName;
     }
 
-    public void setClassName(String className) {
-        this.subjectName = className;
+    public void setClassName(String subjectName) {
+        this.subjectName = subjectName;
     }
 
     public String getClassIMG() {
         return subjectIMG;
     }
 
-    public void setClassIMG(String ClassIMG) {
-        this.subjectIMG = ClassIMG;
+    public void setClassIMG(String subjectIMG) {
+        this.subjectIMG = subjectIMG;
     }
 
     public String getAssociatedCourse() {

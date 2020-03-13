@@ -7,8 +7,10 @@ package attendance.v1.be;
 
 /**
  *
- * @author macos
+ * @author Trigger, Filip, Cecillia and Alan
  */
+
+
 public class StudentSubjects {
     private int uKey,sKey;
     public StudentSubjects(int userKey, int subjectKey)
