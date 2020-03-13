@@ -83,7 +83,7 @@ public class BllManager implements IBLL {
         return dalManager.getAllAttendances();
         }
 
-    @Override
+    
     public List<Attendance> getStudentAttendanceInSubject(int studentKey, int subjectKey) {
         return dalManager.getStudentAttendanceInSubject(studentKey, subjectKey);
     }

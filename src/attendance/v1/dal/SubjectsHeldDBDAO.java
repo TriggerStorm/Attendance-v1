@@ -31,10 +31,10 @@ public class SubjectsHeldDBDAO {
         dbc = new DBConnection();
     }
     
-    public Attendance setSecretCode (String SubjectKey, String Date, String SecretCode) throws SQLException
+    public SubjectsHeld setSecretCode (String SubjectKey, String Date, String SecretCode) throws SQLException
     {
         String sql = "INSERT INTO SubjectsHeld(SubjectKey, Date, SecretCode,) VALUES (?,?,?)";
-        Attendance a = new Attendance(SubjectKey,Date,SecretCode);
+        SubjectsHeld a = new SubjectsHeld(SubjectKey,Date,SecretCode);
         try(Connection con = dbc.getConnection()) {
             PreparedStatement stmt = con.prepareStatement(sql, PreparedStatement.RETURN_GENERATED_KEYS);
             stmt.setString(1, SubjectKey);
