@@ -42,11 +42,7 @@ public class DalManager implements IDAL {
     
    
     
-    @Override
-    public boolean CheckTeacher(String email) {//checks to see if our user is a teacher, doesn't need the password for that.
-        return attendanceDBDao.checkTeacher(email);
-    }
-    
+   
     
     @Override
     public List<String> addDayToAttendance(String selectedCourse) {
@@ -138,6 +134,16 @@ public class DalManager implements IDAL {
             Logger.getLogger(DalManager.class.getName()).log(Level.SEVERE, null, ex);
         }
     return 0;
+    }
+
+    @Override
+    public boolean checkIfTeacher(String email) {
+        try {
+            return userDBDao.checkIfTeacher(email);
+        } catch (SQLException ex) {
+            Logger.getLogger(DalManager.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return false;
     }
 
     

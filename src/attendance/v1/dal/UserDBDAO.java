@@ -165,7 +165,20 @@ public class UserDBDAO {
     }
     
     
-    
-    
+    public boolean checkIfTeacher(String email) throws SQLException {
+        List<User> allUsers = getAllUsers();
+        for (int i = 0; i < allUsers.size(); i++) {
+            User userToCheck = allUsers.get(i);
+            if (userToCheck.getEmail().equals(email)) {
+                if (userToCheck.getTeacher().equals("1")) {
+                return true; //user is a teacher
+            } else {
+                    return false;  // user is not a teacher
+                }
+            }
+        }
+        return false;  // user is not in allUsers
+        }
+        
         
 }

@@ -110,11 +110,11 @@ public class BllManager implements IBLL {
         return dalManager.checkUserLogin(email,password);
     }
 
+   
     @Override
-    public boolean CheckTeacher(String email) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public boolean checkIfTeacher(String email) {
+        return dalManager.checkIfTeacher(email);
     }
-
    
     
     

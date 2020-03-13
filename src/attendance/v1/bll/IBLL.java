@@ -18,7 +18,6 @@ import java.util.List;
 public interface IBLL {
     
     List<String> addDayToAttendance(String selectedCourse);
-    boolean CheckTeacher(String email);
 
 // Mock methods (to delete later)    
     public String course();
@@ -35,6 +34,7 @@ public interface IBLL {
     public User editUser (User userToEdit, String userName, String password, String email, int phoneNr, String address, int postCode, String city, String teacher, String userIMG);
     public void removeUserFromDB(User userToDelete);
     public int checkUserLogin (String email, String password);
+    public boolean checkIfTeacher(String email);
 
     
 }

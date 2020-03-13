@@ -142,21 +142,7 @@ public class AttendanceDBDAO {
     }
     
 
-    public boolean checkTeacher(String email)
-    {
-      /*  if(email.equals(mockuser1.getEmail()))
-        {
-            return mockuser1.getTeacher();//for now we just return the boolean, later it will probably be easier to have sorted the users into students and teachers beforehand, as the DB can sort this out faster.
-        }
-        else if(email.equals(mockuser1.getEmail()))
-        {
-            return mockuser2.getTeacher();
-        }
-        else
-        { */
-            return false;
-        
-    }
+   
         
     
    
