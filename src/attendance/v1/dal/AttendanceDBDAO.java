@@ -15,6 +15,7 @@ import java.sql.ResultSet;
 import java.sql.Statement;
 import attendance.v1.bll.BllManager;
 import attendance.v1.be.Subject;
+import java.util.AbstractList;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
@@ -34,28 +35,21 @@ public class AttendanceDBDAO {
  */
     
     private DBConnection dbc;
-
     public List<Attendance> attendance;
-    public User mockuser1;
-    public User mockuser2;
-
- /*   public SubjectAttendance mockSCO;
-    public SubjectAttendance mockSDE;
-    public SubjectAttendance mockDBOS;
-    public SubjectAttendance mockITO;
-*/
     public List<SubjectAttendance> studentAttendance;
     
     
     
     public AttendanceDBDAO() {
 
+
         dbc = new DBConnection();
+
 
     }
     
     
-     public List<Attendance> getAllAttendance() throws SQLException{
+     public List<Attendance> getAllAttendances() throws SQLException{
         List<Attendance> allAttendance = new ArrayList(); //get a list to store the values.
         try(Connection con = dbc.getConnection()){
             String SQLStmt = "SELECT * FROM ATTENDANCE;";
@@ -63,14 +57,31 @@ public class AttendanceDBDAO {
             ResultSet rs = statement.executeQuery(SQLStmt);
             while(rs.next()) //While you have something in the results
             {
-                String userKey = rs.getString("UserKey");
-                String subjectKey = rs.getString("SubjectKey");
+                int userKey = rs.getInt("UserKey");
+                int subjectKey = rs.getInt("SubjectKey");
                 String dateHeld =  rs.getString("DateHeld");
                allAttendance.add(new Attendance(userKey, subjectKey, dateHeld)); 
             }    
         }
         return allAttendance;
     }
+
+      
+    public List<Attendance> getStudentAttendanceInSubject(int studentKey, int subjectKey) throws SQLException {
+        List<Attendance> allAttendances = getAllAttendances();
+        List<Attendance> studentAttendanceInSubject = new ArrayList<>();
+        Attendance testAttendance;
+        for (int i = 0; i < allAttendances.size(); i++) {
+            testAttendance = allAttendances.get(i);
+            if (testAttendance.getStudentKey() == studentKey) {
+                if (testAttendance.getSubjectKey() == subjectKey) {
+                studentAttendanceInSubject.add(testAttendance);
+                }
+            }
+        }
+        return studentAttendanceInSubject;
+    }
+
 
     public List<String> addDayToAttendance(String selectedCourse) { // bit rough. Work in progress. Needs a lot of work
  /*       selectedCourse = "SCO";  // will come from gui later

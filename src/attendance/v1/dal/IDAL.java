@@ -5,6 +5,7 @@
  */
 package attendance.v1.dal;
 
+import attendance.v1.be.Attendance;
 import attendance.v1.be.ScoMok;
 import attendance.v1.be.User;
 import java.util.List;
@@ -29,6 +30,11 @@ public interface IDAL {
     public void removeUserFromDB(User userToDelete);
     public int checkUserLogin (String email, String password);
     public boolean checkIfTeacher(String email);
+
+
+// AttendanceDBDAO methods
+    public List<Attendance> getAllAttendances();
+    public List<Attendance> getStudentAttendanceInSubject(int studentKey, int subjectKey);
 
 
 }

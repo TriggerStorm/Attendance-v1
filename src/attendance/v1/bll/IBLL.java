@@ -5,6 +5,7 @@
  */
 package attendance.v1.bll;
 
+import attendance.v1.be.Attendance;
 import attendance.v1.be.ScoMok;
 import attendance.v1.be.User;
 import java.util.List;
@@ -29,6 +30,11 @@ public interface IBLL {
     public void removeUserFromDB(User userToDelete);
     public int checkUserLogin (String email, String password);
     public boolean checkIfTeacher(String email);
+
+
+
+ // AttendanceDBDAO methods
+    public List<Attendance> getAllAttendances();
 
 }
 

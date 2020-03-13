@@ -5,6 +5,7 @@
  */
 package attendance.v1.bll;
 
+import attendance.v1.be.Attendance;
 import attendance.v1.be.ScoMok;
 import attendance.v1.be.User;
 
@@ -75,6 +76,16 @@ public class BllManager implements IBLL {
     @Override
     public boolean checkIfTeacher(String email) {
         return dalManager.checkIfTeacher(email);
+    }
+
+    @Override
+    public List<Attendance> getAllAttendances() {
+        return dalManager.getAllAttendances();
+        }
+
+    @Override
+    public List<Attendance> getStudentAttendanceInSubject(int studentKey, int subjectKey) {
+        return dalManager.getStudentAttendanceInSubject(studentKey, subjectKey);
     }
    
     

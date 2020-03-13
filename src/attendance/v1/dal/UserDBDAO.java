@@ -153,6 +153,7 @@ public class UserDBDAO {
         }
     }
       
+    
     public int checkUserLogin(String email, String password) throws SQLException {  // Why an int???
         List<User> allUsers = getAllUsers();
         for (int i = 0; i < allUsers.size(); i++) {
