@@ -56,23 +56,19 @@ public class SubjectsHeldDBDAO {
             pstmt.setString(2,date);
             pstmt.setString(3,secretCode);
             pstmt.setInt(4,subjectsHeld.getSkey());
+            pstmt.execute();
         }
         return new SubjectsHeld(subjectsHeld.getSkey(),date,secretCode);
 }
      
-     public SubjectsHeld getSubjectsHeld(int skey) throws SQLException 
+     public SubjectsHeld getSpecificSubjectsHeld(int skey) throws SQLException 
     {
-        db = new DBConnection();
-        
-           
+        db = new DBConnection(); 
         try(Connection con = db.getConnection()){
-            String SQLStmt = "SELECT * FROM SUBJECTSHELD WHERE subjectKey = ?;";
+            String SQLStmt = "SELECT * FROM SUBJECTSHELD WHERE subjectKey = '"+skey+"';";
             
             Statement statement = con.createStatement();
             ResultSet rs = statement.executeQuery(SQLStmt);
-            PreparedStatement pstmt = con.prepareStatement(SQLStmt);
-            pstmt.setInt(1,skey);
-           
                 int subjectKey = rs.getInt("subjectKey");
                 String date = rs.getString("date");
                 String secretCode = rs.getString("secretCode");
@@ -110,5 +106,14 @@ public class SubjectsHeldDBDAO {
             return new SubjectsHeld(skey,date,secretCode);
         }
      }
-     
+     public void deleteSubjectsHeld(SubjectsHeld subjectsHeld) throws SQLException
+     {
+          db = new DBConnection();
+        try(Connection con = db.getConnection()){
+            String sqlStatement = "DELETE FROM SUBJECTSHELD WHERE subjectKey = ? ;";
+            PreparedStatement pstmt = con.prepareStatement(sqlStatement);
+            pstmt.setInt(1,subjectsHeld.getSkey());
+            pstmt.execute();
+        }
+     }
 }

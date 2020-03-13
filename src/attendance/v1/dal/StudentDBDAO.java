@@ -12,7 +12,6 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
 import java.util.List;
 import java.util.ArrayList;
 import java.sql.Statement;
@@ -23,32 +22,7 @@ import java.sql.Statement;
  */
 public class StudentDBDAO {
    private DBConnection db;
-     public List<Subject> getSubjects() throws SQLException 
-    {
-        db = new DBConnection();
-        List<Subject> allclasses = new ArrayList();
-           
-        try(Connection con = db.getConnection()){
-            String SQLStmt = "SELECT * FROM SUBJECTS;";
-            
-            Statement statement = con.createStatement();
-            ResultSet rs = statement.executeQuery(SQLStmt);
-            
-            while(rs.next()) 
-            {
-               
-                
-                int SubjectKey = rs.getInt("SubjectKey");
-                String SubjectName = rs.getString("SubjectName");
-                String SubjectIMG = rs.getString("SubjectIMG");
-                String AssociatedCourse = rs.getString("AssociatedCourse");
-                String AssociatedTeacher = rs.getString("AssociatedTeacher");
-                Subject p = new Subject(SubjectKey,SubjectName,SubjectIMG,AssociatedCourse,AssociatedTeacher);
-                allclasses.add(p);
-            }    
-        }
-       return allclasses;
-    }
+    
      
      public StudentSubjects assignStudentCourse(User user ,int course) throws SQLException 
     {
@@ -65,7 +39,7 @@ public class StudentDBDAO {
             
              pstmt.setInt(1,ukey);
              pstmt.setInt(2, skey);
-             
+             pstmt.execute();
         }
        return new StudentSubjects(ukey,skey);
         } 
@@ -78,9 +52,9 @@ public class StudentDBDAO {
            
         try(Connection con = db.getConnection()){
             String SQLStmt = "SELECT * FROM SUBJECTS WHERE AssociatedCourse = ?;";
-             PreparedStatement pstmt = con.prepareStatement(SQLStmt);
-            
+             PreparedStatement pstmt = con.prepareStatement(SQLStmt);   
              pstmt.setInt(1,course);
+             pstmt.execute();
             Statement statement = con.createStatement();
             ResultSet rs = statement.executeQuery(SQLStmt);
             
