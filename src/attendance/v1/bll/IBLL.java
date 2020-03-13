@@ -18,8 +18,6 @@ import java.util.List;
 public interface IBLL {
     
     List<String> addDayToAttendance(String selectedCourse);
-    int CheckUser(String email, String password);
-    boolean CheckTeacher(String email);
 
 
         
@@ -29,6 +27,8 @@ public interface IBLL {
     public User addNewUserToDB(String userName, String password, String email, int phoneNr, String address, int postCode, String city, String teacher, String userIMG);
     public User editUser (User userToEdit, String userName, String password, String email, int phoneNr, String address, int postCode, String city, String teacher, String userIMG);
     public void removeUserFromDB(User userToDelete);
+    public int checkUserLogin (String email, String password);
+    public boolean checkIfTeacher(String email);
 
 }
 

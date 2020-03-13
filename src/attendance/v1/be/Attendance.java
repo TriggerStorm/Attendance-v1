@@ -11,14 +11,18 @@ package attendance.v1.be;
  */
 public class Attendance {
     
+
         private String userKey;
+        private String studentKey;
         private String subjectKey;
         private String dateHeld;
         
         
         
 public Attendance(String studentKey, String classKey, String dateHeld){
+
     this.userKey = studentKey;
+    this.studentKey = studentKey;
     this.subjectKey = classKey;
     this.dateHeld = dateHeld;
 }
@@ -26,7 +30,9 @@ public Attendance(String studentKey, String classKey, String dateHeld){
         return userKey;
     }
 
-    public String getSubjectKey() {
+
+    public String getClassKey() {
+
         return subjectKey;
     }
 
@@ -38,7 +44,9 @@ public Attendance(String studentKey, String classKey, String dateHeld){
         this.userKey = studentKey;
     }
 
-    public void setSubjectKey(String classKey) {
+
+    public void setClassKey(String classKey) {
+
         this.subjectKey = classKey;
     }
 

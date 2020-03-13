@@ -29,7 +29,6 @@ public class DalManager implements IDAL {
     private UserDBDAO userDBDao;
     
     
-    
     public DalManager() {
           attendanceDBDao = new AttendanceDBDAO();
           student_SubjectDBDao = new Student_SubjectDBDAO();
@@ -41,17 +40,9 @@ public class DalManager implements IDAL {
     
 // AttendanceDBDAO methods
     
-    @Override
-    public int CheckUser (String email, String password) { //checks if our user exsts and the password is correct.
-        return attendanceDBDao.checkUser(email,password);
-    }
+   
     
-    
-    @Override
-    public boolean CheckTeacher(String email) {//checks to see if our user is a teacher, doesn't need the password for that.
-        return attendanceDBDao.checkTeacher(email);
-    }
-    
+   
     
     @Override
     public List<String> addDayToAttendance(String selectedCourse) {
@@ -100,6 +91,26 @@ public class DalManager implements IDAL {
     }
 
    
+     @Override
+    public int checkUserLogin (String email, String password) { try {
+        //checks if our user exsts and the password is correct.
+        return userDBDao.checkUserLogin(email,password);
+        } catch (SQLException ex) {
+            Logger.getLogger(DalManager.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    return 0;
+    }
+
+    @Override
+    public boolean checkIfTeacher(String email) {
+        try {
+            return userDBDao.checkIfTeacher(email);
+        } catch (SQLException ex) {
+            Logger.getLogger(DalManager.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return false;
+    }
+
     
 
 }
