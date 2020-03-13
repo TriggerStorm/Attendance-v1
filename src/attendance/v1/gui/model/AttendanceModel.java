@@ -17,8 +17,6 @@ import javafx.collections.ObservableList;
  */
 public class AttendanceModel {
     private BllManager bllManager;
-    private ObservableList<ScoMok> ScoList;
-    private ObservableList<String> gCode;
     private ObservableList<String> course;
     
 
