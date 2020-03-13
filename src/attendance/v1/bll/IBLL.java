@@ -31,8 +31,8 @@ public interface IBLL {
 // UsersDBDAO methods
     public List<User> getAllUsers();
     public User getUser(int userKey);
-    public User addNewUserToDB(String userName, String password, String email, int phoneNr, String address, int postCode, String city, String teacher, String userIMG);
-    public User editUser (User userToEdit, String userName, String password, String email, int phoneNr, String address, int postCode, String city, String teacher, String userIMG);
+    public User addNewUserToDB(String userName, String password, String email, int phoneNr, String address, int postCode, String city, boolean teacher, String userIMG);
+    public User editUser (User userToEdit, String userName, String password, String email, int phoneNr, String address, int postCode, String city, boolean teacher, String userIMG);
     public void removeUserFromDB(User userToDelete);
     public int checkUserLogin (String email, String password);
     public boolean checkIfTeacher(String email);
@@ -40,4 +40,6 @@ public interface IBLL {
  // AttendanceDBDAO methods
     public List<Attendance> getAllAttendances();
 
+    
+    public List<Attendance> getStudentAttendanceInSubject(int studentKey, int subjectKey);
 }
