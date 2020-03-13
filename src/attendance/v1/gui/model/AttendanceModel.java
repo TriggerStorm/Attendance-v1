@@ -24,18 +24,5 @@ public class AttendanceModel {
         bllManager = new BllManager();
         
     }
-    public String gCode(){
-      
-      return bllManager.gCode();
-      
-    }
-    
-    public ObservableList<String> course(){
-      
-      String allcourse = bllManager.course();
-      course = FXCollections.observableArrayList(allcourse);
-      return course;
-    }
-    
 
 }

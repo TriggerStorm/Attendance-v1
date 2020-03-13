@@ -32,6 +32,6 @@ public class GeneratedCodeController implements Initializable {
     }    
     public void setcode (){
         Am = new AttendanceModel();
-        TF_code.setText(Am.gCode());
+       // TF_code.setText(Am.gCode());
     }
 }
