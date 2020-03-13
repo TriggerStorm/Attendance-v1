@@ -9,7 +9,7 @@ package attendance.v1.be;
  *
  * @author Trigger
  */
-public class Classes {
+public class Subject {
     private int classkey;
     private String className;
     private String ClassIMG;
@@ -17,7 +17,7 @@ public class Classes {
     private String associatedTeacher;
     
     
-    public Classes (int classkey,String className,String ClassIMG,String associatedCourse,String associatedTeacher ){
+    public Subject (int classkey,String className,String ClassIMG,String associatedCourse,String associatedTeacher ){
     
         this.classkey = classkey;
         this.className = className;

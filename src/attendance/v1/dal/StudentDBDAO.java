@@ -5,7 +5,7 @@
  */
 package attendance.v1.dal;
 import attendance.v1.dal.DBConnection;
-import attendance.v1.be.Classes;
+import attendance.v1.be.Subject;
 import attendance.v1.be.StudentSubjects;
 import attendance.v1.be.User;
 import java.sql.Connection;
@@ -23,10 +23,10 @@ import java.sql.Statement;
  */
 public class StudentDBDAO {
    private DBConnection db;
-     public List<Classes> getSubjects() throws SQLException 
+     public List<Subject> getSubjects() throws SQLException 
     {
         db = new DBConnection();
-        List<Classes> allclasses = new ArrayList();
+        List<Subject> allclasses = new ArrayList();
            
         try(Connection con = db.getConnection()){
             String SQLStmt = "SELECT * FROM SUBJECTS;";
@@ -43,29 +43,61 @@ public class StudentDBDAO {
                 String SubjectIMG = rs.getString("SubjectIMG");
                 String AssociatedCourse = rs.getString("AssociatedCourse");
                 String AssociatedTeacher = rs.getString("AssociatedTeacher");
-                Classes p = new Classes(SubjectKey,SubjectName,SubjectIMG,AssociatedCourse,AssociatedTeacher);
+                Subject p = new Subject(SubjectKey,SubjectName,SubjectIMG,AssociatedCourse,AssociatedTeacher);
                 allclasses.add(p);
             }    
         }
        return allclasses;
     }
      
-     public StudentSubjects assignStudentCourse(Classes classes, User user) throws SQLException 
+     public StudentSubjects assignStudentCourse(User user ,int course) throws SQLException 
     {
-        db = new DBConnection();
+        for(int i = 0; i < getSubjectsSPECIFIC(course).size();i++)
+            
+        {db = new DBConnection();
         
            int ukey = user.getUserKey();
-           int ckey = classes.getClasskey();
-        try(Connection con = db.getConnection()){
-            String SQLStmt = "UPDATE STUDENT_SUBJECTS SET SUBJECTKEY = ?,USERKEY = ? WHERE id = ?;";
+           int skey = getSubjectsSPECIFIC(course).get(i).getClasskey();
+           try(Connection con = db.getConnection()){
+            String SQLStmt = "INSERT INTO  STUDENT_SUBJECTS(subjectKey,userKey) VALUES (?,?); ";
             
             PreparedStatement pstmt = con.prepareStatement(SQLStmt);
             
              pstmt.setInt(1,ukey);
-             pstmt.setInt(2,ckey);
-            pstmt.setInt(3,ckey);
+             pstmt.setInt(2, skey);
+             
         }
-        return new StudentSubjects(ukey,ckey);
+       return new StudentSubjects(ukey,skey);
+        } 
+      return null;
 }
+      public List<Subject> getSubjectsSPECIFIC(int course) throws SQLException 
+    {
+        db = new DBConnection();
+        List<Subject> allclasses = new ArrayList();
+           
+        try(Connection con = db.getConnection()){
+            String SQLStmt = "SELECT * FROM SUBJECTS WHERE AssociatedCourse = ?;";
+             PreparedStatement pstmt = con.prepareStatement(SQLStmt);
+            
+             pstmt.setInt(1,course);
+            Statement statement = con.createStatement();
+            ResultSet rs = statement.executeQuery(SQLStmt);
+            
+            while(rs.next()) 
+            {
+               
+                
+                int SubjectKey = rs.getInt("SubjectKey");
+                String SubjectName = rs.getString("SubjectName");
+                String SubjectIMG = rs.getString("SubjectIMG");
+                String AssociatedCourse = rs.getString("AssociatedCourse");
+                String AssociatedTeacher = rs.getString("AssociatedTeacher");
+                Subject p = new Subject(SubjectKey,SubjectName,SubjectIMG,AssociatedCourse,AssociatedTeacher);
+                allclasses.add(p);
+            }    
+        }
+       return allclasses;
+    }
 }
 

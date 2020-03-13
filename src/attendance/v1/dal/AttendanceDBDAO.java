@@ -10,7 +10,7 @@ import attendance.v1.be.SubjectAttendance;
 import attendance.v1.be.User;
 import attendance.v1.be.Attendance;
 import attendance.v1.bll.BllManager;
-import attendance.v1.be.Classes;
+import attendance.v1.be.Subject;
 import java.util.ArrayList;
 import java.util.List;
 
