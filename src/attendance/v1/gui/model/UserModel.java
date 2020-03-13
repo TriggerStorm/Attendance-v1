@@ -20,7 +20,7 @@ public class UserModel {
     }
     
 
-    public int CheckUser(String email, String password ){
+    public int CheckUser(String email, String password ){  // Changed form int - Alan 12-03
         int loginstate = bllManager.CheckUser(email, password); //This method gets the int.
 
         return loginstate;

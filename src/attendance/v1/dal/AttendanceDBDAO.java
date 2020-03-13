@@ -13,6 +13,8 @@ import attendance.v1.be.User;
 import attendance.v1.be.Attendance;
 import java.sql.ResultSet;
 import java.sql.Statement;
+import attendance.v1.bll.BllManager;
+import attendance.v1.be.Subject;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
@@ -20,8 +22,10 @@ import java.util.logging.Logger;
 
 /**
  *
- * @author admin
+ * @author Trigger, Filip, Cecillia and Alan
  */
+
+
 public class AttendanceDBDAO {
  
 /**
@@ -43,7 +47,9 @@ public class AttendanceDBDAO {
     public List<SubjectAttendance> mockStudentAttendance;
     
     public AttendanceDBDAO() {
+
         dbc = new DBConnection();
+
     }
     
     
@@ -54,7 +60,7 @@ public class AttendanceDBDAO {
     }
 
     
-    public boolean CheckUser(String email, String password) {
+    public int checkUser(String email, String password) {
         String name = mockuser1.getEmail();
         String passw = mockuser1.getPassword();
         String name2 = mockuser2.getEmail();
@@ -63,16 +69,16 @@ public class AttendanceDBDAO {
         {
             if(password.equals(passw) || password.equals(passw2)) //remember that to compare two strings you need to use equals()
             {    
-            return true; //user and password match.
+            return 1; //user and password match = true
             }
             else
             {
-            return false; // fail log in
+            return 0; // fail log in = false
             }
         }
         else
         {
-        return false;// fail log in
+        return 0;// fail log in
         }
     }
     
@@ -98,7 +104,7 @@ public class AttendanceDBDAO {
     }
     
 
-    public boolean CheckTeacher(String email)
+    public boolean checkTeacher(String email)
     {
       /*  if(email.equals(mockuser1.getEmail()))
         {

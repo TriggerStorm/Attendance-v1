@@ -9,29 +9,29 @@ package attendance.v1.be;
  *
  * @author Trigger
  */
-public class Classes {
+public class Subject {
     private int classKey;
     private String className;
-    private String ClassIMG;
+    private String classIMG;
     private String associatedCourse;
     private String associatedTeacher;
     
     
-    public Classes (int classkey,String className,String ClassIMG,String associatedCourse,String associatedTeacher ){
+    public Subject (int classKey, String className,String ClassIMG, String associatedCourse, String associatedTeacher ){
     
         this.classKey = classKey;
         this.className = className;
-        this.ClassIMG = ClassIMG;
+        this.classIMG = classIMG;
         this.associatedCourse = associatedCourse;
         this.associatedTeacher = associatedTeacher;
         
     }
 
-    public int getClasskey() {
+    public int getClassKey() {
         return classKey;
     }
 
-    public void setClasskey(int classkey) {
+    public void setClassKey(int classKey) {
         this.classKey = classKey;
     }
 
@@ -44,11 +44,11 @@ public class Classes {
     }
 
     public String getClassIMG() {
-        return ClassIMG;
+        return classIMG;
     }
 
     public void setClassIMG(String ClassIMG) {
-        this.ClassIMG = ClassIMG;
+        this.classIMG = ClassIMG;
     }
 
     public String getAssociatedCourse() {

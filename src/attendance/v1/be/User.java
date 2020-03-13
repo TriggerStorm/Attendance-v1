@@ -18,12 +18,14 @@ public class User {
     private String email;
     private int phoneNr;
     private String address;
+    private int postCode;
+    private String city;
     private String teacher;
     private String userIMG;
     //private List<SubjectAttendance> attendance;
     
     
- public User (int userKey, String userName, String password, String email, int phoneNr, String address, String teacher, String userIMG) { /*, List<SubjectAttendance> attendance*/
+ public User (int userKey, String userName, String password, String email, int phoneNr, String address, int zipCode, String city, String teacher, String userIMG) { /*, List<SubjectAttendance> attendance*/
 
  
  
@@ -33,15 +35,14 @@ public class User {
      this.email = email;
      this.phoneNr = phoneNr;
      this.address = address;
+     this.postCode = zipCode;
+     this.city = city;
      this.teacher = teacher;
      this.userIMG = userIMG;
      //this.attendance = attendance;
      
  }
 
-    public User() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
 
     public int getUserKey() {
         return userKey;
@@ -91,6 +92,21 @@ public class User {
         this.address = address;
     }
 
+    public int getPostCode() {
+        return postCode;
+    }
+    
+    public void setPostCode(int postCode) {
+        this.postCode = postCode;
+    }
+     
+    public String getCity() {
+        return city;
+    }
+    
+    public void setCity(String city) {
+        this.city = city;
+    }
     public String getTeacher() {
         return teacher;
     }

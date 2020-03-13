@@ -11,21 +11,24 @@ import java.util.List;
 
 /**
  *
- * @author Trigger
+ * @author Trigger, Filip, Cecillia and Alan
  */
+
+
 public interface IDAL {
 
-    
-   
     List<String> addDayToAttendance(String selectedCourse);
-
-
-    boolean CheckUser(String email, String password);
-    
+    int CheckUser(String email, String password);
     boolean CheckTeacher(String email);
 
- 
-    public String course();
-    public String gCode();
-    
+
+
+// UsersDBDAO methods
+    public List<User> getAllUsers();
+    public User getUser(int userKey);
+    public User addNewUserToDB(String userName, String password, String email, int phoneNr, String address, int postCode, String city, String teacher, String userIMG);
+    public User editUser (User userToEdit, String userName, String password, String email, int phoneNr, String address, int postCode, String city, String teacher, String userIMG);
+    public void removeUserFromDB(User userToDelete);
+
+
 }
