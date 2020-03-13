@@ -52,7 +52,7 @@ public class TeacherDBDAO {
         
            
         try(Connection con = db.getConnection()){
-            String SQLStmt = "UPDATE SUBJECTS SET AssociatedTeacher = ? WHERE id = ?;";
+            String SQLStmt = "UPDATE SUBJECTS SET AssociatedTeacher = ? WHERE subjectKey = ?;";
             
             PreparedStatement pstmt = con.prepareStatement(SQLStmt);
              pstmt.setString(1,teacher);
