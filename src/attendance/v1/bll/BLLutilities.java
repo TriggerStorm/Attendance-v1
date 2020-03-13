@@ -7,6 +7,8 @@ package attendance.v1.bll;
 
 import attendance.v1.bll.BllManager;
 import attendance.v1.bll.IBLL;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
 /**
  *
@@ -15,6 +17,23 @@ import attendance.v1.bll.IBLL;
 
 
 public class BLLutilities {
+    
+
+    
+    public String dateNowToString() {
+        LocalDate now = LocalDate.now();
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd LLLL yyyy");
+        String dateNowString = now.format(formatter);
+        return dateNowString;
+    } 
+   
+    
+    public LocalDate stringToLocalDate(String dateString) {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd LLLL yyyy");
+        LocalDate dateNow = LocalDate.parse(dateString, formatter);
+        return dateNow;
+    }
+
     
   /*   public int CheckUser (String email, String password) {//Checks if the user exists, and what kind of user we have.
 
