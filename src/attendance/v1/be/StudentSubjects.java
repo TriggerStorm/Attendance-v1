@@ -10,19 +10,27 @@ package attendance.v1.be;
  * @author macos
  */
 public class StudentSubjects {
-    private int Ukey,Skey;
-    public StudentSubjects(int Userkey, int Subjectkey)
+    private int ukey,skey;
+    public StudentSubjects(int userKey, int subjectKey)
     {
-        this.Ukey = Userkey;
-        this.Skey = Subjectkey;
+        this.ukey = userKey;
+        this.skey = subjectKey;
     }
     
     public int getUkey()
     {
-        return Ukey;
+        return ukey;
     }
     public int getSkey()
     {
-        return Skey;
+        return skey;
+    }
+    public void setUkey(int userKey)
+    {
+            this.ukey = userKey;
+    }
+    public void setSkey(int subjectKey)
+    {
+        this.skey = subjectKey;
     }
 }
