@@ -17,6 +17,7 @@ import attendance.v1.be.User;
 import attendance.v1.be.Attendance;
 import attendance.v1.bll.BllManager;
 import attendance.v1.be.Subject;
+import java.util.AbstractList;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -34,42 +35,17 @@ public class AttendanceDBDAO {
  */
     
     private DBConnection dbc;
-
     public List<Attendance> attendance;
-    public User mockuser1;
-    public User mockuser2;
-
- /*   public SubjectAttendance mockSCO;
-    public SubjectAttendance mockSDE;
-    public SubjectAttendance mockDBOS;
-    public SubjectAttendance mockITO;
-*/
     public List<SubjectAttendance> studentAttendance;
     
     
     
     public AttendanceDBDAO() {
-        
-/*        mockStudentAttendance = new ArrayList<SubjectAttendance>();
-        SubjectAttendance mockSCO = new SubjectAttendance("SCO", 1, 0, 2, 0, 3);
-        SubjectAttendance mockSDE = new SubjectAttendance("SDE", 4, 5, 0, 0, 0);
-        SubjectAttendance mockDBOS = new SubjectAttendance("DBOS", 0, 0, 0, 6, 0);
-        SubjectAttendance mockITO = new SubjectAttendance("ITO", 0, 0, 0, 7, 0);
-
-        mockStudentAttendance.add(mockSCO);
-        mockStudentAttendance.add(mockSDE);
-        mockStudentAttendance.add(mockDBOS);
-        mockStudentAttendance.add(mockITO);
-
-*/
-        mockuser1 = new User(1,"admin", "admin","mock@mail.com", 12345678 ,"1 Mock St" ,90210, "Esbjerg", "Y", "data/mockuserIMG.jpg");
-   
-    
-
+ 
     }
     
     
-     public List<Attendance> getAllAttendance() throws SQLException{
+     public List<Attendance> getAllAttendances() throws SQLException{
         List<Attendance> allAttendance = new ArrayList(); //get a list to store the values.
         try(Connection con = dbc.getConnection()){
             String SQLStmt = "SELECT * FROM ATTENDANCE;";
@@ -77,8 +53,8 @@ public class AttendanceDBDAO {
             ResultSet rs = statement.executeQuery(SQLStmt);
             while(rs.next()) //While you have something in the results
             {
-                String userKey = rs.getString("UserKey");
-                String subjectKey = rs.getString("SubjectKey");
+                int userKey = rs.getInt("UserKey");
+                int subjectKey = rs.getInt("SubjectKey");
                 String dateHeld =  rs.getString("DateHeld");
                allAttendance.add(new Attendance(userKey, subjectKey, dateHeld)); 
             }    
@@ -86,7 +62,26 @@ public class AttendanceDBDAO {
         return allAttendance;
     }
      
+      
+    public List<Attendance> getStudentAttendanceInSubject(int studentKey, int subjectKey) throws SQLException {
+        List<Attendance> allAttendances = getAllAttendances();
+        List<Attendance> studentAttendanceInSubject = new ArrayList<>();
+        Attendance testAttendance;
+        for (int i = 0; i < allAttendances.size(); i++) {
+            testAttendance = allAttendances.get(i);
+            if (testAttendance.getStudentKey() == studentKey) {
+                if (testAttendance.getSubjectKey() == subjectKey) {
+                studentAttendanceInSubject.add(testAttendance);
+                }
+            }
+        }
+        return studentAttendanceInSubject;
+    }
+
+
      
+    
+    
      
      
      

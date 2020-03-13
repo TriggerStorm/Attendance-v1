@@ -148,4 +148,29 @@ public class DalManager implements IDAL {
 
     
     
+    
+// AttendanceDBDAO methods
+
+    @Override
+    public List<Attendance> getAllAttendances() {
+        try {
+            return attendanceDBDao.getAllAttendances();
+        } catch (SQLException ex) {
+            Logger.getLogger(DalManager.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
+    }
+
+    @Override
+    public List<Attendance> getStudentAttendanceInSubject(int studentKey, int subjectKey) {
+        try {
+            return attendanceDBDao.getStudentAttendanceInSubject(studentKey, subjectKey);
+        } catch (SQLException ex) {
+            Logger.getLogger(DalManager.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
+    }
+
+    
+    
 }
