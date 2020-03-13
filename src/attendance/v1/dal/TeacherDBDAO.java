@@ -35,12 +35,12 @@ public class TeacherDBDAO {
             {
                
                 
-                int SubjectKey = rs.getInt("SubjectKey");
-                String SubjectName = rs.getString("SubjectName");
-                String SubjectIMG = rs.getString("SubjectIMG");
-                String AssociatedCourse = rs.getString("AssociatedCourse");
-                String AssociatedTeacher = rs.getString("AssociatedTeacher");
-                Subject p = new Subject(SubjectKey,SubjectName,SubjectIMG,AssociatedCourse,AssociatedTeacher);
+                int subjectKey = rs.getInt("SubjectKey");
+                String subjectName = rs.getString("SubjectName");
+                String subjectIMG = rs.getString("SubjectIMG");
+                String associatedCourse = rs.getString("AssociatedCourse");
+                String associatedTeacher = rs.getString("AssociatedTeacher");
+                Subject p = new Subject(subjectKey,subjectName,subjectIMG,associatedCourse,associatedTeacher);
                 allclasses.add(p);
             }    
         }
