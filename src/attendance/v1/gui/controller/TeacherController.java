@@ -159,7 +159,7 @@ public class TeacherController implements Initializable {
         TBV_friday.setCellValueFactory(new PropertyValueFactory<>("friday"));       
         TBV_student.setCellValueFactory(new PropertyValueFactory<>("Name"));        
         TBV_Attendance.setCellValueFactory(new PropertyValueFactory<>("percent"));        
-        TBV_attendance.setItems(Am.getSCOattendance());
+       // TBV_attendance.setItems(Am.getSCOattendance());
         Lb_subjet.setText("SCO");
     }
 
@@ -173,7 +173,7 @@ public class TeacherController implements Initializable {
         TBV_student.setCellValueFactory(new PropertyValueFactory<>("Name"));        
         TBV_Attendance.setCellValueFactory(new PropertyValueFactory<>("percent"));        
         Lb_subjet.setText("DB/OS");        
-        TBV_attendance.setItems(Am.getDBOSattendance());
+       // TBV_attendance.setItems(Am.getDBOSattendance());
     }
 
     @FXML
@@ -186,7 +186,7 @@ public class TeacherController implements Initializable {
         TBV_student.setCellValueFactory(new PropertyValueFactory<>("Name"));        
         TBV_Attendance.setCellValueFactory(new PropertyValueFactory<>("percent"));        
         Lb_subjet.setText("ITO");        
-        TBV_attendance.setItems(Am.getITOattendance());
+       // TBV_attendance.setItems(Am.getITOattendance());
     }
 
     @FXML
@@ -199,7 +199,7 @@ public class TeacherController implements Initializable {
         TBV_student.setCellValueFactory(new PropertyValueFactory<>("Name"));        
         TBV_Attendance.setCellValueFactory(new PropertyValueFactory<>("percent"));        
         Lb_subjet.setText("SDE");        
-        TBV_attendance.setItems(Am.getSDEattendance());
+       //TBV_attendance.setItems(Am.getSDEattendance());
     }
 
     @FXML

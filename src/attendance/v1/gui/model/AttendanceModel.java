@@ -24,7 +24,7 @@ public class AttendanceModel {
 
     public AttendanceModel() {
         bllManager = new BllManager();
-        getSCOattendance();
+        
     }
     public String gCode(){
       
@@ -39,33 +39,5 @@ public class AttendanceModel {
       return course;
     }
     
-    public ObservableList<ScoMok> getSCOattendance(){
-      
-      List<ScoMok> allSco = bllManager.getSCOattendance();
-      ScoList = FXCollections.observableArrayList(allSco);
-      return ScoList;
-        
-    }
-    public ObservableList<ScoMok> getSDEattendance(){
-      
-      List<ScoMok> allSco = bllManager.getSDEattendance();
-      ScoList = FXCollections.observableArrayList(allSco);
-      return ScoList;
-        
-    }
-    public ObservableList<ScoMok> getITOattendance(){
-      
-      List<ScoMok> allSco = bllManager.getITOattendance();
-      ScoList = FXCollections.observableArrayList(allSco);
-      return ScoList;
-        
-    }
-    public ObservableList<ScoMok> getDBOSattendance(){
-      
-      List<ScoMok> allSco = bllManager.getDBOSattendance();
-      ScoList = FXCollections.observableArrayList(allSco);
-      return ScoList;
-        
-    }
 
 }

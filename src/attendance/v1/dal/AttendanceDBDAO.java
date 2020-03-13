@@ -5,18 +5,14 @@
  */
 package attendance.v1.dal;
 
-import com.microsoft.sqlserver.jdbc.SQLServerException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
-import attendance.v1.be.ScoMok;
 import attendance.v1.be.SubjectAttendance;
 import attendance.v1.be.User;
 import attendance.v1.be.Attendance;
-import attendance.v1.bll.BllManager;
-import attendance.v1.be.Classes;
+import java.sql.ResultSet;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
@@ -48,22 +44,6 @@ public class AttendanceDBDAO {
     
     public AttendanceDBDAO() {
         dbc = new DBConnection();
-/*        mockStudentAttendance = new ArrayList<SubjectAttendance>();
-        SubjectAttendance mockSCO = new SubjectAttendance("SCO", 1, 0, 2, 0, 3);
-        SubjectAttendance mockSDE = new SubjectAttendance("SDE", 4, 5, 0, 0, 0);
-        SubjectAttendance mockDBOS = new SubjectAttendance("DBOS", 0, 0, 0, 6, 0);
-        SubjectAttendance mockITO = new SubjectAttendance("ITO", 0, 0, 0, 7, 0);
-
-        mockStudentAttendance.add(mockSCO);
-        mockStudentAttendance.add(mockSDE);
-        mockStudentAttendance.add(mockDBOS);
-        mockStudentAttendance.add(mockITO);
-
-*/
-        mockuser1 = new User(1,"admin", "admin","mock@mail.com", 12345678 ,"1 Mock St" , "Y", "data/mockuserIMG.jpg");
-   
-    
-
     }
     
     
@@ -72,20 +52,7 @@ public class AttendanceDBDAO {
          int count = mockStudentAttendance.size();
         return count;
     }
-    
-    
-   
-    
 
-
-        // mockuser1 = new User(1,"admin", "admin","admin@test.com", 12345678 ,"1 Mock St" , true, "data/mockuserIMG.jpg"); // add list
-        // mockuser2 = new User(2,"student", "student","student@test.com", 12345678 ,"2 Mock St" , false, "data/mockuserIMG.jpg");//
-
-   
-
-    
-    
-    
     
     public boolean CheckUser(String email, String password) {
         String name = mockuser1.getEmail();
@@ -164,44 +131,6 @@ public class AttendanceDBDAO {
     }
 
     
-    public String gCode() {
-        String gCode = "9W6A";
-        return gCode;
-    }
-        
-     public String course() {
-        String course = "Computer Science";
-        return course;
-    } 
-
-    public List<ScoMok> getSCOattendance(){
-        List<ScoMok> allSCO = new ArrayList<>();
-        String Name = ("student");
-        allSCO.add(new ScoMok(Name,5,8,5,6,8,56));
-        return allSCO;
-    }
-    
-    public List<ScoMok> getSDEattendance(){
-        List<ScoMok> allSDE = new ArrayList<>();
-        String Name = ("student");
-        allSDE.add(new ScoMok(Name,9,9,9,9,9,99));
-        return allSDE;
-    }
-    
-    public List<ScoMok> getITOattendance(){
-        List<ScoMok> allITO = new ArrayList<>();
-        String Name = ("student");
-        allITO.add(new ScoMok(Name,5,4,2,7,5,69));
-        return allITO;
-    }
-    
-    public List<ScoMok> getDBOSattendance(){
-        List<ScoMok> allDBOS = new ArrayList<>();
-        String Name = ("student");
-        allDBOS.add(new ScoMok(Name,12,0,6,4,7,54));
-        return allDBOS;
-    }
-    
     public Attendance setSecretCode (String SubjectKey, String Date, int SecretCode) throws SQLException
     {
         String sql = "INSERT INTO SubjectsHeld(SubjectKey, Date, SecretCode,) VALUES (?,?,?)";
@@ -216,6 +145,24 @@ public class AttendanceDBDAO {
             Logger.getLogger(AttendanceDBDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
             return a;
+    }
+    
+    public List<Attendance> getSecretCode () throws SQLException
+    {
+        List<Attendance> SecretCode = new ArrayList<>();
+        
+        try ( Connection con = dbc.getConnection()) {
+            String sql = "SELECT * FROM SubjectsHeld";
+            Statement stmt = con.createStatement();
+            ResultSet rs = stmt.executeQuery(sql);
+            while (rs.next()){
+                int Code = rs.getInt("Code");
+                
+                SecretCode.add(new Attendance(Code));
+            }
+            return SecretCode;
+        }
+        
     }
     
     

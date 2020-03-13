@@ -125,7 +125,7 @@ public class StudentController implements Initializable {
         TBV_friday.setCellValueFactory(new PropertyValueFactory<>("fredag"));       
         Lb_subjet.setText("SCO");        
                 
-        TBV_attendance.setItems(Am.getSCOattendance());
+        //TBV_attendance.setItems(Am.getSCOattendance());
     }
 
     @FXML
@@ -138,7 +138,7 @@ public class StudentController implements Initializable {
         TBV_friday.setCellValueFactory(new PropertyValueFactory<>("friday"));       
         Lb_subjet.setText("SDE");        
                 
-        TBV_attendance.setItems(Am.getSDEattendance());
+       // TBV_attendance.setItems(Am.getSDEattendance());
     }
 
     @FXML
@@ -151,7 +151,7 @@ public class StudentController implements Initializable {
         TBV_friday.setCellValueFactory(new PropertyValueFactory<>("friday"));       
         Lb_subjet.setText("DB/OS");        
                 
-        TBV_attendance.setItems(Am.getDBOSattendance());
+      //  TBV_attendance.setItems(Am.getDBOSattendance());
     }
 
     @FXML
@@ -163,7 +163,7 @@ public class StudentController implements Initializable {
         TBV_friday.setCellValueFactory(new PropertyValueFactory<>("friday"));       
         Lb_subjet.setText("ITO");        
                 
-        TBV_attendance.setItems(Am.getITOattendance());
+       // TBV_attendance.setItems(Am.getITOattendance());
       
 
     }

@@ -28,6 +28,9 @@ public Attendance(String classKey, String dateHeld, int SecretCode)
     this.dateHeld = dateHeld;
     this.SecretCode = SecretCode;
 }
+public Attendance(int SecretCode){
+    this.SecretCode = SecretCode;
+}
 
     public void setSecretCode(int SecretCode) {
         this.SecretCode = SecretCode;

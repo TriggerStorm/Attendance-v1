@@ -27,8 +27,5 @@ public interface IDAL {
  
     public String course();
     public String gCode();
-     public List<ScoMok> getDBOSattendance();
-        public List<ScoMok> getITOattendance();
-        public List<ScoMok> getSDEattendance();
-        public List<ScoMok> getSCOattendance();
+    
 }
