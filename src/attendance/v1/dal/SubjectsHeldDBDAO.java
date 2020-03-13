@@ -31,13 +31,13 @@ public class SubjectsHeldDBDAO {
         dbc = new DBConnection();
     }
     
-    public SubjectsHeld setSecretCode (String SubjectKey, String Date, String SecretCode) throws SQLException
+    public SubjectsHeld setSecretCode (int SubjectKey, String Date, String SecretCode) throws SQLException
     {
         String sql = "INSERT INTO SubjectsHeld(SubjectKey, Date, SecretCode,) VALUES (?,?,?)";
         SubjectsHeld a = new SubjectsHeld(SubjectKey,Date,SecretCode);
         try(Connection con = dbc.getConnection()) {
             PreparedStatement stmt = con.prepareStatement(sql, PreparedStatement.RETURN_GENERATED_KEYS);
-            stmt.setString(1, SubjectKey);
+            stmt.setInt(1, SubjectKey);
             stmt.setString(2, Date);
             stmt.setString(3, SecretCode); 
             
@@ -46,7 +46,7 @@ public class SubjectsHeldDBDAO {
         }
             return a;
     }
-    
+     // add more getters.....-------------------------------------------------------------------------------------------------------------------
     public List<SubjectsHeld> getSecretCode () throws SQLException
     {
         List<SubjectsHeld> SecretCode = new ArrayList<>();

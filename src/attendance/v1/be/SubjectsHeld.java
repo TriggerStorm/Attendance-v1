@@ -12,18 +12,18 @@ package attendance.v1.be;
 public class SubjectsHeld {
        
     
-        private String subjectKey;
+        private int subjectKey;
         private String dateHeld;
         private String SecretCode;
 
-public SubjectsHeld (String subjectKey, String dateHeld, String SecretCode)
+public SubjectsHeld (int subjectKey, String dateHeld, String SecretCode)
 {
     this.subjectKey = subjectKey;
     this.dateHeld = dateHeld;
     this.SecretCode = SecretCode;
 }
 
-    public String getSubjectKey() {
+    public int getSubjectKey() {
         return subjectKey;
     }
 
@@ -31,7 +31,7 @@ public SubjectsHeld (String subjectKey, String dateHeld, String SecretCode)
         return dateHeld;
     }
 
-    public void setSubjectKey(String subjectKey) {
+    public void setSubjectKey(int subjectKey) {
         this.subjectKey = subjectKey;
     }
 
