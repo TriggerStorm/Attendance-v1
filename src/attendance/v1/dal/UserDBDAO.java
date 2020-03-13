@@ -39,7 +39,7 @@ public class UserDBDAO {
             ResultSet rs = statement.executeQuery(SQLStmt);
             while(rs.next()) //While you have something in the results
             {
-                int userKey = rs.getInt("UserId");
+                int userKey = rs.getInt("UserKey");
                 String userName = rs.getString("UserName");
                 String password = rs.getString("Password");
                 String email = rs.getString("Email");
@@ -105,7 +105,7 @@ public class UserDBDAO {
     }
      
      
-      public User editUser (User userToEdit, String userName, String password, String email, int phoneNr, String address, int postCode, String city, String teacher, String userIMG) { 
+    public User editUser (User userToEdit, String userName, String password, String email, int phoneNr, String address, int postCode, String city, String teacher, String userIMG) { 
         try (//Get a connection to the database.
             Connection con = dbc.getConnection()) {
             //Create a prepared statement.
@@ -142,7 +142,7 @@ public class UserDBDAO {
     }
 
        
-      public void removeUserFromDB(User userToDelete) {
+    public void removeUserFromDB(User userToDelete) {
         String stat = "DELETE FROM Users WHERE id =?";      // USE ID HERE??????
         try (Connection con = dbc.getConnection()) {
             PreparedStatement stmt = con.prepareStatement(stat);
@@ -153,5 +153,19 @@ public class UserDBDAO {
         }
     }
       
-      
+    public int checkUserLogin(String email, String password) throws SQLException {  // Why an int???
+        List<User> allUsers = getAllUsers();
+        for (int i = 0; i < allUsers.size(); i++) {
+            User userToCheck = allUsers.get(i);
+            if ((userToCheck.getEmail().equals(email)) && (userToCheck.getPassword().equals(password))) {
+                return 1; //user and password match = true
+            }
+        }
+        return 0;// fail log in
+    }
+    
+    
+    
+    
+        
 }

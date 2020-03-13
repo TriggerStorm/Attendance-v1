@@ -35,5 +35,6 @@ public interface IDAL {
     public User addNewUserToDB(String userName, String password, String email, int phoneNr, String address, int postCode, String city, String teacher, String userIMG);
     public User editUser (User userToEdit, String userName, String password, String email, int phoneNr, String address, int postCode, String city, String teacher, String userIMG);
     public void removeUserFromDB(User userToDelete);
+    public int checkUserLogin (String email, String password);
 
 }

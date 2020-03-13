@@ -35,16 +35,18 @@ public class AttendanceDBDAO {
     
     private DBConnection dbc;
 
-    public List<String> attendance = new ArrayList<>();
+    public List<Attendance> attendance;
     public User mockuser1;
     public User mockuser2;
 
-    public SubjectAttendance mockSCO;
+ /*   public SubjectAttendance mockSCO;
     public SubjectAttendance mockSDE;
     public SubjectAttendance mockDBOS;
     public SubjectAttendance mockITO;
-
-    public List<SubjectAttendance> mockStudentAttendance;
+*/
+    public List<SubjectAttendance> studentAttendance;
+    
+    
     
     public AttendanceDBDAO() {
         
@@ -67,13 +69,42 @@ public class AttendanceDBDAO {
     }
     
     
-    
-    public int mockPrintOut() {
+     public List<Attendance> getAllAttendance() throws SQLException{
+        List<Attendance> allAttendance = new ArrayList(); //get a list to store the values.
+        try(Connection con = dbc.getConnection()){
+            String SQLStmt = "SELECT * FROM ATTENDANCE;";
+            Statement statement = con.createStatement();
+            ResultSet rs = statement.executeQuery(SQLStmt);
+            while(rs.next()) //While you have something in the results
+            {
+                String userKey = rs.getString("UserKey");
+                String subjectKey = rs.getString("SubjectKey");
+                String dateHeld =  rs.getString("DateHeld");
+               allAttendance.add(new Attendance(userKey, subjectKey, dateHeld)); 
+            }    
+        }
+        return allAttendance;
+    }
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+  /*  public int mockPrintOut() {
          int count = mockStudentAttendance.size();
         return count;
     }
     
-    
+   */ 
    
     
 
@@ -87,27 +118,7 @@ public class AttendanceDBDAO {
     
     
     
-    public int checkUser(String email, String password) {
-        String name = mockuser1.getEmail();
-        String passw = mockuser1.getPassword();
-        String name2 = mockuser2.getEmail();
-        String passw2 = mockuser2.getPassword();
-        if(email.equals(name) || email.equals(name2)) //remember that to compare two strings you need to use equals()
-        {
-            if(password.equals(passw) || password.equals(passw2)) //remember that to compare two strings you need to use equals()
-            {    
-            return 1; //user and password match = true
-            }
-            else
-            {
-            return 0; // fail log in = false
-            }
-        }
-        else
-        {
-        return 0;// fail log in
-        }
-    }
+   
     
     
     

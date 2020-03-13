@@ -27,11 +27,7 @@ public class BllManager implements IBLL {
     private DalManager dalManager = new DalManager();
 
     
-   @Override
-    public int CheckUser (String email, String password) { //checks if our user exsts and the password is correct.
-        return dalManager.CheckUser(email,password);
-    }
-    
+  
     
     @Override
     public List<String> addDayToAttendance(String selectedCourse) {
@@ -106,6 +102,12 @@ public class BllManager implements IBLL {
     @Override
     public void removeUserFromDB(User userToDelete) {
         dalManager.removeUserFromDB(userToDelete);
+    }
+
+    
+    @Override
+    public int checkUserLogin (String email, String password) {
+        return dalManager.checkUserLogin(email,password);
     }
 
     @Override

@@ -40,11 +40,7 @@ public class DalManager implements IDAL {
     
 // AttendanceDBDAO methods
     
-    @Override
-    public int CheckUser (String email, String password) { //checks if our user exsts and the password is correct.
-        return attendanceDBDao.checkUser(email,password);
-    }
-    
+   
     
     @Override
     public boolean CheckTeacher(String email) {//checks to see if our user is a teacher, doesn't need the password for that.
@@ -134,6 +130,16 @@ public class DalManager implements IDAL {
     }
 
    
+     @Override
+    public int checkUserLogin (String email, String password) { try {
+        //checks if our user exsts and the password is correct.
+        return userDBDao.checkUserLogin(email,password);
+        } catch (SQLException ex) {
+            Logger.getLogger(DalManager.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    return 0;
+    }
+
     
     
 }
