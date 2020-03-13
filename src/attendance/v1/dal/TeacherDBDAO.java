@@ -56,8 +56,8 @@ public class TeacherDBDAO {
             
             PreparedStatement pstmt = con.prepareStatement(SQLStmt);
              pstmt.setString(1,teacher);
-            pstmt.setInt(2,subject.getClassKey());
+            pstmt.setInt(2,subject.getSubjectKey());
         }
-        return new Subject(subject.getClassKey(),subject.getClassName(),subject.getClassIMG(),subject.getAssociatedCourse(),teacher);
+        return new Subject(subject.getSubjectKey(),subject.getSubjectName(),subject.getSubjectIMG(),subject.getAssociatedCourse(),teacher);
 }
 }

@@ -38,12 +38,12 @@ public class StudentDBDAO {
             {
                
                 
-                int SubjectKey = rs.getInt("SubjectKey");
-                String SubjectName = rs.getString("SubjectName");
-                String SubjectIMG = rs.getString("SubjectIMG");
-                String AssociatedCourse = rs.getString("AssociatedCourse");
-                String AssociatedTeacher = rs.getString("AssociatedTeacher");
-                Subject p = new Subject(SubjectKey,SubjectName,SubjectIMG,AssociatedCourse,AssociatedTeacher);
+                int subjectKey = rs.getInt("SubjectKey");
+                String subjectName = rs.getString("SubjectName");
+                String subjectIMG = rs.getString("SubjectIMG");
+                String associatedCourse = rs.getString("AssociatedCourse");
+                String associatedTeacher = rs.getString("AssociatedTeacher");
+                Subject p = new Subject(subjectKey,subjectName,subjectIMG,associatedCourse,associatedTeacher);
                 allclasses.add(p);
             }    
         }
@@ -55,7 +55,7 @@ public class StudentDBDAO {
         db = new DBConnection();
         
            int ukey = user.getUserKey();
-           int ckey = subject.getClassKey();
+           int ckey = subject.getSubjectKey();
         try(Connection con = db.getConnection()){
             String SQLStmt = "UPDATE STUDENT_SUBJECTS SET SUBJECTKEY = ?,USERKEY = ? WHERE id = ?;";
             

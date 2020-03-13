@@ -45,11 +45,11 @@ public class Subject {
         this.subjectName = subjectName;
     }
 
-    public String getClassIMG() {
+    public String getSubjectIMG() {
         return subjectIMG;
     }
 
-    public void setClassIMG(String subjectIMG) {
+    public void setSubjectIMG(String subjectIMG) {
         this.subjectIMG = subjectIMG;
     }
 
