@@ -18,10 +18,11 @@ import java.util.List;
 
 public interface IBLL {
     
-    List<String> addDayToAttendance(String selectedCourse);
 
 
-        
+   
+    
+
 // UsersDBDAO methods
     public List<User> getAllUsers();
     public User getUser(int userKey);
@@ -35,9 +36,11 @@ public interface IBLL {
 
  // AttendanceDBDAO methods
     public List<Attendance> getAllAttendances();
+    public List<Attendance> getStudentAttendanceInSubject(int studentKey, int subjectKey);
+    public int[] getStudentAttendanceForSubjectInDays(int studentKey, int subjectKey);
 
 
     
-    public List<Attendance> getStudentAttendanceInSubject(int studentKey, int subjectKey);
+    
 }
 

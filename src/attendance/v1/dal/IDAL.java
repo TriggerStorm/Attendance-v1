@@ -8,6 +8,7 @@ package attendance.v1.dal;
 import attendance.v1.be.Attendance;
 import attendance.v1.be.ScoMok;
 import attendance.v1.be.User;
+import java.time.LocalDate;
 import java.util.List;
 
 /**
@@ -18,8 +19,8 @@ import java.util.List;
 
 public interface IDAL {
 
-    List<String> addDayToAttendance(String selectedCourse);
 
+    List<String> addDayToAttendance(String selectedCourse);
 
 
 // UsersDBDAO methods
@@ -35,6 +36,9 @@ public interface IDAL {
 // AttendanceDBDAO methods
     public List<Attendance> getAllAttendances();
     public List<Attendance> getStudentAttendanceInSubject(int studentKey, int subjectKey);
+    public int[] getStudentAttendanceForSubjectInDays(int studentKey, int subjectKey);
+
+    
 
 
 }
