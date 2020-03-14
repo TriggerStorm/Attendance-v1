@@ -20,12 +20,12 @@ public class User {
     private String address;
     private int postCode;
     private String city;
-    private String teacher;
+    private boolean teacher;
     private String userIMG;
     //private List<SubjectAttendance> attendance;
     
     
- public User (int userKey, String userName, String password, String email, int phoneNr, String address, int zipCode, String city, String teacher, String userIMG) { /*, List<SubjectAttendance> attendance*/
+ public User (int userKey, String userName, String password, String email, int phoneNr, String address, int zipCode, String city, boolean teacher, String userIMG) { /*, List<SubjectAttendance> attendance*/
 
  
  
@@ -107,11 +107,11 @@ public class User {
     public void setCity(String city) {
         this.city = city;
     }
-    public String getTeacher() {
+    public boolean getTeacher() {
         return teacher;
     }
 
-    public void setTeacher(String teacher) {
+    public void setTeacher(boolean teacher) {
         this.teacher = teacher;
     }
 
