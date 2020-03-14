@@ -12,6 +12,7 @@ import attendance.v1.be.Attendance;
 import attendance.v1.bll.BllManager;
 import attendance.v1.be.Subject;
 import java.sql.SQLException;
+import java.time.LocalDate;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -38,18 +39,7 @@ public class DalManager implements IDAL {
     
     
     
-// AttendanceDBDAO methods
-    
-   
-    
-   
-    
-    @Override
-    public List<String> addDayToAttendance(String selectedCourse) {
-        return attendanceDBDao.addDayToAttendance(selectedCourse);
-    }
-   
-           
+        
     @Override 
     public String gCode() {
         return attendanceDBDao.gCode();
@@ -83,6 +73,10 @@ public class DalManager implements IDAL {
     }
 
     
+   
+   
+           
+   
     
 // UserDBDAO methods
     
@@ -172,5 +166,17 @@ public class DalManager implements IDAL {
     }
 
     
+    @Override
+    public int[] getStudentAttendanceForSubjectInDays(int studentKey, int subjectKey) {
+        try {
+            return attendanceDBDao.getStudentAttendanceForSubjectInDays(studentKey, subjectKey);
+        } catch (SQLException ex) {
+            Logger.getLogger(DalManager.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
+    }
+    
+    
+
     
 }

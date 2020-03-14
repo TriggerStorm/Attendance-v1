@@ -18,16 +18,14 @@ import java.util.List;
 
 public interface IBLL {
     
-    List<String> addDayToAttendance(String selectedCourse);
 
-// Mock methods (to delete later)    
     public String course();
     public String gCode();
     public List<ScoMok> getDBOSattendance();
     public List<ScoMok> getITOattendance();
     public List<ScoMok> getSDEattendance();
     public List<ScoMok> getSCOattendance();
-        
+    
 // UsersDBDAO methods
     public List<User> getAllUsers();
     public User getUser(int userKey);
@@ -39,5 +37,7 @@ public interface IBLL {
 
  // AttendanceDBDAO methods
     public List<Attendance> getAllAttendances();
+    public List<Attendance> getStudentAttendanceInSubject(int studentKey, int subjectKey);
+    public int[] getStudentAttendanceForSubjectInDays(int studentKey, int subjectKey);
 
 }

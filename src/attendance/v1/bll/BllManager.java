@@ -30,13 +30,8 @@ public class BllManager implements IBLL {
     
   
     
-    @Override
-    public List<String> addDayToAttendance(String selectedCourse) {
-        return dalManager.addDayToAttendance(selectedCourse);
-    }
-    
-       
-    @Override
+  
+     @Override
     public String gCode() {
         return dalManager.gCode();
     }
@@ -46,7 +41,8 @@ public class BllManager implements IBLL {
     public String course() {
         return dalManager.course();
     } 
-    
+  
+       
          // Mock data methods    
     @Override
     public List<ScoMok> getSCOattendance(){
@@ -71,11 +67,9 @@ public class BllManager implements IBLL {
         return dalManager.getDBOSattendance();
     }
 
-   
-  
-     
     
 // UserDBDAO methods
+    
     @Override
     public List<User> getAllUsers() {
         return dalManager.getAllUsers();
@@ -117,6 +111,13 @@ public class BllManager implements IBLL {
         return dalManager.checkIfTeacher(email);
     }
 
+    
+    
+    
+    
+    
+// AttendanceDBDAO methods
+    
     @Override
     public List<Attendance> getAllAttendances() {
         return dalManager.getAllAttendances();
@@ -128,5 +129,9 @@ public class BllManager implements IBLL {
     }
    
     
+    @Override
+    public int[] getStudentAttendanceForSubjectInDays(int studentKey, int subjectKey) {
+        return dalManager.getStudentAttendanceForSubjectInDays(studentKey, subjectKey);
+    }
     
 }

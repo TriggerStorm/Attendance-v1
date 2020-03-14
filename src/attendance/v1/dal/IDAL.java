@@ -8,6 +8,7 @@ package attendance.v1.dal;
 import attendance.v1.be.Attendance;
 import attendance.v1.be.ScoMok;
 import attendance.v1.be.User;
+import java.time.LocalDate;
 import java.util.List;
 
 /**
@@ -18,8 +19,6 @@ import java.util.List;
 
 public interface IDAL {
 
-    List<String> addDayToAttendance(String selectedCourse);
-
 // Mock methods (to delete later)    
     public String course();
     public String gCode();
@@ -28,6 +27,8 @@ public interface IDAL {
     public List<ScoMok> getSDEattendance();
     public List<ScoMok> getSCOattendance();
         
+
+    
 // UsersDBDAO methods
     public List<User> getAllUsers();
     public User getUser(int userKey);
@@ -37,8 +38,12 @@ public interface IDAL {
     public int checkUserLogin (String email, String password);
     public boolean checkIfTeacher(String email);
 
+    
 // AttendanceDBDAO methods
     public List<Attendance> getAllAttendances();
     public List<Attendance> getStudentAttendanceInSubject(int studentKey, int subjectKey);
+    public int[] getStudentAttendanceForSubjectInDays(int studentKey, int subjectKey);
+
+    
 
 }
