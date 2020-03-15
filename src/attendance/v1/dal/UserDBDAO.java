@@ -93,13 +93,7 @@ public class UserDBDAO {
             stmt.setString(7, city);
             int isteacher = 0;
             if(teacher == true)
-            {
                 isteacher =1;
-            }
-            else if (teacher=false)
-            {
-                isteacher=1;
-            }
             stmt.setInt(8, isteacher);
             stmt.setString(9, userIMG);
             int affectedRows = stmt.executeUpdate();
@@ -138,13 +132,8 @@ public class UserDBDAO {
             pstmt.setInt(6, postCode);
             pstmt.setString(7, city);
             int isteacher = 0;
-            if(teacher == true) {
+            if(teacher == true)
                 isteacher = 1;
-            } else {
-                if (teacher == false) {
-                isteacher = 0;
-                }
-            }
             pstmt.setInt(8, isteacher);
             pstmt.setString(9, userIMG);
             pstmt.setInt(10, userToEdit.getUserKey());
