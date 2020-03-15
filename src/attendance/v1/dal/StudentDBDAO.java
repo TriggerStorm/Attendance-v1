@@ -25,7 +25,7 @@ public class StudentDBDAO {
 
     
      
-     public StudentSubjects assignStudentCourse(User user ,int course) throws SQLException
+     public StudentSubjects newAssignStudentCourse(User user ,int course) throws SQLException
     {
         for(int i = 0; i < getSubjectsSPECIFIC(course).size();i++)
             
@@ -75,7 +75,7 @@ public class StudentDBDAO {
        return allclasses;
     }
      
-     public StudentSubjects assignStudentCourse(Subject subject, User user) throws SQLException 
+     public StudentSubjects editAssignStudentCourse(Subject subject, User user) throws SQLException 
     {
         db = new DBConnection();
         
