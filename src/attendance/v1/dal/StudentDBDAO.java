@@ -32,7 +32,7 @@ public class StudentDBDAO {
         {db = new DBConnection();
         
            int ukey = user.getUserKey();
-           int skey = getSubjectsSPECIFIC(course).get(i).getClasskey();
+           int skey = getSubjectsSPECIFIC(course).get(i).getSubjectKey();
            try(Connection con = db.getConnection()){
             String SQLStmt = "INSERT INTO  STUDENT_SUBJECTS(subjectKey,userKey) VALUES (?,?); ";
             

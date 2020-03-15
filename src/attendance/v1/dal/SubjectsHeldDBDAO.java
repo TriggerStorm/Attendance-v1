@@ -6,7 +6,6 @@
 package attendance.v1.dal;
 
 
-import attendance.v1.be.Attendance;
 import attendance.v1.be.SubjectsHeld;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -57,13 +56,13 @@ public class SubjectsHeldDBDAO {
             String SQLStmt = "UPDATE SUBJECTSHELD SET subjectKey = ?,date = ?, secretCode = ?  WHERE subjectKey = ?;";
             
             PreparedStatement pstmt = con.prepareStatement(SQLStmt);
-             pstmt.setInt(1,subjectsHeld.getSkey());
+             pstmt.setInt(1,subjectsHeld.getSubjectKey());
             pstmt.setString(2,date);
             pstmt.setString(3,secretCode);
-            pstmt.setInt(4,subjectsHeld.getSkey());
+            pstmt.setInt(4,subjectsHeld.getSubjectKey());
             pstmt.execute();
         }
-        return new SubjectsHeld(subjectsHeld.getSkey(),date,secretCode);
+        return new SubjectsHeld(subjectsHeld.getSubjectKey(),date,secretCode);
 }
      
      public SubjectsHeld getSpecificSubjectsHeld(int skey) throws SQLException 
@@ -105,7 +104,7 @@ public class SubjectsHeldDBDAO {
             pstmt.setInt(1,skey);
             pstmt.setString(2,date);
             pstmt.setString(3,secretCode);
-            pstmt.setInt(4,subjectsHeld.getSkey());
+            pstmt.setInt(4,subjectsHeld.getSubjectKey());
             pstmt.execute();
             
             return new SubjectsHeld(skey,date,secretCode);
@@ -117,7 +116,7 @@ public class SubjectsHeldDBDAO {
         try(Connection con = db.getConnection()){
             String sqlStatement = "DELETE FROM SUBJECTSHELD WHERE subjectKey = ? ;";
             PreparedStatement pstmt = con.prepareStatement(sqlStatement);
-            pstmt.setInt(1,subjectsHeld.getSkey());
+            pstmt.setInt(1,subjectsHeld.getSubjectKey());
             pstmt.execute();
         }
      }
@@ -129,7 +128,7 @@ public class SubjectsHeldDBDAO {
     {
         String sql = "INSERT INTO SubjectsHeld(SubjectKey, Date, SecretCode,) VALUES (?,?,?)";
         SubjectsHeld a = new SubjectsHeld(SubjectKey,Date,SecretCode);
-        try(Connection con = dbc.getConnection()) {
+        try(Connection con = db.getConnection()) {
             PreparedStatement stmt = con.prepareStatement(sql, PreparedStatement.RETURN_GENERATED_KEYS);
             stmt.setInt(1, SubjectKey);
             stmt.setString(2, Date);
@@ -145,7 +144,7 @@ public class SubjectsHeldDBDAO {
     {
         List<SubjectsHeld> SecretCode = new ArrayList<>();
         
-        try ( Connection con = dbc.getConnection()) {
+        try ( Connection con = db.getConnection()) {
             String sql = "SELECT * FROM SubjectsHeld";
             Statement stmt = con.createStatement();
             ResultSet rs = stmt.executeQuery(sql);
