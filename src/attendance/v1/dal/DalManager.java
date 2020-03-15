@@ -46,10 +46,7 @@ public class DalManager implements IDAL {
     
    
     
-    @Override
-    public List<String> addDayToAttendance(String selectedCourse) {
-        return attendanceDBDao.addDayToAttendance(selectedCourse);
-    }
+  
  
 
 // UserDBDAO methods
@@ -129,9 +126,9 @@ public class DalManager implements IDAL {
     }
 
     @Override
-    public List<Attendance> getStudentAttendanceInSubject(int studentKey, int subjectKey) {
+    public List<Attendance> getStudentAttendanceForSubject(int studentKey, int subjectKey) {
         try {
-            return attendanceDBDao.getStudentAttendanceInSubject(studentKey, subjectKey);
+            return attendanceDBDao.getStudentAttendanceForSubject(studentKey, subjectKey);
         } catch (SQLException ex) {
             Logger.getLogger(DalManager.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -150,6 +147,26 @@ public class DalManager implements IDAL {
         return null;
     }
     
-    
+        
+    @Override
+    public int[] getAllAttendanceForSubjectInDays(int subjectKey ) {
+        try {
+            return attendanceDBDao.getAllAttendanceForSubjectInDays(subjectKey);
+        } catch (SQLException ex) {
+            Logger.getLogger(DalManager.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
+    }
+
+ 
+    @Override
+    public int[] addNewAttendanceToDB(int studentKey, int subjectKey) {
+        try {
+            return attendanceDBDao.addNewAttendanceToDB(studentKey, subjectKey);
+        } catch (SQLException ex) {
+            Logger.getLogger(DalManager.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
+    }
 
 }

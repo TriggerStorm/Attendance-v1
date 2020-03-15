@@ -36,9 +36,10 @@ public interface IBLL {
 
  // AttendanceDBDAO methods
     public List<Attendance> getAllAttendances();
-    public List<Attendance> getStudentAttendanceInSubject(int studentKey, int subjectKey);
+    public List<Attendance> getStudentAttendanceForSubject(int studentKey, int subjectKey);
     public int[] getStudentAttendanceForSubjectInDays(int studentKey, int subjectKey);
-
+    public int[] getAllAttendanceForSubjectInDays(int subjectKey );
+    public int[] addNewAttendanceToDB(int studentKey, int subjectKey);
 
     
     
