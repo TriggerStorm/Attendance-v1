@@ -15,17 +15,17 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import java.time.format.DateTimeFormatter;
+import com.microsoft.sqlserver.jdbc.SQLServerException;
+import java.sql.ResultSet;
+import java.sql.Statement;
 
 import attendance.v1.be.SubjectAttendance;
 import attendance.v1.be.User;
 import attendance.v1.be.Attendance;
-import java.sql.ResultSet;
-import java.sql.Statement;
 import attendance.v1.bll.BllManager;
 import attendance.v1.be.Subject;
-import com.microsoft.sqlserver.jdbc.SQLServerException;
 
-import java.time.format.DateTimeFormatter;
 
 
 

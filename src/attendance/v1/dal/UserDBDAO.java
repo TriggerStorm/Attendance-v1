@@ -49,14 +49,8 @@ public class UserDBDAO {
                 String city = rs.getString("city");
                 int isteacher = rs.getInt("teacher");
                 boolean teacher = false;
-                if(isteacher == 0)
-                {
-                    teacher = false;
-                }
-                else if(isteacher==1)
-                {
+                if(isteacher == 1)
                     teacher = true;
-                }
                 String userIMG =  rs.getString("userIMG");
                allUsers.add(new User(userKey, userName, password, email, phoneNr, address, postCode, city, teacher, userIMG)); 
             }    
