@@ -22,6 +22,9 @@ public SubjectsHeld (int subjectKey, String dateHeld, String SecretCode)
     this.dateHeld = dateHeld;
     this.SecretCode = SecretCode;
 }
+public SubjectsHeld(String SecretCode){
+    this.SecretCode = SecretCode;
+}
 
     public int getSubjectKey() {
         return subjectKey;
