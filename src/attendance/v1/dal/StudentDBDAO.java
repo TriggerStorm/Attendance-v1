@@ -22,9 +22,10 @@ import java.sql.Statement;
  */
 public class StudentDBDAO {
    private DBConnection db;
+
     
      
-     public StudentSubjects assignStudentCourse(User user ,int course) throws SQLException 
+     public StudentSubjects assignStudentCourse(User user ,int course) throws SQLException
     {
         for(int i = 0; i < getSubjectsSPECIFIC(course).size();i++)
             
@@ -46,6 +47,7 @@ public class StudentDBDAO {
       return null;
 }
       public List<Subject> getSubjectsSPECIFIC(int course) throws SQLException 
+
     {
         db = new DBConnection();
         List<Subject> allclasses = new ArrayList();
@@ -61,17 +63,35 @@ public class StudentDBDAO {
             while(rs.next()) 
             {
                
-                
-                int SubjectKey = rs.getInt("SubjectKey");
-                String SubjectName = rs.getString("SubjectName");
-                String SubjectIMG = rs.getString("SubjectIMG");
-                String AssociatedCourse = rs.getString("AssociatedCourse");
-                String AssociatedTeacher = rs.getString("AssociatedTeacher");
-                Subject p = new Subject(SubjectKey,SubjectName,SubjectIMG,AssociatedCourse,AssociatedTeacher);
+                int subjectKey = rs.getInt("SubjectKey");
+                String subjectName = rs.getString("SubjectName");
+                String subjectIMG = rs.getString("SubjectIMG");
+                String associatedCourse = rs.getString("AssociatedCourse");
+                String associatedTeacher = rs.getString("AssociatedTeacher");
+                Subject p = new Subject(subjectKey,subjectName,subjectIMG,associatedCourse,associatedTeacher);
                 allclasses.add(p);
             }    
         }
        return allclasses;
     }
+     
+     public StudentSubjects assignStudentCourse(Subject subject, User user) throws SQLException 
+    {
+        db = new DBConnection();
+        
+           int ukey = user.getUserKey();
+           int ckey = subject.getSubjectKey();
+        try(Connection con = db.getConnection()){
+            String SQLStmt = "UPDATE STUDENT_SUBJECTS SET SUBJECTKEY = ?,USERKEY = ? WHERE id = ?;";
+            
+            PreparedStatement pstmt = con.prepareStatement(SQLStmt);
+            
+             pstmt.setInt(1,ukey);
+             pstmt.setInt(2,ckey);
+            pstmt.setInt(3,ckey);
+        }
+        return new StudentSubjects(ukey,ckey);
+}
+
 }
 

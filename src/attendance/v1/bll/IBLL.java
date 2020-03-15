@@ -5,37 +5,36 @@
  */
 package attendance.v1.bll;
 
+import attendance.v1.be.Attendance;
 import attendance.v1.be.ScoMok;
 import attendance.v1.be.User;
 import java.util.List;
 
 /**
  *
- * @author Trigger
+ * @author Trigger, Filip, Cecillia and Alan
  */
+
+
 public interface IBLL {
     
-    int CheckUser(String email, String Password);
-    public String course();
-    public String gCode();
-    public List<ScoMok> getDBOSattendance();
-    public List<ScoMok> getITOattendance();
-    public List<ScoMok> getSDEattendance();
-    public List<ScoMok> getSCOattendance();
-        
-
-    
-        
     List<String> addDayToAttendance(String selectedCourse);
 
 
+        
+// UsersDBDAO methods
+    public List<User> getAllUsers();
+    public User getUser(int userKey);
+    public User addNewUserToDB(String userName, String password, String email, int phoneNr, String address, int postCode, String city, String teacher, String userIMG);
+    public User editUser (User userToEdit, String userName, String password, String email, int phoneNr, String address, int postCode, String city, String teacher, String userIMG);
+    public void removeUserFromDB(User userToDelete);
+    public int checkUserLogin (String email, String password);
+    public boolean checkIfTeacher(String email);
 
-    
- /*   
-    //Mock data methods
-    String[] getSCOsttendance();
-    String[] getSDEsttendance();
-    String[] getDBOSsttendance();
-    String[] getITOsttendance();
-    */
+
+
+ // AttendanceDBDAO methods
+    public List<Attendance> getAllAttendances();
+
 }
+
