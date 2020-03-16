@@ -7,28 +7,26 @@ package attendance.v1.be;
 
 /**
  *
- * @author Trigger, Filip, Cecillia and Alan
+ * @author admin
  */
-
-
-public class StudentSubject {
-    private int subjectKey;
+public class Student_Classes {
+    private int classKey;
     private int userKey;
 
     
-    public StudentSubject (int subjectKey, int userKey) {
-        this.subjectKey = subjectKey;
+    public Student_Classes (int classKey, int userKey) {
+        this.classKey = classKey;
         this.userKey = userKey;
         }
 
     
     public int getClassKey() {
-        return subjectKey;
+        return classKey;
     }
     
       
-    public void setClassKey(int subjectKey) {
-        this.subjectKey = subjectKey;
+    public void setClassKey(int classKey) {
+        this.classKey = classKey;
     }
  
        
