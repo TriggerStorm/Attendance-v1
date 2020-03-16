@@ -5,7 +5,7 @@
  */
 package attendance.v1.gui.model;
 
-import attendance.v1.be.ScoMok;
+import attendance.v1.be.StudentDailyAttendance;
 import attendance.v1.bll.BllManager;
 import java.util.List;
 import javafx.collections.FXCollections;

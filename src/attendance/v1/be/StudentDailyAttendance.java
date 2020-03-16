@@ -9,7 +9,7 @@ package attendance.v1.be;
  *
  * @author Trigger
  */
-public class ScoMok {
+public class StudentDailyAttendance {
     private String name;
     private int monday;
     private int tuesday;
@@ -18,7 +18,7 @@ public class ScoMok {
     private int friday;
     private int percent;
 
-    public ScoMok(String name,int monday,int tuesday,int wednesday,int thursday,int friday,int percent) {
+    public StudentDailyAttendance(String name,int monday,int tuesday,int wednesday,int thursday,int friday,int percent) {
         this.name = name;
         this.monday = monday;
         this.tuesday = tuesday;

@@ -214,7 +214,26 @@ public class UserDBDAO {
             }
         }
         return false;  // user is not in allUsers
+    }
+        
+        
+    public String getUserNameFromKey(int studentKey) throws SQLException {
+        List<User> allUsers = getAllUsers();
+        for (int i = 0; i < allUsers.size(); i++) {
+            User testUser = allUsers.get(i);
+            if (testUser.getUserKey() == studentKey) {
+                return testUser.getUserName();
+            }
         }
+        return null;
+    }
+   
+   
+    public String getAllStudentsInASubject(int studentKey) throws SQLException {
+
         
-        
+        return null;
+ 
+    
+    }
 }

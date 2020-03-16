@@ -5,7 +5,7 @@
  */
 package attendance.v1.gui.controller;
 
-import attendance.v1.be.ScoMok;
+import attendance.v1.be.StudentDailyAttendance;
 import attendance.v1.gui.model.AttendanceModel;
 import com.jfoenix.controls.JFXButton;
 import java.io.IOException;
@@ -53,17 +53,17 @@ public class StudentController implements Initializable {
     @FXML
     private AnchorPane body1;
     @FXML
-    private TableView<ScoMok> TBV_attendance;
+    private TableView<StudentDailyAttendance> TBV_attendance;
     @FXML
-    private TableColumn<ScoMok, String> TBV_monday;
+    private TableColumn<StudentDailyAttendance, String> TBV_monday;
     @FXML
-    private TableColumn<ScoMok, String> TBV_tuesday;
+    private TableColumn<StudentDailyAttendance, String> TBV_tuesday;
     @FXML
-    private TableColumn<ScoMok, String> tbv_wednesday;
+    private TableColumn<StudentDailyAttendance, String> tbv_wednesday;
     @FXML
-    private TableColumn<ScoMok, String> TBV_thursday;
+    private TableColumn<StudentDailyAttendance, String> TBV_thursday;
     @FXML
-    private TableColumn<ScoMok, String> TBV_friday;
+    private TableColumn<StudentDailyAttendance, String> TBV_friday;
     @FXML
     private Button Bn_EditOwn;
     @FXML
@@ -80,7 +80,7 @@ public class StudentController implements Initializable {
     private Label LB_AttendanceRate;
     
     private AttendanceModel Am;
-    private ScoMok Sm;
+    private StudentDailyAttendance Sm;
     
     @FXML
     private Label Lb_logInUser;
@@ -121,8 +121,8 @@ public class StudentController implements Initializable {
         TBV_monday.setCellValueFactory(new PropertyValueFactory<>("monday"));
         TBV_tuesday.setCellValueFactory(new PropertyValueFactory<>("tuesday"));
         tbv_wednesday.setCellValueFactory(new PropertyValueFactory<>("wednesday"));
-        TBV_thursday.setCellValueFactory(new PropertyValueFactory<>("thursdag"));
-        TBV_friday.setCellValueFactory(new PropertyValueFactory<>("fredag"));       
+        TBV_thursday.setCellValueFactory(new PropertyValueFactory<>("thursday"));
+        TBV_friday.setCellValueFactory(new PropertyValueFactory<>("friday"));       
         Lb_subjet.setText("SCO");        
                 
 
@@ -136,7 +136,7 @@ public class StudentController implements Initializable {
         TBV_monday.setCellValueFactory(new PropertyValueFactory<>("monday"));
         TBV_tuesday.setCellValueFactory(new PropertyValueFactory<>("tuesday"));
         tbv_wednesday.setCellValueFactory(new PropertyValueFactory<>("wednesday"));
-        TBV_thursday.setCellValueFactory(new PropertyValueFactory<>("thursdag"));
+        TBV_thursday.setCellValueFactory(new PropertyValueFactory<>("thursday"));
         TBV_friday.setCellValueFactory(new PropertyValueFactory<>("friday"));       
         Lb_subjet.setText("SDE");        
                 
@@ -149,7 +149,7 @@ public class StudentController implements Initializable {
         TBV_monday.setCellValueFactory(new PropertyValueFactory<>("monday"));
         TBV_tuesday.setCellValueFactory(new PropertyValueFactory<>("tuesday"));
         tbv_wednesday.setCellValueFactory(new PropertyValueFactory<>("wednesday"));
-        TBV_thursday.setCellValueFactory(new PropertyValueFactory<>("thursdag"));
+        TBV_thursday.setCellValueFactory(new PropertyValueFactory<>("thursday"));
         TBV_friday.setCellValueFactory(new PropertyValueFactory<>("friday"));       
         Lb_subjet.setText("DB/OS");        
                 
@@ -163,7 +163,7 @@ public class StudentController implements Initializable {
          TBV_monday.setCellValueFactory(new PropertyValueFactory<>("monday"));
         TBV_tuesday.setCellValueFactory(new PropertyValueFactory<>("tuesday"));
         tbv_wednesday.setCellValueFactory(new PropertyValueFactory<>("wednesday"));
-        TBV_thursday.setCellValueFactory(new PropertyValueFactory<>("thursdag"));
+        TBV_thursday.setCellValueFactory(new PropertyValueFactory<>("thursday"));
         TBV_friday.setCellValueFactory(new PropertyValueFactory<>("friday"));       
         Lb_subjet.setText("ITO");        
                 

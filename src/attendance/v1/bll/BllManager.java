@@ -6,7 +6,8 @@
 package attendance.v1.bll;
 
 import attendance.v1.be.Attendance;
-import attendance.v1.be.ScoMok;
+import attendance.v1.be.StudentDailyAttendance;
+import attendance.v1.be.SubjectsHeld;
 import attendance.v1.be.User;
 
 import java.util.List;
@@ -32,10 +33,7 @@ public class BllManager implements IBLL {
     
 
     
-    public List<String> addDayToAttendance(String selectedCourse) {
-        return dalManager.addDayToAttendance(selectedCourse);
-    }
- 
+    
 
     
 // UserDBDAO methods
@@ -93,16 +91,17 @@ public class BllManager implements IBLL {
         return dalManager.getAllAttendances();
         }
 
-    
-    public List<Attendance> getStudentAttendanceInSubject(int studentKey, int subjectKey) {
-        return dalManager.getStudentAttendanceInSubject(studentKey, subjectKey);
+        
+    @Override
+    public StudentDailyAttendance getStudentDailyAttendance(int studentKey, SubjectsHeld subjectHeld) {
+        return dalManager.getStudentDailyAttendance(studentKey, subjectHeld);
     }
    
     
-    @Override
-    public int[] getStudentAttendanceForSubjectInDays(int studentKey, int subjectKey) {
-        return dalManager.getStudentAttendanceForSubjectInDays(studentKey, subjectKey);
+     @Override
+    public StudentDailyAttendance addNewAttendanceToDB(int studentKey, SubjectsHeld subjectHeld) {
+        return dalManager.addNewAttendanceToDB(studentKey, subjectHeld);
     }
+ 
     
-
 }

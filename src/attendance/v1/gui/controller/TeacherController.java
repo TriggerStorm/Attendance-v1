@@ -5,7 +5,7 @@
  */
 package attendance.v1.gui.controller;
 
-import attendance.v1.be.ScoMok;
+import attendance.v1.be.StudentDailyAttendance;
 import attendance.v1.gui.model.AttendanceModel;
 import com.jfoenix.controls.JFXButton;
 import java.io.IOException;
@@ -55,21 +55,21 @@ public class TeacherController implements Initializable {
     @FXML
     private JFXButton Bn_gencode;
     @FXML
-    private TableView<ScoMok> TBV_attendance;
+    private TableView<StudentDailyAttendance> TBV_attendance;
     @FXML
-    private TableColumn<ScoMok, String> TBV_student;
+    private TableColumn<StudentDailyAttendance, String> TBV_student;
     @FXML
-    private TableColumn<ScoMok, String> TBV_monday;
+    private TableColumn<StudentDailyAttendance, String> TBV_monday;
     @FXML
-    private TableColumn<ScoMok, String> TBV_tuesday;
+    private TableColumn<StudentDailyAttendance, String> TBV_tuesday;
     @FXML
-    private TableColumn<ScoMok, String> tbv_wednesday;
+    private TableColumn<StudentDailyAttendance, String> tbv_wednesday;
     @FXML
-    private TableColumn<ScoMok, String> TBV_thursday;
+    private TableColumn<StudentDailyAttendance, String> TBV_thursday;
     @FXML
-    private TableColumn<ScoMok, String> TBV_friday;
+    private TableColumn<StudentDailyAttendance, String> TBV_friday;
     @FXML
-    private TableColumn<ScoMok, String> TBV_Attendance;
+    private TableColumn<StudentDailyAttendance, String> TBV_Attendance;
     @FXML
     private Button Bn_user;
     @FXML
@@ -182,7 +182,7 @@ public class TeacherController implements Initializable {
         TBV_tuesday.setCellValueFactory(new PropertyValueFactory<>("tuesday"));
         tbv_wednesday.setCellValueFactory(new PropertyValueFactory<>("wednesday"));
         TBV_thursday.setCellValueFactory(new PropertyValueFactory<>("thursday"));
-        TBV_friday.setCellValueFactory(new PropertyValueFactory<>("fredag"));       
+        TBV_friday.setCellValueFactory(new PropertyValueFactory<>("friday"));       
         TBV_student.setCellValueFactory(new PropertyValueFactory<>("Name"));        
         TBV_Attendance.setCellValueFactory(new PropertyValueFactory<>("percent"));        
         Lb_subjet.setText("ITO");        
@@ -195,7 +195,7 @@ public class TeacherController implements Initializable {
         TBV_tuesday.setCellValueFactory(new PropertyValueFactory<>("tuesday"));
         tbv_wednesday.setCellValueFactory(new PropertyValueFactory<>("wednesday"));
         TBV_thursday.setCellValueFactory(new PropertyValueFactory<>("thursday"));
-        TBV_friday.setCellValueFactory(new PropertyValueFactory<>("fredag"));       
+        TBV_friday.setCellValueFactory(new PropertyValueFactory<>("friday"));       
         TBV_student.setCellValueFactory(new PropertyValueFactory<>("Name"));        
         TBV_Attendance.setCellValueFactory(new PropertyValueFactory<>("percent"));        
         Lb_subjet.setText("SDE");        
