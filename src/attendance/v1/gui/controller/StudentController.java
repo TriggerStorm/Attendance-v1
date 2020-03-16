@@ -5,7 +5,7 @@
  */
 package attendance.v1.gui.controller;
 
-import attendance.v1.be.ScoMok;
+import attendance.v1.be.SubjectAttendance;
 import attendance.v1.gui.model.AttendanceModel;
 import com.jfoenix.controls.JFXButton;
 import java.io.IOException;
@@ -53,17 +53,17 @@ public class StudentController implements Initializable {
     @FXML
     private AnchorPane body1;
     @FXML
-    private TableView<ScoMok> TBV_attendance;
+    private TableView<SubjectAttendance> TBV_attendance;
     @FXML
-    private TableColumn<ScoMok, String> TBV_monday;
+    private TableColumn<SubjectAttendance, String> TBV_monday;
     @FXML
-    private TableColumn<ScoMok, String> TBV_tuesday;
+    private TableColumn<SubjectAttendance, String> TBV_tuesday;
     @FXML
-    private TableColumn<ScoMok, String> tbv_wednesday;
+    private TableColumn<SubjectAttendance, String> tbv_wednesday;
     @FXML
-    private TableColumn<ScoMok, String> TBV_thursday;
+    private TableColumn<SubjectAttendance, String> TBV_thursday;
     @FXML
-    private TableColumn<ScoMok, String> TBV_friday;
+    private TableColumn<SubjectAttendance, String> TBV_friday;
     @FXML
     private Button Bn_EditOwn;
     @FXML
@@ -80,7 +80,7 @@ public class StudentController implements Initializable {
     private Label LB_AttendanceRate;
     
     private AttendanceModel Am;
-    private ScoMok Sm;
+    private SubjectAttendance Sm;
     
     @FXML
     private Label Lb_logInUser;

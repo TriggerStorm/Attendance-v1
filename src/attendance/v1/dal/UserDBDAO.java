@@ -11,12 +11,13 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import attendance.v1.be.User;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-
+import attendance.v1.be.User;
+import attendance.v1.be.StudentSubject;
+import attendance.v1.be.SubjectsHeld;
 /**
  *
  * @author Trigger, Filip, Cecillia and Alan
@@ -24,10 +25,12 @@ import java.util.logging.Logger;
 
 
 public class UserDBDAO {
-        private DBConnection dbc;
-
+    private DBConnection dbc;
+    StudentSubjectDBDAO studentSubjectDBDao;
+    
     public UserDBDAO() {
         dbc = new DBConnection();
+        studentSubjectDBDao = new StudentSubjectDBDAO();
     }
         
    
@@ -198,5 +201,34 @@ public class UserDBDAO {
         return false;  // user is not in allUsers
         }
         
+    
+    public String getUserNameFromKey(int studentKey) throws SQLException {
+        List<User> allUsers = getAllUsers();
+        for (int i = 0; i < allUsers.size(); i++) {
+            User testUser = allUsers.get(i);
+            if (testUser.getUserKey() == studentKey) {
+                return testUser.getUserName();
+            }
+        }
+        return null;
+    }
         
+    
+    public List<User> getAllStudentsInASubject(SubjectsHeld subjectsHeld) throws SQLException {
+        List<User> studentsInSubject = new ArrayList<>();
+        int subjectKey = subjectsHeld.getSubjectKey();
+        List<StudentSubject> allStudentSubjects = studentSubjectDBDao.getAllStudentSubjects();
+        for (int i = 0; i < allStudentSubjects.size(); i++) {
+            StudentSubject testStudentSubject = allStudentSubjects.get(i);
+            if (testStudentSubject.getSubjectKey() == subjectKey) {
+                int studentKeyInSubject = testStudentSubject.getUserKey();
+                User studentInSubject = getUser(studentKeyInSubject);
+                studentsInSubject.add(studentInSubject);   
+            }
+            
+        }
+        return studentsInSubject;
+    }
+    
+    
 }

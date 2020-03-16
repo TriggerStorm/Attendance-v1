@@ -25,8 +25,9 @@ import attendance.v1.be.User;
 import attendance.v1.be.Attendance;
 import attendance.v1.bll.BllManager;
 import attendance.v1.be.Subject;
-
-
+import attendance.v1.be.SubjectsHeld;
+import attendance.v1.be.StudentSubject;
+import attendance.v1.be.SubjectAttendance;
 
 
 /**
@@ -40,11 +41,11 @@ public class AttendanceDBDAO {
     private DBConnection dbc;
     public List<Attendance> attendance;
     public List<SubjectAttendance> studentAttendance;
-    
+    public UserDBDAO newUserDBDao;
     
     
     public AttendanceDBDAO() {
-
+        newUserDBDao = new UserDBDAO();
         dbc = new DBConnection();
     }
     
@@ -66,11 +67,10 @@ public class AttendanceDBDAO {
         return allAttendance;
     }
      
-   public int[] addNewAttendanceToDB(int studentKey, int subjectKey) throws SQLException { 
-        LocalDate now = LocalDate.now();
+   public SubjectAttendance addNewAttendanceToDB(int studentKey, SubjectsHeld subjectHeld) throws SQLException { 
+        int subjectKey = subjectHeld.getSubjectKey();
         String dateHeld = dateNowToString();
         String sql = "INSERT INTO ATTENDANCE(UserKey, SubjectKey, DateHeld) VALUES (?,?,?)";
-        
         
         Attendance newAttendance = new Attendance(studentKey, subjectKey, dateHeld);
         try (Connection con = dbc.getConnection()) {
@@ -94,21 +94,42 @@ public class AttendanceDBDAO {
         } catch (SQLException ex) {
             Logger.getLogger(AttendanceDBDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
-        return getStudentAttendanceForSubjectInDays(studentKey, subjectKey);
+        return getSubjectAttendanceForAStudent(studentKey, subjectHeld);
     }
    
         
-
-    public int[] getStudentAttendanceForSubjectInDays(int studentKey, int subjectKey) throws SQLException { // bit rough. Work in progress. Needs a lot of work
+   public List<SubjectAttendance> getSubjectAttendanceListForAllStudentsInThatSubject(SubjectsHeld subjectHeld) throws SQLException {
+       int subjectKey = subjectHeld.getSubjectKey();
+       List<SubjectAttendance> allStudentDailyAttendance = new ArrayList<>();
+       List<User> allStudentsInASubject = newUserDBDao.getAllStudentsInASubject(subjectHeld);
+       for (int i = 0; i < allStudentsInASubject.size(); i++) {
+           int userKey = allStudentsInASubject.get(i).getUserKey();
+           SubjectAttendance studentsDailyAttendance = getSubjectAttendanceForAStudent(userKey, subjectHeld);
+           allStudentDailyAttendance.add(studentsDailyAttendance);
+       }
+       return allStudentDailyAttendance;
+   }
+   
+   
+    public  SubjectAttendance getSubjectAttendanceForAStudent(int studentKey, SubjectsHeld subjectHeld) throws SQLException { // bit rough. Work in progress. Needs a lot of work
         int[] dailyAttendanceIntArray = new int[5];
-        List<Attendance> studentAttendanceInSubject = getStudentAttendanceForSubject(studentKey, subjectKey);
+        int subjectKey = subjectHeld.getSubjectKey();
+        List<Attendance> studentAttendanceInSubject = getAStudentsAttendanceForASubject(studentKey, subjectKey);
         dailyAttendanceIntArray = listOfAttendanceToIntArrayOfDays(studentAttendanceInSubject);
-        return dailyAttendanceIntArray;
+        String name = newUserDBDao.getUserNameFromKey(studentKey);
+        int monday = dailyAttendanceIntArray[0];
+        int tuesday = dailyAttendanceIntArray[1];
+        int wednesday = dailyAttendanceIntArray[2];
+        int thursday = dailyAttendanceIntArray[3];
+        int friday = dailyAttendanceIntArray[4];
+        int percent = 100; // to change
+        SubjectAttendance sda = new SubjectAttendance(name, monday, tuesday, wednesday, thursday, friday, percent);
+        return sda;
     }
     
     
 
-    public List<Attendance> getStudentAttendanceForSubject(int studentKey, int subjectKey) throws SQLException {
+    public List<Attendance> getAStudentsAttendanceForASubject(int studentKey, int subjectKey) throws SQLException {
         List<Attendance> allAttendances = getAllAttendances();
         List<Attendance> studentAttendanceInSubject = new ArrayList<>();
         Attendance testAttendance;
@@ -124,13 +145,7 @@ public class AttendanceDBDAO {
     }
 
 
-    public int[] getAllAttendanceForSubjectInDays(int subjectKey ) throws SQLException { // bit rough. Work in progress. Needs a lot of work
-        int[] dailyAttendanceIntArray = new int[5];
-        List<Attendance> allAttendanceInSubject = getAllAttendanceForSubject(subjectKey);
-        dailyAttendanceIntArray = listOfAttendanceToIntArrayOfDays(allAttendanceInSubject);
-        return dailyAttendanceIntArray;
-    }
-    
+   
  
     public List<Attendance> getAllAttendanceForSubject(int subjectKey) throws SQLException {
         List<Attendance> allAttendances = getAllAttendances();
@@ -197,6 +212,12 @@ public class AttendanceDBDAO {
 
 
     
-   
+ /*   public int[] getAllAttendanceForSubjectInDays(int subjectKey ) throws SQLException { // bit rough. Work in progress. Needs a lot of work
+        int[] dailyAttendanceIntArray = new int[5];
+        List<Attendance> allAttendanceInSubject = getAllAttendanceForSubject(subjectKey);
+        dailyAttendanceIntArray = listOfAttendanceToIntArrayOfDays(allAttendanceInSubject);
+        return dailyAttendanceIntArray;
+    }
+    */
 }
 
