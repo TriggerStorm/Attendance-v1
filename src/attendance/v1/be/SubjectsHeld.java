@@ -5,43 +5,52 @@
  */
 package attendance.v1.be;
 
-/**
- *
- * @author macos
- */
-public class SubjectsHeld {
-    private int skey;
-    private String date,sCode;
-    public SubjectsHeld(int subjectKey, String subDate, String secretCode)
-    {
-        this.skey = subjectKey;
-        this.sCode = secretCode;
-        this.date = subDate;
-    }
 
-    public int getSkey() {
-        return skey;
-    }
-
-    public void setSkey(int skey) {
-        this.skey = skey;
-    }
-
-    public String getDate() {
-        return date;
-    }
-
-    public void setDate(String date) {
-        this.date = date;
-    }
-
-    public String getsCode() {
-        return sCode;
-    }
-
-    public void setsCode(String sCode) {
-        this.sCode = sCode;
-    }
-    
-}
  
+
+
+public class SubjectsHeld {
+       
+    
+        private int subjectKey;
+        private String dateHeld;
+        private String SecretCode;
+
+public SubjectsHeld (int subjectKey, String dateHeld, String SecretCode)
+{
+    this.subjectKey = subjectKey;
+    this.dateHeld = dateHeld;
+    this.SecretCode = SecretCode;
+}
+public SubjectsHeld(String SecretCode){
+    this.SecretCode = SecretCode;
+}
+
+    public int getSubjectKey() {
+        return subjectKey;
+    }
+
+    public String getDateHeld() {
+        return dateHeld;
+    }
+
+    public void setSubjectKey(int subjectKey) {
+        this.subjectKey = subjectKey;
+    }
+
+    public void setDateHeld(String dateHeld) {
+        this.dateHeld = dateHeld;
+    }
+
+    public void setSecretCode(String SecretCode) {
+        this.SecretCode = SecretCode;
+    }
+
+    public String getSecretCode() {
+        return SecretCode;
+    }
+        
+        
+
+}
+

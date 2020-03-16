@@ -16,8 +16,10 @@ import java.sql.SQLException;
  */
 public class TeacherDBDAO {
      private DBConnection db;
+
     
-     public Subject assignTeacherClass(Subject classes, String teacher) throws SQLException 
+     public Subject assignTeacherClass(Subject subject, String teacher) throws SQLException 
+
     {
         db = new DBConnection();
         
@@ -26,10 +28,11 @@ public class TeacherDBDAO {
             String SQLStmt = "UPDATE SUBJECTS SET AssociatedTeacher = ? WHERE subjectKey = ?;";
             
             PreparedStatement pstmt = con.prepareStatement(SQLStmt);
-            pstmt.setString(1,teacher);
-            pstmt.setInt(2,classes.getClasskey());
-            pstmt.execute();
+
+             pstmt.setString(1,teacher);
+            pstmt.setInt(2,subject.getSubjectKey());
         }
-        return new Subject(classes.getClasskey(),classes.getClassName(),classes.getClassIMG(),classes.getAssociatedCourse(),teacher);
+        return new Subject(subject.getSubjectKey(),subject.getSubjectName(),subject.getSubjectIMG(),subject.getAssociatedCourse(),teacher);
+
 }
 }

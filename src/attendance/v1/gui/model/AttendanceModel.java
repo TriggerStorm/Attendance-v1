@@ -8,6 +8,8 @@ package attendance.v1.gui.model;
 import attendance.v1.be.ScoMok;
 import attendance.v1.bll.BllManager;
 import java.util.List;
+import java.util.Random;
+import java.util.stream.Collectors;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
@@ -17,55 +19,24 @@ import javafx.collections.ObservableList;
  */
 public class AttendanceModel {
     private BllManager bllManager;
-    private ObservableList<ScoMok> ScoList;
-    private ObservableList<String> gCode;
     private ObservableList<String> course;
     
 
     public AttendanceModel() {
         bllManager = new BllManager();
-        getScoAttendance();
-    }
-    public String gCode(){
-      
-      return bllManager.gCode();
-      
-    }
-    
-    public ObservableList<String> course(){
-      
-      String allcourse = bllManager.course();
-      course = FXCollections.observableArrayList(allcourse);
-      return course;
-    }
-    
-    public ObservableList<ScoMok> getScoAttendance(){
-      
-      List<ScoMok> allSco = bllManager.getSCOattendance();
-      ScoList = FXCollections.observableArrayList(allSco);
-      return ScoList;
         
     }
-    public ObservableList<ScoMok> getSdeAttendance(){
-      
-      List<ScoMok> allSco = bllManager.getSDEattendance();
-      ScoList = FXCollections.observableArrayList(allSco);
-      return ScoList;
-        
+    public String getCode(){
+     String password = new Random().ints(10, 33, 122).mapToObj(i -> String.valueOf((char)i)).collect(Collectors.joining());
+ String SALTCHARS = "ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890";
+        StringBuilder salt = new StringBuilder();
+        Random rnd = new Random();
+        while (salt.length() < 4) { // length of the random string.
+            int index = (int) (rnd.nextFloat() * SALTCHARS.length());
+            salt.append(SALTCHARS.charAt(index));
+        }
+        String saltStr = salt.toString();
+ 
+    return saltStr;
     }
-    public ObservableList<ScoMok> getItoAttandance(){
-      
-      List<ScoMok> allSco = bllManager.getITOattendance();
-      ScoList = FXCollections.observableArrayList(allSco);
-      return ScoList;
-        
-    }
-    public ObservableList<ScoMok> getDBOSAttandance(){
-      
-      List<ScoMok> allSco = bllManager.getDBOSattendance();
-      ScoList = FXCollections.observableArrayList(allSco);
-      return ScoList;
-        
-    }
-
 }

@@ -5,6 +5,7 @@
  */
 package attendance.v1.dal;
 
+
 import attendance.v1.be.SubjectsHeld;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -13,6 +14,9 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 
 /**
  *
@@ -52,13 +56,13 @@ public class SubjectsHeldDBDAO {
             String SQLStmt = "UPDATE SUBJECTSHELD SET subjectKey = ?,date = ?, secretCode = ?  WHERE subjectKey = ?;";
             
             PreparedStatement pstmt = con.prepareStatement(SQLStmt);
-             pstmt.setInt(1,subjectsHeld.getSkey());
+             pstmt.setInt(1,subjectsHeld.getSubjectKey());
             pstmt.setString(2,date);
             pstmt.setString(3,secretCode);
-            pstmt.setInt(4,subjectsHeld.getSkey());
+            pstmt.setInt(4,subjectsHeld.getSubjectKey());
             pstmt.execute();
         }
-        return new SubjectsHeld(subjectsHeld.getSkey(),date,secretCode);
+        return new SubjectsHeld(subjectsHeld.getSubjectKey(),date,secretCode);
 }
      
      public SubjectsHeld getSpecificSubjectsHeld(int skey) throws SQLException 
@@ -100,7 +104,7 @@ public class SubjectsHeldDBDAO {
             pstmt.setInt(1,skey);
             pstmt.setString(2,date);
             pstmt.setString(3,secretCode);
-            pstmt.setInt(4,subjectsHeld.getSkey());
+            pstmt.setInt(4,subjectsHeld.getSubjectKey());
             pstmt.execute();
             
             return new SubjectsHeld(skey,date,secretCode);
@@ -112,8 +116,45 @@ public class SubjectsHeldDBDAO {
         try(Connection con = db.getConnection()){
             String sqlStatement = "DELETE FROM SUBJECTSHELD WHERE subjectKey = ? ;";
             PreparedStatement pstmt = con.prepareStatement(sqlStatement);
-            pstmt.setInt(1,subjectsHeld.getSkey());
+            pstmt.setInt(1,subjectsHeld.getSubjectKey());
             pstmt.execute();
         }
      }
+
+
+
+
+    public SubjectsHeld setSecretCode (int SubjectKey, String Date, String SecretCode) throws SQLException
+    {
+        String sql = "INSERT INTO SubjectsHeld(SubjectKey, Date, SecretCode,) VALUES (?,?,?)";
+        SubjectsHeld a = new SubjectsHeld(SubjectKey,Date,SecretCode);
+        try(Connection con = db.getConnection()) {
+            PreparedStatement stmt = con.prepareStatement(sql, PreparedStatement.RETURN_GENERATED_KEYS);
+            stmt.setInt(1, SubjectKey);
+            stmt.setString(2, Date);
+            stmt.setString(3, SecretCode); 
+            
+            }    catch (SQLException ex) {
+            Logger.getLogger(AttendanceDBDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+            return a;
+    }
+     // add more getters.....-------------------------------------------------------------------------------------------------------------------
+    public List<SubjectsHeld> getSecretCode () throws SQLException
+    {
+        List<SubjectsHeld> SecretCode = new ArrayList<>();
+        
+        try ( Connection con = db.getConnection()) {
+            String sql = "SELECT * FROM SubjectsHeld";
+            Statement stmt = con.createStatement();
+            ResultSet rs = stmt.executeQuery(sql);
+            while (rs.next()){
+                String Code = rs.getString("Code"); // string
+                
+                SecretCode.add(new SubjectsHeld(Code));
+            }
+            return SecretCode;
+        }
+        
+    }
 }

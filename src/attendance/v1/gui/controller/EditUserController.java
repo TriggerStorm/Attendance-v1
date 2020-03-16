@@ -46,7 +46,7 @@ public class EditUserController implements Initializable {
     }    
     public void setCB(){
         Am = new AttendanceModel();
-        CB_classes.setItems(Am.course());
+        //CB_classes.setItems(Am.course());
         
     }
     @FXML

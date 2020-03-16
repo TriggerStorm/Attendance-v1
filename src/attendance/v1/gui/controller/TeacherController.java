@@ -199,7 +199,9 @@ public class TeacherController implements Initializable {
         TBV_student.setCellValueFactory(new PropertyValueFactory<>("Name"));        
         TBV_Attendance.setCellValueFactory(new PropertyValueFactory<>("percent"));        
         Lb_subjet.setText("SDE");        
+
         //TBV_attendance.setItems(Am.getSDEattendance());
+
     }
 
     @FXML

@@ -7,18 +7,23 @@ package attendance.v1.be;
 
 /**
  *
- * @author macos
+ * @author Trigger, Filip, Cecillia and Alan
  */
+
+
 public class StudentSubjects {
+
     private int ukey,skey;
     public StudentSubjects(int userKey, int subjectKey)
     {
         this.ukey = userKey;
         this.skey = subjectKey;
+
     }
     
     public int getUkey()
     {
+
         return ukey;
     }
     public int getSkey()
@@ -32,5 +37,6 @@ public class StudentSubjects {
     public void setSkey(int subjectKey)
     {
         this.skey = subjectKey;
+
     }
 }

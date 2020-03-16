@@ -6,6 +6,7 @@
 package attendance.v1.dal;
 
 import attendance.v1.be.Subject;
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -69,4 +70,5 @@ public class SubjectDBDAO {
         }
       
     }
+
 

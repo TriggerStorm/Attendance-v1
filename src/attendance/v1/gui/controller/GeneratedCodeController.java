@@ -5,8 +5,12 @@
  */
 package attendance.v1.gui.controller;
 
+import attendance.v1.bll.BllManager;
 import attendance.v1.gui.model.AttendanceModel;
 import java.net.URL;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.ResourceBundle;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -23,15 +27,24 @@ public class GeneratedCodeController implements Initializable {
     @FXML
     private Label TF_code;
     private AttendanceModel Am;
+    private BllManager bm;
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        bm = new BllManager();
         setcode();
     }    
     public void setcode (){
+        
         Am = new AttendanceModel();
-        TF_code.setText(Am.gCode());
+        String secretCode = Am.getCode();
+       TF_code.setText(secretCode);
+       DateFormat df = new SimpleDateFormat("dd-M-yyyy hh:mm:ss");
+       Date date = new Date();
+       
+       bm.newSubjectsHeld(0,df.format(date),secretCode); // TO DO IT NEEDS TO KNOW CURRENT SELECTED SUBJECT
+       
     }
 }

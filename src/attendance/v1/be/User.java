@@ -18,12 +18,14 @@ public class User {
     private String email;
     private int phoneNr;
     private String address;
-    private boolean teacher;
+    private int postCode;
+    private String city;
+    private String teacher;
     private String userIMG;
-    private List<SubjectAttendance> attendance;
+    //private List<SubjectAttendance> attendance;
     
     
- public User (int userKey, String userName,String password,String email,int phoneNr,String address,boolean teacher,String userIMG, List<SubjectAttendance> attendance){
+ public User (int userKey, String userName, String password, String email, int phoneNr, String address, int zipCode, String city, String teacher, String userIMG) { /*, List<SubjectAttendance> attendance*/
 
  
  
@@ -33,11 +35,14 @@ public class User {
      this.email = email;
      this.phoneNr = phoneNr;
      this.address = address;
+     this.postCode = zipCode;
+     this.city = city;
      this.teacher = teacher;
      this.userIMG = userIMG;
-     this.attendance = attendance;
+     //this.attendance = attendance;
      
  }
+
 
     public int getUserKey() {
         return userKey;
@@ -87,11 +92,26 @@ public class User {
         this.address = address;
     }
 
-    public boolean getTeacher() {
+    public int getPostCode() {
+        return postCode;
+    }
+    
+    public void setPostCode(int postCode) {
+        this.postCode = postCode;
+    }
+     
+    public String getCity() {
+        return city;
+    }
+    
+    public void setCity(String city) {
+        this.city = city;
+    }
+    public String getTeacher() {
         return teacher;
     }
 
-    public void setTeacher(boolean teacher) {
+    public void setTeacher(String teacher) {
         this.teacher = teacher;
     }
 
@@ -103,12 +123,12 @@ public class User {
         this.userIMG = userIMG;
     }
     
-    public List<SubjectAttendance> getAttendance () {
+    /*public List<SubjectAttendance> getAttendance () {
         return attendance;
     }
 
     public void setUserIMG(List<SubjectAttendance> attendance) {
         this.attendance = attendance;
-    }
+    }*/
  
 }
