@@ -7,6 +7,7 @@ package attendance.v1.dal;
 
 import attendance.v1.be.Attendance;
 import attendance.v1.be.ScoMok;
+import attendance.v1.be.SubjectsHeld;
 import attendance.v1.be.User;
 import java.util.List;
 
@@ -35,6 +36,7 @@ public interface IDAL {
 // AttendanceDBDAO methods
     public List<Attendance> getAllAttendances();
     public List<Attendance> getStudentAttendanceInSubject(int studentKey, int subjectKey);
-
+// SubjectsHeldDBDAO methods
+    public SubjectsHeld addSubjectsHeld(int skey, String date, String secretCode);
 
 }
