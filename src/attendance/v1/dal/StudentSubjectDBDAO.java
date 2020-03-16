@@ -5,11 +5,18 @@
  */
 package attendance.v1.dal;
 
-import attendance.v1.be.Student_Classes;
+import attendance.v1.be.StudentSubject;
+import java.util.List;
 /**
  *
  * @author admin
  */
-public class Student_SubjectDBDAO {
+public class StudentSubjectDBDAO {
+    
+    
+    public List<StudentSubject> getAllStudent_Subjects () {
+        return null;
+    }
+    
     
 }
