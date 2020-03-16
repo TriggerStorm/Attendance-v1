@@ -11,6 +11,7 @@ import attendance.v1.be.User;
 import attendance.v1.be.Attendance;
 import attendance.v1.bll.BllManager;
 import attendance.v1.be.Subject;
+import attendance.v1.be.SubjectsHeld;
 import java.sql.SQLException;
 import java.time.LocalDate;
 import java.util.List;
@@ -28,6 +29,8 @@ public class DalManager implements IDAL {
     private Student_SubjectDBDAO student_SubjectDBDao;
     private SubjectDBDAO subjectDBDao;
     private UserDBDAO userDBDao;
+    private SubjectsHeldDBDAO subjectsHeldDBDao;
+    
     
     
     public DalManager() {
@@ -35,6 +38,7 @@ public class DalManager implements IDAL {
           student_SubjectDBDao = new Student_SubjectDBDAO();
           subjectDBDao = new SubjectDBDAO();
           userDBDao = new UserDBDAO();
+          subjectsHeldDBDao = new SubjectsHeldDBDAO();
     } 
     
     
@@ -139,17 +143,30 @@ public class DalManager implements IDAL {
     }
 
 
+
     
     @Override
     public int[] getStudentAttendanceForSubjectInDays(int studentKey, int subjectKey) {
+       
+            try {
+                return attendanceDBDao.getStudentAttendanceForSubjectInDays(studentKey, subjectKey);
+            } catch (SQLException ex) {
+                Logger.getLogger(DalManager.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            return null;
+        }
+        
+    
+    @Override
+    public SubjectsHeld addSubjectsHeld(int skey, String date, String secretCode)
+    {
         try {
-            return attendanceDBDao.getStudentAttendanceForSubjectInDays(studentKey, subjectKey);
+            return subjectsHeldDBDao.addSubjectsHeld(skey, date, secretCode);
+
         } catch (SQLException ex) {
             Logger.getLogger(DalManager.class.getName()).log(Level.SEVERE, null, ex);
         }
         return null;
     }
     
-    
-
 }

@@ -12,19 +12,31 @@ package attendance.v1.be;
 
 
 public class StudentSubjects {
-    private int uKey,sKey;
+
+    private int ukey,skey;
     public StudentSubjects(int userKey, int subjectKey)
     {
-        this.uKey = userKey;
-        this.sKey = subjectKey;
+        this.ukey = userKey;
+        this.skey = subjectKey;
+
     }
     
     public int getUkey()
     {
-        return uKey;
+
+        return ukey;
     }
     public int getSkey()
     {
-        return sKey;
+        return skey;
+    }
+    public void setUkey(int userKey)
+    {
+            this.ukey = userKey;
+    }
+    public void setSkey(int subjectKey)
+    {
+        this.skey = subjectKey;
+
     }
 }

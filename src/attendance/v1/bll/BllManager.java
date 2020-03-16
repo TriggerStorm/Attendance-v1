@@ -7,6 +7,7 @@ package attendance.v1.bll;
 
 import attendance.v1.be.Attendance;
 import attendance.v1.be.ScoMok;
+import attendance.v1.be.SubjectsHeld;
 import attendance.v1.be.User;
 
 import java.util.List;
@@ -98,6 +99,10 @@ public class BllManager implements IBLL {
         return dalManager.getStudentAttendanceInSubject(studentKey, subjectKey);
     }
    
+    public SubjectsHeld newSubjectsHeld(int sKey, String date, String secretCode)
+    {
+       return dalManager.addSubjectsHeld(sKey,date,secretCode);
+    }
     
     @Override
     public int[] getStudentAttendanceForSubjectInDays(int studentKey, int subjectKey) {

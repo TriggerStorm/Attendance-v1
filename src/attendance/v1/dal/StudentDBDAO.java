@@ -12,7 +12,6 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
 import java.util.List;
 import java.util.ArrayList;
 import java.sql.Statement;
@@ -23,21 +22,47 @@ import java.sql.Statement;
  */
 public class StudentDBDAO {
    private DBConnection db;
-     public List<Subject> getSubjects() throws SQLException 
+
+    
+     
+     public StudentSubjects newAssignStudentCourse(User user ,int course) throws SQLException
+    {
+        for(int i = 0; i < getSubjectsSPECIFIC(course).size();i++)
+            
+        {db = new DBConnection();
+        
+           int ukey = user.getUserKey();
+           int skey = getSubjectsSPECIFIC(course).get(i).getSubjectKey();
+           try(Connection con = db.getConnection()){
+            String SQLStmt = "INSERT INTO  STUDENT_SUBJECTS(subjectKey,userKey) VALUES (?,?); ";
+            
+            PreparedStatement pstmt = con.prepareStatement(SQLStmt);
+            
+             pstmt.setInt(1,ukey);
+             pstmt.setInt(2, skey);
+             pstmt.execute();
+        }
+       return new StudentSubjects(ukey,skey);
+        } 
+      return null;
+}
+      public List<Subject> getSubjectsSPECIFIC(int course) throws SQLException 
+
     {
         db = new DBConnection();
         List<Subject> allclasses = new ArrayList();
            
         try(Connection con = db.getConnection()){
-            String SQLStmt = "SELECT * FROM SUBJECTS;";
-            
+            String SQLStmt = "SELECT * FROM SUBJECTS WHERE AssociatedCourse = ?;";
+             PreparedStatement pstmt = con.prepareStatement(SQLStmt);   
+             pstmt.setInt(1,course);
+             pstmt.execute();
             Statement statement = con.createStatement();
             ResultSet rs = statement.executeQuery(SQLStmt);
             
             while(rs.next()) 
             {
                
-                
                 int subjectKey = rs.getInt("SubjectKey");
                 String subjectName = rs.getString("SubjectName");
                 String subjectIMG = rs.getString("SubjectIMG");
@@ -50,7 +75,7 @@ public class StudentDBDAO {
        return allclasses;
     }
      
-     public StudentSubjects assignStudentCourse(Subject subject, User user) throws SQLException 
+     public StudentSubjects editAssignStudentCourse(Subject subject, User user) throws SQLException 
     {
         db = new DBConnection();
         
@@ -67,5 +92,6 @@ public class StudentDBDAO {
         }
         return new StudentSubjects(ukey,ckey);
 }
+
 }
 

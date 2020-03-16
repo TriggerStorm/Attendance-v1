@@ -5,10 +5,10 @@
  */
 package attendance.v1.be;
 
-/**
- *
- * @author Trigger
- */
+
+ 
+
+
 public class SubjectsHeld {
        
     
@@ -20,6 +20,9 @@ public SubjectsHeld (int subjectKey, String dateHeld, String SecretCode)
 {
     this.subjectKey = subjectKey;
     this.dateHeld = dateHeld;
+    this.SecretCode = SecretCode;
+}
+public SubjectsHeld(String SecretCode){
     this.SecretCode = SecretCode;
 }
 
@@ -48,7 +51,6 @@ public SubjectsHeld (int subjectKey, String dateHeld, String SecretCode)
     }
         
         
-public SubjectsHeld(String SecretCode){
-    this.SecretCode = SecretCode;
+
 }
-}
+

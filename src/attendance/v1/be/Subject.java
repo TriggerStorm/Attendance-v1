@@ -11,15 +11,19 @@ package attendance.v1.be;
  */
 
 
+
 public class Subject {
     private int subjectKey;
     private String subjectName;
     private String subjectIMG;
+
     private String associatedCourse;
     private String associatedTeacher;
     
     
+
     public Subject (int subjectKey, String subjectName,String subjectIMG, String associatedCourse, String associatedTeacher ){
+
     
         this.subjectKey = subjectKey;
         this.subjectName = subjectName;
