@@ -29,7 +29,7 @@ public class LoggedInUser{
     private LoggedInUser(){
 
     }
-    
+   
     public static LoggedInUser getInstance()
     {
         if(instance == null)
@@ -40,7 +40,7 @@ public class LoggedInUser{
         return instance;
     }
 
-    
+
     public int getSelectedSubjectKey()
     {
         return selectedSubjectKey;

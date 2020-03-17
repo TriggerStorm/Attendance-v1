@@ -196,6 +196,7 @@ public class UserDBDAO {
                 lUser.setPhoneNr(userToCheck.getPhoneNr());
                 lUser.setPostCode(userToCheck.getPostCode());
                 lUser.setCity(userToCheck.getCity());
+                lUser.setTeacher(userToCheck.getTeacher());
                 lUser.setUserIMG(userToCheck.getUserIMG());
                 
                 if(userToCheck.getTeacher() == true)
