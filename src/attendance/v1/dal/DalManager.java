@@ -5,7 +5,6 @@
  */
 package attendance.v1.dal;
 
-import attendance.v1.be.ScoMok;
 import attendance.v1.be.SubjectAttendance;
 import attendance.v1.be.User;
 import attendance.v1.be.Attendance;
@@ -26,7 +25,7 @@ import java.util.logging.Logger;
 
 public class DalManager implements IDAL {
     private AttendanceDBDAO attendanceDBDao;
-    private Student_SubjectDBDAO student_SubjectDBDao;
+    private StudentSubjectDBDAO studentSubjectDBDao;
     private SubjectDBDAO subjectDBDao;
     private UserDBDAO userDBDao;
     private SubjectsHeldDBDAO subjectsHeldDBDao;
@@ -35,7 +34,7 @@ public class DalManager implements IDAL {
     
     public DalManager() {
           attendanceDBDao = new AttendanceDBDAO();
-          student_SubjectDBDao = new Student_SubjectDBDAO();
+          studentSubjectDBDao = new StudentSubjectDBDAO();
           subjectDBDao = new SubjectDBDAO();
           userDBDao = new UserDBDAO();
           subjectsHeldDBDao = new SubjectsHeldDBDAO();
@@ -43,18 +42,6 @@ public class DalManager implements IDAL {
     
     
     
-
-// AttendanceDBDAO methods
-    
-   
-    
-   
-    
-    @Override
-    public List<String> addDayToAttendance(String selectedCourse) {
-        return attendanceDBDao.addDayToAttendance(selectedCourse);
-    }
- 
 
 // UserDBDAO methods
     
@@ -133,9 +120,9 @@ public class DalManager implements IDAL {
     }
 
     @Override
-    public List<Attendance> getStudentAttendanceInSubject(int studentKey, int subjectKey) {
+    public List<Attendance> getStudentAttendanceForSubject(int studentKey, int subjectKey) { /// ????
         try {
-            return attendanceDBDao.getStudentAttendanceInSubject(studentKey, subjectKey);
+            return attendanceDBDao.getAStudentsAttendanceForASubject(studentKey, subjectKey);
         } catch (SQLException ex) {
             Logger.getLogger(DalManager.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -143,16 +130,15 @@ public class DalManager implements IDAL {
     }
 
 
-
     
     @Override
-    public int[] getStudentAttendanceForSubjectInDays(int studentKey, int subjectKey) {
+    public List<Attendance> getStudentAttendanceInSubject(int studentKey, int subjectKey) {
        
-            try {
-                return attendanceDBDao.getStudentAttendanceForSubjectInDays(studentKey, subjectKey);
-            } catch (SQLException ex) {
-                Logger.getLogger(DalManager.class.getName()).log(Level.SEVERE, null, ex);
-            }
+        try {
+            return attendanceDBDao.getAStudentsAttendanceForASubject(studentKey, subjectKey);
+        } catch (SQLException ex) {
+            Logger.getLogger(DalManager.class.getName()).log(Level.SEVERE, null, ex);
+        }
             return null;
         }
         
@@ -169,4 +155,34 @@ public class DalManager implements IDAL {
         return null;
     }
     
+    @Override
+    public SubjectAttendance addNewAttendanceToDB(int studentKey, SubjectsHeld subjectHeld) {
+        try {
+            return attendanceDBDao.addNewAttendanceToDB(studentKey, subjectHeld);
+
+        } catch (SQLException ex) {
+            Logger.getLogger(DalManager.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
+    }
+
+ 
+    @Override
+    public SubjectAttendance getStudentDailyAttendance(int studentKey, SubjectsHeld subjectHeld) {
+        try {
+            return attendanceDBDao.getSubjectAttendanceForAStudent(studentKey, subjectHeld);
+        } catch (SQLException ex) {
+            Logger.getLogger(DalManager.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
+    }
+
+    @Override
+    public int[] getStudentAttendanceForSubjectInDays(int studentKey, int subjectKey) { /// ???
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    
+
+
 }

@@ -6,7 +6,8 @@
 package attendance.v1.bll;
 
 import attendance.v1.be.Attendance;
-import attendance.v1.be.ScoMok;
+import attendance.v1.be.SubjectAttendance;
+import attendance.v1.be.SubjectsHeld;
 import attendance.v1.be.User;
 import java.util.List;
 
@@ -36,9 +37,9 @@ public interface IBLL {
 
  // AttendanceDBDAO methods
     public List<Attendance> getAllAttendances();
-    public List<Attendance> getStudentAttendanceInSubject(int studentKey, int subjectKey);
-    public int[] getStudentAttendanceForSubjectInDays(int studentKey, int subjectKey);
-
+    public List<Attendance> getStudentAttendanceForSubject(int studentKey, int subjectKey);
+    public SubjectAttendance addNewAttendanceToDB(int studentKey, SubjectsHeld subjectHeld);
+    public SubjectAttendance getStudentDailyAttendance(int studentKey, SubjectsHeld subjectHeld);
 
     
     
