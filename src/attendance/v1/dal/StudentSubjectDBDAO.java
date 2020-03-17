@@ -5,7 +5,13 @@
  */
 package attendance.v1.dal;
 
+import attendance.v1.be.Attendance;
 import attendance.v1.be.StudentSubject;
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.ArrayList;
 import java.util.List;
 /**
  *
@@ -13,8 +19,8 @@ import java.util.List;
  */
 public class StudentSubjectDBDAO {
     
-    public List<StudentSubject> getAllStudentSubjects() {
-        
+    public List<StudentSubject> getAllStudentSubjects() throws SQLException {
+      
         return null;   // will be list of StudentSubject
     }
 }

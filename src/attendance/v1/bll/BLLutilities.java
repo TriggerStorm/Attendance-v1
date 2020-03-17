@@ -20,12 +20,11 @@ public class BLLutilities {
     
  
     public static boolean hasFourHoursPass (String dateTimeHeldString) {
-         LocalDateTime dateTimeHeld = stringToLocalDateTime(dateTimeHeldString);
+        LocalDateTime dateTimeHeld = stringToLocalDateTime(dateTimeHeldString);
         LocalDateTime fourHoursAgo = LocalDateTime.now().minusHours(4);
         boolean fourHoursHavePassed = fourHoursAgo.isAfter(dateTimeHeld);
         return fourHoursHavePassed;
      }
-    
     
     
     public static LocalDateTime stringToLocalDateTime(String dateString) {

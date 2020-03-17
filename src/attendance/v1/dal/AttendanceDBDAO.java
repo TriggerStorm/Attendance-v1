@@ -9,7 +9,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.AbstractList;
 import java.util.ArrayList;
 import java.util.List;
@@ -167,7 +167,7 @@ public class AttendanceDBDAO {
             for (int i = 0; i < attendanceTotal; i++) {
                 Attendance attendance = attendanceList.get(i);
                 String dateHeldString = attendance.getDateHeld();
-                LocalDate dateHeld = stringToLocalDate(dateHeldString);
+                LocalDateTime dateHeld = stringToLocalDate(dateHeldString);
                 int dayOfWeek = (dateHeld.getDayOfWeek().getValue()) - 1; 
                 dailyAttendanceIntArray[dayOfWeek] ++;
             }
@@ -176,23 +176,23 @@ public class AttendanceDBDAO {
     
    
     public String dateNowToString() {
-        LocalDate now = LocalDate.now();
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd LLLL yyyy");
+        LocalDateTime now = LocalDateTime.now();
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd['T'HH:mm:ss[Z]]");
         String dateNowString = now.format(formatter);
         return dateNowString;
     } 
     
     
-    public String localDateToString(LocalDate date) {
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd LLLL yyyy");
+    public String localDateToString(LocalDateTime date) {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd['T'HH:mm:ss[Z]]");
         String dateString = date.format(formatter);
         return dateString;
     } 
     
     
-     public LocalDate stringToLocalDate(String dateString) {
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd LLLL yyyy");
-        LocalDate date = LocalDate.parse(dateString, formatter);
+     public LocalDateTime stringToLocalDate(String dateString) {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd['T'HH:mm:ss[Z]]");
+        LocalDateTime date = LocalDateTime.parse(dateString, formatter);
         return date;
     }
     
