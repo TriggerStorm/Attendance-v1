@@ -10,6 +10,7 @@ import attendance.v1.be.Attendance;
 import attendance.v1.be.ScoMok;
 import attendance.v1.be.SubjectsHeld;
 import attendance.v1.be.User;
+import attendance.v1.be.SubjectAttendance;
 
 import java.util.List;
 
@@ -34,7 +35,7 @@ public class BllManager implements IBLL {
     
 
     
-    public int[] addDayToAttendance() {
+    public SubjectAttendance addNewAttendanceToDB() {
         LoggedInUser lUser = LoggedInUser.getInstance();
         return dalManager.addNewAttendanceToDB(lUser.getUserKey(), lUser.getSelectedSubjectKey());
     }
@@ -115,7 +116,7 @@ public class BllManager implements IBLL {
     {
         if(checkCode(code))
         {
-            int[] theList = addDayToAttendance();
+            SubjectAttendance theAtttendance = addNewAttendanceToDB();
         }
         
     }
