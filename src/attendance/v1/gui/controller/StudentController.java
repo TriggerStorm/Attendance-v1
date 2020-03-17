@@ -5,6 +5,7 @@
  */
 package attendance.v1.gui.controller;
 
+import attendance.v1.be.LoggedInUser;
 import attendance.v1.be.ScoMok;
 import attendance.v1.gui.model.AttendanceModel;
 import com.jfoenix.controls.JFXButton;
@@ -36,6 +37,8 @@ import javafx.stage.Stage;
  */
 public class StudentController implements Initializable {
 
+    int currentSubjectKey;
+    
     @FXML
     private Label date;
     @FXML
@@ -172,4 +175,10 @@ public class StudentController implements Initializable {
 
     }
     
+    @FXML
+    private void submitAttendance(ActionEvent event)
+    {
+        String code = TF_code.getText();
+        Am.submitAttendance(code);
+    }
 }

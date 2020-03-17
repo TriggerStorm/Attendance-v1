@@ -5,6 +5,7 @@
  */
 package attendance.v1.dal;
 
+import attendance.v1.dal.SecretCodeDBDAO;
 import attendance.v1.be.ScoMok;
 import attendance.v1.be.SubjectAttendance;
 import attendance.v1.be.User;
@@ -13,6 +14,7 @@ import attendance.v1.bll.BllManager;
 import attendance.v1.be.Subject;
 import attendance.v1.be.SubjectsHeld;
 import java.sql.SQLException;
+import java.text.ParseException;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.logging.Level;
@@ -30,6 +32,7 @@ public class DalManager implements IDAL {
     private SubjectDBDAO subjectDBDao;
     private UserDBDAO userDBDao;
     private SubjectsHeldDBDAO subjectsHeldDBDao;
+    private SecretCodeDBDAO secretCodeDBDAO;
     
     
     
@@ -39,6 +42,7 @@ public class DalManager implements IDAL {
           subjectDBDao = new SubjectDBDAO();
           userDBDao = new UserDBDAO();
           subjectsHeldDBDao = new SubjectsHeldDBDAO();
+          secretCodeDBDAO = new SecretCodeDBDAO();
     } 
     
     
@@ -46,7 +50,11 @@ public class DalManager implements IDAL {
 
 // AttendanceDBDAO methods
     
-   
+   @Override 
+   public int[] addNewAttendanceToDB(int studentK, int subjectK)
+   {
+       return attendanceDBDao.addNewAttendanceToDB(studentK, subjectK);
+   }
     
    
     
@@ -169,4 +177,19 @@ public class DalManager implements IDAL {
         return null;
     }
     
+    
+    //SecretCode Methods
+    
+    @Override
+    public boolean checkCode(int sKey, String code)
+    {
+        try {
+            return secretCodeDBDAO.checkCode(sKey, code);
+        } catch (SQLException ex) {
+            Logger.getLogger(DalManager.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ParseException ex) {
+            Logger.getLogger(DalManager.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return false;
+    }   
 }

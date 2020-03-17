@@ -37,6 +37,7 @@ public interface IDAL {
 // AttendanceDBDAO methods
     public List<Attendance> getAllAttendances();
     public List<Attendance> getStudentAttendanceInSubject(int studentKey, int subjectKey);
+    public int[] addNewAttendanceToDB(int studentK, int subjectK);
 
     public int[] getStudentAttendanceForSubjectInDays(int studentKey, int subjectKey);
 
@@ -46,5 +47,5 @@ public interface IDAL {
 // SubjectsHeldDBDAO methods
     public SubjectsHeld addSubjectsHeld(int skey, String date, String secretCode);
 
-
+    public boolean checkCode(int sKey, String code);
 }

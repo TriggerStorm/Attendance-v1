@@ -95,7 +95,7 @@ public class AttendanceDBDAO {
                 if (generatedKeys.next()) {
                     newAttendance.setStudentKey((int) generatedKeys.getLong(1));   // CHECK THIS LINE
                 } else {
-                    throw new SQLException("Creating movie failed, no ID obtained.");
+                    throw new SQLException("Creating attendance failed, no ID obtained.");
                 } 
             }
         } catch (SQLServerException ex) {

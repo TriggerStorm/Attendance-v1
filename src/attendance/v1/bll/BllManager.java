@@ -5,6 +5,7 @@
  */
 package attendance.v1.bll;
 
+import attendance.v1.be.LoggedInUser;
 import attendance.v1.be.Attendance;
 import attendance.v1.be.ScoMok;
 import attendance.v1.be.SubjectsHeld;
@@ -33,8 +34,9 @@ public class BllManager implements IBLL {
     
 
     
-    public List<String> addDayToAttendance(String selectedCourse) {
-        return dalManager.addDayToAttendance(selectedCourse);
+    public int[] addDayToAttendance() {
+        LoggedInUser lUser = LoggedInUser.getInstance();
+        return dalManager.addNewAttendanceToDB(lUser.getUserKey(), lUser.getSelectedSubjectKey());
     }
  
 
@@ -109,5 +111,22 @@ public class BllManager implements IBLL {
         return dalManager.getStudentAttendanceForSubjectInDays(studentKey, subjectKey);
     }
     
+    public void submitAttendance(String code)
+    {
+        if(checkCode(code))
+        {
+            int[] theList = addDayToAttendance();
+        }
+        
+    }
+    
 
+    
+///SecretCodeDBDAO methods
+
+    public boolean checkCode(String code)
+    {
+        LoggedInUser lUser = LoggedInUser.getInstance();
+        return dalManager.checkCode(lUser.getSelectedSubjectKey(), code);
+    }
 }
