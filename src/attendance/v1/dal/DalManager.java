@@ -25,14 +25,14 @@ import java.util.logging.Logger;
 
 public class DalManager implements IDAL {
     private AttendanceDBDAO attendanceDBDao;
-    private Student_SubjectDBDAO student_SubjectDBDao;
+    private StudentSubjectDBDAO studentSubjectDBDao;
     private SubjectDBDAO subjectDBDao;
     private UserDBDAO userDBDao;
     
     
     public DalManager() {
           attendanceDBDao = new AttendanceDBDAO();
-          student_SubjectDBDao = new Student_SubjectDBDAO();
+          studentSubjectDBDao = new StudentSubjectDBDAO();
           subjectDBDao = new SubjectDBDAO();
           userDBDao = new UserDBDAO();
     } 
