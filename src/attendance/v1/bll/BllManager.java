@@ -35,10 +35,10 @@ public class BllManager implements IBLL {
     
 
     
-    public SubjectAttendance addNewAttendanceToDB() {
-        LoggedInUser lUser = LoggedInUser.getInstance();
-        return dalManager.addNewAttendanceToDB(lUser.getUserKey(), lUser.getSelectedSubjectKey());
-    }
+ //   public SubjectAttendance addNewAttendanceToDB() {
+  //      LoggedInUser lUser = LoggedInUser.getInstance();
+ //       return dalManager.addNewAttendanceToDB(lUser.getUserKey(), lUser.getSelectedSubjectKey());
+  //  }
  
 
     
@@ -116,7 +116,7 @@ public class BllManager implements IBLL {
     {
         if(checkCode(code))
         {
-            SubjectAttendance theAtttendance = addNewAttendanceToDB();
+           // SubjectAttendance theAtttendance = addNewAttendanceToDB();
         }
         
     }

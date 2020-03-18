@@ -78,6 +78,18 @@ public class UserDBDAO {
         }
         return null;  // User does not exist
     }
+    public User getUserByEmail(String userMail) throws SQLException {
+        List<User> allUsers = getAllUsers();
+        User user;
+        for (int i = 0; i < allUsers.size(); i++) {
+            user = allUsers.get(i);
+            String testMail = user.getEmail();
+            if (testMail == userMail)  {
+            return user;
+            }
+        }
+        return null;  // User does not exist
+    }
     
     
      public User addNewUserToDB(String userName, String password, String email, int phoneNr, String address, int postCode, String city, boolean teacher, String userIMG) { 

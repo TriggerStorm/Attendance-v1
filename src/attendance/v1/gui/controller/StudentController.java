@@ -84,7 +84,7 @@ public class StudentController implements Initializable {
     
     private AttendanceModel Am;
     private ScoMok Sm;
-    
+    private LoggedInUser lu;
     @FXML
     private Label Lb_logInUser;
     /**
@@ -92,10 +92,11 @@ public class StudentController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        lu = LoggedInUser.getInstance();
         settingTableView();
-        Lb_logInUser.setText("Student");
-        TF_logInAss.setText("Student");
-    }    
+        Lb_logInUser.setText(lu.getUserName());
+        TF_logInAss.setText(lu.getUserName());
+    }
     private void settingTableView() {
         Am = new AttendanceModel(); 
     }
