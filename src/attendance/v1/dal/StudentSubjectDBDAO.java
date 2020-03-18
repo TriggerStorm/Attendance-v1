@@ -21,17 +21,18 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 /**
  *
- * @author admin
+ * @author Trigger, Filip, Cecillia and Alan
  */
+
+
 public class StudentSubjectDBDAO {
-    
     private DBConnection dbc;
 
+    
     public StudentSubjectDBDAO() {
         dbc = new DBConnection();
-
-        
     }
+    
     
     public List<StudentSubject> getAllStudentSubjects() throws SQLException {
         List<StudentSubject> allStudentSubjects = new ArrayList(); //get a list to store the values.
@@ -65,7 +66,7 @@ public class StudentSubjectDBDAO {
     }
     
     
-    public List<StudentSubject> getSubjectsOfGivenStudent(int userKey) throws SQLException {
+    public List<StudentSubject> getSubjectsOfAStudent(int userKey) throws SQLException {
         List<StudentSubject> studentSubjects= new ArrayList();
         try(Connection con = dbc.getConnection()){
             String SQLStmt = "SELECT * FROM STUDENT_SUBJECTS WHERE userKey = '"+ userKey +"';";

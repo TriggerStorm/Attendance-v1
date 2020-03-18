@@ -6,6 +6,7 @@
 package attendance.v1.bll;
 
 import attendance.v1.be.Attendance;
+import attendance.v1.be.StudentSubject;
 import attendance.v1.be.SubjectAttendance;
 import attendance.v1.be.SubjectsHeld;
 import attendance.v1.be.User;
@@ -89,19 +90,14 @@ public class BllManager implements IBLL {
     @Override
     public List<Attendance> getAllAttendances() {
         return dalManager.getAllAttendances();
-        }
+    }
 
-    
+    @Override
     public List<Attendance> getStudentAttendanceForSubject(int studentKey, int subjectKey) {
         return dalManager.getStudentAttendanceForSubject(studentKey, subjectKey);
     }
    
 
-    public SubjectsHeld newSubjectsHeld(int sKey, String date, String secretCode)
-    {
-       return dalManager.addSubjectsHeld(sKey,date,secretCode);
-    }
-    
     @Override
     public SubjectAttendance addNewAttendanceToDB(int studentKey, SubjectsHeld subjectHeld) {
         return dalManager.addNewAttendanceToDB(studentKey, subjectHeld);
@@ -111,6 +107,32 @@ public class BllManager implements IBLL {
     @Override
     public SubjectAttendance getStudentDailyAttendance(int studentKey, SubjectsHeld subjectHeld) {
         return dalManager.getStudentDailyAttendance(studentKey, subjectHeld);
+    }
+
+    
+    
+
+// StudentSubjectDBDAO methods
+    
+    @Override
+    public List<StudentSubject> getSubjectsOfAStudent(int userKey) {
+        return dalManager.getSubjectsOfAStudent(userKey);
+    }
+
+   
+    
+    
+// SubjectsHeldDBDAO methods
+    
+    @Override
+    public SubjectsHeld addSubjectsHeld(int skey, String date, String secretCode) {
+        return dalManager.addSubjectsHeld(skey, date, secretCode);
+    }
+
+
+    public SubjectsHeld newSubjectsHeld(int sKey, String date, String secretCode)
+    {
+       return dalManager.addSubjectsHeld(sKey,date,secretCode);
     }
 
 }

@@ -6,6 +6,7 @@
 package attendance.v1.dal;
 
 import attendance.v1.be.Attendance;
+import attendance.v1.be.StudentSubject;
 import attendance.v1.be.SubjectAttendance;
 import attendance.v1.be.SubjectsHeld;
 import attendance.v1.be.User;
@@ -37,12 +38,13 @@ public interface IDAL {
 // AttendanceDBDAO methods
     public List<Attendance> getAllAttendances();
     public List<Attendance> getStudentAttendanceInSubject(int studentKey, int subjectKey);
-    public int[] getStudentAttendanceForSubjectInDays(int studentKey, int subjectKey);
     public List<Attendance> getStudentAttendanceForSubject(int studentKey, int subjectKey);
     public SubjectAttendance addNewAttendanceToDB(int studentKey, SubjectsHeld subjectHeld);
     public SubjectAttendance getStudentDailyAttendance(int studentKey, SubjectsHeld subjectHeld);
 
 
+// StudentSubjectDBDAO methods
+    public List<StudentSubject> getSubjectsOfAStudent(int userKey);
 
 
 // SubjectsHeldDBDAO methods
