@@ -6,6 +6,7 @@
 package attendance.v1.bll;
 
 import attendance.v1.be.Attendance;
+import attendance.v1.be.StudentSubject;
 import attendance.v1.be.SubjectAttendance;
 import attendance.v1.be.SubjectsHeld;
 import attendance.v1.be.User;
@@ -42,6 +43,16 @@ public interface IBLL {
     public SubjectAttendance getStudentDailyAttendance(int studentKey, SubjectsHeld subjectHeld);
 
     
-    
+
+// StudentSubjectDBDAO methods
+    public List<StudentSubject> getSubjectsOfAStudent(int userKey);
+
+
+
+// SubjectsHeldDBDAO methods
+    public SubjectsHeld addSubjectsHeld(int skey, String date, String secretCode);
+    public SubjectsHeld newSubjectsHeld(int sKey, String date, String secretCode);
+
+
 }
 

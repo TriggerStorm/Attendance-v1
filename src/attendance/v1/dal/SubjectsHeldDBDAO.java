@@ -24,6 +24,8 @@ import java.util.logging.Logger;
  */
 public class SubjectsHeldDBDAO {
      private DBConnection db;
+     
+     
      public List<SubjectsHeld> getALLSubjectsHeld() throws SQLException 
     {
         db = new DBConnection();
