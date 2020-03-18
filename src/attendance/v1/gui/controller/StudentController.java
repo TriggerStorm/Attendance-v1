@@ -9,6 +9,7 @@ import attendance.v1.be.LoggedInUser;
 import attendance.v1.be.ScoMok;
 import attendance.v1.gui.model.AttendanceModel;
 import com.jfoenix.controls.JFXButton;
+import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -26,6 +27,8 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
@@ -87,6 +90,8 @@ public class StudentController implements Initializable {
     private LoggedInUser lu;
     @FXML
     private Label Lb_logInUser;
+    @FXML
+    private ImageView img;
     /**
      * Initializes the controller class.
      */
@@ -96,6 +101,8 @@ public class StudentController implements Initializable {
         settingTableView();
         Lb_logInUser.setText(lu.getUserName());
         TF_logInAss.setText(lu.getUserName());
+        Image image1 = new Image(new File(lu.getUserIMG()).toURI().toString());
+        img.setImage(image1);
     }
     private void settingTableView() {
         Am = new AttendanceModel(); 
