@@ -5,6 +5,7 @@
  */
 package attendance.v1;
 
+import attendance.v1.be.User;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -31,6 +32,7 @@ public class AttendanceV1 extends Application {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
+        User loggedInUser;
         launch(args);
     }
     
