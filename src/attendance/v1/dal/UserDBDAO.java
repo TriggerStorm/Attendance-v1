@@ -12,6 +12,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import attendance.v1.be.User;
+import attendance.v1.be.LoggedInUser;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
@@ -34,20 +35,29 @@ public class UserDBDAO {
     public List<User> getAllUsers() throws SQLException{
         List<User> allUsers = new ArrayList(); //get a list to store the values.
         try(Connection con = dbc.getConnection()){
-            String SQLStmt = "SELECT * FROM USERS;";
+            String SQLStmt = "SELECT userKey, userName, password, email, phonenr, address, postCode, city, teacher, userIMG  FROM USERS;";
             Statement statement = con.createStatement();
             ResultSet rs = statement.executeQuery(SQLStmt);
             while(rs.next()) //While you have something in the results
             {
-                int userKey = rs.getInt("UserKey");
-                String userName = rs.getString("UserName");
-                String password = rs.getString("Password");
-                String email = rs.getString("Email");
-                int phoneNr = rs.getInt("Phonenr");
-                String address = rs.getString("Address");
-                int postCode = rs.getInt("PostCode");
-                String city = rs.getString("City");
-                String teacher = rs.getString("Teacher");
+                int userKey = rs.getInt("userKey");
+                String userName = rs.getString("userName");
+                String password = rs.getString("password");
+                String email = rs.getString("email");
+                int phoneNr = rs.getInt("phonenr");
+                String address = rs.getString("address");
+                int postCode = rs.getInt("postCode");
+                String city = rs.getString("city");
+                int isteacher = rs.getInt("teacher");
+                boolean teacher = false;
+                if(isteacher == 0)
+                {
+                    teacher = false;
+                }
+                else if(isteacher==1)
+                {
+                    teacher = true;
+                }
                 String userIMG =  rs.getString("userIMG");
                allUsers.add(new User(userKey, userName, password, email, phoneNr, address, postCode, city, teacher, userIMG)); 
             }    
@@ -70,7 +80,7 @@ public class UserDBDAO {
     }
     
     
-     public User addNewUserToDB(String userName, String password, String email, int phoneNr, String address, int postCode, String city, String teacher, String userIMG) { 
+     public User addNewUserToDB(String userName, String password, String email, int phoneNr, String address, int postCode, String city, boolean teacher, String userIMG) { 
         String sql = "INSERT INTO Users(userName, password, email, phoneNr, address, postCode, city, teacher, userIMG) VALUES (?,?,?,?,?,?,?,?,?)";
         User newUser = new User(postCode, userName, password, email, phoneNr, address, postCode, city, teacher, userIMG);
         try (Connection con = dbc.getConnection()) {
@@ -82,7 +92,16 @@ public class UserDBDAO {
             stmt.setString(5, address);
             stmt.setInt(6, postCode);
             stmt.setString(7, city);
-            stmt.setString(8, teacher);
+            int isteacher = 0;
+            if(teacher == true)
+            {
+                isteacher =1;
+            }
+            else if (teacher=false)
+            {
+                isteacher=1;
+            }
+            stmt.setInt(8, isteacher);
             stmt.setString(9, userIMG);
             int affectedRows = stmt.executeUpdate();
             if (affectedRows == 0) {
@@ -105,7 +124,7 @@ public class UserDBDAO {
     }
      
      
-    public User editUser (User userToEdit, String userName, String password, String email, int phoneNr, String address, int postCode, String city, String teacher, String userIMG) { 
+    public User editUser (User userToEdit, String userName, String password, String email, int phoneNr, String address, int postCode, String city, boolean teacher, String userIMG) { 
         try (//Get a connection to the database.
             Connection con = dbc.getConnection()) {
             //Create a prepared statement.
@@ -119,8 +138,18 @@ public class UserDBDAO {
             pstmt.setString(5, address);
             pstmt.setInt(6, postCode);
             pstmt.setString(7, city);
-            pstmt.setString(8, teacher);
+            int isteacher = 0;
+            if(teacher == true)
+            {
+                isteacher =1;
+            }
+            else if (teacher=false)
+            {
+                isteacher=1;
+            }
+            pstmt.setInt(8, isteacher);
             pstmt.setString(9, userIMG);
+            pstmt.setInt(10, userToEdit.getUserKey());
             //Execute SQL query.
             pstmt.executeUpdate();
             userToEdit.setUserName(userName);
@@ -159,7 +188,25 @@ public class UserDBDAO {
         for (int i = 0; i < allUsers.size(); i++) {
             User userToCheck = allUsers.get(i);
             if ((userToCheck.getEmail().equals(email)) && (userToCheck.getPassword().equals(password))) {
-                return 1; //user and password match = true
+                LoggedInUser lUser = LoggedInUser.getInstance();
+                lUser.setUserKey(userToCheck.getUserKey());
+                lUser.setUserName(userToCheck.getUserName());
+                lUser.setEmail(email);
+                lUser.setPassword(password);
+                lUser.setPhoneNr(userToCheck.getPhoneNr());
+                lUser.setPostCode(userToCheck.getPostCode());
+                lUser.setCity(userToCheck.getCity());
+                lUser.setTeacher(userToCheck.getTeacher());
+                lUser.setUserIMG(userToCheck.getUserIMG());
+                
+                if(userToCheck.getTeacher() == true)
+                {
+                    return 1; //user and password match = true
+                }
+                else if(userToCheck.getTeacher() == false)
+                {
+                    return 2;
+                }
             }
         }
         return 0;// fail log in
@@ -171,7 +218,7 @@ public class UserDBDAO {
         for (int i = 0; i < allUsers.size(); i++) {
             User userToCheck = allUsers.get(i);
             if (userToCheck.getEmail().equals(email)) {
-                if (userToCheck.getTeacher().equals("1")) {
+                if (userToCheck.getTeacher()) {
                 return true; //user is a teacher
             } else {
                     return false;  // user is not a teacher

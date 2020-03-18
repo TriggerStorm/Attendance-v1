@@ -103,7 +103,7 @@
                                     <Pane prefHeight="100.0" prefWidth="200.0">
                                        <children>
                                           <TextField fx:id="TF_code" layoutX="33.0" layoutY="14.0" prefHeight="25.0" prefWidth="95.0" promptText="Enter Code" />
-                                          <Button fx:id="Bn_submit" layoutX="34.0" layoutY="50.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="95.0" text="Submit" />
+                                          <Button fx:id="Bn_submit" layoutX="34.0" layoutY="50.0" mnemonicParsing="false" onAction="#submitAttendance" prefHeight="25.0" prefWidth="95.0" text="Submit" />
                                        </children>
                                     </Pane>
                                     <Pane prefHeight="67.0" prefWidth="105.0" />

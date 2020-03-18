@@ -5,6 +5,7 @@
  */
 package attendance.v1.dal;
 
+import com.microsoft.sqlserver.jdbc.SQLServerException;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -14,6 +15,8 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -21,7 +24,7 @@ import java.util.Locale;
  */
 public class SecretCodeDBDAO {
     private DBConnection db;
-   public boolean checkCode(int skey,int scode) throws SQLException, ParseException
+   public boolean checkCode(int skey,String scode) throws SQLException, ParseException
    {
        db = new DBConnection();
        
@@ -41,7 +44,11 @@ public class SecretCodeDBDAO {
                 long currentDate = new Date().getTime();
                 if(secretCode.equals(scode) && skey == subjectKey && currentDate + 14400000 < dateToCompare)
                     return true;
-            }    
+            }catch (SQLServerException ex) {
+            Logger.getLogger(AttendanceDBDAO.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+            Logger.getLogger(AttendanceDBDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
        return false;
    }
     

@@ -5,10 +5,12 @@
  */
 package attendance.v1.bll;
 
+import attendance.v1.be.LoggedInUser;
 import attendance.v1.be.Attendance;
 import attendance.v1.be.ScoMok;
 import attendance.v1.be.SubjectsHeld;
 import attendance.v1.be.User;
+import attendance.v1.be.SubjectAttendance;
 
 import java.util.List;
 
@@ -31,13 +33,17 @@ public class BllManager implements IBLL {
     
   
     
-    @Override
-    public List<String> addDayToAttendance(String selectedCourse) {
-        return dalManager.addDayToAttendance(selectedCourse);
+
+    
+    public SubjectAttendance addNewAttendanceToDB() {
+        LoggedInUser lUser = LoggedInUser.getInstance();
+        return dalManager.addNewAttendanceToDB(lUser.getUserKey(), lUser.getSelectedSubjectKey());
     }
  
+
     
 // UserDBDAO methods
+    
     @Override
     public List<User> getAllUsers() {
         return dalManager.getAllUsers();
@@ -51,13 +57,13 @@ public class BllManager implements IBLL {
 
     
     @Override
-    public User addNewUserToDB(String userName, String password, String email, int phoneNr, String address, int postCode, String city, String teacher, String userIMG) {
+    public User addNewUserToDB(String userName, String password, String email, int phoneNr, String address, int postCode, String city, boolean teacher, String userIMG) {
         return dalManager.addNewUserToDB(userName, password, email, phoneNr, address, postCode, city, teacher, userIMG);
     }
     
 
     @Override
-    public User editUser(User userToEdit, String userName, String password, String email, int phoneNr, String address, int postCode, String city, String teacher, String userIMG) {
+    public User editUser(User userToEdit, String userName, String password, String email, int phoneNr, String address, int postCode, String city, boolean teacher, String userIMG) {
         return dalManager.editUser(userToEdit, userName, password, email, phoneNr, address, postCode, city, teacher, userIMG);
     }
 
@@ -79,6 +85,13 @@ public class BllManager implements IBLL {
         return dalManager.checkIfTeacher(email);
     }
 
+    
+    
+    
+    
+    
+// AttendanceDBDAO methods
+    
     @Override
     public List<Attendance> getAllAttendances() {
         return dalManager.getAllAttendances();
@@ -94,6 +107,27 @@ public class BllManager implements IBLL {
        return dalManager.addSubjectsHeld(sKey,date,secretCode);
     }
     
+    @Override
+    public int[] getStudentAttendanceForSubjectInDays(int studentKey, int subjectKey) {
+        return dalManager.getStudentAttendanceForSubjectInDays(studentKey, subjectKey);
+    }
+    
+    public void submitAttendance(String code)
+    {
+        if(checkCode(code))
+        {
+            SubjectAttendance theAtttendance = addNewAttendanceToDB();
+        }
+        
+    }
     
 
+    
+///SecretCodeDBDAO methods
+
+    public boolean checkCode(String code)
+    {
+        LoggedInUser lUser = LoggedInUser.getInstance();
+        return dalManager.checkCode(lUser.getSelectedSubjectKey(), code);
+    }
 }

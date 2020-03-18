@@ -35,7 +35,21 @@ public class BLLutilities {
     }
 
     
-  /*   public int CheckUser (String email, String password) {//Checks if the user exists, and what kind of user we have.
+    
+    
+ /*    private int[] attendance = new int[5];
+    
+    public int[] addDayToAttendance() {
+        LocalDate now = LocalDate.now();
+        int dayOfWeek = now.getDayOfWeek().getValue();
+        
+ //       DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd LLLL yyyy");
+ //       String dateNowString = now.format(formatter);
+        return attendance;
+    } 
+   
+    
+     public int CheckUser (String email, String password) {//Checks if the user exists, and what kind of user we have.
 
         boolean usercheck = dalManager.CheckUser(email, password);
         int[] Status  = {1,2,3};//just for easy reference later, might have omitted this and just hardcoded the values.

@@ -5,6 +5,7 @@
  */
 package attendance.v1.dal;
 
+import attendance.v1.dal.SecretCodeDBDAO;
 import attendance.v1.be.ScoMok;
 import attendance.v1.be.SubjectAttendance;
 import attendance.v1.be.User;
@@ -13,6 +14,8 @@ import attendance.v1.bll.BllManager;
 import attendance.v1.be.Subject;
 import attendance.v1.be.SubjectsHeld;
 import java.sql.SQLException;
+import java.text.ParseException;
+import java.time.LocalDate;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -29,6 +32,7 @@ public class DalManager implements IDAL {
     private SubjectDBDAO subjectDBDao;
     private UserDBDAO userDBDao;
     private SubjectsHeldDBDAO subjectsHeldDBDao;
+    private SecretCodeDBDAO secretCodeDBDAO;
     
     
     
@@ -38,13 +42,19 @@ public class DalManager implements IDAL {
           subjectDBDao = new SubjectDBDAO();
           userDBDao = new UserDBDAO();
           subjectsHeldDBDao = new SubjectsHeldDBDAO();
+          secretCodeDBDAO = new SecretCodeDBDAO();
     } 
     
     
     
+
 // AttendanceDBDAO methods
     
-   
+   @Override 
+   public int[] addNewAttendanceToDB(int studentK, int subjectK)
+   {
+       return attendanceDBDao.addNewAttendanceToDB(studentK, subjectK);
+   }
     
    
     
@@ -53,6 +63,7 @@ public class DalManager implements IDAL {
         return attendanceDBDao.addDayToAttendance(selectedCourse);
     }
  
+
 // UserDBDAO methods
     
     @Override
@@ -78,13 +89,13 @@ public class DalManager implements IDAL {
 
     
     @Override
-    public User addNewUserToDB(String userName, String password, String email, int phoneNr, String address, int postCode, String city, String teacher, String userIMG) {
+    public User addNewUserToDB(String userName, String password, String email, int phoneNr, String address, int postCode, String city, boolean teacher, String userIMG) {
         return userDBDao.addNewUserToDB(userName, password, email, phoneNr, address, postCode, city, teacher, userIMG);
     }
     
 
     @Override
-    public User editUser(User userToEdit, String userName, String password, String email, int phoneNr, String address, int postCode, String city, String teacher, String userIMG) {
+    public User editUser(User userToEdit, String userName, String password, String email, int phoneNr, String address, int postCode, String city, boolean teacher, String userIMG) {
         return userDBDao.editUser(userToEdit, userName, password, email, phoneNr, address, postCode, city, teacher, userIMG);
     }
 
@@ -139,12 +150,27 @@ public class DalManager implements IDAL {
         return null;
     }
 
+
+
+    
+    @Override
+    public int[] getStudentAttendanceForSubjectInDays(int studentKey, int subjectKey) {
+       
+            try {
+                return attendanceDBDao.getStudentAttendanceForSubjectInDays(studentKey, subjectKey);
+            } catch (SQLException ex) {
+                Logger.getLogger(DalManager.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            return null;
+        }
+        
     
     @Override
     public SubjectsHeld addSubjectsHeld(int skey, String date, String secretCode)
     {
         try {
             return subjectsHeldDBDao.addSubjectsHeld(skey, date, secretCode);
+
         } catch (SQLException ex) {
             Logger.getLogger(DalManager.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -152,5 +178,18 @@ public class DalManager implements IDAL {
     }
     
     
+    //SecretCode Methods
     
+    @Override
+    public boolean checkCode(int sKey, String code)
+    {
+        try {
+            return secretCodeDBDAO.checkCode(sKey, code);
+        } catch (SQLException ex) {
+            Logger.getLogger(DalManager.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ParseException ex) {
+            Logger.getLogger(DalManager.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return false;
+    }   
 }

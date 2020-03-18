@@ -5,13 +5,14 @@
  */
 package attendance.v1.be;
 
-import java.util.List;
-
 /**
  *
- * @author Trigger
+ * @author cille
  */
-public class User {
+public class LoggedInUser{
+    
+    private static LoggedInUser instance = null;
+    
     private int userKey;
     private String userName;
     private String password;
@@ -22,28 +23,35 @@ public class User {
     private String city;
     private boolean teacher;
     private String userIMG;
-    //private List<SubjectAttendance> attendance;
     
+    private int selectedSubjectKey=1;
+
+    private LoggedInUser(){
+
+    }
+   
+    public static LoggedInUser getInstance()
+    {
+        if(instance == null)
+        {
+            instance = new LoggedInUser();
+        }
+        
+        return instance;
+    }
+
+
+    public int getSelectedSubjectKey()
+    {
+        return selectedSubjectKey;
+    }
     
- public User (int userKey, String userName, String password, String email, int phoneNr, String address, int zipCode, String city, boolean teacher, String userIMG) { /*, List<SubjectAttendance> attendance*/
+    public void setSelectedSubjectKey(int subjectKey)
+    {
+        selectedSubjectKey = subjectKey;
+    }
 
- 
- 
-     this.userKey = userKey;
-     this.userName = userName;
-     this.password = password;
-     this.email = email;
-     this.phoneNr = phoneNr;
-     this.address = address;
-     this.postCode = zipCode;
-     this.city = city;
-     this.teacher = teacher;
-     this.userIMG = userIMG;
-     //this.attendance = attendance;
-     
- }
-
-
+    
     public int getUserKey() {
         return userKey;
     }
@@ -122,13 +130,4 @@ public class User {
     public void setUserIMG(String userIMG) {
         this.userIMG = userIMG;
     }
-    
-    /*public List<SubjectAttendance> getAttendance () {
-        return attendance;
-    }
-
-    public void setUserIMG(List<SubjectAttendance> attendance) {
-        this.attendance = attendance;
-    }*/
- 
 }
