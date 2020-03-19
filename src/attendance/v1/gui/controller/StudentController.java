@@ -5,7 +5,6 @@
  */
 package attendance.v1.gui.controller;
 import attendance.v1.be.LoggedInUser;
-import attendance.v1.be.ScoMok;
 import attendance.v1.be.SubjectAttendance;
 import attendance.v1.gui.model.AttendanceModel;
 import com.jfoenix.controls.JFXButton;
@@ -91,7 +90,7 @@ public class StudentController implements Initializable {
     private Label LB_AttendanceRate;
     
     private AttendanceModel Am;
-    private ScoMok Sm;
+  
     private LoggedInUser lu;
     @FXML
     private Label Lb_logInUser;
