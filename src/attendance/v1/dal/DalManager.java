@@ -5,7 +5,6 @@
  */
 package attendance.v1.dal;
 import attendance.v1.dal.SecretCodeDBDAO;
-import attendance.v1.be.ScoMok;
 import attendance.v1.be.SubjectAttendance;
 import attendance.v1.be.User;
 import attendance.v1.be.Attendance;
