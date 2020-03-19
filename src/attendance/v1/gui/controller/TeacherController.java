@@ -90,6 +90,8 @@ public class TeacherController implements Initializable {
     private LoggedInUser lu;
     @FXML
     private ImageView img;
+    @FXML
+    private ImageView miniImg;
    
     /**
      * Initializes the controller class.
@@ -101,11 +103,13 @@ public class TeacherController implements Initializable {
     private void settingTableView() {
         lu = LoggedInUser.getInstance();
         Am = new AttendanceModel();
-         Lb_logInUser.setText(lu.getUserName());
         Lb_loginas.setText(lu.getUserName());
-        File file = new File(lu.getUserIMG());
-        Image image = new Image(file.toURI().toString());
-        img.setImage(image);
+            Lb_logInUser.setText(lu.getUserName());
+               Image image3 = new Image(lu.getUserIMG(), 100, 100, false, false);
+               Image image2 = new Image(lu.getUserIMG(), 10, 10, false, false);
+               
+        miniImg.setImage(image2);
+        img.setImage(image3);
  
     }
     @FXML

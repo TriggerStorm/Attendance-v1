@@ -36,7 +36,7 @@
                   <Label fx:id="date" layoutX="264.0" layoutY="7.0" prefHeight="18.0" prefWidth="182.0" styleClass="textsm2" text="Wednesday 24th February" />
                   <Button fx:id="Bn_EditOwn" layoutX="679.0" layoutY="1.0" mnemonicParsing="false" onAction="#handle_editown" prefHeight="12.0" prefWidth="10.0" style="-fx-background-color: #f5f5f5;">
                      <graphic>
-                        <ImageView fitHeight="25.0" fitWidth="27.0" pickOnBounds="true" preserveRatio="true">
+                        <ImageView fx:id="miniImg" fitHeight="25.0" fitWidth="27.0" pickOnBounds="true" preserveRatio="true">
                            <image>
                               <Image url="@../assets/usericon30x30.png" />
                            </image>

@@ -9,10 +9,14 @@ import attendance.v1.be.LoggedInUser;
 import attendance.v1.be.ScoMok;
 import attendance.v1.gui.model.AttendanceModel;
 import com.jfoenix.controls.JFXButton;
+import java.awt.image.RenderedImage;
 import java.io.File;
 import java.io.IOException;
+import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -32,6 +36,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
+import javax.imageio.ImageIO;
 
 /**
  * FXML Controller class
@@ -92,17 +97,25 @@ public class StudentController implements Initializable {
     private Label Lb_logInUser;
     @FXML
     private ImageView img;
+    @FXML
+    private ImageView miniImg;
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        lu = LoggedInUser.getInstance();
-        settingTableView();
-        Lb_logInUser.setText(lu.getUserName());
-        TF_logInAss.setText(lu.getUserName());
-        Image image1 = new Image(new File(lu.getUserIMG()).toURI().toString());
-        img.setImage(image1);
+       
+            lu = LoggedInUser.getInstance();
+            settingTableView();
+            TF_logInAss.setText(lu.getUserName());
+            Lb_logInUser.setText(lu.getUserName());
+               Image image3 = new Image(lu.getUserIMG(), 100, 100, false, false);
+               Image image2 = new Image(lu.getUserIMG(), 10, 10, false, false);
+               
+        miniImg.setImage(image2);
+        img.setImage(image3);
+    
+        
     }
     private void settingTableView() {
         Am = new AttendanceModel(); 
