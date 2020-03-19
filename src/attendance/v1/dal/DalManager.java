@@ -30,6 +30,7 @@ public class DalManager implements IDAL {
     private SubjectDBDAO subjectDBDao;
     private UserDBDAO userDBDao;
     private SubjectsHeldDBDAO subjectsHeldDBDao;
+    private SubjectDBDAO subjectDBdao;
     
     
     
@@ -197,5 +198,17 @@ public class DalManager implements IDAL {
         }
         return null;
     }
+    // SubjectDBDAO methods
     
+     public Subject getSpecificSubjects(int subjectKey){
+         
+             try {
+                 return subjectDBdao.getSpecificSubject(subjectKey);
+             } catch (SQLException ex) {
+                 Logger.getLogger(DalManager.class.getName()).log(Level.SEVERE, null, ex);
+             }
+             return null;
+         }
+     
+   
 }

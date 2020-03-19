@@ -7,6 +7,7 @@ package attendance.v1.bll;
 
 import attendance.v1.be.Attendance;
 import attendance.v1.be.StudentSubject;
+import attendance.v1.be.Subject;
 import attendance.v1.be.SubjectAttendance;
 import attendance.v1.be.SubjectsHeld;
 import attendance.v1.be.User;
@@ -135,4 +136,9 @@ public class BllManager implements IBLL {
        return dalManager.addSubjectsHeld(sKey,date,secretCode);
     }
 
+// SubjectDBDOA methods
+    public Subject getSpecificSubjects(int subjectKey){
+        return dalManager.getSpecificSubjects(subjectKey);
+    }
+    
 }

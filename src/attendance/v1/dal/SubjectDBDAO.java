@@ -45,13 +45,13 @@ public class SubjectDBDAO {
     }
     
     
-    public Subject getSpecificSubjects(int skey) throws SQLException {
+    public Subject getSpecificSubject(int subjectKey) throws SQLException {
         dbc = new DBConnection();
         try(Connection con = dbc.getConnection()){
-            String SQLStmt = "SELECT * FROM SUBJECTS WHERE subjectKey = '"+skey+"';";
+            String SQLStmt = "SELECT * FROM SUBJECTS WHERE subjectKey = '"+subjectKey+"';";
             Statement statement = con.createStatement();
             ResultSet rs = statement.executeQuery(SQLStmt);
-            int subjectKey = rs.getInt("SubjectKey");
+            //int subjectKey = rs.getInt("SubjectKey");
             String subjectName = rs.getString("SubjectName");
             String subjectIMG = rs.getString("SubjectIMG");
             String associatedCourse = rs.getString("AssociatedCourse");
