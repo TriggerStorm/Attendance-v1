@@ -7,8 +7,10 @@ package attendance.v1.be;
 
 /**
  *
- * @author admin
+ * @author Trigger, Filip, Cecillia and Alan
  */
+
+
 public class StudentSubject {
     private int subjectKey;
     private int userKey;

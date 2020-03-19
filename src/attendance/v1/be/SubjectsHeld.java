@@ -5,13 +5,14 @@
  */
 package attendance.v1.be;
 
+/**
+ *
+ * @author Trigger, Filip, Cecillia and Alan
+ */
 
- 
 
 
 public class SubjectsHeld {
-       
-    
         private int subjectKey;
         private String dateHeld;
         private String SecretCode;

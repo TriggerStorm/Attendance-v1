@@ -76,6 +76,20 @@ public class UserDBDAO {
     }
     
     
+    public User getLoggedInUser(String email) throws SQLException {
+        List<User> allUsers = getAllUsers();
+        User user;
+        for (int i = 0; i < allUsers.size(); i++) {
+            user = allUsers.get(i);
+            String testEmail = user.getEmail();
+            if (testEmail == email)  {
+            return user;
+            }
+        }
+        return null;  // User does not exist
+    }
+    
+    
      public User addNewUserToDB(String userName, String password, String email, int phoneNr, String address, int postCode, String city, boolean teacher, String userIMG) { 
         String sql = "INSERT INTO Users(userName, password, email, phoneNr, address, postCode, city, teacher, userIMG) VALUES (?,?,?,?,?,?,?,?,?)";
         User newUser = new User(postCode, userName, password, email, phoneNr, address, postCode, city, teacher, userIMG);
@@ -159,7 +173,7 @@ public class UserDBDAO {
         String stat = "DELETE FROM Users WHERE id =?";      // USE ID HERE??????
         try (Connection con = dbc.getConnection()) {
             PreparedStatement stmt = con.prepareStatement(stat);
-            stmt.setInt(1,userToDelete.getUserKey());                      // IS THIS 0 ??
+            stmt.setInt(1,userToDelete.getUserKey());
             stmt.execute();
         } catch (SQLException ex) {
             System.out.println("Exception " + ex);
