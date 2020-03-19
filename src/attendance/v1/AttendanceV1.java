@@ -5,6 +5,7 @@
  */
 package attendance.v1;
 
+import attendance.v1.be.User;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -16,7 +17,7 @@ import javafx.stage.Stage;
  * @author Bruger
  */
 public class AttendanceV1 extends Application {
-    
+
     @Override
     public void start(Stage stage) throws Exception {
         Parent root = FXMLLoader.load(getClass().getResource("gui/view/logIn.fxml"));

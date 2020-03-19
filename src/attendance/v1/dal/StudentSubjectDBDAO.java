@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 package attendance.v1.dal;
-
+import attendance.v1.AttendanceV1;
 import attendance.v1.be.Attendance;
 import attendance.v1.be.StudentSubject;
 import attendance.v1.be.SubjectAttendance;

@@ -35,7 +35,6 @@ public class StudentDBDAO {
            int skey = getSubjectsSPECIFIC(course).get(i).getSubjectKey();
            try(Connection con = db.getConnection()){
             String SQLStmt = "INSERT INTO  STUDENT_SUBJECTS(subjectKey,userKey) VALUES (?,?); ";
-            
             PreparedStatement pstmt = con.prepareStatement(SQLStmt);
             
              pstmt.setInt(1,ukey);

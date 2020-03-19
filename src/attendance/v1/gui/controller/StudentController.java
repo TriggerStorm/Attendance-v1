@@ -8,6 +8,8 @@ package attendance.v1.gui.controller;
 
 import attendance.v1.be.SubjectAttendance;
 import attendance.v1.gui.model.AttendanceModel;
+import attendance.v1.dal.UserDBDAO;
+import static attendance.v1.dal.UserDBDAO.loggedInUser;
 import com.jfoenix.controls.JFXButton;
 import java.io.IOException;
 import java.net.URL;
@@ -91,8 +93,11 @@ public class StudentController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         settingTableView();
-        Lb_logInUser.setText("Student");
-        TF_logInAss.setText("Student");
+         System.out.println("");
+                System.out.println("Loggeg in as UserName" + UserDBDAO.loggedInUser.getUserName());
+        Lb_logInUser.setText("zz" + UserDBDAO.loggedInUser.getUserName());
+        TF_logInAss.setText(UserDBDAO.loggedInUser.getUserName());
+        
     }    
     private void settingTableView() {
         Am = new AttendanceModel(); 
