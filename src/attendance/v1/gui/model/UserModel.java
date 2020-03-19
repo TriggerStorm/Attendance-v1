@@ -17,6 +17,7 @@ public class UserModel {
 
     public UserModel() {
         bllManager = new BllManager();
+        bllManager.getAllUsers();
     }
     
 

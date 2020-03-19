@@ -6,6 +6,7 @@
 package attendance.v1.gui.controller;
 
 import attendance.v1.be.User;
+import attendance.v1.bll.BllManager;
 import attendance.v1.gui.model.UserModel;
 import com.jfoenix.controls.JFXButton;
 import java.io.IOException;
@@ -33,7 +34,8 @@ public class LogInController implements Initializable {
     private TextField TF_password;
     @FXML
     private JFXButton Bn_login;
-
+    
+    private BllManager bllManager;
     private UserModel userModle;
     private User user;
     /**
@@ -53,8 +55,10 @@ public class LogInController implements Initializable {
        int loginstate = userModle.CheckUser(loginmail, passw);//returns an int, as it also checks if it is a teacher or a student.
         switch (loginstate) {
             case 1:  teacherLogin(loginmail, passw); //teacher login needs creation and then place make something like teacherLogin method in stead.
+                     bllManager.getLogInUser(TF_email.getText());
                     break;
             case 2:  studentLogin(loginmail, passw); //student login 
+                    bllManager.getLogInUser(TF_email.getText());
                     break;
             default: System.out.println("Sorry wrong authentication"); //Might want to make a popup here in stead....
        }
