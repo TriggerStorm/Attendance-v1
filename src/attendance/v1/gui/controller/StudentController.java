@@ -124,7 +124,7 @@ public class StudentController implements Initializable {
         tbv_wednesday.setCellValueFactory(new PropertyValueFactory<>("wednesday"));
         TBV_thursday.setCellValueFactory(new PropertyValueFactory<>("thursdag"));
         TBV_friday.setCellValueFactory(new PropertyValueFactory<>("fredag"));       
-        Lb_subjet.setText("SCO");    /*   
+        Lb_subjet.setText("SCO");    */
                 
 
        // TBV_attendance.setItems(Am.getSCOattendance());
