@@ -4,12 +4,12 @@
  * and open the template in the editor.
  */
 package attendance.v1.dal;
-
 import attendance.v1.dal.SecretCodeDBDAO;
 import attendance.v1.be.ScoMok;
 import attendance.v1.be.SubjectAttendance;
 import attendance.v1.be.User;
 import attendance.v1.be.Attendance;
+import attendance.v1.be.StudentSubject;
 import attendance.v1.bll.BllManager;
 import attendance.v1.be.Subject;
 import attendance.v1.be.SubjectsHeld;
@@ -28,17 +28,18 @@ import java.util.logging.Logger;
 
 public class DalManager implements IDAL {
     private AttendanceDBDAO attendanceDBDao;
-    private Student_SubjectDBDAO student_SubjectDBDao;
+    private StudentSubjectDBDAO studentSubjectDBDao;
     private SubjectDBDAO subjectDBDao;
     private UserDBDAO userDBDao;
     private SubjectsHeldDBDAO subjectsHeldDBDao;
     private SecretCodeDBDAO secretCodeDBDAO;
+    private SubjectDBDAO subjectDBdao;
     
     
     
     public DalManager() {
           attendanceDBDao = new AttendanceDBDAO();
-          student_SubjectDBDao = new Student_SubjectDBDAO();
+          studentSubjectDBDao = new StudentSubjectDBDAO();
           subjectDBDao = new SubjectDBDAO();
           userDBDao = new UserDBDAO();
           subjectsHeldDBDao = new SubjectsHeldDBDAO();
@@ -64,6 +65,7 @@ public class DalManager implements IDAL {
     }
  
 
+
 // UserDBDAO methods
     
     @Override
@@ -75,7 +77,14 @@ public class DalManager implements IDAL {
         }
         return null;
     }
-
+    public User getLoggedInUser(String email){
+        try {
+            return userDBDao.getLoggedInUser(email);
+        } catch (SQLException ex) {
+            Logger.getLogger(DalManager.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
+    }
     
     @Override
     public User getUser(int userKey) {
@@ -106,9 +115,9 @@ public class DalManager implements IDAL {
     }
 
    
-     @Override
-    public int checkUserLogin (String email, String password) { try {
-        //checks if our user exsts and the password is correct.
+    @Override
+    public int checkUserLogin (String email, String password) { //checks if our user exsts and the password is correct.
+        try {
         return userDBDao.checkUserLogin(email,password);
         } catch (SQLException ex) {
             Logger.getLogger(DalManager.class.getName()).log(Level.SEVERE, null, ex);
@@ -116,6 +125,7 @@ public class DalManager implements IDAL {
     return 0;
     }
 
+    
     @Override
     public boolean checkIfTeacher(String email) {
         try {
@@ -127,6 +137,7 @@ public class DalManager implements IDAL {
     }
 
 
+    
     
 // AttendanceDBDAO methods
 
@@ -140,10 +151,11 @@ public class DalManager implements IDAL {
         return null;
     }
 
+    
     @Override
-    public List<Attendance> getStudentAttendanceInSubject(int studentKey, int subjectKey) {
+    public List<Attendance> getStudentAttendanceForSubject(int studentKey, int subjectKey) { /// ????
         try {
-            return attendanceDBDao.getStudentAttendanceInSubject(studentKey, subjectKey);
+            return attendanceDBDao.getAStudentsAttendanceForASubject(studentKey, subjectKey);
         } catch (SQLException ex) {
             Logger.getLogger(DalManager.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -151,31 +163,70 @@ public class DalManager implements IDAL {
     }
 
 
-
+    @Override
+    public List<Attendance> getStudentAttendanceInSubject(int studentKey, int subjectKey) {
+       
+        try {
+            return attendanceDBDao.getAStudentsAttendanceForASubject(studentKey, subjectKey);
+        } catch (SQLException ex) {
+            Logger.getLogger(DalManager.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
+    }
+        
     
     @Override
-    public int[] getStudentAttendanceForSubjectInDays(int studentKey, int subjectKey) {
-       
-            try {
-                return attendanceDBDao.getStudentAttendanceForSubjectInDays(studentKey, subjectKey);
-            } catch (SQLException ex) {
-                Logger.getLogger(DalManager.class.getName()).log(Level.SEVERE, null, ex);
-            }
-            return null;
+    public SubjectAttendance addNewAttendanceToDB(int studentKey, SubjectsHeld subjectHeld) {
+        try {
+            return attendanceDBDao.addNewAttendanceToDB(studentKey, subjectHeld);
+        } catch (SQLException ex) {
+            Logger.getLogger(DalManager.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
+        return null;
+    }
+
+ 
+    @Override
+    public SubjectAttendance getStudentDailyAttendance(int studentKey, SubjectsHeld subjectHeld) {
+        try {
+            return attendanceDBDao.getSubjectAttendanceForAStudent(studentKey, subjectHeld);
+        } catch (SQLException ex) {
+            Logger.getLogger(DalManager.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
+    }
+
+    
+    
+    
+// StudentSubjectDBDAO methods
+    
+    @Override
+    public List<StudentSubject> getSubjectsOfAStudent(int userKey) {
+        try {
+            return studentSubjectDBDao.getSubjectsOfAStudent(userKey);
+        } catch (SQLException ex) {
+            Logger.getLogger(DalManager.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;  
+    }
+
+   
+    
+    
+// SubjectsHeldDBDAO methods
     
     @Override
     public SubjectsHeld addSubjectsHeld(int skey, String date, String secretCode)
     {
         try {
             return subjectsHeldDBDao.addSubjectsHeld(skey, date, secretCode);
-
         } catch (SQLException ex) {
             Logger.getLogger(DalManager.class.getName()).log(Level.SEVERE, null, ex);
         }
         return null;
     }
+
     
     
     //SecretCode Methods
@@ -192,4 +243,19 @@ public class DalManager implements IDAL {
         }
         return false;
     }   
+
+    // SubjectDBDAO methods
+    
+     public Subject getSpecificSubjects(int subjectKey){
+         
+             try {
+                 return subjectDBdao.getSpecificSubject(subjectKey);
+             } catch (SQLException ex) {
+                 Logger.getLogger(DalManager.class.getName()).log(Level.SEVERE, null, ex);
+             }
+             return null;
+         }
+     
+   
+
 }

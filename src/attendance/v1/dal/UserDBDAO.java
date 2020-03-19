@@ -17,7 +17,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-
+import attendance.v1.be.User;
+import attendance.v1.be.StudentSubject;
+import attendance.v1.be.SubjectsHeld;
 /**
  *
  * @author Trigger, Filip, Cecillia and Alan
@@ -25,10 +27,12 @@ import java.util.logging.Logger;
 
 
 public class UserDBDAO {
-        private DBConnection dbc;
-
+    private DBConnection dbc;
+    StudentSubjectDBDAO studentSubjectDBDao;
+    
     public UserDBDAO() {
         dbc = new DBConnection();
+        studentSubjectDBDao = new StudentSubjectDBDAO();
     }
         
    
@@ -50,14 +54,8 @@ public class UserDBDAO {
                 String city = rs.getString("city");
                 int isteacher = rs.getInt("teacher");
                 boolean teacher = false;
-                if(isteacher == 0)
-                {
-                    teacher = false;
-                }
-                else if(isteacher==1)
-                {
+                if(isteacher == 1)
                     teacher = true;
-                }
                 String userIMG =  rs.getString("userIMG");
                allUsers.add(new User(userKey, userName, password, email, phoneNr, address, postCode, city, teacher, userIMG)); 
             }    
@@ -78,19 +76,21 @@ public class UserDBDAO {
         }
         return null;  // User does not exist
     }
-    public User getUserByEmail(String userMail) throws SQLException {
+
+
+    public User getLoggedInUser(String email) throws SQLException {
         List<User> allUsers = getAllUsers();
         User user;
         for (int i = 0; i < allUsers.size(); i++) {
             user = allUsers.get(i);
-            String testMail = user.getEmail();
-            if (testMail == userMail)  {
+            String testEmail = user.getEmail();
+            if (testEmail == email)  {
             return user;
             }
         }
         return null;  // User does not exist
     }
-    
+
     
      public User addNewUserToDB(String userName, String password, String email, int phoneNr, String address, int postCode, String city, boolean teacher, String userIMG) { 
         String sql = "INSERT INTO Users(userName, password, email, phoneNr, address, postCode, city, teacher, userIMG) VALUES (?,?,?,?,?,?,?,?,?)";
@@ -106,13 +106,7 @@ public class UserDBDAO {
             stmt.setString(7, city);
             int isteacher = 0;
             if(teacher == true)
-            {
                 isteacher =1;
-            }
-            else if (teacher=false)
-            {
-                isteacher=1;
-            }
             stmt.setInt(8, isteacher);
             stmt.setString(9, userIMG);
             int affectedRows = stmt.executeUpdate();
@@ -152,13 +146,7 @@ public class UserDBDAO {
             pstmt.setString(7, city);
             int isteacher = 0;
             if(teacher == true)
-            {
-                isteacher =1;
-            }
-            else if (teacher=false)
-            {
-                isteacher=1;
-            }
+                isteacher = 1;
             pstmt.setInt(8, isteacher);
             pstmt.setString(9, userIMG);
             pstmt.setInt(10, userToEdit.getUserKey());
@@ -240,5 +228,34 @@ public class UserDBDAO {
         return false;  // user is not in allUsers
         }
         
+    
+    public String getUserNameFromKey(int studentKey) throws SQLException {
+        List<User> allUsers = getAllUsers();
+        for (int i = 0; i < allUsers.size(); i++) {
+            User testUser = allUsers.get(i);
+            if (testUser.getUserKey() == studentKey) {
+                return testUser.getUserName();
+            }
+        }
+        return null;
+    }
         
+    
+    public List<User> getAllStudentsInASubject(SubjectsHeld subjectsHeld) throws SQLException {
+        List<User> studentsInSubject = new ArrayList<>();
+        int subjectKey = subjectsHeld.getSubjectKey();
+        List<StudentSubject> allStudentSubjects = studentSubjectDBDao.getAllStudentSubjects();
+        for (int i = 0; i < allStudentSubjects.size(); i++) {
+            StudentSubject testStudentSubject = allStudentSubjects.get(i);
+            if (testStudentSubject.getSubjectKey() == subjectKey) {
+                int studentKeyInSubject = testStudentSubject.getUserKey();
+                User studentInSubject = getUser(studentKeyInSubject);
+                studentsInSubject.add(studentInSubject);   
+            }
+            
+        }
+        return studentsInSubject;
+    }
+    
+    
 }

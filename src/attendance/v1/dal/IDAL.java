@@ -6,9 +6,12 @@
 package attendance.v1.dal;
 
 import attendance.v1.be.Attendance;
-import attendance.v1.be.ScoMok;
+import attendance.v1.be.StudentSubject;
+import attendance.v1.be.Subject;
+import attendance.v1.be.SubjectAttendance;
 import attendance.v1.be.SubjectsHeld;
 import attendance.v1.be.User;
+import java.sql.SQLException;
 import java.time.LocalDate;
 import java.util.List;
 
@@ -21,7 +24,6 @@ import java.util.List;
 public interface IDAL {
 
 
-    List<String> addDayToAttendance(String selectedCourse);
 
 
 // UsersDBDAO methods
@@ -32,20 +34,30 @@ public interface IDAL {
     public void removeUserFromDB(User userToDelete);
     public int checkUserLogin (String email, String password);
     public boolean checkIfTeacher(String email);
-
+    public User getLoggedInUser(String email);
 
 // AttendanceDBDAO methods
     public List<Attendance> getAllAttendances();
     public List<Attendance> getStudentAttendanceInSubject(int studentKey, int subjectKey);
+
     public int[] addNewAttendanceToDB(int studentK, int subjectK);
+    public List<Attendance> getStudentAttendanceForSubject(int studentKey, int subjectKey);
+    public SubjectAttendance addNewAttendanceToDB(int studentKey, SubjectsHeld subjectHeld);
+    public SubjectAttendance getStudentDailyAttendance(int studentKey, SubjectsHeld subjectHeld);
 
-    public int[] getStudentAttendanceForSubjectInDays(int studentKey, int subjectKey);
 
-    
+// StudentSubjectDBDAO methods
+    public List<StudentSubject> getSubjectsOfAStudent(int userKey);
 
 
 // SubjectsHeldDBDAO methods
     public SubjectsHeld addSubjectsHeld(int skey, String date, String secretCode);
 
+
     public boolean checkCode(int sKey, String code);
+
+// subjectDBDAO
+    public Subject getSpecificSubjects(int subjectKey);
+
+
 }

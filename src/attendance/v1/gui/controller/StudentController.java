@@ -4,9 +4,9 @@
  * and open the template in the editor.
  */
 package attendance.v1.gui.controller;
-
 import attendance.v1.be.LoggedInUser;
 import attendance.v1.be.ScoMok;
+import attendance.v1.be.SubjectAttendance;
 import attendance.v1.gui.model.AttendanceModel;
 import com.jfoenix.controls.JFXButton;
 import java.awt.image.RenderedImage;
@@ -64,18 +64,18 @@ public class StudentController implements Initializable {
     @FXML
     private AnchorPane body1;
     @FXML
-    private TableView<ScoMok> TBV_attendance;
+    private TableView<?> TBV_attendance;
     @FXML
-    private TableColumn<ScoMok, String> TBV_monday;
+    /*private TableColumn<SubjectAttendance>, String> TBV_monday;
     @FXML
-    private TableColumn<ScoMok, String> TBV_tuesday;
+    private TableColumn<SubjectAttendance>, String> TBV_tuesday;
     @FXML
-    private TableColumn<ScoMok, String> tbv_wednesday;
+    private TableColumn<SubjectAttendance>, String> tbv_wednesday;
     @FXML
-    private TableColumn<ScoMok, String> TBV_thursday;
+    private TableColumn<SubjectAttendance>, String> TBV_thursday;
     @FXML
-    private TableColumn<ScoMok, String> TBV_friday;
-    @FXML
+    private TableColumn<SubjectAttendance>, String> TBV_friday;*/
+    
     private Button Bn_EditOwn;
     @FXML
     private TextField TF_code;
@@ -142,12 +142,12 @@ public class StudentController implements Initializable {
 
     @FXML
     private void handle_SCO(ActionEvent event) {
-        TBV_monday.setCellValueFactory(new PropertyValueFactory<>("monday"));
+       /* TBV_monday.setCellValueFactory(new PropertyValueFactory<>("monday"));
         TBV_tuesday.setCellValueFactory(new PropertyValueFactory<>("tuesday"));
         tbv_wednesday.setCellValueFactory(new PropertyValueFactory<>("wednesday"));
         TBV_thursday.setCellValueFactory(new PropertyValueFactory<>("thursdag"));
         TBV_friday.setCellValueFactory(new PropertyValueFactory<>("fredag"));       
-        Lb_subjet.setText("SCO");        
+        Lb_subjet.setText("SCO");    */
                 
 
        // TBV_attendance.setItems(Am.getSCOattendance());
@@ -157,12 +157,12 @@ public class StudentController implements Initializable {
     @FXML
     private void handle_SDE(ActionEvent event) {
         
-        TBV_monday.setCellValueFactory(new PropertyValueFactory<>("monday"));
+       /* TBV_monday.setCellValueFactory(new PropertyValueFactory<>("monday"));
         TBV_tuesday.setCellValueFactory(new PropertyValueFactory<>("tuesday"));
         tbv_wednesday.setCellValueFactory(new PropertyValueFactory<>("wednesday"));
         TBV_thursday.setCellValueFactory(new PropertyValueFactory<>("thursdag"));
         TBV_friday.setCellValueFactory(new PropertyValueFactory<>("friday"));       
-        Lb_subjet.setText("SDE");        
+        Lb_subjet.setText("SDE");      */  
                 
        // TBV_attendance.setItems(Am.getSDEattendance());
     }
@@ -170,12 +170,12 @@ public class StudentController implements Initializable {
     @FXML
     private void handle_DBOS(ActionEvent event) {
         
-        TBV_monday.setCellValueFactory(new PropertyValueFactory<>("monday"));
+       /* TBV_monday.setCellValueFactory(new PropertyValueFactory<>("monday"));
         TBV_tuesday.setCellValueFactory(new PropertyValueFactory<>("tuesday"));
         tbv_wednesday.setCellValueFactory(new PropertyValueFactory<>("wednesday"));
         TBV_thursday.setCellValueFactory(new PropertyValueFactory<>("thursdag"));
         TBV_friday.setCellValueFactory(new PropertyValueFactory<>("friday"));       
-        Lb_subjet.setText("DB/OS");        
+        Lb_subjet.setText("DB/OS");  */      
                 
 
        // TBV_attendance.setItems(Am.getDBOSattendance());
@@ -184,12 +184,12 @@ public class StudentController implements Initializable {
 
     @FXML
     private void handle_ITO(ActionEvent event) {
-         TBV_monday.setCellValueFactory(new PropertyValueFactory<>("monday"));
+        /*TBV_monday.setCellValueFactory(new PropertyValueFactory<>("monday"));
         TBV_tuesday.setCellValueFactory(new PropertyValueFactory<>("tuesday"));
         tbv_wednesday.setCellValueFactory(new PropertyValueFactory<>("wednesday"));
         TBV_thursday.setCellValueFactory(new PropertyValueFactory<>("thursdag"));
         TBV_friday.setCellValueFactory(new PropertyValueFactory<>("friday"));       
-        Lb_subjet.setText("ITO");        
+        Lb_subjet.setText("ITO");   */     
                 
        // TBV_attendance.setItems(Am.getITOattendance());
       

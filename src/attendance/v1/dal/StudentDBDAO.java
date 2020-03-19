@@ -6,7 +6,7 @@
 package attendance.v1.dal;
 import attendance.v1.dal.DBConnection;
 import attendance.v1.be.Subject;
-import attendance.v1.be.StudentSubjects;
+import attendance.v1.be.StudentSubject;
 import attendance.v1.be.User;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -25,7 +25,7 @@ public class StudentDBDAO {
 
     
      
-     public StudentSubjects newAssignStudentCourse(User user ,int course) throws SQLException
+     public StudentSubject newAssignStudentCourse(User user ,int course) throws SQLException
     {
         for(int i = 0; i < getSubjectsSPECIFIC(course).size();i++)
             
@@ -42,7 +42,7 @@ public class StudentDBDAO {
              pstmt.setInt(2, skey);
              pstmt.execute();
         }
-       return new StudentSubjects(ukey,skey);
+       return new StudentSubject(ukey,skey);
         } 
       return null;
 }
@@ -75,7 +75,10 @@ public class StudentDBDAO {
        return allclasses;
     }
      
-     public StudentSubjects editAssignStudentCourse(Subject subject, User user) throws SQLException 
+
+
+     public StudentSubject assignStudentCourse(Subject subject, User user) throws SQLException 
+
     {
         db = new DBConnection();
         
@@ -90,7 +93,7 @@ public class StudentDBDAO {
              pstmt.setInt(2,ckey);
             pstmt.setInt(3,ckey);
         }
-        return new StudentSubjects(ukey,ckey);
+        return new StudentSubject(ukey,ckey);
 }
 
 }

@@ -20,22 +20,18 @@ import java.util.List;
  * @author macos
  */
 public class SubjectDBDAO {
-       private DBConnection db;
-      public List<Subject> getSubjects() throws SQLException 
+    private DBConnection dbc;
+    public List<Subject> getSubjects() throws SQLException 
     {
-        db = new DBConnection();
+        dbc = new DBConnection();
         List<Subject> allclasses = new ArrayList();
            
-        try(Connection con = db.getConnection()){
+        try(Connection con = dbc.getConnection()){
             String SQLStmt = "SELECT * FROM SUBJECTS;";
-            
             Statement statement = con.createStatement();
             ResultSet rs = statement.executeQuery(SQLStmt);
-            
             while(rs.next()) 
             {
-               
-                
                 int subjectKey = rs.getInt("SubjectKey");
                 String subjectName = rs.getString("SubjectName");
                 String subjectIMG = rs.getString("SubjectIMG");
@@ -47,28 +43,24 @@ public class SubjectDBDAO {
         }
        return allclasses;
     }
-       public Subject getSpecificSubjects(int skey) throws SQLException 
-    {
-        db = new DBConnection();
-      
-           
-        try(Connection con = db.getConnection()){
-            String SQLStmt = "SELECT * FROM SUBJECTS WHERE subjectKey = '"+skey+"';";
-            
+    
+    
+    public Subject getSpecificSubject(int subjectKey) throws SQLException {
+        dbc = new DBConnection();
+        try(Connection con = dbc.getConnection()){
+            String SQLStmt = "SELECT * FROM SUBJECTS WHERE subjectKey = '"+subjectKey+"';";
             Statement statement = con.createStatement();
             ResultSet rs = statement.executeQuery(SQLStmt);
-           
-             
-                int subjectKey = rs.getInt("SubjectKey");
-                String subjectName = rs.getString("SubjectName");
-                String subjectIMG = rs.getString("SubjectIMG");
-                String associatedCourse = rs.getString("AssociatedCourse");
-                String associatedTeacher = rs.getString("AssociatedTeacher");
-                return  new Subject(subjectKey,subjectName,subjectIMG,associatedCourse,associatedTeacher);
-               
-            }    
-        }
-      
+            //int subjectKey = rs.getInt("SubjectKey");
+            String subjectName = rs.getString("SubjectName");
+            String subjectIMG = rs.getString("SubjectIMG");
+            String associatedCourse = rs.getString("AssociatedCourse");
+            String associatedTeacher = rs.getString("AssociatedTeacher");
+            return  new Subject(subjectKey,subjectName,subjectIMG,associatedCourse,associatedTeacher);
+        }    
     }
+      
+    
+}
 
 

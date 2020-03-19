@@ -7,7 +7,7 @@ package attendance.v1.bll;
 
 import attendance.v1.bll.BllManager;
 import attendance.v1.bll.IBLL;
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
 /**
@@ -18,37 +18,32 @@ import java.time.format.DateTimeFormatter;
 
 public class BLLutilities {
     
-
+ 
+    public static boolean hasFourHoursPass (String dateTimeHeldString) {
+        LocalDateTime dateTimeHeld = stringToLocalDateTime(dateTimeHeldString);
+        LocalDateTime fourHoursAgo = LocalDateTime.now().minusHours(4);
+        boolean fourHoursHavePassed = fourHoursAgo.isAfter(dateTimeHeld);
+        return fourHoursHavePassed;
+     }
     
-    public String dateNowToString() {
-        LocalDate now = LocalDate.now();
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd LLLL yyyy");
-        String dateNowString = now.format(formatter);
-        return dateNowString;
-    } 
-   
     
-    public LocalDate stringToLocalDate(String dateString) {
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd LLLL yyyy");
-        LocalDate dateNow = LocalDate.parse(dateString, formatter);
-        return dateNow;
+    public static LocalDateTime stringToLocalDateTime(String dateString) {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd['T'HH:mm:ss[Z]]");
+        LocalDateTime later = LocalDateTime.parse(dateString, formatter);
+        return later;
     }
-
-    
-    
-    
- /*    private int[] attendance = new int[5];
-    
-    public int[] addDayToAttendance() {
-        LocalDate now = LocalDate.now();
-        int dayOfWeek = now.getDayOfWeek().getValue();
-        
- //       DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd LLLL yyyy");
- //       String dateNowString = now.format(formatter);
-        return attendance;
+     
+     public static String localDateTimeToString(LocalDateTime date) {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd['T'HH:mm:ss[Z]]");
+        String dateString = date.format(formatter);
+        return dateString;
     } 
-   
+     
     
+    
+    
+/*    
+      
      public int CheckUser (String email, String password) {//Checks if the user exists, and what kind of user we have.
 
         boolean usercheck = dalManager.CheckUser(email, password);

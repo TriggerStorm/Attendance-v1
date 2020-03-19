@@ -9,24 +9,25 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.AbstractList;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import java.time.format.DateTimeFormatter;
+import com.microsoft.sqlserver.jdbc.SQLServerException;
+import java.sql.ResultSet;
+import java.sql.Statement;
 
 import attendance.v1.be.SubjectAttendance;
 import attendance.v1.be.User;
 import attendance.v1.be.Attendance;
-import java.sql.ResultSet;
-import java.sql.Statement;
 import attendance.v1.bll.BllManager;
 import attendance.v1.be.Subject;
-import com.microsoft.sqlserver.jdbc.SQLServerException;
-
-import java.time.format.DateTimeFormatter;
-
+import attendance.v1.be.SubjectsHeld;
+import attendance.v1.be.StudentSubject;
+import attendance.v1.be.SubjectAttendance;
 
 
 /**
@@ -37,23 +38,15 @@ import java.time.format.DateTimeFormatter;
 
 public class AttendanceDBDAO {
  
-/**
- *
- * @author Alan
- */
-    
     private DBConnection dbc;
     public List<Attendance> attendance;
     public List<SubjectAttendance> studentAttendance;
-    
+    public UserDBDAO newUserDBDao;
     
     
     public AttendanceDBDAO() {
-
-
+        newUserDBDao = new UserDBDAO();
         dbc = new DBConnection();
-
-
     }
     
     
@@ -74,11 +67,10 @@ public class AttendanceDBDAO {
         return allAttendance;
     }
      
-   public int[] addNewAttendanceToDB(int studentKey, int subjectKey) { 
-        LocalDate now = LocalDate.now();
+   public SubjectAttendance addNewAttendanceToDB(int studentKey, SubjectsHeld subjectHeld) throws SQLException { 
+        int subjectKey = subjectHeld.getSubjectKey();
         String dateHeld = dateNowToString();
         String sql = "INSERT INTO ATTENDANCE(UserKey, SubjectKey, DateHeld) VALUES (?,?,?)";
-        
         
         Attendance newAttendance = new Attendance(studentKey, subjectKey, dateHeld);
         try (Connection con = dbc.getConnection()) {
@@ -87,7 +79,6 @@ public class AttendanceDBDAO {
             stmt.setInt(2, subjectKey);
             stmt.setString(3, dateHeld);
             int affectedRows = stmt.executeUpdate();
-
             if (affectedRows == 0) {
                 throw new SQLException("Creating attendance failed, no rows affected.");
             }
@@ -103,21 +94,42 @@ public class AttendanceDBDAO {
         } catch (SQLException ex) {
             Logger.getLogger(AttendanceDBDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
-        return null;   // FOR NOW
+        return getSubjectAttendanceForAStudent(studentKey, subjectHeld);
     }
    
         
-
-    public int[] getStudentAttendanceForSubjectInDays(int studentKey, int subjectKey ) throws SQLException { // bit rough. Work in progress. Needs a lot of work
+   public List<SubjectAttendance> getSubjectAttendanceListForAllStudentsInThatSubject(SubjectsHeld subjectHeld) throws SQLException {
+       int subjectKey = subjectHeld.getSubjectKey();
+       List<SubjectAttendance> allStudentDailyAttendance = new ArrayList<>();
+       List<User> allStudentsInASubject = newUserDBDao.getAllStudentsInASubject(subjectHeld);
+       for (int i = 0; i < allStudentsInASubject.size(); i++) {
+           int userKey = allStudentsInASubject.get(i).getUserKey();
+           SubjectAttendance studentsDailyAttendance = getSubjectAttendanceForAStudent(userKey, subjectHeld);
+           allStudentDailyAttendance.add(studentsDailyAttendance);
+       }
+       return allStudentDailyAttendance;
+   }
+   
+   
+    public  SubjectAttendance getSubjectAttendanceForAStudent(int studentKey, SubjectsHeld subjectHeld) throws SQLException { // bit rough. Work in progress. Needs a lot of work
         int[] dailyAttendanceIntArray = new int[5];
-        List<Attendance> studentAttendanceInSubject = getStudentAttendanceInSubject(studentKey, subjectKey);
+        int subjectKey = subjectHeld.getSubjectKey();
+        List<Attendance> studentAttendanceInSubject = getAStudentsAttendanceForASubject(studentKey, subjectKey);
         dailyAttendanceIntArray = listOfAttendanceToIntArrayOfDays(studentAttendanceInSubject);
-        return dailyAttendanceIntArray;
+        String name = newUserDBDao.getUserNameFromKey(studentKey);
+        int monday = dailyAttendanceIntArray[0];
+        int tuesday = dailyAttendanceIntArray[1];
+        int wednesday = dailyAttendanceIntArray[2];
+        int thursday = dailyAttendanceIntArray[3];
+        int friday = dailyAttendanceIntArray[4];
+        int percent = 100; // to change
+        SubjectAttendance sda = new SubjectAttendance(name, monday, tuesday, wednesday, thursday, friday, percent);
+        return sda;
     }
     
     
 
-    public List<Attendance> getStudentAttendanceInSubject(int studentKey, int subjectKey) throws SQLException {
+    public List<Attendance> getAStudentsAttendanceForASubject(int studentKey, int subjectKey) throws SQLException {
         List<Attendance> allAttendances = getAllAttendances();
         List<Attendance> studentAttendanceInSubject = new ArrayList<>();
         Attendance testAttendance;
@@ -133,75 +145,54 @@ public class AttendanceDBDAO {
     }
 
 
-
-    public List<String> addDayToAttendance(String selectedCourse) { // bit rough. Work in progress. Needs a lot of work
- /*       selectedCourse = "SCO";  // will come from gui later
-        LocalDate now = LocalDate.now();
-        int dayOfWeek = now.getDayOfWeek().getValue();
-        int noOfCourses = attendance.size();
-        if (noOfCourses > 0) {
-            System.out.println("No of courses =" + noOfCourses);
-            for (int i = 0; i < noOfCourses; i++) {
-            
-            String testCourse = attendance.get(i);
-                System.out.println("Course number:" + (i+1));
-                System.out.println(testCourse);
-        }
-        return attendance;
-    } */
-       return null; 
-    }
-    
-
-    public String[] getSubjectAttendance(String subject) {
- /*       SubjectAttendance subjectCheck;
-        String[] subjectString;
-        int weekdayAttendance = 0;
-        if (mockStudentAttendance.size()>0) {
-            for(int i = 0; i > mockStudentAttendance.size(); i++) {
-                subjectCheck = null; 
-                // need to finish this method later
+   
+ 
+    public List<Attendance> getAllAttendanceForSubject(int subjectKey) throws SQLException {
+        List<Attendance> allAttendances = getAllAttendances();
+        List<Attendance> allAttendanceInSubject = new ArrayList<>();
+        Attendance testAttendance;
+        for (int i = 0; i < allAttendances.size(); i++) {
+            testAttendance = allAttendances.get(i);
+            if (testAttendance.getSubjectKey() == subjectKey) {
+                allAttendanceInSubject.add(testAttendance);
             }
-        } */
-        return null;
+        }
+        return allAttendanceInSubject;
     }
-
 
         
     public int[] listOfAttendanceToIntArrayOfDays(List<Attendance> attendanceList) {
         int[] dailyAttendanceIntArray = new int[5];
         int attendanceTotal = attendanceList.size();
-// System.out.println("No of courses =" + noOfCourses);
             for (int i = 0; i < attendanceTotal; i++) {
                 Attendance attendance = attendanceList.get(i);
                 String dateHeldString = attendance.getDateHeld();
-                LocalDate dateHeld = stringToLocalDate(dateHeldString);
+                LocalDateTime dateHeld = stringToLocalDate(dateHeldString);
                 int dayOfWeek = (dateHeld.getDayOfWeek().getValue()) - 1; 
                 dailyAttendanceIntArray[dayOfWeek] ++;
             }
-  //      int dayInt = Integer.parseInt(myString);
         return dailyAttendanceIntArray;
     }
     
    
     public String dateNowToString() {
-        LocalDate now = LocalDate.now();
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd LLLL yyyy");
+        LocalDateTime now = LocalDateTime.now();
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd['T'HH:mm:ss[Z]]");
         String dateNowString = now.format(formatter);
         return dateNowString;
     } 
     
     
-    public String localDateToString(LocalDate date) {
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd LLLL yyyy");
+    public String localDateToString(LocalDateTime date) {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd['T'HH:mm:ss[Z]]");
         String dateString = date.format(formatter);
         return dateString;
     } 
     
     
-     public LocalDate stringToLocalDate(String dateString) {
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd LLLL yyyy");
-        LocalDate date = LocalDate.parse(dateString, formatter);
+     public LocalDateTime stringToLocalDate(String dateString) {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd['T'HH:mm:ss[Z]]");
+        LocalDateTime date = LocalDateTime.parse(dateString, formatter);
         return date;
     }
     
@@ -221,6 +212,12 @@ public class AttendanceDBDAO {
 
 
     
-   
+ /*   public int[] getAllAttendanceForSubjectInDays(int subjectKey ) throws SQLException { // bit rough. Work in progress. Needs a lot of work
+        int[] dailyAttendanceIntArray = new int[5];
+        List<Attendance> allAttendanceInSubject = getAllAttendanceForSubject(subjectKey);
+        dailyAttendanceIntArray = listOfAttendanceToIntArrayOfDays(allAttendanceInSubject);
+        return dailyAttendanceIntArray;
+    }
+    */
 }
 
