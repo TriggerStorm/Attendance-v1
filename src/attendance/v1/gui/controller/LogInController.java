@@ -83,7 +83,6 @@ public class LogInController implements Initializable {
         
         Stage stage = (Stage) Bn_login.getScene().getWindow();
         stage.close();
-        bllManager.getSubjectsOfAStudent(loggedInUser.getId);
         bllManager.getSpecificSubjects(bllManager.getSubjectsOfAStudent(loggedInUser.getId));
     }
 
