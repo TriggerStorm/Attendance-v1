@@ -104,7 +104,7 @@ public class StudentController implements Initializable {
     @FXML
     private ImageView miniImg;
     private BLLutilities bllu;
-    private BllManager bm;
+  
     /**
      * Initializes the controller class.
      */
@@ -112,13 +112,10 @@ public class StudentController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
       
          bllu = new BLLutilities();
-         bm = new BllManager();
             lu = LoggedInUser.getInstance();
-        try {
-            System.out.println(bllu.subjectsForGui().get(1).getSubjectKey());
-        } catch (SQLException ex) {
-            Logger.getLogger(StudentController.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        
+           // System.out.println(bllu.subjectsForGui().get(1).getSubjectKey());
+       
     
             settingTableView();
             TF_logInAss.setText(lu.getUserName());
