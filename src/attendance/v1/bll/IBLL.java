@@ -34,7 +34,7 @@ public interface IBLL {
     public void removeUserFromDB(User userToDelete);
     public int checkUserLogin (String email, String password);
     public boolean checkIfTeacher(String email);
-
+    public User getLoggedInUser(String email);
 
 
  // AttendanceDBDAO methods

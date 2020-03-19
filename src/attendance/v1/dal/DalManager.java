@@ -56,7 +56,14 @@ public class DalManager implements IDAL {
         }
         return null;
     }
-
+    public User getLoggedInUser(String email){
+        try {
+            return userDBDao.getLoggedInUser(email);
+        } catch (SQLException ex) {
+            Logger.getLogger(DalManager.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
+    }
     
     @Override
     public User getUser(int userKey) {

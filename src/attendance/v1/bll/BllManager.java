@@ -44,7 +44,10 @@ public class BllManager implements IBLL {
     public List<User> getAllUsers() {
         return dalManager.getAllUsers();
         }
-
+    
+    public User getLoggedInUser(String email){
+        return dalManager.getLoggedInUser(email);
+    }
     
     @Override
     public User getUser(int userKey) {

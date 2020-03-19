@@ -74,7 +74,18 @@ public class UserDBDAO {
         }
         return null;  // User does not exist
     }
-    
+    public User getLoggedInUser(String email) throws SQLException {
+        List<User> allUsers = getAllUsers();
+        User user;
+        for (int i = 0; i < allUsers.size(); i++) {
+            user = allUsers.get(i);
+            String testEmail = user.getEmail();
+            if (testEmail == email)  {
+            return user;
+            }
+        }
+        return null;  // User does not exist
+    }
     
      public User addNewUserToDB(String userName, String password, String email, int phoneNr, String address, int postCode, String city, boolean teacher, String userIMG) { 
         String sql = "INSERT INTO Users(userName, password, email, phoneNr, address, postCode, city, teacher, userIMG) VALUES (?,?,?,?,?,?,?,?,?)";

@@ -5,6 +5,7 @@
  */
 package attendance.v1.gui.controller;
 
+import attendance.v1.be.Subject;
 import attendance.v1.be.User;
 import attendance.v1.bll.BllManager;
 import attendance.v1.gui.model.UserModel;
@@ -38,6 +39,7 @@ public class LogInController implements Initializable {
     private BllManager bllManager;
     private UserModel userModle;
     private User user;
+    private Subject subject;
     /**
      * Initializes the controller class.
      */
@@ -55,10 +57,10 @@ public class LogInController implements Initializable {
        int loginstate = userModle.CheckUser(loginmail, passw);//returns an int, as it also checks if it is a teacher or a student.
         switch (loginstate) {
             case 1:  teacherLogin(loginmail, passw); //teacher login needs creation and then place make something like teacherLogin method in stead.
-                     bllManager.getLogInUser(TF_email.getText());
+                     bllManager.getLoggedInUser(TF_email.getText());
                     break;
             case 2:  studentLogin(loginmail, passw); //student login 
-                    bllManager.getLogInUser(TF_email.getText());
+                    bllManager.getLoggedInUser(TF_email.getText());
                     break;
             default: System.out.println("Sorry wrong authentication"); //Might want to make a popup here in stead....
        }
@@ -83,7 +85,9 @@ public class LogInController implements Initializable {
         
         Stage stage = (Stage) Bn_login.getScene().getWindow();
         stage.close();
-        bllManager.getSpecificSubjects(bllManager.getSubjectsOfAStudent(loggedInUser.getId));
+        bllManager.getSubjectsOfAStudent(user.getUserKey());
+        bllManager.getSpecificSubjects(subject.getSubjectKey());
+        
     }
 
 
@@ -104,7 +108,7 @@ public class LogInController implements Initializable {
         
         Stage stage = (Stage) Bn_login.getScene().getWindow();
         stage.close();
-        bllManager.getSubjectsOfATeatcher(loggedInUser.getId);
+        
         
     }
     
