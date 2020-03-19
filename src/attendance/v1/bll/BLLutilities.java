@@ -5,10 +5,16 @@
  */
 package attendance.v1.bll;
 
+import attendance.v1.be.LoggedInUser;
+import attendance.v1.be.Subject;
 import attendance.v1.bll.BllManager;
 import attendance.v1.bll.IBLL;
+import attendance.v1.dal.SubjectDBDAO;
+import java.sql.SQLException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  *
@@ -17,7 +23,16 @@ import java.time.format.DateTimeFormatter;
 
 
 public class BLLutilities {
-    
+ private LoggedInUser lu;   
+ private BllManager bm;
+ private SubjectDBDAO sdb;
+ 
+ public BLLutilities()
+ {
+     lu = LoggedInUser.getInstance();
+     bm = new BllManager();
+     sdb = new SubjectDBDAO();
+ }
  
     public static boolean hasFourHoursPass (String dateTimeHeldString) {
         LocalDateTime dateTimeHeld = stringToLocalDateTime(dateTimeHeldString);
@@ -39,6 +54,15 @@ public class BLLutilities {
         return dateString;
     } 
      
+     public List<Subject> subjectsForGui() throws SQLException   
+     {
+         List<Subject> list = new ArrayList();
+         for(int i = 0; i < bm.getSubjectsOfAStudent(lu.getUserKey()).size();i++)
+         {
+            list.add(sdb.getSpecificSubject(bm.getSubjectsOfAStudent(lu.getUserKey()).get(i).getSubjectKey()));
+         }
+         return list;
+     }
     
     
     

@@ -6,6 +6,9 @@
 package attendance.v1.gui.controller;
 import attendance.v1.be.LoggedInUser;
 import attendance.v1.be.SubjectAttendance;
+import attendance.v1.bll.BLLutilities;
+import attendance.v1.bll.BllManager;
+import attendance.v1.dal.StudentSubjectDBDAO;
 import attendance.v1.gui.model.AttendanceModel;
 import com.jfoenix.controls.JFXButton;
 import java.awt.image.RenderedImage;
@@ -13,6 +16,8 @@ import java.io.File;
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.sql.SQLException;
+import java.util.Arrays;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -98,13 +103,23 @@ public class StudentController implements Initializable {
     private ImageView img;
     @FXML
     private ImageView miniImg;
+    private BLLutilities bllu;
+    private BllManager bm;
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-       
+      
+         bllu = new BLLutilities();
+         bm = new BllManager();
             lu = LoggedInUser.getInstance();
+        try {
+            System.out.println(bllu.subjectsForGui().get(1).getSubjectKey());
+        } catch (SQLException ex) {
+            Logger.getLogger(StudentController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    
             settingTableView();
             TF_logInAss.setText(lu.getUserName());
             Lb_logInUser.setText(lu.getUserName());
@@ -147,8 +162,8 @@ public class StudentController implements Initializable {
         TBV_thursday.setCellValueFactory(new PropertyValueFactory<>("thursdag"));
         TBV_friday.setCellValueFactory(new PropertyValueFactory<>("fredag"));       
         Lb_subjet.setText("SCO");    */
-                
-
+       
+         
        // TBV_attendance.setItems(Am.getSCOattendance());
 
     }
