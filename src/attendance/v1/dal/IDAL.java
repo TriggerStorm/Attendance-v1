@@ -40,7 +40,7 @@ public interface IDAL {
     public List<Attendance> getAllAttendances();
     public List<Attendance> getStudentAttendanceInSubject(int studentKey, int subjectKey);
 
-    public int[] addNewAttendanceToDB(int studentK, int subjectK);
+   // public int[] addNewAttendanceToDB(int studentK, int subjectK);
     public List<Attendance> getStudentAttendanceForSubject(int studentKey, int subjectKey);
     public SubjectAttendance addNewAttendanceToDB(int studentKey, SubjectsHeld subjectHeld);
     public SubjectAttendance getStudentDailyAttendance(int studentKey, SubjectsHeld subjectHeld);
