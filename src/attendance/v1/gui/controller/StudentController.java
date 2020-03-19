@@ -109,7 +109,7 @@ public class StudentController implements Initializable {
             settingTableView();
             TF_logInAss.setText(lu.getUserName());
             Lb_logInUser.setText(lu.getUserName());
-               Image image3 = new Image(lu.getUserIMG(), 100, 100, false, false);
+               Image image3 = new Image(lu.getUserIMG(), 80, 80, false, false);
                Image image2 = new Image(lu.getUserIMG(), 10, 10, false, false);
                
         miniImg.setImage(image2);
