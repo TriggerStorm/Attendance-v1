@@ -5,11 +5,14 @@
  */
 package attendance.v1.bll;
 
+import attendance.v1.be.LoggedInUser;
 import attendance.v1.be.Attendance;
 import attendance.v1.be.StudentSubject;
+import attendance.v1.be.Subject;
 import attendance.v1.be.SubjectAttendance;
 import attendance.v1.be.SubjectsHeld;
 import attendance.v1.be.User;
+import attendance.v1.be.SubjectAttendance;
 
 import java.util.List;
 
@@ -33,8 +36,12 @@ public class BllManager implements IBLL {
   
     
 
-    
-    
+ //   public SubjectAttendance addNewAttendanceToDB() {
+  //      LoggedInUser lUser = LoggedInUser.getInstance();
+ //       return dalManager.addNewAttendanceToDB(lUser.getUserKey(), lUser.getSelectedSubjectKey());
+  //  }
+ 
+
 
     
 // UserDBDAO methods
@@ -43,7 +50,10 @@ public class BllManager implements IBLL {
     public List<User> getAllUsers() {
         return dalManager.getAllUsers();
         }
-
+    
+    public User getLoggedInUser(String email){
+        return dalManager.getLoggedInUser(email);
+    }
     
     @Override
     public User getUser(int userKey) {
@@ -133,6 +143,31 @@ public class BllManager implements IBLL {
     public SubjectsHeld newSubjectsHeld(int sKey, String date, String secretCode)
     {
        return dalManager.addSubjectsHeld(sKey,date,secretCode);
+    }
+
+// SubjectDBDOA methods
+    public Subject getSpecificSubjects(int subjectKey){
+        return dalManager.getSpecificSubjects(subjectKey);
+    }
+    
+
+    public void submitAttendance(String code)
+    {
+        if(checkCode(code))
+        {
+           // SubjectAttendance theAtttendance = addNewAttendanceToDB();
+        }
+        
+    }
+    
+
+    
+///SecretCodeDBDAO methods
+
+    public boolean checkCode(String code)
+    {
+        LoggedInUser lUser = LoggedInUser.getInstance();
+        return dalManager.checkCode(lUser.getSelectedSubjectKey(), code);
     }
 
 }

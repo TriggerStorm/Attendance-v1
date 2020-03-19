@@ -5,11 +5,17 @@
  */
 package attendance.v1.gui.controller;
 
+import attendance.v1.be.LoggedInUser;
 import attendance.v1.be.User;
+import attendance.v1.dal.UserDBDAO;
+import attendance.v1.be.Subject;
+import attendance.v1.be.User;
+import attendance.v1.bll.BllManager;
 import attendance.v1.gui.model.UserModel;
 import com.jfoenix.controls.JFXButton;
 import java.io.IOException;
 import java.net.URL;
+import java.sql.SQLException;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -26,6 +32,7 @@ import javafx.stage.Stage;
  * @author Trigger
  */
 public class LogInController implements Initializable {
+    private LoggedInUser lu;
 
     @FXML
     private TextField TF_email;
@@ -33,29 +40,37 @@ public class LogInController implements Initializable {
     private TextField TF_password;
     @FXML
     private JFXButton Bn_login;
-
+    
+    private BllManager bllManager;
     private UserModel userModle;
     private User user;
+    private UserDBDAO udb;
+    private Subject subject;
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        // TODO
+      lu = LoggedInUser.getInstance();
     }    
 
     @FXML
 
-    private void handle_login(ActionEvent event) throws IOException{
+    private void handle_login(ActionEvent event) throws IOException, SQLException{
        userModle = new UserModel();
        String loginmail = TF_email.getText().trim();
        String passw = TF_password.getText().trim();
+     //  UserDBDAO udb = new UserDBDAO();
+//       lu.setEmail(udb.getUserByEmail(loginmail).getEmail());
+     //  lu.setUserName(udb.getUserByEmail(loginmail).getUserName());
        int loginstate = userModle.CheckUser(loginmail, passw);//returns an int, as it also checks if it is a teacher or a student.
         switch (loginstate) {
             case 1:  teacherLogin(loginmail, passw); //teacher login needs creation and then place make something like teacherLogin method in stead.
-                break;
+
+                    break;
             case 2:  studentLogin(loginmail, passw); //student login 
-                break;
+                    
+                    break;
             default: System.out.println("Sorry wrong authentication"); //Might want to make a popup here in stead....
        }
 
@@ -77,8 +92,14 @@ public class LogInController implements Initializable {
         addStage.setScene(addScene);
         addStage.show();
         
+        bllManager.getLoggedInUser(TF_email.getText());
+        bllManager.getSubjectsOfAStudent(user.getUserKey());
+        bllManager.getSpecificSubjects(subject.getSubjectKey());
+        
         Stage stage = (Stage) Bn_login.getScene().getWindow();
         stage.close();
+        
+        
     }
 
 
@@ -99,6 +120,8 @@ public class LogInController implements Initializable {
         
         Stage stage = (Stage) Bn_login.getScene().getWindow();
         stage.close();
+        
+        
     }
     
 

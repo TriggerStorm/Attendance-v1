@@ -4,10 +4,11 @@
  * and open the template in the editor.
  */
 package attendance.v1.gui.controller;
-
+import attendance.v1.be.LoggedInUser;
 import attendance.v1.be.SubjectAttendance;
 import attendance.v1.gui.model.AttendanceModel;
 import com.jfoenix.controls.JFXButton;
+import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -23,6 +24,8 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
@@ -83,6 +86,12 @@ public class TeacherController implements Initializable {
     private Label LB_AttendanceRate;
     @FXML
     private JFXButton bn_Showcode;
+    private LoggedInUser lu;
+    @FXML
+    private ImageView img;
+    @FXML
+    private ImageView miniImg;
+   
     /**
      * Initializes the controller class.
      */
@@ -91,9 +100,15 @@ public class TeacherController implements Initializable {
         settingTableView();
     }    
     private void settingTableView() {
+        lu = LoggedInUser.getInstance();
         Am = new AttendanceModel();
-        Lb_loginas.setText("Admin");
-        Lb_logInUser.setText("Admin");
+        Lb_loginas.setText(lu.getUserName());
+            Lb_logInUser.setText(lu.getUserName());
+               Image image3 = new Image(lu.getUserIMG(), 50, 50, false, false);
+               Image image2 = new Image(lu.getUserIMG(), 10, 10, false, false);
+               
+        miniImg.setImage(image2);
+        img.setImage(image3);
  
     }
     @FXML

@@ -12,6 +12,7 @@ import java.util.Random;
 import java.util.stream.Collectors;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import attendance.v1.be.LoggedInUser;
 
 /**
  *
@@ -38,5 +39,10 @@ public class AttendanceModel {
         String saltStr = salt.toString();
  
     return saltStr;
+    }
+    
+    public void submitAttendance(String code)
+    {
+        bllManager.submitAttendance(code);
     }
 }

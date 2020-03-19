@@ -29,7 +29,17 @@ public class SubjectAttendance {
         this.friday = friday;
         this.percent= percent;
     }
-    
+     public SubjectAttendance(int monday,int tuesday,int wednesday,int thursday,int friday) {
+        
+        this.monday = monday;
+        this.tuesday = tuesday;
+        this.wednesday = wednesday;
+        this.thursday = thursday;
+        this.friday = friday;
+        
+    }
+      
+      
     
     public String getName() {
         return name;

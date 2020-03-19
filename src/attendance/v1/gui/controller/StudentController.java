@@ -4,16 +4,20 @@
  * and open the template in the editor.
  */
 package attendance.v1.gui.controller;
-
-
+import attendance.v1.be.LoggedInUser;
 import attendance.v1.be.SubjectAttendance;
 import attendance.v1.gui.model.AttendanceModel;
 import attendance.v1.dal.UserDBDAO;
 import static attendance.v1.dal.UserDBDAO.loggedInUser;
 import com.jfoenix.controls.JFXButton;
+import java.awt.image.RenderedImage;
+import java.io.File;
 import java.io.IOException;
+import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -28,9 +32,12 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
+import javax.imageio.ImageIO;
 
 /**
  * FXML Controller class
@@ -39,6 +46,8 @@ import javafx.stage.Stage;
  */
 public class StudentController implements Initializable {
 
+    int currentSubjectKey;
+    
     @FXML
     private Label date;
     @FXML
@@ -83,22 +92,39 @@ public class StudentController implements Initializable {
     private Label LB_AttendanceRate;
     
     private AttendanceModel Am;
-    
-    
+  
+    private LoggedInUser lu;
     @FXML
     private Label Lb_logInUser;
+    @FXML
+    private ImageView img;
+    @FXML
+    private ImageView miniImg;
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        settingTableView();
+/*        settingTableView();
          System.out.println("");
                 System.out.println("Loggeg in as UserName" + UserDBDAO.loggedInUser.getUserName());
         Lb_logInUser.setText("zz" + UserDBDAO.loggedInUser.getUserName());
         TF_logInAss.setText(UserDBDAO.loggedInUser.getUserName());
         
     }    
+*/       
+            lu = LoggedInUser.getInstance();
+            settingTableView();
+            TF_logInAss.setText(lu.getUserName());
+            Lb_logInUser.setText(lu.getUserName());
+               Image image3 = new Image(lu.getUserIMG(), 50, 50, false, false);
+               Image image2 = new Image(lu.getUserIMG(), 10, 10, false, false);
+               
+        miniImg.setImage(image2);
+        img.setImage(image3);
+    
+        
+    }
     private void settingTableView() {
         Am = new AttendanceModel(); 
     }
@@ -129,7 +155,7 @@ public class StudentController implements Initializable {
         tbv_wednesday.setCellValueFactory(new PropertyValueFactory<>("wednesday"));
         TBV_thursday.setCellValueFactory(new PropertyValueFactory<>("thursdag"));
         TBV_friday.setCellValueFactory(new PropertyValueFactory<>("fredag"));       
-        Lb_subjet.setText("SCO"); */       
+        Lb_subjet.setText("SCO");    */
                 
 
        // TBV_attendance.setItems(Am.getSCOattendance());
@@ -178,4 +204,10 @@ public class StudentController implements Initializable {
 
     }
     
+    @FXML
+    private void submitAttendance(ActionEvent event)
+    {
+        String code = TF_code.getText();
+        Am.submitAttendance(code);
+    }
 }

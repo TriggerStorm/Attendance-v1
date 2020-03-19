@@ -11,6 +11,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import attendance.v1.be.User;
+import attendance.v1.be.LoggedInUser;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
@@ -76,7 +78,21 @@ public class UserDBDAO {
         }
         return null;  // User does not exist
     }
-    
+
+
+    public User getLoggedInUser(String email) throws SQLException {
+        List<User> allUsers = getAllUsers();
+        User user;
+        for (int i = 0; i < allUsers.size(); i++) {
+            user = allUsers.get(i);
+            String testEmail = user.getEmail();
+            if (testEmail == email)  {
+            return user;
+            }
+        }
+        return null;  // User does not exist
+    }
+
     
     public User getLoggedInUser(String email) throws SQLException {
         List<User> allUsers = getAllUsers();
@@ -188,7 +204,7 @@ public class UserDBDAO {
         for (int i = 0; i < allUsers.size(); i++) {
             User userToCheck = allUsers.get(i);
             if ((userToCheck.getEmail().equals(email)) && (userToCheck.getPassword().equals(password))) {
-                loggedInUser.setUserKey(userToCheck.getUserKey());
+  /*              loggedInUser.setUserKey(userToCheck.getUserKey());
                 loggedInUser.setUserName(userToCheck.getUserName());
                 loggedInUser.setEmail(email);
                 loggedInUser.setPassword(password);
@@ -215,6 +231,18 @@ public class UserDBDAO {
                 System.out.println("setTeacher" + loggedInUser.getTeacher());
                 System.out.println("");
                 System.out.println("setUserIMG" + loggedInUser.getUserIMG());
+
+*/
+                LoggedInUser lUser = LoggedInUser.getInstance();
+                lUser.setUserKey(userToCheck.getUserKey());
+                lUser.setUserName(userToCheck.getUserName());
+                lUser.setEmail(email);
+                lUser.setPassword(password);
+                lUser.setPhoneNr(userToCheck.getPhoneNr());
+                lUser.setPostCode(userToCheck.getPostCode());
+                lUser.setCity(userToCheck.getCity());
+                lUser.setTeacher(userToCheck.getTeacher());
+                lUser.setUserIMG(userToCheck.getUserIMG());
                 
                 if(userToCheck.getTeacher() == true)
                 {
