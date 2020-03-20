@@ -4,7 +4,6 @@
  * and open the template in the editor.
  */
 package attendance.v1.gui.controller;
-import attendance.v1.be.Attendance;
 import attendance.v1.be.LoggedInUser;
 import attendance.v1.be.SubjectAttendance;
 import attendance.v1.bll.BLLutilities;
@@ -22,8 +21,6 @@ import java.util.Arrays;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -71,17 +68,17 @@ public class StudentController implements Initializable {
     @FXML
     private AnchorPane body1;
     @FXML
-    private TableView<Attendance> TBV_attendance;
+    private TableView<?> TBV_attendance;
     @FXML
-    private TableColumn<Attendance,String> TBV_monday;
-//    @FXML
-//    private TableColumn<Attendance, String> TBV_tuesday;
-//    @FXML
-//    private TableColumn<SubjectAttendance, String> tbv_wednesday;
-//    @FXML
-//    private TableColumn<SubjectAttendance, String> TBV_thursday;
-//    @FXML
-//    private TableColumn<SubjectAttendance, String> TBV_friday;
+    /*private TableColumn<SubjectAttendance>, String> TBV_monday;
+    @FXML
+    private TableColumn<SubjectAttendance>, String> TBV_tuesday;
+    @FXML
+    private TableColumn<SubjectAttendance>, String> tbv_wednesday;
+    @FXML
+    private TableColumn<SubjectAttendance>, String> TBV_thursday;
+    @FXML
+    private TableColumn<SubjectAttendance>, String> TBV_friday;*/
     
     private Button Bn_EditOwn;
     @FXML
@@ -107,7 +104,6 @@ public class StudentController implements Initializable {
     @FXML
     private ImageView miniImg;
     private BLLutilities bllu;
-    private BllManager bm;
   
     /**
      * Initializes the controller class.
@@ -117,7 +113,7 @@ public class StudentController implements Initializable {
       
          bllu = new BLLutilities();
             lu = LoggedInUser.getInstance();
-         bm = new BllManager();
+        
            // System.out.println(bllu.subjectsForGui().get(1).getSubjectKey());
        
     
@@ -156,16 +152,16 @@ public class StudentController implements Initializable {
     }
 
     @FXML
-    private void handle_SCO(ActionEvent event) throws SQLException {
-        TBV_monday.setCellValueFactory(new PropertyValueFactory<>("dateHeld"));
-//        TBV_tuesday.setCellValueFactory(new PropertyValueFactory<>("tuesday"));
-//        tbv_wednesday.setCellValueFactory(new PropertyValueFactory<>("wednesday"));
-//        TBV_thursday.setCellValueFactory(new PropertyValueFactory<>("thursday"));
-//        TBV_friday.setCellValueFactory(new PropertyValueFactory<>("friday"));       
-        Lb_subjet.setText("SCO");    
-       ObservableList<Attendance> list = FXCollections.observableArrayList(bm.getStudentAttendanceForSubject(lu.getUserKey(),bllu.subjectsForGui().get(1).getSubjectKey()));
-      //   bm.getStudentAttendanceForSubject(lu.getUserKey(),bllu.subjectsForGui().get(1).getSubjectKey());
-        TBV_attendance.setItems(list);
+    private void handle_SCO(ActionEvent event) {
+       /* TBV_monday.setCellValueFactory(new PropertyValueFactory<>("monday"));
+        TBV_tuesday.setCellValueFactory(new PropertyValueFactory<>("tuesday"));
+        tbv_wednesday.setCellValueFactory(new PropertyValueFactory<>("wednesday"));
+        TBV_thursday.setCellValueFactory(new PropertyValueFactory<>("thursdag"));
+        TBV_friday.setCellValueFactory(new PropertyValueFactory<>("fredag"));       
+        Lb_subjet.setText("SCO");    */
+       
+         
+       // TBV_attendance.setItems(Am.getSCOattendance());
 
     }
 

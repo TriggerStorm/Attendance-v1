@@ -58,7 +58,7 @@ public class AttendanceDBDAO {
             ResultSet rs = statement.executeQuery(SQLStmt);
             while(rs.next()) //While you have something in the results
             {
-                int userKey = rs.getInt("studentKey");
+                int userKey = rs.getInt("UserKey");
                 int subjectKey = rs.getInt("SubjectKey");
                 String dateHeld =  rs.getString("DateHeld");
                allAttendance.add(new Attendance(userKey, subjectKey, dateHeld)); 

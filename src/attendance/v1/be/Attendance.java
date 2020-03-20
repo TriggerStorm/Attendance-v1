@@ -49,7 +49,7 @@ public Attendance(int studentKey, int subjectKey, String dateHeld){
     }
 
     public String getDateHeld() {
-        return dateHeld.split("T")[0];
+        return dateHeld;
 
     }
 
@@ -58,12 +58,6 @@ public Attendance(int studentKey, int subjectKey, String dateHeld){
         this.dateHeld = dateHeld;
     }
         
-    @Override
-    public String toString()
-    {
-        this.dateHeld = dateHeld.split("T")[0];
-        return this.dateHeld+"LOL";
-    }
         
 }
 
