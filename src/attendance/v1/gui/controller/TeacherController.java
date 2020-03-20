@@ -6,6 +6,7 @@
 package attendance.v1.gui.controller;
 import attendance.v1.be.LoggedInUser;
 import attendance.v1.be.SubjectAttendance;
+import attendance.v1.dal.DalManager;
 import attendance.v1.gui.model.AttendanceModel;
 import com.jfoenix.controls.JFXButton;
 import java.io.File;
@@ -91,6 +92,7 @@ public class TeacherController implements Initializable {
     private ImageView img;
     @FXML
     private ImageView miniImg;
+    private DalManager dm;
    
     /**
      * Initializes the controller class.
@@ -100,6 +102,7 @@ public class TeacherController implements Initializable {
         settingTableView();
     }    
     private void settingTableView() {
+        dm = new DalManager();
         lu = LoggedInUser.getInstance();
         Am = new AttendanceModel();
         Lb_loginas.setText(lu.getUserName());
@@ -176,6 +179,7 @@ public class TeacherController implements Initializable {
         TBV_Attendance.setCellValueFactory(new PropertyValueFactory<>("percent"));        
        // TBV_attendance.setItems(Am.getSCOattendance());
         Lb_subjet.setText("SCO");
+        lu.setSelectedSubjectKey(1); // YOU NEED TO GIVE SUBJECTS KEY HERE MANUALLY SO IT WONT BE 1 FOR SDE/ITO etc.
     }
 
     @FXML
@@ -187,7 +191,8 @@ public class TeacherController implements Initializable {
         TBV_friday.setCellValueFactory(new PropertyValueFactory<>("friday"));       
         TBV_student.setCellValueFactory(new PropertyValueFactory<>("Name"));        
         TBV_Attendance.setCellValueFactory(new PropertyValueFactory<>("percent"));        
-        Lb_subjet.setText("DB/OS");        
+        Lb_subjet.setText("DB/OS");     
+        lu.setSelectedSubjectKey(17);
        // TBV_attendance.setItems(Am.getDBOSattendance());
     }
 
@@ -201,6 +206,7 @@ public class TeacherController implements Initializable {
         TBV_student.setCellValueFactory(new PropertyValueFactory<>("Name"));        
         TBV_Attendance.setCellValueFactory(new PropertyValueFactory<>("percent"));        
         Lb_subjet.setText("ITO");        
+        lu.setSelectedSubjectKey(9);
        // TBV_attendance.setItems(Am.getITOattendance());
     }
 
@@ -214,6 +220,7 @@ public class TeacherController implements Initializable {
         TBV_student.setCellValueFactory(new PropertyValueFactory<>("Name"));        
         TBV_Attendance.setCellValueFactory(new PropertyValueFactory<>("percent"));        
         Lb_subjet.setText("SDE");        
+        lu.setSelectedSubjectKey(7);
 
         //TBV_attendance.setItems(Am.getSDEattendance());
 

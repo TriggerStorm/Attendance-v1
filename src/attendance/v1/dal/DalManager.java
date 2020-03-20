@@ -209,7 +209,16 @@ public class DalManager implements IDAL {
     }
 
     
-    
+    @Override
+    public SubjectsHeld getSpecificSubjectsHeld(int skey)
+    {
+        try {
+            return subjectsHeldDBDao.getSpecificSubjectsHeld(skey);
+        } catch (SQLException ex) {
+            Logger.getLogger(DalManager.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
+    }
     //SecretCode Methods
     
     @Override

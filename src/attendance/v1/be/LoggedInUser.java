@@ -23,11 +23,11 @@ public class LoggedInUser{
     private String city;
     private boolean teacher;
     private String userIMG;
-    
+    private SubjectsHeld sbh;
     private int selectedSubjectKey=1;
 
     private LoggedInUser(){
-
+     SubjectsHeld sbh = new SubjectsHeld(0,"","");
     }
    
     public static LoggedInUser getInstance()
@@ -129,5 +129,13 @@ public class LoggedInUser{
 
     public void setUserIMG(String userIMG) {
         this.userIMG = userIMG;
+    }
+    public void setSelectedSubjectsHeld(SubjectsHeld subjectsHeld)
+    {
+        this.sbh = subjectsHeld;
+    }
+    public SubjectsHeld getSelectedSubjectsHeld()
+    {
+        return sbh;
     }
 }

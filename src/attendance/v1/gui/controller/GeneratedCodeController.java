@@ -5,6 +5,7 @@
  */
 package attendance.v1.gui.controller;
 
+import attendance.v1.be.LoggedInUser;
 import attendance.v1.bll.BllManager;
 import attendance.v1.gui.model.AttendanceModel;
 import java.net.URL;
@@ -28,11 +29,13 @@ public class GeneratedCodeController implements Initializable {
     private Label TF_code;
     private AttendanceModel Am;
     private BllManager bm;
+    private LoggedInUser lu;
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        lu = LoggedInUser.getInstance();
         bm = new BllManager();
         setcode();
     }    
@@ -44,7 +47,7 @@ public class GeneratedCodeController implements Initializable {
        DateFormat df = new SimpleDateFormat("dd-M-yyyy hh:mm:ss");
        Date date = new Date();
        
-       bm.newSubjectsHeld(0,df.format(date),secretCode); // TO DO IT NEEDS TO KNOW CURRENT SELECTED SUBJECT
+       bm.newSubjectsHeld(lu.getSelectedSubjectKey(),df.format(date),secretCode); // TO DO IT NEEDS TO KNOW CURRENT SELECTED SUBJECT
        
     }
 }
