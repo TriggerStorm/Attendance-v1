@@ -41,7 +41,7 @@ public class SecretCodeDBDAO {
             ResultSet rs = statement.executeQuery(SQLStmt);
             while(rs.next())
             {
-                System.out.println("In the while loop");
+               // System.out.println("In the while loop");
                 int subjectKey = rs.getInt("subjectKey");
                 String savedDate = rs.getString("date");
                 String secretCode = rs.getString("secretCode");
@@ -58,7 +58,7 @@ public class SecretCodeDBDAO {
                 long currentDate = new Date().getTime();*/
                 if(secretCode.equals(scode) && skey == subjectKey && /*(currentDate + 14400000) < dateToCompare*/ !fourHoursHavePassed)
                 {
-                    System.out.println("In the if statement");
+                    //System.out.println("In the if statement");
                     subjectHeld = new SubjectsHeld(subjectKey, savedDate, secretCode);
                     return subjectHeld;
                 }
