@@ -49,7 +49,7 @@ public class GeneratedCodeController implements Initializable {
        LocalDateTime date = LocalDateTime.now();
          DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd['T'HH:mm:ss[Z]]");
         String dateString = date.format(formatter);
-       bm.newSubjectsHeld(lu.getSelectedSubjectKey(),dateString,secretCode); // TO DO IT NEEDS TO KNOW CURRENT SELECTED SUBJECT
+       bm.newSubjectsHeld(lu.getSelectedSubjectKey(),secretCode,dateString); // TO DO IT NEEDS TO KNOW CURRENT SELECTED SUBJECT
        
     }
 }
