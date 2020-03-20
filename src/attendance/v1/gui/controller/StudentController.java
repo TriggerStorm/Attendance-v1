@@ -38,6 +38,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import javax.imageio.ImageIO;
+import javax.swing.JLabel;
 
 /**
  * FXML Controller class
@@ -108,11 +109,12 @@ public class StudentController implements Initializable {
 /*        settingTableView();
          System.out.println("");
                 System.out.println("Loggeg in as UserName" + UserDBDAO.loggedInUser.getUserName());
-        Lb_logInUser.setText("zz" + UserDBDAO.loggedInUser.getUserName());
+        Lb_logInUser.setText(UserDBDAO.loggedInUser.getUserName());
         TF_logInAss.setText(UserDBDAO.loggedInUser.getUserName());
-        
     }    
-*/       
+*/      
+     String dateString = "todays date";
+     //   date = new JLabel(dateString);
             lu = LoggedInUser.getInstance();
             settingTableView();
             TF_logInAss.setText(lu.getUserName());
@@ -210,4 +212,7 @@ public class StudentController implements Initializable {
         String code = TF_code.getText();
         Am.submitAttendance(code);
     }
+    
+    
+    
 }
