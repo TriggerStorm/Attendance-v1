@@ -11,6 +11,8 @@ import attendance.v1.gui.model.AttendanceModel;
 import java.net.URL;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Date;
 import java.util.ResourceBundle;
 import javafx.fxml.FXML;
@@ -44,10 +46,10 @@ public class GeneratedCodeController implements Initializable {
         Am = new AttendanceModel();
         String secretCode = Am.getCode();
        TF_code.setText(secretCode);
-       DateFormat df = new SimpleDateFormat("dd-M-yyyy hh:mm:ss");
-       Date date = new Date();
-       
-       bm.newSubjectsHeld(lu.getSelectedSubjectKey(),df.format(date),secretCode); // TO DO IT NEEDS TO KNOW CURRENT SELECTED SUBJECT
+       LocalDateTime date = LocalDateTime.now();
+         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd['T'HH:mm:ss[Z]]");
+        String dateString = date.format(formatter);
+       bm.newSubjectsHeld(lu.getSelectedSubjectKey(),dateString,secretCode); // TO DO IT NEEDS TO KNOW CURRENT SELECTED SUBJECT
        
     }
 }
