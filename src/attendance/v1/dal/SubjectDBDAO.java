@@ -51,13 +51,17 @@ public class SubjectDBDAO {
             String SQLStmt = "SELECT * FROM SUBJECTS WHERE subjectKey = '"+subjectKey+"';";
             Statement statement = con.createStatement();
             ResultSet rs = statement.executeQuery(SQLStmt);
-            //int subjectKey = rs.getInt("SubjectKey");
+            while(rs.next()) 
+            {
+            int subjecttKey = rs.getInt("SubjectKey");
             String subjectName = rs.getString("SubjectName");
             String subjectIMG = rs.getString("SubjectIMG");
             String associatedCourse = rs.getString("AssociatedCourse");
             String associatedTeacher = rs.getString("AssociatedTeacher");
             return  new Subject(subjectKey,subjectName,subjectIMG,associatedCourse,associatedTeacher);
+            }
         }    
+        return null;
     }
       
     

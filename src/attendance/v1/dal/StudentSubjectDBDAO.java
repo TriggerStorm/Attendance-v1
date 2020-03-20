@@ -69,13 +69,14 @@ public class StudentSubjectDBDAO {
     public List<StudentSubject> getSubjectsOfAStudent(int userKey) throws SQLException {
         List<StudentSubject> studentSubjects = new ArrayList();
         try(Connection con = dbc.getConnection()){
-            String SQLStmt = "SELECT * FROM STUDENT_SUBJECTS WHERE userKey = '"+ userKey +"';";
+            String SQLStmt = "SELECT * FROM  Student_Subjects WHERE userKey = '"+ userKey +"';";
             Statement statement = con.createStatement();
             ResultSet rs = statement.executeQuery(SQLStmt);
             while(rs.next()) 
             {
                 int subjectKey = rs.getInt("subjectKey");
-                StudentSubject p = new StudentSubject(subjectKey, userKey);
+		 int userrKey = rs.getInt("userKey");
+                StudentSubject p = new StudentSubject(subjectKey,userrKey);
                 studentSubjects.add(p);
             }    
         }
