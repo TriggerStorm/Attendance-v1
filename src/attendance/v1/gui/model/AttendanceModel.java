@@ -41,8 +41,8 @@ public class AttendanceModel {
     return saltStr;
     }
     
-    public void submitAttendance(String code)
+    public void submitAttendance(String code, String selectedSubjectName)
     {
-        bllManager.submitAttendance(code);
+        bllManager.submitAttendance(code, selectedSubjectName);
     }
 }

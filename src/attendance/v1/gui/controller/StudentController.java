@@ -216,7 +216,8 @@ public class StudentController implements Initializable {
     @FXML
     private void submitAttendance(ActionEvent event)
     {
+        String selectedSubject = Lb_subjet.getText();
         String code = TF_code.getText();
-        Am.submitAttendance(code);
+        Am.submitAttendance(code, selectedSubject);
     }
 }

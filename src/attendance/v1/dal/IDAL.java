@@ -54,7 +54,7 @@ public interface IDAL {
     public SubjectsHeld addSubjectsHeld(int skey, String date, String secretCode);
 
 
-    public boolean checkCode(int sKey, String code);
+    public SubjectsHeld checkCode(int sKey, String code);
 
 // subjectDBDAO
     public Subject getSpecificSubjects(int subjectKey);

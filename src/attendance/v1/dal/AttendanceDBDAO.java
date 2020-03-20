@@ -69,8 +69,8 @@ public class AttendanceDBDAO {
      
    public SubjectAttendance addNewAttendanceToDB(int studentKey, SubjectsHeld subjectHeld) throws SQLException { 
         int subjectKey = subjectHeld.getSubjectKey();
-        String dateHeld = dateNowToString();
-        String sql = "INSERT INTO ATTENDANCE(UserKey, SubjectKey, DateHeld) VALUES (?,?,?)";
+        String dateHeld = subjectHeld.getDateHeld();
+        String sql = "INSERT INTO ATTENDANCE(studentKey, SubjectKey, DateHeld) VALUES (?,?,?)";
         
         Attendance newAttendance = new Attendance(studentKey, subjectKey, dateHeld);
         try (Connection con = dbc.getConnection()) {
