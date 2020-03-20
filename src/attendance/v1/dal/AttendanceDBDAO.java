@@ -114,7 +114,7 @@ public class AttendanceDBDAO {
     public  SubjectAttendance getSubjectAttendanceForAStudent(int studentKey, SubjectsHeld subjectHeld) throws SQLException { // bit rough. Work in progress. Needs a lot of work
         int[] dailyAttendanceIntArray = new int[5];
         int subjectKey = subjectHeld.getSubjectKey();
-        List<Attendance> studentAttendanceInSubject = getAStudentsAttendanceForASubject(studentKey, subjectKey);
+        List<Attendance> studentAttendanceInSubject = getAllOfAStudentsAttendanceForASubject(studentKey, subjectKey);
         dailyAttendanceIntArray = listOfAttendanceToIntArrayOfDays(studentAttendanceInSubject);
         String name = newUserDBDao.getUserNameFromKey(studentKey);
         int monday = dailyAttendanceIntArray[0];
@@ -129,7 +129,7 @@ public class AttendanceDBDAO {
     
     
 
-    public List<Attendance> getAStudentsAttendanceForASubject(int studentKey, int subjectKey) throws SQLException {
+    public List<Attendance> getAllOfAStudentsAttendanceForASubject(int studentKey, int subjectKey) throws SQLException {
         List<Attendance> allAttendances = getAllAttendances();
         List<Attendance> studentAttendanceInSubject = new ArrayList<>();
         Attendance testAttendance;
