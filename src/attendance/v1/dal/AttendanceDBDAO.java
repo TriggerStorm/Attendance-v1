@@ -101,7 +101,7 @@ public class AttendanceDBDAO {
    public List<SubjectAttendance> getSubjectAttendanceListForAllStudentsInThatSubject(SubjectsHeld subjectHeld) throws SQLException {
        int subjectKey = subjectHeld.getSubjectKey();
        List<SubjectAttendance> allStudentDailyAttendance = new ArrayList<>();
-       List<User> allStudentsInASubject = newUserDBDao.getAllStudentsInASubject(subjectHeld);
+       List<User> allStudentsInASubject = newUserDBDao.getAllStudentsInASubject(subjectKey);
        for (int i = 0; i < allStudentsInASubject.size(); i++) {
            int userKey = allStudentsInASubject.get(i).getUserKey();
            SubjectAttendance studentsDailyAttendance = getSubjectAttendanceForAStudent(userKey, subjectHeld);

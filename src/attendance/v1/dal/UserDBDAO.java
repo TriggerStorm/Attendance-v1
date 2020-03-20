@@ -273,9 +273,8 @@ public class UserDBDAO {
     }
         
     
-    public List<User> getAllStudentsInASubject(SubjectsHeld subjectsHeld) throws SQLException {
+    public List<User> getAllStudentsInASubject(int subjectKey) throws SQLException {
         List<User> studentsInSubject = new ArrayList<>();
-        int subjectKey = subjectsHeld.getSubjectKey();
         List<StudentSubject> allStudentSubjects = studentSubjectDBDao.getAllStudentSubjects();
         for (int i = 0; i < allStudentSubjects.size(); i++) {
             StudentSubject testStudentSubject = allStudentSubjects.get(i);
