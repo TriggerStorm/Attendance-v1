@@ -170,16 +170,18 @@ public class StudentController implements Initializable {
     }
 
     @FXML
-    private void handle_SDE(ActionEvent event) {
+    private void handle_SDE(ActionEvent event) throws SQLException {
         
-       /* TBV_monday.setCellValueFactory(new PropertyValueFactory<>("monday"));
-        TBV_tuesday.setCellValueFactory(new PropertyValueFactory<>("tuesday"));
-        tbv_wednesday.setCellValueFactory(new PropertyValueFactory<>("wednesday"));
-        TBV_thursday.setCellValueFactory(new PropertyValueFactory<>("thursdag"));
-        TBV_friday.setCellValueFactory(new PropertyValueFactory<>("friday"));       
-        Lb_subjet.setText("SDE");      */  
+       TBV_monday.setCellValueFactory(new PropertyValueFactory<>("dateHeld"));
+      //  TBV_tuesday.setCellValueFactory(new PropertyValueFactory<>("tuesday"));
+      //  tbv_wednesday.setCellValueFactory(new PropertyValueFactory<>("wednesday"));
+      //  TBV_thursday.setCellValueFactory(new PropertyValueFactory<>("thursdag"));
+      //  TBV_friday.setCellValueFactory(new PropertyValueFactory<>("friday")); 
+       ObservableList<Attendance> list = FXCollections.observableArrayList(bm.getStudentAttendanceForSubject(lu.getUserKey(),bllu.subjectsForGui().get(0).getSubjectKey()));
+      
+        Lb_subjet.setText("SDE");       
                 
-       // TBV_attendance.setItems(Am.getSDEattendance());
+       TBV_attendance.setItems(list);
     }
 
     @FXML
