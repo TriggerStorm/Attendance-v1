@@ -36,14 +36,15 @@ public interface IDAL {
     public boolean checkIfTeacher(String email);
     public User getLoggedInUser(String email);
 
+    
 // AttendanceDBDAO methods
     public List<Attendance> getAllAttendances();
-    public List<Attendance> getStudentAttendanceInSubject(int studentKey, int subjectKey);
-
-   // public int[] addNewAttendanceToDB(int studentK, int subjectK);
+ //   public List<Attendance> getStudentAttendanceInSubject(int studentKey, int subjectKey);
     public List<Attendance> getStudentAttendanceForSubject(int studentKey, int subjectKey);
     public SubjectAttendance addNewAttendanceToDB(int studentKey, SubjectsHeld subjectHeld);
     public SubjectAttendance getStudentDailyAttendance(int studentKey,  int subjectKey);
+    public List<SubjectAttendance> getSubjectAttendanceListForAllStudentsInThatSubject( int subjectKey);
+    public  SubjectAttendance getSubjectAttendanceForAStudent(int studentKey, int subjectKey);
 
 
 // StudentSubjectDBDAO methods

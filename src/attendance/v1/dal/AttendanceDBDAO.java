@@ -246,7 +246,22 @@ public class AttendanceDBDAO {
     }
     
      
-    
-    
+// This is an old method called from the gui and interface. No longer needed???
+     public List<Attendance> getStudentAttendanceForSubject(int studentKey, int subjectKey) throws SQLException {
+        List<Attendance> allAttendances = getAllAttendances();
+        List<Attendance> studentAttendanceInSubject = new ArrayList<>();
+        Attendance testAttendance;
+        for (int i = 0; i < allAttendances.size(); i++) {
+            testAttendance = allAttendances.get(i);
+            if (testAttendance.getStudentKey() == studentKey) {
+                if (testAttendance.getSubjectKey() == subjectKey) {
+                studentAttendanceInSubject.add(testAttendance);
+                }
+            }
+        }
+        return studentAttendanceInSubject;
+    }
+
+
 }
 
