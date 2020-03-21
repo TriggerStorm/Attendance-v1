@@ -58,7 +58,7 @@ public class BLLutilities {
     public  boolean hasOneDayPass(String dateSubjectsHeld)
     {
         LocalDateTime dateToString = stringToLocalDateTime(dateSubjectsHeld);
-        LocalDateTime oneDayAgo = LocalDateTime.now().minusHours(24);
+        LocalDateTime oneDayAgo = LocalDateTime.now().minusHours(12);
         boolean oneDayPassed = oneDayAgo.isAfter(dateToString);
         return oneDayPassed;
      }
