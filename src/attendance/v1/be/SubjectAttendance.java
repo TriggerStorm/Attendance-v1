@@ -7,8 +7,10 @@ package attendance.v1.be;
 
 /**
  *
- * @author Trigger
+ * @author Trigger, Filip, Cecillia and Alan
  */
+
+
 public class SubjectAttendance {
     private String name;
     private int monday;

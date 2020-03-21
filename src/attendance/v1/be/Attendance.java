@@ -7,14 +7,14 @@ package attendance.v1.be;
 
 /**
  *
- * @author Trigger
+ * @author Trigger, Filip, Cecillia and Alan
  */
-public class Attendance {
-    
 
-        private int studentKey;
-        private int subjectKey;
-        private String dateHeld;
+
+public class Attendance {
+    private int studentKey;
+    private int subjectKey;
+    private String dateHeld;
         
         
 public Attendance(int studentKey, int subjectKey, String dateHeld){

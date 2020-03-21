@@ -27,10 +27,12 @@ import attendance.v1.be.SubjectsHeld;
 
 
 public class UserDBDAO {
+    public static User loggedInUser;
     private DBConnection dbc;
     StudentSubjectDBDAO studentSubjectDBDao;
     
     public UserDBDAO() {
+        loggedInUser = new User(-1,"","","",0,"",0,"", false, "");
         dbc = new DBConnection();
         studentSubjectDBDao = new StudentSubjectDBDAO();
     }
@@ -85,13 +87,14 @@ public class UserDBDAO {
             user = allUsers.get(i);
             String testEmail = user.getEmail();
             if (testEmail == email)  {
+            int userKey = user.getUserKey();
             return user;
             }
         }
         return null;  // User does not exist
     }
 
-    
+                
      public User addNewUserToDB(String userName, String password, String email, int phoneNr, String address, int postCode, String city, boolean teacher, String userIMG) { 
         String sql = "INSERT INTO Users(userName, password, email, phoneNr, address, postCode, city, teacher, userIMG) VALUES (?,?,?,?,?,?,?,?,?)";
         User newUser = new User(postCode, userName, password, email, phoneNr, address, postCode, city, teacher, userIMG);
@@ -175,7 +178,7 @@ public class UserDBDAO {
         String stat = "DELETE FROM Users WHERE id =?";      // USE ID HERE??????
         try (Connection con = dbc.getConnection()) {
             PreparedStatement stmt = con.prepareStatement(stat);
-            stmt.setInt(1,userToDelete.getUserKey());                      // IS THIS 0 ??
+            stmt.setInt(1,userToDelete.getUserKey());
             stmt.execute();
         } catch (SQLException ex) {
             System.out.println("Exception " + ex);
@@ -188,6 +191,35 @@ public class UserDBDAO {
         for (int i = 0; i < allUsers.size(); i++) {
             User userToCheck = allUsers.get(i);
             if ((userToCheck.getEmail().equals(email)) && (userToCheck.getPassword().equals(password))) {
+  /*              loggedInUser.setUserKey(userToCheck.getUserKey());
+                loggedInUser.setUserName(userToCheck.getUserName());
+                loggedInUser.setEmail(email);
+                loggedInUser.setPassword(password);
+                loggedInUser.setPhoneNr(userToCheck.getPhoneNr());
+                loggedInUser.setPostCode(userToCheck.getPostCode());
+                loggedInUser.setCity(userToCheck.getCity());
+                loggedInUser.setTeacher(userToCheck.getTeacher());
+                loggedInUser.setUserIMG(userToCheck.getUserIMG());
+                System.out.println("");
+                System.out.println("key" + loggedInUser.getUserKey());
+                System.out.println("");
+                System.out.println("setUserName" + loggedInUser.getUserName());
+                System.out.println("");
+                System.out.println("setEmail" + loggedInUser.getEmail());
+                System.out.println("");
+                System.out.println("setPassword" + loggedInUser.getPassword());
+                System.out.println("");
+                System.out.println("setPhoneNr" + loggedInUser.getPhoneNr());
+                System.out.println("");
+                System.out.println("setPostCode" + loggedInUser.getPostCode());
+                System.out.println("");
+                System.out.println("setCity" + loggedInUser.getCity());
+                System.out.println("");
+                System.out.println("setTeacher" + loggedInUser.getTeacher());
+                System.out.println("");
+                System.out.println("setUserIMG" + loggedInUser.getUserIMG());
+
+*/
                 LoggedInUser lUser = LoggedInUser.getInstance();
                 lUser.setUserKey(userToCheck.getUserKey());
                 lUser.setUserName(userToCheck.getUserName());
@@ -241,9 +273,8 @@ public class UserDBDAO {
     }
         
     
-    public List<User> getAllStudentsInASubject(SubjectsHeld subjectsHeld) throws SQLException {
+    public List<User> getAllStudentsInASubject(int subjectKey) throws SQLException {
         List<User> studentsInSubject = new ArrayList<>();
-        int subjectKey = subjectsHeld.getSubjectKey();
         List<StudentSubject> allStudentSubjects = studentSubjectDBDao.getAllStudentSubjects();
         for (int i = 0; i < allStudentSubjects.size(); i++) {
             StudentSubject testStudentSubject = allStudentSubjects.get(i);

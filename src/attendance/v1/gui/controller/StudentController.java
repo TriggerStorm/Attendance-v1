@@ -11,6 +11,8 @@ import attendance.v1.bll.BLLutilities;
 import attendance.v1.bll.BllManager;
 import attendance.v1.dal.StudentSubjectDBDAO;
 import attendance.v1.gui.model.AttendanceModel;
+import attendance.v1.dal.UserDBDAO;
+import static attendance.v1.dal.UserDBDAO.loggedInUser;
 import com.jfoenix.controls.JFXButton;
 import java.awt.image.RenderedImage;
 import java.io.File;
@@ -44,6 +46,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import javax.imageio.ImageIO;
+import javax.swing.JLabel;
 
 /**
  * FXML Controller class
@@ -114,7 +117,15 @@ public class StudentController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-      
+/*        settingTableView();
+         System.out.println("");
+                System.out.println("Loggeg in as UserName" + UserDBDAO.loggedInUser.getUserName());
+        Lb_logInUser.setText(UserDBDAO.loggedInUser.getUserName());
+        TF_logInAss.setText(UserDBDAO.loggedInUser.getUserName());
+    }    
+     String dateString = "todays date";
+     //   date = new JLabel(dateString);
+*/      
          bllu = new BLLutilities();
             lu = LoggedInUser.getInstance();
          bm = new BllManager();
@@ -219,4 +230,7 @@ public class StudentController implements Initializable {
         String code = TF_code.getText();
         Am.submitAttendance(code);
     }
+    
+    
+    
 }

@@ -9,8 +9,10 @@ import java.util.List;
 
 /**
  *
- * @author Trigger
+ * @author Trigger, Filip, Cecillia and Alan
  */
+
+
 public class User {
     private int userKey;
     private String userName;

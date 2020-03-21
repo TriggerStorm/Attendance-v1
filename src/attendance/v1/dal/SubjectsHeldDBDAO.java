@@ -52,39 +52,48 @@ public class SubjectsHeldDBDAO {
      public SubjectsHeld editSubjectsHeld(SubjectsHeld subjectsHeld, String date, String secretCode) throws SQLException 
     {
         db = new DBConnection();
-        
-           
         try(Connection con = db.getConnection()){
             String SQLStmt = "UPDATE SUBJECTSHELD SET subjectKey = ?,date = ?, secretCode = ?  WHERE subjectKey = ?;";
-            
             PreparedStatement pstmt = con.prepareStatement(SQLStmt);
-             pstmt.setInt(1,subjectsHeld.getSubjectKey());
+            pstmt.setInt(1,subjectsHeld.getSubjectKey());
             pstmt.setString(2,date);
             pstmt.setString(3,secretCode);
             pstmt.setInt(4,subjectsHeld.getSubjectKey());
             pstmt.execute();
         }
         return new SubjectsHeld(subjectsHeld.getSubjectKey(),date,secretCode);
-}
+    }
+    
      
-     public SubjectsHeld getSpecificSubjectsHeld(int skey) throws SQLException 
-    {
+     public SubjectsHeld getSpecificSubjectsHeld(int skey) throws SQLException {
         db = new DBConnection(); 
-        try(Connection con = db.getConnection()){
+        try(Connection con = db.getConnection()) {
             String SQLStmt = "SELECT * FROM SUBJECTSHELD WHERE subjectKey = '"+skey+"';";
-            
             Statement statement = con.createStatement();
             ResultSet rs = statement.executeQuery(SQLStmt);
                 int subjectKey = rs.getInt("subjectKey");
                 String date = rs.getString("date");
                 String secretCode = rs.getString("secretCode");
                 return new SubjectsHeld(subjectKey,date,secretCode);
-            }    
-       
-       
+        }  
     }
- public SubjectsHeld addSubjectsHeld(int skey, String date, String secretCode) throws SQLException {
-   db = new DBConnection();
+
+     
+    public List<SubjectsHeld> getAllSubjectsHeldForASubject(int subjectKey) throws SQLException {
+        List<SubjectsHeld> allSubjectsHeld = getALLSubjectsHeld();
+        List<SubjectsHeld> allSubjectsHeldForASubject = new ArrayList<>();
+        for (int i = 0; i < allSubjectsHeld.size(); i++) {
+            SubjectsHeld testSubjectsHeld = allSubjectsHeld.get(i);
+            if (testSubjectsHeld.getSubjectKey() == subjectKey) {
+                allSubjectsHeldForASubject.add(testSubjectsHeld);
+            }
+        }
+        return allSubjectsHeldForASubject;
+    }
+     
+     
+    public SubjectsHeld addSubjectsHeld(int skey, String date, String secretCode) throws SQLException {
+        db = new DBConnection();
         try(Connection con = db.getConnection()){
             
             String sqlIf = "INSERT INTO SUBJECTSHELD (subjectKey, secretCode, date) VALUES (?, ?, ?);"; 
@@ -96,6 +105,8 @@ public class SubjectsHeldDBDAO {
             return new SubjectsHeld(skey,date,secretCode);
         } 
     }
+     
+     
      public SubjectsHeld editSubjectsHeld(SubjectsHeld subjectsHeld,int skey, String date, String secretCode) throws SQLException
      {
          db = new DBConnection();

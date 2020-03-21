@@ -62,7 +62,7 @@ public class DalManager implements IDAL {
     @Override
     public List<Attendance> getStudentAttendanceForSubject(int studentKey, int subjectKey) { /// ????
         try {
-            return attendanceDBDao.getAStudentsAttendanceForASubject(studentKey, subjectKey);
+            return attendanceDBDao.getAllOfAStudentsAttendanceForASubject(studentKey, subjectKey);
         } catch (SQLException ex) {
             Logger.getLogger(DalManager.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -74,7 +74,7 @@ public class DalManager implements IDAL {
     public List<Attendance> getStudentAttendanceInSubject(int studentKey, int subjectKey) {
        
         try {
-            return attendanceDBDao.getAStudentsAttendanceForASubject(studentKey, subjectKey);
+            return attendanceDBDao.getAllOfAStudentsAttendanceForASubject(studentKey, subjectKey);
         } catch (SQLException ex) {
             Logger.getLogger(DalManager.class.getName()).log(Level.SEVERE, null, ex);
         }

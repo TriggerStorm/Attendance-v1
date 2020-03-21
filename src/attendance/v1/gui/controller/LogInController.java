@@ -66,7 +66,7 @@ public class LogInController implements Initializable {
        int loginstate = userModle.CheckUser(loginmail, passw);//returns an int, as it also checks if it is a teacher or a student.
         switch (loginstate) {
             case 1:  teacherLogin(loginmail, passw); //teacher login needs creation and then place make something like teacherLogin method in stead.
-                     
+
                     break;
             case 2:  studentLogin(loginmail, passw); //student login 
                     

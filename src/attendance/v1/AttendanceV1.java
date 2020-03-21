@@ -17,7 +17,7 @@ import javafx.stage.Stage;
  * @author Bruger
  */
 public class AttendanceV1 extends Application {
-    
+
     @Override
     public void start(Stage stage) throws Exception {
         Parent root = FXMLLoader.load(getClass().getResource("gui/view/logIn.fxml"));
@@ -32,7 +32,6 @@ public class AttendanceV1 extends Application {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        User loggedInUser;
         launch(args);
     }
     
