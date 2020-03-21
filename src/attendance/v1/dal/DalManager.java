@@ -94,9 +94,9 @@ public class DalManager implements IDAL {
 
  
     @Override
-    public SubjectAttendance getStudentDailyAttendance(int studentKey, SubjectsHeld subjectHeld) {
+    public SubjectAttendance getStudentDailyAttendance(int studentKey,  int subjectKey) {
         try {
-            return attendanceDBDao.getSubjectAttendanceForAStudent(studentKey, subjectHeld);
+            return attendanceDBDao.getSubjectAttendanceForAStudent(studentKey, subjectKey);
         } catch (SQLException ex) {
             Logger.getLogger(DalManager.class.getName()).log(Level.SEVERE, null, ex);
         }

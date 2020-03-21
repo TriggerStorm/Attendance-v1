@@ -115,8 +115,8 @@ public class BllManager implements IBLL {
 
     
     @Override
-    public SubjectAttendance getStudentDailyAttendance(int studentKey, SubjectsHeld subjectHeld) {
-        return dalManager.getStudentDailyAttendance(studentKey, subjectHeld);
+    public SubjectAttendance getStudentDailyAttendance(int studentKey, int subjectKey) {
+        return dalManager.getStudentDailyAttendance(studentKey, subjectKey);
     }
 
     
