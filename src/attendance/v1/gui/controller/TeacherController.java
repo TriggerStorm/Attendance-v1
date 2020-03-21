@@ -6,12 +6,16 @@
 package attendance.v1.gui.controller;
 import attendance.v1.be.LoggedInUser;
 import attendance.v1.be.SubjectAttendance;
+import attendance.v1.bll.BLLutilities;
+import attendance.v1.bll.BllManager;
 import attendance.v1.dal.DalManager;
 import attendance.v1.gui.model.AttendanceModel;
 import com.jfoenix.controls.JFXButton;
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -92,19 +96,27 @@ public class TeacherController implements Initializable {
     private ImageView img;
     @FXML
     private ImageView miniImg;
-    private DalManager dm;
+    
+    private BllManager bm;
+    private BLLutilities bllu;
    
+    
+    
+    public TeacherController()
+    {
+        bllu = new BLLutilities();
+        lu = LoggedInUser.getInstance();
+        Am = new AttendanceModel();
+        bm = new BllManager();
+    }
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        settingTableView();
+       Bn_gencode.setDisable(true);
     }    
     private void settingTableView() {
-        dm = new DalManager();
-        lu = LoggedInUser.getInstance();
-        Am = new AttendanceModel();
         Lb_loginas.setText(lu.getUserName());
             Lb_logInUser.setText(lu.getUserName());
                Image image3 = new Image(lu.getUserIMG(), 50, 50, false, false);
@@ -112,6 +124,8 @@ public class TeacherController implements Initializable {
                
         miniImg.setImage(image2);
         img.setImage(image3);
+      if(!bllu.hasOneDayPass(bm.getLatestSubjectsHeldDate(lu.getSelectedSubjectKey())))
+       Bn_gencode.setDisable(true);
  
     }
     @FXML
@@ -136,6 +150,7 @@ public class TeacherController implements Initializable {
 
     @FXML
     private void handle_attendancecode(ActionEvent event) throws IOException {
+       Bn_gencode.setDisable(true);
         Parent root1;
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/attendance/v1/gui/view/generatedCode.fxml"));
         root1 = (Parent) fxmlLoader.load();
@@ -180,6 +195,9 @@ public class TeacherController implements Initializable {
        // TBV_attendance.setItems(Am.getSCOattendance());
         Lb_subjet.setText("SCO");
         lu.setSelectedSubjectKey(1); // YOU NEED TO GIVE SUBJECTS KEY HERE MANUALLY SO IT WONT BE 1 FOR SDE/ITO etc.
+       Bn_gencode.setDisable(false);
+       if(!bllu.hasOneDayPass(bm.getLatestSubjectsHeldDate(lu.getSelectedSubjectKey())))
+       Bn_gencode.setDisable(true);
     }
 
     @FXML
@@ -193,6 +211,9 @@ public class TeacherController implements Initializable {
         TBV_Attendance.setCellValueFactory(new PropertyValueFactory<>("percent"));        
         Lb_subjet.setText("DB/OS");     
         lu.setSelectedSubjectKey(17);
+        Bn_gencode.setDisable(false);
+       if(!bllu.hasOneDayPass(bm.getLatestSubjectsHeldDate(lu.getSelectedSubjectKey())))
+       Bn_gencode.setDisable(true);
        // TBV_attendance.setItems(Am.getDBOSattendance());
     }
 
@@ -207,6 +228,9 @@ public class TeacherController implements Initializable {
         TBV_Attendance.setCellValueFactory(new PropertyValueFactory<>("percent"));        
         Lb_subjet.setText("ITO");        
         lu.setSelectedSubjectKey(9);
+        Bn_gencode.setDisable(false);
+       if(!bllu.hasOneDayPass(bm.getLatestSubjectsHeldDate(lu.getSelectedSubjectKey())))
+       Bn_gencode.setDisable(true);
        // TBV_attendance.setItems(Am.getITOattendance());
     }
 
@@ -221,6 +245,9 @@ public class TeacherController implements Initializable {
         TBV_Attendance.setCellValueFactory(new PropertyValueFactory<>("percent"));        
         Lb_subjet.setText("SDE");        
         lu.setSelectedSubjectKey(7);
+        Bn_gencode.setDisable(false);
+       if(!bllu.hasOneDayPass(bm.getLatestSubjectsHeldDate(lu.getSelectedSubjectKey())))
+       Bn_gencode.setDisable(true);
 
         //TBV_attendance.setItems(Am.getSDEattendance());
 
@@ -228,6 +255,7 @@ public class TeacherController implements Initializable {
 
     @FXML
     private void handle_showcode(ActionEvent event) throws IOException {
+      
         Parent root1;
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/attendance/v1/gui/view/generatedCode.fxml"));
         root1 = (Parent) fxmlLoader.load();

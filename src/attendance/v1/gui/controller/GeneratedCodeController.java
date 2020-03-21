@@ -42,14 +42,13 @@ public class GeneratedCodeController implements Initializable {
         setcode();
     }    
     public void setcode (){
-        
         Am = new AttendanceModel();
-        String secretCode = Am.getCode();
-       TF_code.setText(secretCode);
        LocalDateTime date = LocalDateTime.now();
          DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd['T'HH:mm:ss[Z]]");
         String dateString = date.format(formatter);
-       bm.newSubjectsHeld(lu.getSelectedSubjectKey(),secretCode,dateString); // TO DO IT NEEDS TO KNOW CURRENT SELECTED SUBJECT
+         String secretCode = Am.getCode();
+       TF_code.setText(secretCode);
+       bm.newSubjectsHeld(lu.getSelectedSubjectKey(),secretCode,dateString); 
        
     }
 }

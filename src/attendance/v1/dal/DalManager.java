@@ -246,6 +246,19 @@ public class DalManager implements IDAL {
              return null;
          }
 
+    @Override
+   public String getLatestSubjectsHeld(int skey) {
+       
+        try {
+            return subjectsHeldDBDao.getLatestSubjectsHeld(skey);
+        } catch (SQLException ex) {
+            Logger.getLogger(DalManager.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
+        } 
+        
+    
+
     
      
    

@@ -170,4 +170,21 @@ public class SubjectsHeldDBDAO {
         }
         
     }
+    public String getLatestSubjectsHeld(int skey) throws SQLException
+    {     
+        String date ="";
+          db = new DBConnection(); 
+        try(Connection con = db.getConnection()) {
+            String SQLStmt = "SELECT TOP 1 * FROM SUBJECTSHELD WHERE subjectKey = '"+skey+"'ORDER BY date DESC;";
+            Statement statement = con.createStatement();
+            ResultSet rs = statement.executeQuery(SQLStmt);
+           while(rs.next())
+           {
+             date = rs.getString("date");
+           }
+                
+        }
+        return date;
+}
+
 }

@@ -11,6 +11,7 @@ import attendance.v1.be.Subject;
 import attendance.v1.be.SubjectAttendance;
 import attendance.v1.be.SubjectsHeld;
 import attendance.v1.be.User;
+import java.sql.SQLException;
 import java.util.List;
 
 /**
@@ -53,7 +54,7 @@ public interface IBLL {
 // SubjectsHeldDBDAO methods
     public SubjectsHeld addSubjectsHeld(int skey, String date, String secretCode);
     public SubjectsHeld newSubjectsHeld(int sKey, String date, String secretCode);
-    
+   public String getLatestSubjectsHeldDate(int skey);
 // subjectDBDAO methods
     public Subject getSpecificSubjects(int subjectKey);
 
