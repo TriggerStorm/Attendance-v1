@@ -222,7 +222,7 @@ public class DalManager implements IDAL {
     //SecretCode Methods
     
     @Override
-    public boolean checkCode(int sKey, String code)
+    public SubjectsHeld checkCode(int sKey, String code)
     {
         try {
             return secretCodeDBDAO.checkCode(sKey, code);
@@ -231,7 +231,7 @@ public class DalManager implements IDAL {
         } catch (ParseException ex) {
             Logger.getLogger(DalManager.class.getName()).log(Level.SEVERE, null, ex);
         }
-        return false;
+        return null;
     }   
 
     // SubjectDBDAO methods

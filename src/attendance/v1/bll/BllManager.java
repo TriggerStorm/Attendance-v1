@@ -151,11 +151,15 @@ public class BllManager implements IBLL {
     }
     
 
-    public void submitAttendance(String code)
+    public void submitAttendance(String code, String selectedSubjectName)
     {
-        if(checkCode(code))
+        if(checkCode(code) != null)
         {
-           // SubjectAttendance theAtttendance = addNewAttendanceToDB();
+            LoggedInUser lUser = LoggedInUser.getInstance();
+           SubjectsHeld subjectSelected = checkCode(code);
+           SubjectAttendance subjectAttendance = dalManager.addNewAttendanceToDB(lUser.getUserKey() , subjectSelected);
+           
+           
         }
         
     }
@@ -164,7 +168,7 @@ public class BllManager implements IBLL {
     
 ///SecretCodeDBDAO methods
 
-    public boolean checkCode(String code)
+    public SubjectsHeld checkCode(String code)
     {
         LoggedInUser lUser = LoggedInUser.getInstance();
         return dalManager.checkCode(lUser.getSelectedSubjectKey(), code);
