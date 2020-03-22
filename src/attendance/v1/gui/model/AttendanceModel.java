@@ -21,11 +21,10 @@ import attendance.v1.be.LoggedInUser;
 public class AttendanceModel {
     private BllManager bllManager;
     private ObservableList<String> course;
-    
 
     public AttendanceModel() {
         bllManager = new BllManager();
-        
+       
     }
     public String getCode(){
      String password = new Random().ints(10, 33, 122).mapToObj(i -> String.valueOf((char)i)).collect(Collectors.joining());
@@ -44,5 +43,7 @@ public class AttendanceModel {
     public void submitAttendance(String code, String selectedSubjectName)
     {
         bllManager.submitAttendance(code, selectedSubjectName);
+  
+        
     }
 }

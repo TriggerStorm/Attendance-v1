@@ -24,10 +24,14 @@ public class LoggedInUser{
     private boolean teacher;
     private String userIMG;
     private SubjectsHeld sbh;
+    private boolean attBoolean;
+    
     private int selectedSubjectKey=1;
 
     private LoggedInUser(){
      SubjectsHeld sbh = new SubjectsHeld(0,"","");
+     attBoolean = false;
+     
     }
    
     public static LoggedInUser getInstance()
@@ -137,5 +141,13 @@ public class LoggedInUser{
     public SubjectsHeld getSelectedSubjectsHeld()
     {
         return sbh;
+    }
+    public void setAttendanceSubmitted()
+    {
+       this.attBoolean = true;
+    }
+    public boolean getAttendanceSubmitted()
+    {
+        return attBoolean;
     }
 }

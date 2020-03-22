@@ -34,6 +34,8 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.chart.BarChart;
 import javafx.scene.chart.PieChart;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
@@ -230,6 +232,18 @@ public class StudentController implements Initializable {
         String selectedSubject = Lb_subjet.getText();
         String code = TF_code.getText();
         Am.submitAttendance(code, selectedSubject);
+        if(lu.getAttendanceSubmitted())
+        {
+             Alert a = new Alert(AlertType.INFORMATION); 
+         a.setContentText("Attendance Submitted");
+         a.show();
+        }
+        else
+        {
+            Alert a = new Alert(AlertType.INFORMATION); 
+         a.setContentText("Error either code is invalid or it expired");
+         a.show();
+        }
     }
     
     

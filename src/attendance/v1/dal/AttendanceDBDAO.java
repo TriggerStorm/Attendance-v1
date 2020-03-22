@@ -23,6 +23,7 @@ import java.sql.Statement;
 import attendance.v1.be.SubjectAttendance;
 import attendance.v1.be.User;
 import attendance.v1.be.Attendance;
+import attendance.v1.be.LoggedInUser;
 import attendance.v1.bll.BllManager;
 import attendance.v1.be.Subject;
 import attendance.v1.be.SubjectsHeld;
@@ -42,11 +43,13 @@ public class AttendanceDBDAO {
     public List<Attendance> attendance;
     public List<SubjectAttendance> studentAttendance;
     public UserDBDAO newUserDBDao;
+    public LoggedInUser lu;
     
     
     public AttendanceDBDAO() {
         newUserDBDao = new UserDBDAO();
         dbc = new DBConnection();
+        lu = LoggedInUser.getInstance();
     }
     
     
@@ -84,7 +87,8 @@ public class AttendanceDBDAO {
             }
             try (ResultSet generatedKeys = stmt.getGeneratedKeys()) {
                 if (generatedKeys.next()) {
-                    newAttendance.setStudentKey((int) generatedKeys.getLong(1));   // CHECK THIS LINE
+                    newAttendance.setStudentKey((int) generatedKeys.getLong(1));// CHECK THIS LINE
+                    lu.setAttendanceSubmitted();
                 } else {
                     throw new SQLException("Creating attendance failed, no ID obtained.");
                 } 
