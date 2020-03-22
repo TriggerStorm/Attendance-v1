@@ -168,6 +168,7 @@ public class StudentController implements Initializable {
 
     @FXML
     private void handle_SCO(ActionEvent event) throws SQLException {
+        lu.setSelectedSubjectKey(1);
         TBV_monday.setCellValueFactory(new PropertyValueFactory<>("dateHeld"));
 //        TBV_tuesday.setCellValueFactory(new PropertyValueFactory<>("tuesday"));
 //        tbv_wednesday.setCellValueFactory(new PropertyValueFactory<>("wednesday"));
@@ -182,7 +183,7 @@ public class StudentController implements Initializable {
 
     @FXML
     private void handle_SDE(ActionEvent event) throws SQLException {
-        
+        lu.setSelectedSubjectKey(5);
        TBV_monday.setCellValueFactory(new PropertyValueFactory<>("dateHeld"));
       //  TBV_tuesday.setCellValueFactory(new PropertyValueFactory<>("tuesday"));
       //  tbv_wednesday.setCellValueFactory(new PropertyValueFactory<>("wednesday"));
@@ -212,6 +213,8 @@ public class StudentController implements Initializable {
 
     @FXML
     private void handle_ITO(ActionEvent event) {
+        lu.setSelectedSubjectKey(9);
+
         /*TBV_monday.setCellValueFactory(new PropertyValueFactory<>("monday"));
         TBV_tuesday.setCellValueFactory(new PropertyValueFactory<>("tuesday"));
         tbv_wednesday.setCellValueFactory(new PropertyValueFactory<>("wednesday"));

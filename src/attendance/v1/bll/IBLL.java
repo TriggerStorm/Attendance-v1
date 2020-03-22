@@ -44,7 +44,7 @@ public interface IBLL {
     public SubjectAttendance addNewAttendanceToDB(int studentKey, SubjectsHeld subjectHeld);
     public SubjectAttendance getStudentDailyAttendance(int studentKey, int subjectKey);
     public List<SubjectAttendance> getSubjectAttendanceListForAllStudentsInThatSubject( int subjectKey);
-    public  SubjectAttendance getSubjectAttendanceForAStudent(int studentKey, int subjectKey);
+    public SubjectAttendance getSubjectAttendanceForAStudent(int studentKey, int subjectKey);
 
 
     
