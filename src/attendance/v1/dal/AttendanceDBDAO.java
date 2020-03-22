@@ -44,11 +44,12 @@ public class AttendanceDBDAO {
     public List<SubjectAttendance> studentAttendance;
     public UserDBDAO tempUserDBDao;
     public SubjectsHeldDBDAO tempSubjectsHeldDBDao;
-    
+   public StudentSubjectDBDAO tempStudentSubjectDBDao;
     
     public AttendanceDBDAO() {
         tempUserDBDao = new UserDBDAO();
         tempSubjectsHeldDBDao = new SubjectsHeldDBDAO();
+        tempStudentSubjectDBDao = new StudentSubjectDBDAO();
         dbc = new DBConnection();
     }
     
@@ -116,6 +117,7 @@ public class AttendanceDBDAO {
    
    
     public  SubjectAttendance getSubjectAttendanceForAStudent(int studentKey, int subjectKey) throws SQLException {
+    //  returns a SubjectAttendance of a student in a subject
         int[] dailyAttendanceIntArray = new int[7];
         List<Attendance> studentAttendanceInSubject = getAllOfAStudentsAttendanceForASubject(studentKey, subjectKey);
         dailyAttendanceIntArray = listOfAttendanceToIntArrayOfDays(studentAttendanceInSubject);
@@ -160,8 +162,26 @@ public class AttendanceDBDAO {
         return allAttendanceInSubject;
     }
 
-        
-    public int[] listOfAttendanceToIntArrayOfDays(List<Attendance> attendanceList) {
+       
+    public String getAverageAttendanceOfAStudentsForAllSubjects (int studentKey) throws SQLException {
+    //  Returns the String of the total average of a students attendance for all subjects
+        double totalAverageAttendanceOfAStudentsForAllSubjects = 0;
+        int numberOfSubjectsOfAStudent;
+        List<StudentSubject> allOfAStudentsSubjects;
+        allOfAStudentsSubjects = tempStudentSubjectDBDao.getSubjectsOfAStudent(studentKey);
+        numberOfSubjectsOfAStudent = allOfAStudentsSubjects.size();
+        for (int i = 0; i < numberOfSubjectsOfAStudent; i++) {
+            int testSubjectKey = allOfAStudentsSubjects.get(i).getSubjectKey();
+            totalAverageAttendanceOfAStudentsForAllSubjects += calculateAverageOfAStudentsAttendanceInASubject(testSubjectKey, studentKey);
+        }
+        double averageAttendanceOfAStudentsForAllSubjects = totalAverageAttendanceOfAStudentsForAllSubjects / numberOfSubjectsOfAStudent;
+        String averageAttendanceOfAStudentsForAllSubjectsString = convertDoubleToPercentageString(averageAttendanceOfAStudentsForAllSubjects);
+        return averageAttendanceOfAStudentsForAllSubjectsString;
+    }
+    
+    
+    private int[] listOfAttendanceToIntArrayOfDays(List<Attendance> attendanceList) {
+    //  converts list of attendances into a int[] and gives daily attendance totals where monday is [0]...  
         int[] dailyAttendanceIntArray = new int[7];
         int attendanceTotal = attendanceList.size();
             if(attendanceTotal > 0)
@@ -208,12 +228,12 @@ public class AttendanceDBDAO {
     }
      
     
-    private double calculateAverageOfAStudentsAttendanceInASubject(int subjecKey, int userKey) throws SQLException {
+    private double calculateAverageOfAStudentsAttendanceInASubject(int subjectKey, int userKey) throws SQLException {
         //  Returns the int value of the average attendance of a student in a subject
         double averageOfAStudentsAttendanceInASubject;
-        List<SubjectsHeld> allSubjectsHeldForASubject = tempSubjectsHeldDBDao.getAllSubjectsHeldForASubject(subjecKey);
+        List<SubjectsHeld> allSubjectsHeldForASubject = tempSubjectsHeldDBDao.getAllSubjectsHeldForASubject(subjectKey);
         System.out.print(allSubjectsHeldForASubject.size());
-        List<Attendance> allOfAStudentsAttendanceForASubject = getAllOfAStudentsAttendanceForASubject(userKey, subjecKey);
+        List<Attendance> allOfAStudentsAttendanceForASubject = getAllOfAStudentsAttendanceForASubject(userKey, subjectKey);
         System.out.print(allOfAStudentsAttendanceForASubject.size());
         double allOfStudentAttendanceInSubject = allOfAStudentsAttendanceForASubject.size();
         double totalAttendanceForSubject = allSubjectsHeldForASubject.size();
