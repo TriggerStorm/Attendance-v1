@@ -110,19 +110,26 @@ public class BllManager implements IBLL {
         return dalManager.getStudentAttendanceForSubject(studentKey, subjectKey);
     }
    
-
     @Override
     public SubjectAttendance addNewAttendanceToDB(int studentKey, SubjectsHeld subjectHeld) {
         return dalManager.addNewAttendanceToDB(studentKey, subjectHeld);
     }
 
-    
     @Override
-    public SubjectAttendance getStudentDailyAttendance(int studentKey, SubjectsHeld subjectHeld) {
-        return dalManager.getStudentDailyAttendance(studentKey, subjectHeld);
+    public SubjectAttendance getStudentDailyAttendance(int studentKey, int subjectKey) {
+        return dalManager.getStudentDailyAttendance(studentKey, subjectKey);
     }
 
-    
+      @Override
+    public List<SubjectAttendance> getSubjectAttendanceListForAllStudentsInThatSubject(int subjectKey) {
+        return dalManager.getSubjectAttendanceListForAllStudentsInThatSubject(subjectKey);
+    }
+
+    @Override
+    public SubjectAttendance getSubjectAttendanceForAStudent(int studentKey, int subjectKey) {
+        return dalManager.getSubjectAttendanceForAStudent(studentKey, subjectKey);
+    }
+
     
 
 // StudentSubjectDBDAO methods
@@ -142,13 +149,15 @@ public class BllManager implements IBLL {
         return dalManager.addSubjectsHeld(skey, date, secretCode);
     }
 
-
-    public SubjectsHeld newSubjectsHeld(int sKey, String date, String secretCode)
-    {
+    public SubjectsHeld newSubjectsHeld(int sKey, String date, String secretCode) {
        return dalManager.addSubjectsHeld(sKey,date,secretCode);
     }
 
+    
+    
+    
 // SubjectDBDOA methods
+    
     public Subject getSpecificSubjects(int subjectKey){
         return dalManager.getSpecificSubjects(subjectKey);
     }
@@ -177,4 +186,5 @@ public class BllManager implements IBLL {
         return dalManager.checkCode(lUser.getSelectedSubjectKey(), code);
     }
 
+  
 }

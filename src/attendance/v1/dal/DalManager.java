@@ -79,7 +79,7 @@ public class DalManager implements IDAL {
     }
 
 
-    @Override
+/*    @Override
     public List<Attendance> getStudentAttendanceInSubject(int studentKey, int subjectKey) {
        
         try {
@@ -89,7 +89,7 @@ public class DalManager implements IDAL {
         }
         return null;
     }
-        
+ */       
     
     @Override
     public SubjectAttendance addNewAttendanceToDB(int studentKey, SubjectsHeld subjectHeld) {
@@ -103,9 +103,31 @@ public class DalManager implements IDAL {
 
  
     @Override
-    public SubjectAttendance getStudentDailyAttendance(int studentKey, SubjectsHeld subjectHeld) {
+    public SubjectAttendance getStudentDailyAttendance(int studentKey,  int subjectKey) {
         try {
-            return attendanceDBDao.getSubjectAttendanceForAStudent(studentKey, subjectHeld);
+            return attendanceDBDao.getSubjectAttendanceForAStudent(studentKey, subjectKey);
+        } catch (SQLException ex) {
+            Logger.getLogger(DalManager.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
+    }
+ 
+
+    @Override
+    public List<SubjectAttendance> getSubjectAttendanceListForAllStudentsInThatSubject(int subjectKey) {
+        try {
+            return attendanceDBDao.getSubjectAttendanceListForAllStudentsInThatSubject(subjectKey);
+        } catch (SQLException ex) {
+            Logger.getLogger(DalManager.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    return null;
+    }
+
+    
+    @Override
+    public SubjectAttendance getSubjectAttendanceForAStudent(int studentKey,  int subjectKey) {
+        try {
+            return attendanceDBDao.getSubjectAttendanceForAStudent(studentKey, subjectKey);
         } catch (SQLException ex) {
             Logger.getLogger(DalManager.class.getName()).log(Level.SEVERE, null, ex);
         }

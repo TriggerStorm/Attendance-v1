@@ -102,7 +102,7 @@ public class BLLutilities {
     }
        
     
-     public String getAverageOfAllStudentAttendancesInASubjectAsAString(int subjectKey) throws SQLException {
+    public String getAverageOfAllStudentAttendancesInASubjectAsAString(int subjectKey) throws SQLException {
         double totalOfAllStudentAttendancesInASubject = 0;
         List<User> allstudentsInASubject = userdb.getAllStudentsInASubject(subjectKey);
         int numberOfStudentsInASubject = allstudentsInASubject.size();
