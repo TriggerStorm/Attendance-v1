@@ -116,7 +116,7 @@ public class AttendanceDBDAO {
    
    
     public  SubjectAttendance getSubjectAttendanceForAStudent(int studentKey, int subjectKey) throws SQLException {
-        int[] dailyAttendanceIntArray = new int[5];
+        int[] dailyAttendanceIntArray = new int[7];
         List<Attendance> studentAttendanceInSubject = getAllOfAStudentsAttendanceForASubject(studentKey, subjectKey);
         dailyAttendanceIntArray = listOfAttendanceToIntArrayOfDays(studentAttendanceInSubject);
         String name = tempUserDBDao.getUserNameFromKey(studentKey);
@@ -162,14 +162,19 @@ public class AttendanceDBDAO {
 
         
     public int[] listOfAttendanceToIntArrayOfDays(List<Attendance> attendanceList) {
-        int[] dailyAttendanceIntArray = new int[5];
+        int[] dailyAttendanceIntArray = new int[7];
         int attendanceTotal = attendanceList.size();
-            for (int i = 0; i < attendanceTotal; i++) {
-                Attendance attendance = attendanceList.get(i);
-                String dateHeldString = attendance.getDateHeld();
-                LocalDateTime dateHeld = stringToLocalDate(dateHeldString);
-                int dayOfWeek = (dateHeld.getDayOfWeek().getValue()) - 1; 
-                dailyAttendanceIntArray[dayOfWeek] ++;
+            if(attendanceTotal > 0)
+            {
+                System.out.print(attendanceTotal);
+                for (int i = 0; i+1 < attendanceTotal; i++) {
+                    System.out.print("in the for loop");
+                    Attendance attendance = attendanceList.get(i);
+                    String dateHeldString = attendance.getDateHeld();
+                    LocalDateTime dateHeld = stringToLocalDate(dateHeldString);
+                    int dayOfWeek = (dateHeld.getDayOfWeek().getValue()) - 1; 
+                    dailyAttendanceIntArray[dayOfWeek] ++;
+                }
             }
         return dailyAttendanceIntArray;
     }
@@ -206,8 +211,13 @@ public class AttendanceDBDAO {
     public double calculateAverageOfAStudentsAttendanceInASubject(int subjecKey, int userKey) throws SQLException {
         double averageOfAStudentsAttendanceInASubject;
         List<SubjectsHeld> allSubjectsHeldForASubject = tempSubjectsHeldDBDao.getAllSubjectsHeldForASubject(subjecKey);
+        System.out.print(allSubjectsHeldForASubject.size());
         List<Attendance> allOfAStudentsAttendanceForASubject = getAllOfAStudentsAttendanceForASubject(userKey, subjecKey);
-        averageOfAStudentsAttendanceInASubject = allOfAStudentsAttendanceForASubject.size()/allSubjectsHeldForASubject.size();
+        System.out.print(allOfAStudentsAttendanceForASubject.size());
+        double allOfStudentAttendanceInSubject = allOfAStudentsAttendanceForASubject.size();
+        double totalAttendanceForSubject = allSubjectsHeldForASubject.size();
+        
+        averageOfAStudentsAttendanceInASubject = allOfStudentAttendanceInSubject/totalAttendanceForSubject;
         return averageOfAStudentsAttendanceInASubject;
     }
         

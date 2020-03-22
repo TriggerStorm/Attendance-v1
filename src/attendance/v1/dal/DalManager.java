@@ -124,7 +124,16 @@ public class DalManager implements IDAL {
     }
 
     
-    
+     @Override
+    public String getAverageOfAllStudentAttendancesInASubjectAsAString(int subjectKey)
+    {
+        try {
+            return attendanceDBDao.getAverageOfAllStudentAttendancesInASubjectAsAString(subjectKey);
+        } catch (SQLException ex) {
+            Logger.getLogger(DalManager.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
+    }
  
 
 
