@@ -172,7 +172,8 @@ public class StudentController implements Initializable {
 //        TBV_tuesday.setCellValueFactory(new PropertyValueFactory<>("tuesday"));
 //        tbv_wednesday.setCellValueFactory(new PropertyValueFactory<>("wednesday"));
 //        TBV_thursday.setCellValueFactory(new PropertyValueFactory<>("thursday"));
-//        TBV_friday.setCellValueFactory(new PropertyValueFactory<>("friday"));       
+//        TBV_friday.setCellValueFactory(new PropertyValueFactory<>("friday"));
+        lu.setSelectedSubjectKey(1);
         Lb_subjet.setText("SCO");    
        ObservableList<Attendance> list = FXCollections.observableArrayList(bm.getStudentAttendanceForSubject(lu.getUserKey(),bllu.subjectsForGui().get(1).getSubjectKey()));
       //   bm.getStudentAttendanceForSubject(lu.getUserKey(),bllu.subjectsForGui().get(1).getSubjectKey());
@@ -189,7 +190,7 @@ public class StudentController implements Initializable {
       //  TBV_thursday.setCellValueFactory(new PropertyValueFactory<>("thursdag"));
       //  TBV_friday.setCellValueFactory(new PropertyValueFactory<>("friday")); 
        ObservableList<Attendance> list = FXCollections.observableArrayList(bm.getStudentAttendanceForSubject(lu.getUserKey(),bllu.subjectsForGui().get(0).getSubjectKey()));
-      
+      lu.setSelectedSubjectKey(5);
         Lb_subjet.setText("SDE");       
                 
        TBV_attendance.setItems(list);
@@ -220,6 +221,7 @@ public class StudentController implements Initializable {
         Lb_subjet.setText("ITO");   */     
                 
        // TBV_attendance.setItems(Am.getITOattendance());
+       lu.setSelectedSubjectKey(9);
       
 
     }
