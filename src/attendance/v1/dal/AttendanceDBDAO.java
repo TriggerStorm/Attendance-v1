@@ -23,6 +23,7 @@ import java.sql.Statement;
 import attendance.v1.be.SubjectAttendance;
 import attendance.v1.be.User;
 import attendance.v1.be.Attendance;
+import attendance.v1.be.LoggedInUser;
 import attendance.v1.bll.BllManager;
 import attendance.v1.be.Subject;
 import attendance.v1.be.SubjectsHeld;
@@ -44,6 +45,7 @@ public class AttendanceDBDAO {
     public List<SubjectAttendance> studentAttendance;
     public UserDBDAO tempUserDBDao;
     public SubjectsHeldDBDAO tempSubjectsHeldDBDao;
+    public LoggedInUser lu;
     
     
     public AttendanceDBDAO() {
@@ -119,7 +121,7 @@ public class AttendanceDBDAO {
         int[] dailyAttendanceIntArray = new int[5];
         List<Attendance> studentAttendanceInSubject = getAllOfAStudentsAttendanceForASubject(studentKey, subjectKey);
         dailyAttendanceIntArray = listOfAttendanceToIntArrayOfDays(studentAttendanceInSubject);
-        String name = tempUserDBDao.getUserNameFromKey(studentKey);
+        String name = lu.getUserName();
         int monday = dailyAttendanceIntArray[0];
         int tuesday = dailyAttendanceIntArray[1];
         int wednesday = dailyAttendanceIntArray[2];
