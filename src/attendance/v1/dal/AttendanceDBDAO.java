@@ -168,7 +168,6 @@ public class AttendanceDBDAO {
             {
                 System.out.print(attendanceTotal);
                 for (int i = 0; i+1 < attendanceTotal; i++) {
-                    System.out.print("in the for loop");
                     Attendance attendance = attendanceList.get(i);
                     String dateHeldString = attendance.getDateHeld();
                     LocalDateTime dateHeld = stringToLocalDate(dateHeldString);
@@ -193,14 +192,15 @@ public class AttendanceDBDAO {
        
     
     public String getAverageOfAllStudentAttendancesInASubjectAsAString(int subjectKey) throws SQLException {
+    //  Returns the String of the total average of all students in a subject   
         double totalOfAllStudentAttendancesInASubject = 0;
         List<User> allstudentsInASubject = tempUserDBDao.getAllStudentsInASubject(subjectKey);
         int numberOfStudentsInASubject = allstudentsInASubject.size();
-// maybe need an if (numberOfStudentsInASubject < 1) ...
+    // maybe need an if (numberOfStudentsInASubject > 0) ...
         for (int i = 0; i < numberOfStudentsInASubject; i++) {
             User testUser = allstudentsInASubject.get(i);
             int userKey = testUser.getUserKey();
-            totalOfAllStudentAttendancesInASubject =+ calculateAverageOfAStudentsAttendanceInASubject(subjectKey, userKey);
+            totalOfAllStudentAttendancesInASubject += calculateAverageOfAStudentsAttendanceInASubject(subjectKey, userKey);
         }
         double averageOfAllStudentAttendancesInASubject = totalOfAllStudentAttendancesInASubject / numberOfStudentsInASubject;
         String averageOfAllStudentAttendancesInASubjectString = convertDoubleToPercentageString(averageOfAllStudentAttendancesInASubject);
@@ -208,7 +208,8 @@ public class AttendanceDBDAO {
     }
      
     
-    public double calculateAverageOfAStudentsAttendanceInASubject(int subjecKey, int userKey) throws SQLException {
+    private double calculateAverageOfAStudentsAttendanceInASubject(int subjecKey, int userKey) throws SQLException {
+        //  Returns the int value of the average attendance of a student in a subject
         double averageOfAStudentsAttendanceInASubject;
         List<SubjectsHeld> allSubjectsHeldForASubject = tempSubjectsHeldDBDao.getAllSubjectsHeldForASubject(subjecKey);
         System.out.print(allSubjectsHeldForASubject.size());
@@ -222,7 +223,8 @@ public class AttendanceDBDAO {
     }
         
     
-    public String convertDoubleToPercentageString(double decimal) {
+    private String convertDoubleToPercentageString(double decimal) {
+        //  Converts double to String percent
         DecimalFormat df = new DecimalFormat("##.##%");
         String percentageString = df.format(decimal);
         return percentageString;
