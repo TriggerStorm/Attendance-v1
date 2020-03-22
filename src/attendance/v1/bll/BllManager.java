@@ -124,8 +124,12 @@ public class BllManager implements IBLL {
     public List<SubjectAttendance> getSubjectAttendanceListForAllStudentsInThatSubject(int subjectKey) {
         return dalManager.getSubjectAttendanceListForAllStudentsInThatSubject(subjectKey);
     }
-
     
+     @Override
+    public String getAverageOfAllStudentAttendancesInASubjectAsAString(int subjectKey)
+    {
+        return dalManager.getAverageOfAllStudentAttendancesInASubjectAsAString(subjectKey);
+    }
 
     
 

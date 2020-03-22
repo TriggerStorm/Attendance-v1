@@ -49,7 +49,7 @@ public Attendance(int studentKey, int subjectKey, String dateHeld){
     }
 
     public String getDateHeld() {
-        return dateHeld.split("T")[0];
+        return dateHeld;
 
     }
 
