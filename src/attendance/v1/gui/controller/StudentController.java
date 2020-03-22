@@ -244,6 +244,7 @@ public class StudentController implements Initializable {
          a.setContentText("Error either code is invalid or it expired");
          a.show();
         }
+        lu.setBooleanToFalse();
     }
     
     

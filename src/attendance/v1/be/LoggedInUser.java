@@ -150,4 +150,8 @@ public class LoggedInUser{
     {
         return attBoolean;
     }
+    public void setBooleanToFalse()
+    {
+        this.attBoolean = false;
+    }
 }
