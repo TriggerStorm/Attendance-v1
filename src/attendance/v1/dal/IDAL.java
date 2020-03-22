@@ -56,7 +56,7 @@ public interface IDAL {
 // SubjectsHeldDBDAO methods
     public SubjectsHeld addSubjectsHeld(int skey, String date, String secretCode);
     public SubjectsHeld getSpecificSubjectsHeld(int skey);
-
+   public String getLatestSubjectsHeld(int skey);
     public SubjectsHeld checkCode(int sKey, String code);
 
 // subjectDBDAO

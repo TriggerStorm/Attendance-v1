@@ -183,5 +183,10 @@ public class BllManager implements IBLL {
         return dalManager.checkCode(lUser.getSelectedSubjectKey(), code);
     }
 
-  
+
+    @Override
+    public String getLatestSubjectsHeldDate(int skey) {
+        return dalManager.getLatestSubjectsHeld(skey);
+    }
+
 }
