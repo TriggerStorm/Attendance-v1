@@ -46,21 +46,21 @@ public class AttendanceModel {
     return saltStr;
     }
     
-    public ObservableList<List> getStutendAttancence () throws SQLException
-    {
+    //public ObservableList<List> getStutendAttancence () throws SQLException
+    /*{
         ObservableList<Attendance> liste = FXCollections.observableArrayList(bllManager.getStudentAttendanceForSubject(lu.getUserKey(),bllu.subjectsForGui().get(1).getSubjectKey()));
         return liste;
-    }
+    }*/
     
     public void submitAttendance(String code, String selectedSubjectName)
     {
         bllManager.submitAttendance(code, selectedSubjectName);
     }
     
-   public SubjectAttendance getSubjectAttendanceForAStudent(int studentKey, SubjectsHeld subjectHeld)
+   /*public SubjectAttendance getSubjectAttendanceForAStudent(int studentKey, SubjectsHeld subjectHeld)
    {     
        bllManager.getSubjectAttendanceForAStudent(studentKey, subjectHeld);
        return null;
-   }
+   }*/
    
 }
