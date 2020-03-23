@@ -26,12 +26,7 @@ public class AttendanceModel {
     private BllManager bllManager;
     private ObservableList<String> course;
 
-
-    public AttendanceModel() {
-        bllManager = new BllManager();
-       
-    private BLLutilities bllu;
-    private LoggedInUser lu;
+ 
 
     public AttendanceModel() {
         bllManager = new BllManager();
