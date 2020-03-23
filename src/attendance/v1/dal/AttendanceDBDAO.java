@@ -46,11 +46,13 @@ public class AttendanceDBDAO {
     public UserDBDAO tempUserDBDao;
     public SubjectsHeldDBDAO tempSubjectsHeldDBDao;
     public LoggedInUser lu;
-    
+    public StudentSubjectDBDAO tempStudentSubjectDBDao;
+
     
     public AttendanceDBDAO() {
         tempUserDBDao = new UserDBDAO();
         tempSubjectsHeldDBDao = new SubjectsHeldDBDAO();
+        tempStudentSubjectDBDao = new StudentSubjectDBDAO();
         dbc = new DBConnection();
     }
     
@@ -118,7 +120,8 @@ public class AttendanceDBDAO {
    
    
     public  SubjectAttendance getSubjectAttendanceForAStudent(int studentKey, int subjectKey) throws SQLException {
-        int[] dailyAttendanceIntArray = new int[5];
+    //  returns a SubjectAttendance of a student in a subject
+        int[] dailyAttendanceIntArray = new int[7];
         List<Attendance> studentAttendanceInSubject = getAllOfAStudentsAttendanceForASubject(studentKey, subjectKey);
         dailyAttendanceIntArray = listOfAttendanceToIntArrayOfDays(studentAttendanceInSubject);
         String name = lu.getUserName();
@@ -134,44 +137,90 @@ public class AttendanceDBDAO {
     
 
     public List<Attendance> getAllOfAStudentsAttendanceForASubject(int studentKey, int subjectKey) throws SQLException {
-        List<Attendance> allAttendances = getAllAttendances();
+        
         List<Attendance> studentAttendanceInSubject = new ArrayList<>();
-        Attendance testAttendance;
-        for (int i = 0; i < allAttendances.size(); i++) {
+        try(Connection con = dbc.getConnection()){
+            String SQLStmt = "SELECT DateHeld FROM ATTENDANCE WHERE studentKey = '" + studentKey + "' AND subjectKey='" + subjectKey + "'";
+            Statement statement = con.createStatement();
+            ResultSet rs = statement.executeQuery(SQLStmt);
+            while(rs.next()) //While you have something in the results
+            {
+                String dateHeld =  rs.getString("DateHeld");
+               studentAttendanceInSubject.add(new Attendance(studentKey, subjectKey, dateHeld)); 
+            }    
+        }
+        /*for (int i = 0; i < allAttendances.size(); i++) {
             testAttendance = allAttendances.get(i);
             if (testAttendance.getStudentKey() == studentKey) {
                 if (testAttendance.getSubjectKey() == subjectKey) {
                 studentAttendanceInSubject.add(testAttendance);
                 }
             }
-        }
+        }*/
         return studentAttendanceInSubject;
     }
 
  
     public List<Attendance> getAllAttendanceForSubject(int subjectKey) throws SQLException {
-        List<Attendance> allAttendances = getAllAttendances();
+        //List<Attendance> allAttendances = getAllAttendances();
         List<Attendance> allAttendanceInSubject = new ArrayList<>();
-        Attendance testAttendance;
+       
+        try(Connection con = dbc.getConnection()){
+            String SQLStmt = "SELECT studentKey, DateHeld FROM ATTENDANCE WHERE  subjectKey='" + subjectKey + "'";
+            Statement statement = con.createStatement();
+            ResultSet rs = statement.executeQuery(SQLStmt);
+            while(rs.next()) //While you have something in the results
+            {
+                int studentKey = rs.getInt("studentKey");
+                String dateHeld =  rs.getString("DateHeld");
+               allAttendanceInSubject.add(new Attendance(studentKey, subjectKey, dateHeld)); 
+            }    
+        }
+        
+        
+        /* Attendance testAttendance;
         for (int i = 0; i < allAttendances.size(); i++) {
             testAttendance = allAttendances.get(i);
             if (testAttendance.getSubjectKey() == subjectKey) {
                 allAttendanceInSubject.add(testAttendance);
             }
-        }
+        }*/
         return allAttendanceInSubject;
     }
 
-        
-    public int[] listOfAttendanceToIntArrayOfDays(List<Attendance> attendanceList) {
-        int[] dailyAttendanceIntArray = new int[5];
+       
+    public String getAverageAttendanceOfAStudentsForAllSubjects (int studentKey) throws SQLException {
+    //  Returns the String of the total average of a students attendance for all subjects
+        double totalAverageAttendanceOfAStudentsForAllSubjects = 0;
+        int numberOfSubjectsOfAStudent;
+        List<StudentSubject> allOfAStudentsSubjects;
+        allOfAStudentsSubjects = tempStudentSubjectDBDao.getSubjectsOfAStudent(studentKey);
+        numberOfSubjectsOfAStudent = allOfAStudentsSubjects.size();
+        for (int i = 0; i < numberOfSubjectsOfAStudent; i++) {
+            int testSubjectKey = allOfAStudentsSubjects.get(i).getSubjectKey();
+            totalAverageAttendanceOfAStudentsForAllSubjects += calculateAverageOfAStudentsAttendanceInASubject(testSubjectKey, studentKey);
+        }
+        double averageAttendanceOfAStudentsForAllSubjects = totalAverageAttendanceOfAStudentsForAllSubjects / numberOfSubjectsOfAStudent;
+        String averageAttendanceOfAStudentsForAllSubjectsString = convertDoubleToPercentageString(averageAttendanceOfAStudentsForAllSubjects);
+        return averageAttendanceOfAStudentsForAllSubjectsString;
+    }
+    
+    
+    private int[] listOfAttendanceToIntArrayOfDays(List<Attendance> attendanceList) {
+    //  converts list of attendances into a int[] and gives daily attendance totals where monday is [0]...  
+        int[] dailyAttendanceIntArray = new int[7];
         int attendanceTotal = attendanceList.size();
-            for (int i = 0; i < attendanceTotal; i++) {
-                Attendance attendance = attendanceList.get(i);
-                String dateHeldString = attendance.getDateHeld();
-                LocalDateTime dateHeld = stringToLocalDate(dateHeldString);
-                int dayOfWeek = (dateHeld.getDayOfWeek().getValue()) - 1; 
-                dailyAttendanceIntArray[dayOfWeek] ++;
+            if(attendanceTotal > 0)
+            {
+                //System.out.print(attendanceTotal);
+                for (int i = 0; i+1 < attendanceTotal; i++) {
+                    //System.out.print("in the for loop");
+                    Attendance attendance = attendanceList.get(i);
+                    String dateHeldString = attendance.getDateHeld();
+                    LocalDateTime dateHeld = stringToLocalDate(dateHeldString);
+                    int dayOfWeek = (dateHeld.getDayOfWeek().getValue()) - 1; 
+                    dailyAttendanceIntArray[dayOfWeek] ++;
+                }
             }
         return dailyAttendanceIntArray;
     }
@@ -190,14 +239,15 @@ public class AttendanceDBDAO {
        
     
     public String getAverageOfAllStudentAttendancesInASubjectAsAString(int subjectKey) throws SQLException {
+    //  Returns the String of the total average of all students in a subject   
         double totalOfAllStudentAttendancesInASubject = 0;
         List<User> allstudentsInASubject = tempUserDBDao.getAllStudentsInASubject(subjectKey);
         int numberOfStudentsInASubject = allstudentsInASubject.size();
-// maybe need an if (numberOfStudentsInASubject < 1) ...
+    // maybe need an if (numberOfStudentsInASubject > 0) ...
         for (int i = 0; i < numberOfStudentsInASubject; i++) {
             User testUser = allstudentsInASubject.get(i);
             int userKey = testUser.getUserKey();
-            totalOfAllStudentAttendancesInASubject =+ calculateAverageOfAStudentsAttendanceInASubject(subjectKey, userKey);
+            totalOfAllStudentAttendancesInASubject += calculateAverageOfAStudentsAttendanceInASubject(subjectKey, userKey);
         }
         double averageOfAllStudentAttendancesInASubject = totalOfAllStudentAttendancesInASubject / numberOfStudentsInASubject;
         String averageOfAllStudentAttendancesInASubjectString = convertDoubleToPercentageString(averageOfAllStudentAttendancesInASubject);
@@ -205,16 +255,23 @@ public class AttendanceDBDAO {
     }
      
     
-    public double calculateAverageOfAStudentsAttendanceInASubject(int subjecKey, int userKey) throws SQLException {
+    private double calculateAverageOfAStudentsAttendanceInASubject(int subjectKey, int userKey) throws SQLException {
+        //  Returns the int value of the average attendance of a student in a subject
         double averageOfAStudentsAttendanceInASubject;
-        List<SubjectsHeld> allSubjectsHeldForASubject = tempSubjectsHeldDBDao.getAllSubjectsHeldForASubject(subjecKey);
-        List<Attendance> allOfAStudentsAttendanceForASubject = getAllOfAStudentsAttendanceForASubject(userKey, subjecKey);
-        averageOfAStudentsAttendanceInASubject = allOfAStudentsAttendanceForASubject.size()/allSubjectsHeldForASubject.size();
+        List<SubjectsHeld> allSubjectsHeldForASubject = tempSubjectsHeldDBDao.getAllSubjectsHeldForASubject(subjectKey);
+        System.out.print(allSubjectsHeldForASubject.size());
+        List<Attendance> allOfAStudentsAttendanceForASubject = getAllOfAStudentsAttendanceForASubject(userKey, subjectKey);
+        System.out.print(allOfAStudentsAttendanceForASubject.size());
+        double allOfStudentAttendanceInSubject = allOfAStudentsAttendanceForASubject.size();
+        double totalAttendanceForSubject = allSubjectsHeldForASubject.size();
+        
+        averageOfAStudentsAttendanceInASubject = allOfStudentAttendanceInSubject/totalAttendanceForSubject;
         return averageOfAStudentsAttendanceInASubject;
     }
         
     
-    public String convertDoubleToPercentageString(double decimal) {
+    private String convertDoubleToPercentageString(double decimal) {
+        //  Converts double to String percent
         DecimalFormat df = new DecimalFormat("##.##%");
         String percentageString = df.format(decimal);
         return percentageString;

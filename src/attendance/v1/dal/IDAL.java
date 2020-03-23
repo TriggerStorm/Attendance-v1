@@ -47,6 +47,8 @@ public interface IDAL {
     public SubjectAttendance getStudentDailyAttendance(int studentKey,  int subjectKey);
     public List<SubjectAttendance> getSubjectAttendanceListForAllStudentsInThatSubject( int subjectKey);
     public  SubjectAttendance getSubjectAttendanceForAStudent(int studentKey, int subjectKey);
+    public String getAverageOfAllStudentAttendancesInASubjectAsAString(int subjectKey);
+    public String getAverageAttendanceOfAStudentsForAllSubjects (int studentKey);
 
 
 // StudentSubjectDBDAO methods
