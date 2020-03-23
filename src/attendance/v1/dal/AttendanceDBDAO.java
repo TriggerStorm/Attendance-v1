@@ -54,7 +54,8 @@ public class AttendanceDBDAO {
     }
     
     
-     public List<Attendance> getAllAttendances() throws SQLException{
+    public List<Attendance> getAllAttendances() throws SQLException{
+    //  Gets a list of all attendances
         List<Attendance> allAttendance = new ArrayList(); //get a list to store the values.
         try(Connection con = dbc.getConnection()){
             String SQLStmt = "SELECT * FROM ATTENDANCE;";
@@ -117,7 +118,7 @@ public class AttendanceDBDAO {
    
    
     public  SubjectAttendance getSubjectAttendanceForAStudent(int studentKey, int subjectKey) throws SQLException {
-    //  returns a SubjectAttendance of a student in a subject
+    //  Returns a SubjectAttendance of a student in a subject
         int[] dailyAttendanceIntArray = new int[7];
         List<Attendance> studentAttendanceInSubject = getAllOfAStudentsAttendanceForASubject(studentKey, subjectKey);
         dailyAttendanceIntArray = listOfAttendanceToIntArrayOfDays(studentAttendanceInSubject);
@@ -134,7 +135,7 @@ public class AttendanceDBDAO {
     
 
     public List<Attendance> getAllOfAStudentsAttendanceForASubject(int studentKey, int subjectKey) throws SQLException {
-        
+    //  Returns all attendances for all students in a subject   
         List<Attendance> studentAttendanceInSubject = new ArrayList<>();
         try(Connection con = dbc.getConnection()){
             String SQLStmt = "SELECT DateHeld FROM ATTENDANCE WHERE studentKey = '" + studentKey + "' AND subjectKey='" + subjectKey + "'";
@@ -159,6 +160,7 @@ public class AttendanceDBDAO {
 
  
     public List<Attendance> getAllAttendanceForSubject(int subjectKey) throws SQLException {
+     //  Returns all attendances for a student in a subject   
         //List<Attendance> allAttendances = getAllAttendances();
         List<Attendance> allAttendanceInSubject = new ArrayList<>();
        
@@ -204,14 +206,12 @@ public class AttendanceDBDAO {
     
     
     private int[] listOfAttendanceToIntArrayOfDays(List<Attendance> attendanceList) {
-    //  converts list of attendances into a int[] and gives daily attendance totals where monday is [0]...  
+    //  Converts list of attendances into a int[] and gives daily attendance totals where monday is [0]...  
         int[] dailyAttendanceIntArray = new int[7];
         int attendanceTotal = attendanceList.size();
             if(attendanceTotal > 0)
             {
-                //System.out.print(attendanceTotal);
                 for (int i = 0; i+1 < attendanceTotal; i++) {
-                    //System.out.print("in the for loop");
                     Attendance attendance = attendanceList.get(i);
                     String dateHeldString = attendance.getDateHeld();
                     LocalDateTime dateHeld = stringToLocalDate(dateHeldString);
@@ -229,6 +229,7 @@ public class AttendanceDBDAO {
 // Average calculators
     
     public String getAverageOfAStudentsAttendanceInASubjectAsAString(int subjectKey, int userKey) throws SQLException {
+    //  Returns the String of the average of a students attendance in a subject
         double averageOfAStudentsAttendanceInASubject = calculateAverageOfAStudentsAttendanceInASubject(subjectKey, userKey);
         String averageOfAStudentsAttendanceInASubjectString = convertDoubleToPercentageString(averageOfAStudentsAttendanceInASubject);
         return averageOfAStudentsAttendanceInASubjectString;
