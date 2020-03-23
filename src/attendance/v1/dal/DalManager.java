@@ -256,8 +256,15 @@ public class DalManager implements IDAL {
         }
         return null;
     }
-    
-    
+    @Override
+      public boolean deleteSubjectsHeld(SubjectsHeld subjectsHeld) {
+        try {
+            return subjectsHeldDBDao.deleteSubjectsHeld(subjectsHeld);
+        } catch (SQLException ex) {
+            Logger.getLogger(DalManager.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return false;
+      }
     
     //SecretCode Methods
     

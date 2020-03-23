@@ -60,6 +60,7 @@ public interface IDAL {
     public SubjectsHeld getSpecificSubjectsHeld(int skey);
    public String getLatestSubjectsHeld(int skey);
     public SubjectsHeld checkCode(int sKey, String code);
+      public boolean deleteSubjectsHeld(SubjectsHeld subjectsHeld);
 
 // subjectDBDAO
     public Subject getSpecificSubjects(int subjectKey);

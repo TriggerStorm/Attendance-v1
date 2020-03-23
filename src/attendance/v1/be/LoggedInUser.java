@@ -11,7 +11,8 @@ package attendance.v1.be;
  */
 public class LoggedInUser{
     
-    private static LoggedInUser instance = null;
+   
+     private static LoggedInUser instance = null;
     
     private int userKey;
     private String userName;
