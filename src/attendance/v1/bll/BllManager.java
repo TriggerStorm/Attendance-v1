@@ -101,6 +101,8 @@ public class BllManager implements IBLL {
     public List<Attendance> getAllAttendances() {
         return dalManager.getAllAttendances();
     }
+    
+    @Override
     public SubjectAttendance getSubjectAttendanceForAStudent(int studentKey, int subjectKey){
         return dalManager.getSubjectAttendanceForAStudent(studentKey, subjectKey);
     }
@@ -116,16 +118,11 @@ public class BllManager implements IBLL {
     }
 
     @Override
-    public SubjectAttendance getStudentDailyAttendance(int studentKey, int subjectKey) {
-        return dalManager.getStudentDailyAttendance(studentKey, subjectKey);
-    }
-
-      @Override
     public List<SubjectAttendance> getSubjectAttendanceListForAllStudentsInThatSubject(int subjectKey) {
         return dalManager.getSubjectAttendanceListForAllStudentsInThatSubject(subjectKey);
     }
     
-     @Override
+    @Override
     public String getAverageOfAllStudentAttendancesInASubjectAsAString(int subjectKey) {
         return dalManager.getAverageOfAllStudentAttendancesInASubjectAsAString(subjectKey);
     }
