@@ -105,11 +105,15 @@
                                           <JFXButton fx:id="bn_Showcode" buttonType="RAISED" layoutX="24.0" layoutY="70.0" onAction="#handle_showcode" prefHeight="25.0" prefWidth="105.0" style="-fx-background-color: white;" text="Show code" />
                                        </children>
                                     </Pane>
-                                    <Pane prefHeight="67.0" prefWidth="105.0" />
+                                    <Pane prefHeight="67.0" prefWidth="105.0">
+                                       <children>
+                                          <Label layoutX="40.0" layoutY="9.0" style="-fx-background-color: #F5F5F5;" styleClass="textsm2" text="Course AVG of:" />
+                                          <Label layoutX="57.0" layoutY="32.0" style="-fx-background-color: #F5F5F5;" styleClass="h2" text="67%" />
+                                       </children></Pane>
                                     <Pane prefHeight="100.0" prefWidth="200.0">
                                        <children>
                                           <Label fx:id="LB_AttendanceRate" layoutX="23.0" layoutY="37.0" prefHeight="64.0" prefWidth="105.0" style="-fx-background-color: #F5F5F5;" styleClass="h2" stylesheets="@../css/Attendance.css" text="69%" textAlignment="CENTER" />
-                                          <Label layoutX="21.0" layoutY="31.0" prefHeight="17.0" prefWidth="105.0" styleClass="textsm2" stylesheets="@../css/Attendance.css" text="  AVG. Rate" textAlignment="CENTER" />
+                                          <Label layoutX="21.0" layoutY="31.0" prefHeight="17.0" prefWidth="105.0" styleClass="textsm2" stylesheets="@../css/Attendance.css" text="Subject AVG. Rate" textAlignment="CENTER" />
                                        </children>
                                     </Pane>
                                     <Pane prefHeight="78.0" prefWidth="123.0">
