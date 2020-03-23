@@ -49,7 +49,8 @@ public class DalManager implements IDAL {
     
 
 // AttendanceDBDAO methods
- public List<Attendance> getAllAttendances() {
+    
+    public List<Attendance> getAllAttendances() {
         try {
             return attendanceDBDao.getAllAttendances();
         } catch (SQLException ex) {
@@ -57,7 +58,16 @@ public class DalManager implements IDAL {
         }
         return null;
     }
-
+    
+    @Override
+    public SubjectAttendance getSubjectAttendanceForAStudent(int studentKey, int subjectKey){
+        try {
+            return attendanceDBDao.getSubjectAttendanceForAStudent(studentKey, subjectKey);
+        } catch (SQLException ex) {
+            Logger.getLogger(DalManager.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
+    }
     
     @Override
     public List<Attendance> getStudentAttendanceForSubject(int studentKey, int subjectKey) { /// ????
@@ -69,10 +79,8 @@ public class DalManager implements IDAL {
         return null;
     }
 
-
-    @Override
+    @Override   // OBSOLETE??
     public List<Attendance> getStudentAttendanceInSubject(int studentKey, int subjectKey) {
-       
         try {
             return attendanceDBDao.getAllOfAStudentsAttendanceForASubject(studentKey, subjectKey);
         } catch (SQLException ex) {
@@ -80,8 +88,7 @@ public class DalManager implements IDAL {
         }
         return null;
     }
-        
-    
+       
     @Override
     public SubjectAttendance addNewAttendanceToDB(int studentKey, SubjectsHeld subjectHeld) {
         try {
@@ -92,17 +99,47 @@ public class DalManager implements IDAL {
         return null;
     }
 
- 
-    @Override
-    public SubjectAttendance getStudentDailyAttendance(int studentKey, SubjectsHeld subjectHeld) {
+    @Override  // OBSOLETE??
+    public SubjectAttendance getStudentDailyAttendance(int studentKey,  int subjectKey) {
         try {
-            return attendanceDBDao.getSubjectAttendanceForAStudent(studentKey, subjectHeld);
+            return attendanceDBDao.getSubjectAttendanceForAStudent(studentKey, subjectKey);
+        } catch (SQLException ex) {
+            Logger.getLogger(DalManager.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
+    }
+
+    @Override
+    public List<SubjectAttendance> getSubjectAttendanceListForAllStudentsInThatSubject(int subjectKey) {
+        try {
+            return attendanceDBDao.getSubjectAttendanceListForAllStudentsInThatSubject(subjectKey);
+        } catch (SQLException ex) {
+            Logger.getLogger(DalManager.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    return null;
+    }
+
+    @Override
+    public String getAverageOfAllStudentAttendancesInASubjectAsAString(int subjectKey)
+    {
+        try {
+            return attendanceDBDao.getAverageOfAllStudentAttendancesInASubjectAsAString(subjectKey);
         } catch (SQLException ex) {
             Logger.getLogger(DalManager.class.getName()).log(Level.SEVERE, null, ex);
         }
         return null;
     }
  
+    @Override
+    public String getAverageAttendanceOfAStudentsForAllSubjects(int studentKey) {
+        try {
+            return attendanceDBDao.getAverageAttendanceOfAStudentsForAllSubjects(studentKey);
+        } catch (SQLException ex) {
+            Logger.getLogger(DalManager.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null; 
+    }
+       
 
 
 // UserDBDAO methods
@@ -219,6 +256,9 @@ public class DalManager implements IDAL {
         }
         return null;
     }
+    
+    
+    
     //SecretCode Methods
     
     @Override
@@ -234,9 +274,11 @@ public class DalManager implements IDAL {
         return null;
     }   
 
+    
+    
     // SubjectDBDAO methods
     
-     public Subject getSpecificSubjects(int subjectKey){
+    public Subject getSpecificSubjects(int subjectKey){
          
              try {
                  return subjectDBdao.getSpecificSubject(subjectKey);
@@ -258,9 +300,10 @@ public class DalManager implements IDAL {
         } 
         
     
+    /*public SubjectAttendance getSubjectAttendanceForAStudent(int studentKey, SubjectsHeld subjectHeld) {
+            return attendanceDBDao.getSubjectAttendanceForAStudent(studentKey, subjectHeld);
+        }*/
 
-    
-     
    
 
 }

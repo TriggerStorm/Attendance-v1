@@ -187,7 +187,58 @@ public class UserDBDAO {
       
     
     public int checkUserLogin(String email, String password) throws SQLException {  // Why an int???
-        List<User> allUsers = getAllUsers();
+        User tempLogin = null;
+        try(Connection con = dbc.getConnection()){
+            String SQLStmt = "SELECT userKey, userName, phonenr, address, postCode, city, teacher, userIMG  FROM USERS WHERE email = '"+ email + "' AND password ='" + password + "'";
+            Statement statement = con.createStatement();
+            ResultSet rs = statement.executeQuery(SQLStmt);
+            if(rs != null) //If there is an entry
+            {
+                while(rs.next())
+                {
+                    int userKey = rs.getInt("userKey");
+                    String userName = rs.getString("userName");
+                    int phoneNr = rs.getInt("phonenr");
+                    String address = rs.getString("address");
+                    int postCode = rs.getInt("postCode");
+                    String city = rs.getString("city");
+                    int isteacher = rs.getInt("teacher");
+                    boolean teacher = false;
+                    if(isteacher == 1)
+                        teacher = true;
+                    String userIMG =  rs.getString("userIMG");
+                    tempLogin = new User(userKey, userName, password, email, phoneNr, address, postCode, city, teacher, userIMG);
+
+                    LoggedInUser lUser = LoggedInUser.getInstance();
+                    lUser.setUserKey(tempLogin.getUserKey());
+                    lUser.setUserName(tempLogin.getUserName());
+                    lUser.setEmail(email);
+                    lUser.setPassword(password);
+                    lUser.setPhoneNr(tempLogin.getPhoneNr());
+                    lUser.setPostCode(tempLogin.getPostCode());
+                    lUser.setCity(tempLogin.getCity());
+                    lUser.setTeacher(tempLogin.getTeacher());
+                    lUser.setUserIMG(tempLogin.getUserIMG());
+
+                    if(tempLogin.getTeacher() == true)
+                    {
+                        return 1; //user and password match = true
+                    }
+                    else if(tempLogin.getTeacher() == false)
+                    {
+                        return 2;
+                    }
+                }
+            }
+            else
+            {
+                return 0;
+            }
+        }
+        return 4; //this should never happen.
+        
+        
+        /* List<User> allUsers = getAllUsers();
         for (int i = 0; i < allUsers.size(); i++) {
             User userToCheck = allUsers.get(i);
             if ((userToCheck.getEmail().equals(email)) && (userToCheck.getPassword().equals(password))) {
@@ -220,33 +271,33 @@ public class UserDBDAO {
                 System.out.println("setUserIMG" + loggedInUser.getUserIMG());
 
 */
-                LoggedInUser lUser = LoggedInUser.getInstance();
-                lUser.setUserKey(userToCheck.getUserKey());
-                lUser.setUserName(userToCheck.getUserName());
-                lUser.setEmail(email);
-                lUser.setPassword(password);
-                lUser.setPhoneNr(userToCheck.getPhoneNr());
-                lUser.setPostCode(userToCheck.getPostCode());
-                lUser.setCity(userToCheck.getCity());
-                lUser.setTeacher(userToCheck.getTeacher());
-                lUser.setUserIMG(userToCheck.getUserIMG());
-                
-                if(userToCheck.getTeacher() == true)
-                {
-                    return 1; //user and password match = true
-                }
-                else if(userToCheck.getTeacher() == false)
-                {
-                    return 2;
-                }
-            }
-        }
-        return 0;// fail log in
-    }
+}
     
     
     public boolean checkIfTeacher(String email) throws SQLException {
-        List<User> allUsers = getAllUsers();
+        
+        try(Connection con = dbc.getConnection()){
+            boolean teacher = false;
+            String SQLStmt = "SELECT teacher FROM Users WHERE  email='" + email + "'";
+            Statement statement = con.createStatement();
+            ResultSet rs = statement.executeQuery(SQLStmt);
+            while(rs.next()) //While you have something in the results
+            {
+                
+                int isTeacher =  rs.getInt("teacher");
+                if(isTeacher == 1)
+                {
+                    teacher=true;
+                }
+                else if(isTeacher == 0)
+                {
+                    teacher = false;
+                }
+               
+            }
+            return teacher;
+        }
+        /*List<User> allUsers = getAllUsers();
         for (int i = 0; i < allUsers.size(); i++) {
             User userToCheck = allUsers.get(i);
             if (userToCheck.getEmail().equals(email)) {
@@ -256,27 +307,69 @@ public class UserDBDAO {
                     return false;  // user is not a teacher
                 }
             }
-        }
-        return false;  // user is not in allUsers
-        }
+        } */
+        //return false;  // user is not in allUsers
+    }
         
     
     public String getUserNameFromKey(int studentKey) throws SQLException {
-        List<User> allUsers = getAllUsers();
+        try(Connection con = dbc.getConnection()){
+            String userName = null;
+            String SQLStmt = "SELECT userName FROM Users WHERE  userKey='" + studentKey + "'";
+            Statement statement = con.createStatement();
+            ResultSet rs = statement.executeQuery(SQLStmt);
+            while(rs.next()) //While you have something in the results
+            {
+                
+                userName =  rs.getString("userName");
+               
+            }
+            return userName;
+        }
+        
+        /*  List<User> allUsers = getAllUsers();
         for (int i = 0; i < allUsers.size(); i++) {
             User testUser = allUsers.get(i);
             if (testUser.getUserKey() == studentKey) {
                 return testUser.getUserName();
             }
         }
-        return null;
+        return null;*/
     }
         
     
     public List<User> getAllStudentsInASubject(int subjectKey) throws SQLException {
         List<User> studentsInSubject = new ArrayList<>();
-        List<StudentSubject> allStudentSubjects = studentSubjectDBDao.getAllStudentSubjects();
-        for (int i = 0; i < allStudentSubjects.size(); i++) {
+        //List<StudentSubject> allStudentSubjects = studentSubjectDBDao.getAllStudentSubjects();
+        String stmt = "Select u.userKey, u.userName, u.password, u.email, u.email,u.phonenr, u.address, u.teacher, u.userIMG, u.postCode, u.city FROM Users u JOIN Student_Subjects s On u.userKey = s.userKey WHERE s.subjectKey = ?";
+        try (Connection con = dbc.getConnection()) {
+            PreparedStatement pstmt = con.prepareStatement(stmt);
+            pstmt.setInt(1,subjectKey);
+            ResultSet rs = pstmt.executeQuery();
+            
+            while(rs.next())
+            {
+                int userKey = rs.getInt("userKey");
+                String userName = rs.getString("userName");
+                String password = rs.getString("password");
+                String email = rs.getString("email");
+                int phoneNr = rs.getInt("phonenr");
+                String address = rs.getString("address");
+                int postCode = rs.getInt("postCode");
+                String city = rs.getString("city");
+                int isteacher = rs.getInt("teacher");
+                boolean teacher = false;
+                if(isteacher == 1)
+                    teacher = true;
+                String userIMG =  rs.getString("userIMG");
+               studentsInSubject.add(new User(userKey, userName, password, email, phoneNr, address, postCode, city, teacher, userIMG)); 
+            }
+        } catch (SQLException ex) {
+            System.out.println("Exception " + ex);
+        }
+        
+        
+      /*  for (int i = 0; i < allStudentSubjects.size(); i++) {
             StudentSubject testStudentSubject = allStudentSubjects.get(i);
             if (testStudentSubject.getSubjectKey() == subjectKey) {
                 int studentKeyInSubject = testStudentSubject.getUserKey();
@@ -284,7 +377,7 @@ public class UserDBDAO {
                 studentsInSubject.add(studentInSubject);   
             }
             
-        }
+        }*/
         return studentsInSubject;
     }
     

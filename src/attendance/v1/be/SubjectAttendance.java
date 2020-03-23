@@ -18,9 +18,9 @@ public class SubjectAttendance {
     private int wednesday;
     private int thursday;
     private int friday;
-    private int percent;
+    private String percent;
 
-    public SubjectAttendance(String name,int monday,int tuesday,int wednesday,int thursday,int friday,int percent) {
+    public SubjectAttendance(String name,int monday,int tuesday,int wednesday,int thursday,int friday, String percent) {
         this.name = name;
         this.monday = monday;
         this.tuesday = tuesday;
@@ -29,6 +29,7 @@ public class SubjectAttendance {
         this.friday = friday;
         this.percent= percent;
     }
+    
      public SubjectAttendance(int monday,int tuesday,int wednesday,int thursday,int friday) {
         
         this.monday = monday;
@@ -95,11 +96,11 @@ public class SubjectAttendance {
     }
 
     
-    public int getPercent() {
+    public String getPercent() {
         return percent;
     }
     
-    public void setPercent(int percent) {
+    public void setPercent(String percent) {
         this.percent = percent;
     }
 

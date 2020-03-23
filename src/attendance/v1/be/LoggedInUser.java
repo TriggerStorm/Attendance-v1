@@ -25,8 +25,7 @@ public class LoggedInUser{
     private String userIMG;
     private SubjectsHeld sbh;
     private boolean attBoolean;
-    
-    private int selectedSubjectKey=1;
+    private int selectedSubjectKey;
 
     private LoggedInUser(){
      SubjectsHeld sbh = new SubjectsHeld(0,"","");

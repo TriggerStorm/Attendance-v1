@@ -76,17 +76,17 @@ public class StudentController implements Initializable {
     @FXML
     private AnchorPane body1;
     @FXML
-    private TableView<Attendance> TBV_attendance;
+    private TableView<SubjectAttendance> TBV_attendance;
     @FXML
-    private TableColumn<Attendance,String> TBV_monday;
-//    @FXML
-//    private TableColumn<Attendance, String> TBV_tuesday;
-//    @FXML
-//    private TableColumn<SubjectAttendance, String> tbv_wednesday;
-//    @FXML
-//    private TableColumn<SubjectAttendance, String> TBV_thursday;
-//    @FXML
-//    private TableColumn<SubjectAttendance, String> TBV_friday;
+    private TableColumn<SubjectAttendance,String> TBV_monday;
+    @FXML
+    private TableColumn<SubjectAttendance, String> TBV_tuesday;
+    @FXML
+    private TableColumn<SubjectAttendance, String> tbv_wednesday;
+    @FXML
+    private TableColumn<SubjectAttendance, String> TBV_thursday;
+    @FXML
+    private TableColumn<SubjectAttendance, String> TBV_friday;
     
     private Button Bn_EditOwn;
     @FXML
@@ -133,7 +133,7 @@ public class StudentController implements Initializable {
          bm = new BllManager();
            // System.out.println(bllu.subjectsForGui().get(1).getSubjectKey());
        
-    
+          // LB_AttendanceRate.setText(arg0);
             settingTableView();
             TF_logInAss.setText(lu.getUserName());
             Lb_logInUser.setText(lu.getUserName());
@@ -170,34 +170,49 @@ public class StudentController implements Initializable {
 
     @FXML
     private void handle_SCO(ActionEvent event) throws SQLException {
-        TBV_monday.setCellValueFactory(new PropertyValueFactory<>("dateHeld"));
+        lu.setSelectedSubjectKey(1);
+
+       SubjectAttendance sAttendance = bm.getSubjectAttendanceForAStudent(lu.getUserKey(), 1);
+       ObservableList<SubjectAttendance> attendance = FXCollections.observableArrayList(sAttendance);
+        TBV_monday.setCellValueFactory(new PropertyValueFactory<SubjectAttendance, String>("monday"));
+        TBV_tuesday.setCellValueFactory(new PropertyValueFactory<SubjectAttendance, String>("tuesday"));
+        tbv_wednesday.setCellValueFactory(new PropertyValueFactory<SubjectAttendance, String>("wednesday"));
+        TBV_thursday.setCellValueFactory(new PropertyValueFactory<SubjectAttendance, String>("thursday"));
+        TBV_friday.setCellValueFactory(new PropertyValueFactory<SubjectAttendance, String>("friday"));
 //        TBV_tuesday.setCellValueFactory(new PropertyValueFactory<>("tuesday"));
 //        tbv_wednesday.setCellValueFactory(new PropertyValueFactory<>("wednesday"));
 //        TBV_thursday.setCellValueFactory(new PropertyValueFactory<>("thursday"));
-//        TBV_friday.setCellValueFactory(new PropertyValueFactory<>("friday"));       
-        Lb_subjet.setText("SCO");    
-       ObservableList<Attendance> list = FXCollections.observableArrayList(bm.getStudentAttendanceForSubject(lu.getUserKey(),bllu.subjectsForGui().get(1).getSubjectKey()));
+//        TBV_friday.setCellValueFactory(new PropertyValueFactory<>("friday"));
+        LB_AttendanceRate.setText(sAttendance.getPercent());
+       Lb_subjet.setText("SCO");    
+ //      ObservableList<Attendance> list = FXCollections.observableArrayList(bm.getStudentAttendanceForSubject(lu.getUserKey(),bllu.subjectsForGui().get(1).getSubjectKey()));
       //   bm.getStudentAttendanceForSubject(lu.getUserKey(),bllu.subjectsForGui().get(1).getSubjectKey());
-        TBV_attendance.setItems(list);
+        TBV_attendance.setItems(attendance);
 
     }
 
     @FXML
     private void handle_SDE(ActionEvent event) throws SQLException {
-        
-       TBV_monday.setCellValueFactory(new PropertyValueFactory<>("dateHeld"));
+       lu.setSelectedSubjectKey(5);
+        SubjectAttendance sAttendance = bm.getSubjectAttendanceForAStudent(lu.getUserKey(), 5);
+       ObservableList<SubjectAttendance> attendance = FXCollections.observableArrayList(sAttendance);
+        TBV_monday.setCellValueFactory(new PropertyValueFactory<SubjectAttendance, String>("monday"));
+        TBV_tuesday.setCellValueFactory(new PropertyValueFactory<SubjectAttendance, String>("tuesday"));
+        tbv_wednesday.setCellValueFactory(new PropertyValueFactory<SubjectAttendance, String>("wednesday"));
+        TBV_thursday.setCellValueFactory(new PropertyValueFactory<SubjectAttendance, String>("thursday"));
+        TBV_friday.setCellValueFactory(new PropertyValueFactory<SubjectAttendance, String>("friday"));
       //  TBV_tuesday.setCellValueFactory(new PropertyValueFactory<>("tuesday"));
       //  tbv_wednesday.setCellValueFactory(new PropertyValueFactory<>("wednesday"));
       //  TBV_thursday.setCellValueFactory(new PropertyValueFactory<>("thursdag"));
       //  TBV_friday.setCellValueFactory(new PropertyValueFactory<>("friday")); 
-       ObservableList<Attendance> list = FXCollections.observableArrayList(bm.getStudentAttendanceForSubject(lu.getUserKey(),bllu.subjectsForGui().get(0).getSubjectKey()));
-      
+  //     ObservableList<Attendance> list = FXCollections.observableArrayList(bm.getStudentAttendanceForSubject(lu.getUserKey(),bllu.subjectsForGui().get(0).getSubjectKey()));
+        LB_AttendanceRate.setText(sAttendance.getPercent());
         Lb_subjet.setText("SDE");       
                 
-       TBV_attendance.setItems(list);
+       TBV_attendance.setItems(attendance);
     }
 
-    @FXML
+  @FXML
     private void handle_DBOS(ActionEvent event) {
         
        /* TBV_monday.setCellValueFactory(new PropertyValueFactory<>("monday"));
@@ -210,21 +225,32 @@ public class StudentController implements Initializable {
 
        // TBV_attendance.setItems(Am.getDBOSattendance());
 
-    }
+    } 
+    
 
-    @FXML
+  @FXML
     private void handle_ITO(ActionEvent event) {
+        lu.setSelectedSubjectKey(9);
+
+        SubjectAttendance sAttendance = bm.getSubjectAttendanceForAStudent(lu.getUserKey(),9);
+       ObservableList<SubjectAttendance> attendance = FXCollections.observableArrayList(sAttendance);
+        TBV_monday.setCellValueFactory(new PropertyValueFactory<SubjectAttendance, String>("monday"));
+        TBV_tuesday.setCellValueFactory(new PropertyValueFactory<SubjectAttendance, String>("tuesday"));
+        tbv_wednesday.setCellValueFactory(new PropertyValueFactory<SubjectAttendance, String>("wednesday"));
+        TBV_thursday.setCellValueFactory(new PropertyValueFactory<SubjectAttendance, String>("thursday"));
+        TBV_friday.setCellValueFactory(new PropertyValueFactory<SubjectAttendance, String>("friday"));
         /*TBV_monday.setCellValueFactory(new PropertyValueFactory<>("monday"));
         TBV_tuesday.setCellValueFactory(new PropertyValueFactory<>("tuesday"));
         tbv_wednesday.setCellValueFactory(new PropertyValueFactory<>("wednesday"));
         TBV_thursday.setCellValueFactory(new PropertyValueFactory<>("thursdag"));
         TBV_friday.setCellValueFactory(new PropertyValueFactory<>("friday"));       
-        Lb_subjet.setText("ITO");   */     
-                
-       // TBV_attendance.setItems(Am.getITOattendance());
+ */       Lb_subjet.setText("ITO");        
+        LB_AttendanceRate.setText(sAttendance.getPercent());
+        TBV_attendance.setItems(attendance);
+
       
 
-    }
+     }
     
     @FXML
     private void submitAttendance(ActionEvent event)
