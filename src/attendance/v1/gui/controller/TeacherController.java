@@ -6,6 +6,7 @@
 package attendance.v1.gui.controller;
 import attendance.v1.be.LoggedInUser;
 import attendance.v1.be.SubjectAttendance;
+import attendance.v1.be.User;
 import attendance.v1.bll.BLLutilities;
 import attendance.v1.bll.BllManager;
 import attendance.v1.dal.DalManager;
@@ -102,6 +103,28 @@ public class TeacherController implements Initializable {
     
     private BllManager bm;
     private BLLutilities bllu;
+    private User user;
+    private SubjectAttendance SBA;        
+    @FXML
+    private Label Lb_CourseAvgTxt;
+    @FXML
+    private Label Lb_courseAvg;
+    @FXML
+    private TableView<?> TBV_attendance1;
+    @FXML
+    private TableColumn<?, ?> TBV_student1;
+    @FXML
+    private TableColumn<?, ?> TBV_monday1;
+    @FXML
+    private TableColumn<?, ?> TBV_tuesday1;
+    @FXML
+    private TableColumn<?, ?> tbv_wednesday1;
+    @FXML
+    private TableColumn<?, ?> TBV_thursday1;
+    @FXML
+    private TableColumn<?, ?> TBV_friday1;
+    @FXML
+    private TableColumn<?, ?> TBV_Attendance1;
    
     
     
@@ -111,6 +134,7 @@ public class TeacherController implements Initializable {
         lu = LoggedInUser.getInstance();
         Am = new AttendanceModel();
         bm = new BllManager();
+        
     }
     /**
      * Initializes the controller class.
@@ -148,7 +172,11 @@ public class TeacherController implements Initializable {
         
         
     }
-
+    private void handle_getUser(MouseEvent event) { // pick  selected user
+        SBA = TBV_attendance.getSelectionModel().getSelectedItem();
+        bm.getUserKeyFromName(SBA.getName());
+        
+    }
 
 
     @FXML

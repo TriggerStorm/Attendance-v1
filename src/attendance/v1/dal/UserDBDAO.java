@@ -311,7 +311,13 @@ public class UserDBDAO {
         //return false;  // user is not in allUsers
     }
         
-    
+     
+    /**
+     *
+     * @param studentKey
+     * @return
+     * @throws SQLException
+     */
     public String getUserNameFromKey(int studentKey) throws SQLException {
         try(Connection con = dbc.getConnection()){
             String userName = null;
@@ -337,6 +343,21 @@ public class UserDBDAO {
         return null;*/
     }
         
+    public int getUserKeyFromName(String userName) throws SQLException {
+        try(Connection con = dbc.getConnection()){
+            int studentKey = 0;
+            String SQLStmt = "SELECT studentKey FROM Users WHERE  userName='" + userName + "'";
+            Statement statement = con.createStatement();
+            ResultSet rs = statement.executeQuery(SQLStmt);
+            while(rs.next()) //While you have something in the results
+            {
+                
+                studentKey =  rs.getInt(studentKey);
+               
+            }
+            return studentKey;
+        }
+    }
     
     public List<User> getAllStudentsInASubject(int subjectKey) throws SQLException {
         List<User> studentsInSubject = new ArrayList<>();

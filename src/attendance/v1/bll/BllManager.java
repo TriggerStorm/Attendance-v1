@@ -46,6 +46,10 @@ public class BllManager implements IBLL {
     
 // UserDBDAO methods
     
+    public int getUserKeyFromName(String userName) throws SQLException{
+        return dalManager.getUserKeyFromName(userName);
+    }
+    
     @Override
     public List<User> getAllUsers() {
         return dalManager.getAllUsers();

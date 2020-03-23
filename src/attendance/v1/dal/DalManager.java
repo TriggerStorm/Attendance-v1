@@ -144,6 +144,11 @@ public class DalManager implements IDAL {
 
 // UserDBDAO methods
     
+    public int getUserKeyFromName(String userName) throws SQLException{
+        userDBDao.getUserNameFromKey(userName);
+        return 0;
+    }
+            
     @Override
     public List<User> getAllUsers() {
         try {
