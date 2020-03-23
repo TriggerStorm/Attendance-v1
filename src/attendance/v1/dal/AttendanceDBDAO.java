@@ -155,7 +155,7 @@ public class AttendanceDBDAO {
      //  Returns all attendances for a student in a subject   
         List<Attendance> allAttendanceInSubject = new ArrayList<>();
         try(Connection con = dbc.getConnection()){
-            String SQLStmt = "SELECT studentKey, DateHeld FROM ATTENDANCE WHERE  subjectKey='" + subjectKey + "'";
+            String SQLStmt = "SELECT studentKey, DateHeld FROM ATTENDANCE WHERE subjectKey ='" + subjectKey + "'";
             Statement statement = con.createStatement();
             ResultSet rs = statement.executeQuery(SQLStmt);
             while(rs.next()) //While you have something in the results

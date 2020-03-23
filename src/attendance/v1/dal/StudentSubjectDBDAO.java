@@ -75,7 +75,7 @@ public class StudentSubjectDBDAO {
             while(rs.next()) 
             {
                 int subjectKey = rs.getInt("subjectKey");
-		 int userrKey = rs.getInt("userKey");
+		int userrKey = rs.getInt("userKey");
                 StudentSubject p = new StudentSubject(subjectKey,userrKey);
                 studentSubjects.add(p);
             }    
