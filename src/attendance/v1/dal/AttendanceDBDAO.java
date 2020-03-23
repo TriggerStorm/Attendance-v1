@@ -144,26 +144,16 @@ public class AttendanceDBDAO {
             while(rs.next()) //While you have something in the results
             {
                 String dateHeld =  rs.getString("DateHeld");
-               studentAttendanceInSubject.add(new Attendance(studentKey, subjectKey, dateHeld)); 
+                studentAttendanceInSubject.add(new Attendance(studentKey, subjectKey, dateHeld)); 
             }    
         }
-        /*for (int i = 0; i < allAttendances.size(); i++) {
-            testAttendance = allAttendances.get(i);
-            if (testAttendance.getStudentKey() == studentKey) {
-                if (testAttendance.getSubjectKey() == subjectKey) {
-                studentAttendanceInSubject.add(testAttendance);
-                }
-            }
-        }*/
         return studentAttendanceInSubject;
     }
 
  
     public List<Attendance> getAllAttendanceForSubject(int subjectKey) throws SQLException {
      //  Returns all attendances for a student in a subject   
-        //List<Attendance> allAttendances = getAllAttendances();
         List<Attendance> allAttendanceInSubject = new ArrayList<>();
-       
         try(Connection con = dbc.getConnection()){
             String SQLStmt = "SELECT studentKey, DateHeld FROM ATTENDANCE WHERE  subjectKey='" + subjectKey + "'";
             Statement statement = con.createStatement();
@@ -175,15 +165,6 @@ public class AttendanceDBDAO {
                allAttendanceInSubject.add(new Attendance(studentKey, subjectKey, dateHeld)); 
             }    
         }
-        
-        
-        /* Attendance testAttendance;
-        for (int i = 0; i < allAttendances.size(); i++) {
-            testAttendance = allAttendances.get(i);
-            if (testAttendance.getSubjectKey() == subjectKey) {
-                allAttendanceInSubject.add(testAttendance);
-            }
-        }*/
         return allAttendanceInSubject;
     }
 
