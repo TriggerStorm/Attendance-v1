@@ -134,7 +134,7 @@ public class AttendanceDBDAO {
         int thursday = dailyAttendanceIntArray[3];
         int friday = dailyAttendanceIntArray[4];
         String percent = getAverageOfAStudentsAttendanceInASubjectAsAString(subjectKey, studentKey);
-        SubjectAttendance sda = new SubjectAttendance(name, monday, tuesday, wednesday, thursday, friday, percent);
+        SubjectAttendance sda = new SubjectAttendance(studentKey, name, monday, tuesday, wednesday, thursday, friday, percent);
         return sda;
     }
     
