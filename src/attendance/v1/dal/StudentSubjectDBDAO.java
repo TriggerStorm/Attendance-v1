@@ -52,19 +52,19 @@ public class StudentSubjectDBDAO {
     
      
     public StudentSubject getStudentSubject(int subjectKey, int userKey) throws SQLException { 
-        List<StudentSubject> allStudentSubjects = getAllStudentSubjects();
-        StudentSubject testStudentSubject;
-        for (int i = 0; i < allStudentSubjects.size(); i++) {
-            testStudentSubject = allStudentSubjects.get(i);
-            int testSubjectKey = testStudentSubject.getSubjectKey();
-            int testUserKey = testStudentSubject.getUserKey();
-            if ((testSubjectKey == subjectKey) && (testUserKey == userKey))  {
-            return testStudentSubject;
-            }
+        StudentSubject studentSubject = null;
+        try(Connection con = dbc.getConnection()) {
+            String SQLStmt = "SELECT * FROM Student_Subjects WHERE subjectKey = '" + subjectKey + "' AND userKey='" + userKey + "'";
+            Statement statement = con.createStatement();
+            ResultSet rs = statement.executeQuery(SQLStmt);
+            while(rs.next()) //While you have something in the results
+            {
+                studentSubject = new StudentSubject(subjectKey, userKey);
+            }           
         }
-        return null;  // StudentSubject does not exist
+        return studentSubject;
     }
-    
+ 
     
     public List<StudentSubject> getSubjectsOfAStudent(int userKey) throws SQLException {
         List<StudentSubject> studentSubjects = new ArrayList();
@@ -75,7 +75,7 @@ public class StudentSubjectDBDAO {
             while(rs.next()) 
             {
                 int subjectKey = rs.getInt("subjectKey");
-		 int userrKey = rs.getInt("userKey");
+		int userrKey = rs.getInt("userKey");
                 StudentSubject p = new StudentSubject(subjectKey,userrKey);
                 studentSubjects.add(p);
             }    

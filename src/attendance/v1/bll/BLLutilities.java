@@ -100,45 +100,8 @@ public class BLLutilities {
     
 
 
-// Average calculators
     
-    public String getAverageOfAStudentsAttendanceInASubjectAsAString(int subjectKey, int userKey) throws SQLException {
-        double averageOfAStudentsAttendanceInASubject = calculateAverageOfAStudentsAttendanceInASubject(subjectKey, userKey);
-        String averageOfAStudentsAttendanceInASubjectString = convertDoubleToPercentageString(averageOfAStudentsAttendanceInASubject);
-        return averageOfAStudentsAttendanceInASubjectString;
-    }
-       
+//  Average calculators (NO LNGER IN HERE. In AttendanceDBDAO
     
-    public String getAverageOfAllStudentAttendancesInASubjectAsAString(int subjectKey) throws SQLException {
-        double totalOfAllStudentAttendancesInASubject = 0;
-        List<User> allstudentsInASubject = userdb.getAllStudentsInASubject(subjectKey);
-        int numberOfStudentsInASubject = allstudentsInASubject.size();
-// maybe need an if (numberOfStudentsInASubject < 1) ...
-        for (int i = 0; i < numberOfStudentsInASubject; i++) {
-            User testUser = allstudentsInASubject.get(i);
-            int userKey = testUser.getUserKey();
-            totalOfAllStudentAttendancesInASubject =+ calculateAverageOfAStudentsAttendanceInASubject(subjectKey, userKey);
-        }
-        double averageOfAllStudentAttendancesInASubject = totalOfAllStudentAttendancesInASubject / numberOfStudentsInASubject;
-        String averageOfAllStudentAttendancesInASubjectString = convertDoubleToPercentageString(averageOfAllStudentAttendancesInASubject);
-        return averageOfAllStudentAttendancesInASubjectString;
-    }
-     
-    
-    public double calculateAverageOfAStudentsAttendanceInASubject(int subjecKey, int userKey) throws SQLException {
-        double averageOfAStudentsAttendanceInASubject;
-        List<SubjectsHeld> allSubjectsHeldForASubject = subjectshelddb.getAllSubjectsHeldForASubject(subjecKey);
-        List<Attendance> allOfAStudentsAttendanceForASubject = attendancedb.getAllOfAStudentsAttendanceForASubject(userKey, subjecKey);
-        averageOfAStudentsAttendanceInASubject = allOfAStudentsAttendanceForASubject.size()/allSubjectsHeldForASubject.size();
-        return averageOfAStudentsAttendanceInASubject;
-    }
-        
-    
-    public String convertDoubleToPercentageString(double decimal) {
-        DecimalFormat df = new DecimalFormat("##.##%");
-        String percentageString = df.format(decimal);
-        return percentageString;
-    }
-        
-        
+ 
 }
