@@ -83,7 +83,7 @@ public class EditOwnController implements Initializable {
         String postCode = TF_PostCode.getText();
         int userkey = lu.getUserKey();
         
-        if(iv.isValidPostCode(postCode) && iv.isValidPhoneNumber(phoneNr))
+        if(iv.isValidPostCode(postCode) && iv.isValidPhoneNumber(phoneNr) && iv.isValidEmail(email))
         {
            // bm.editUser(bm.getLoggedInUser(lu.getEmail()), name, pass, email, Integer.parseInt(phoneNr), addres,Integer.parseInt(postCode), city,lu.getTeacher(),lu.getUserIMG());
         Stage stage = (Stage) Bn_save.getScene().getWindow();
