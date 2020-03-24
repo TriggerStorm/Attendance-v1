@@ -156,6 +156,9 @@ public class BllManager implements IBLL {
     public SubjectsHeld newSubjectsHeld(int sKey, String date, String secretCode) {
        return dalManager.addSubjectsHeld(sKey,date,secretCode);
     }
+      public boolean deleteSubjectsHeld(SubjectsHeld subjectsHeld) {
+          return dalManager.deleteSubjectsHeld(subjectsHeld);
+      }
 
     
     

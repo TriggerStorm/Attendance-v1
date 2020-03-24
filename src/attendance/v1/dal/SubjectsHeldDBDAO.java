@@ -80,14 +80,29 @@ public class SubjectsHeldDBDAO {
 
      
     public List<SubjectsHeld> getAllSubjectsHeldForASubject(int subjectKey) throws SQLException {
-        List<SubjectsHeld> allSubjectsHeld = getALLSubjectsHeld();
+        //List<SubjectsHeld> allSubjectsHeld = getALLSubjectsHeld();
         List<SubjectsHeld> allSubjectsHeldForASubject = new ArrayList<>();
-        for (int i = 0; i < allSubjectsHeld.size(); i++) {
+                db = new DBConnection(); 
+        try(Connection con = db.getConnection()) {
+            String SQLStmt = "SELECT * FROM SUBJECTSHELD WHERE subjectKey = '"+subjectKey+"';";
+            Statement statement = con.createStatement();
+            ResultSet rs = statement.executeQuery(SQLStmt);
+            while(rs.next())
+            {
+                int subtKey = rs.getInt("subjectKey");
+                String date = rs.getString("date");
+                String secretCode = rs.getString("secretCode");
+                allSubjectsHeldForASubject.add( new SubjectsHeld(subtKey,date,secretCode));
+            }
+        }  
+        
+        
+        /*for (int i = 0; i < allSubjectsHeld.size(); i++) {
             SubjectsHeld testSubjectsHeld = allSubjectsHeld.get(i);
             if (testSubjectsHeld.getSubjectKey() == subjectKey) {
                 allSubjectsHeldForASubject.add(testSubjectsHeld);
             }
-        }
+        }*/
         return allSubjectsHeldForASubject;
     }
      
@@ -96,7 +111,7 @@ public class SubjectsHeldDBDAO {
         db = new DBConnection();
         try(Connection con = db.getConnection()){
             
-            String sqlIf = "INSERT INTO SUBJECTSHELD (subjectKey, secretCode, date) VALUES (?, ?, ?);"; 
+            String sqlIf = "INSERT INTO SUBJECTSHELD (subjectKey, date, secretCode) VALUES (?, ?, ?);"; 
             PreparedStatement pstmt = con.prepareStatement(sqlIf);
             pstmt.setInt(1,skey);
             pstmt.setString(2,date);
@@ -123,16 +138,25 @@ public class SubjectsHeldDBDAO {
             return new SubjectsHeld(skey,date,secretCode);
         }
      }
-     public void deleteSubjectsHeld(SubjectsHeld subjectsHeld) throws SQLException
+     public boolean deleteSubjectsHeld(SubjectsHeld subjectsHeld) throws SQLException
      {
           db = new DBConnection();
         try(Connection con = db.getConnection()){
-            String sqlStatement = "DELETE FROM SUBJECTSHELD WHERE subjectKey = ? ;";
+            String sqlStatement = "DELETE FROM SUBJECTSHELD WHERE subjectKey = ? AND date=?;";
             PreparedStatement pstmt = con.prepareStatement(sqlStatement);
             pstmt.setInt(1,subjectsHeld.getSubjectKey());
-            pstmt.execute();
+            pstmt.setString(2, subjectsHeld.getDateHeld());
+            int affectedRows = pstmt.executeUpdate();
+            if (affectedRows == 0) {
+                return false;
+                
+            }
+            else
+                return true;
         }
      }
+     
+     
 
 
 

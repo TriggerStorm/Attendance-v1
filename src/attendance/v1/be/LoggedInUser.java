@@ -11,7 +11,8 @@ package attendance.v1.be;
  */
 public class LoggedInUser{
     
-    private static LoggedInUser instance = null;
+   
+     private static LoggedInUser instance = null;
     
     private int userKey;
     private String userName;
@@ -24,10 +25,13 @@ public class LoggedInUser{
     private boolean teacher;
     private String userIMG;
     private SubjectsHeld sbh;
+    private boolean attBoolean;
     private int selectedSubjectKey;
 
     private LoggedInUser(){
      SubjectsHeld sbh = new SubjectsHeld(0,"","");
+     attBoolean = false;
+     
     }
    
     public static LoggedInUser getInstance()
@@ -137,5 +141,17 @@ public class LoggedInUser{
     public SubjectsHeld getSelectedSubjectsHeld()
     {
         return sbh;
+    }
+    public void setAttendanceSubmitted()
+    {
+       this.attBoolean = true;
+    }
+    public boolean getAttendanceSubmitted()
+    {
+        return attBoolean;
+    }
+    public void setBooleanToFalse()
+    {
+        this.attBoolean = false;
     }
 }
