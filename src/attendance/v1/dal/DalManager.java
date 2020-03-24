@@ -9,12 +9,10 @@ import attendance.v1.be.SubjectAttendance;
 import attendance.v1.be.User;
 import attendance.v1.be.Attendance;
 import attendance.v1.be.StudentSubject;
-import attendance.v1.bll.BllManager;
 import attendance.v1.be.Subject;
 import attendance.v1.be.SubjectsHeld;
 import java.sql.SQLException;
 import java.text.ParseException;
-import java.time.LocalDate;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -79,16 +77,9 @@ public class DalManager implements IDAL {
         return null;
     }
 
-    @Override   // OBSOLETE??
-    public List<Attendance> getStudentAttendanceInSubject(int studentKey, int subjectKey) {
-        try {
-            return attendanceDBDao.getAllOfAStudentsAttendanceForASubject(studentKey, subjectKey);
-        } catch (SQLException ex) {
-            Logger.getLogger(DalManager.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        return null;
-    }
-       
+    
+  
+    
     @Override
     public SubjectAttendance addNewAttendanceToDB(int studentKey, SubjectsHeld subjectHeld) {
         try {
@@ -99,16 +90,7 @@ public class DalManager implements IDAL {
         return null;
     }
 
-    @Override  // OBSOLETE??
-    public SubjectAttendance getStudentDailyAttendance(int studentKey,  int subjectKey) {
-        try {
-            return attendanceDBDao.getSubjectAttendanceForAStudent(studentKey, subjectKey);
-        } catch (SQLException ex) {
-            Logger.getLogger(DalManager.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        return null;
-    }
-
+    
     @Override
     public List<SubjectAttendance> getSubjectAttendanceListForAllStudentsInThatSubject(int subjectKey) {
         try {
@@ -256,8 +238,15 @@ public class DalManager implements IDAL {
         }
         return null;
     }
-    
-    
+    @Override
+      public boolean deleteSubjectsHeld(SubjectsHeld subjectsHeld) {
+        try {
+            return subjectsHeldDBDao.deleteSubjectsHeld(subjectsHeld);
+        } catch (SQLException ex) {
+            Logger.getLogger(DalManager.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return false;
+      }
     
     //SecretCode Methods
     

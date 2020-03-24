@@ -25,12 +25,13 @@ import java.sql.SQLException;
 public class AttendanceModel {
     private BllManager bllManager;
     private ObservableList<String> course;
-    private BLLutilities bllu;
-    private LoggedInUser lu;
+
+ 
 
     public AttendanceModel() {
         bllManager = new BllManager();
         bllManager.getAllAttendances();
+
     }
     public String getCode(){ // need to be move to Teatcher model.
      String password = new Random().ints(10, 33, 122).mapToObj(i -> String.valueOf((char)i)).collect(Collectors.joining());
@@ -55,6 +56,8 @@ public class AttendanceModel {
     public void submitAttendance(String code, String selectedSubjectName)
     {
         bllManager.submitAttendance(code, selectedSubjectName);
+  
+        
     }
     
    /*public SubjectAttendance getSubjectAttendanceForAStudent(int studentKey, SubjectsHeld subjectHeld)

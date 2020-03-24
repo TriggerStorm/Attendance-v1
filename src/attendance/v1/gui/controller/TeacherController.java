@@ -8,6 +8,7 @@ import attendance.v1.be.LoggedInUser;
 import attendance.v1.be.SubjectAttendance;
 import attendance.v1.bll.BLLutilities;
 import attendance.v1.bll.BllManager;
+import attendance.v1.bll.CommandManager;
 import attendance.v1.dal.DalManager;
 import attendance.v1.gui.model.AttendanceModel;
 import com.jfoenix.controls.JFXButton;
@@ -102,11 +103,30 @@ public class TeacherController implements Initializable {
     
     private BllManager bm;
     private BLLutilities bllu;
+    @FXML
+    private JFXButton btn_undo;
+    @FXML
+    private TableView<?> TBV_attendance1;
+    @FXML
+    private TableColumn<?, ?> TBV_student1;
+    @FXML
+    private TableColumn<?, ?> TBV_monday1;
+    @FXML
+    private TableColumn<?, ?> TBV_tuesday1;
+    @FXML
+    private TableColumn<?, ?> tbv_wednesday1;
+    @FXML
+    private TableColumn<?, ?> TBV_thursday1;
+    @FXML
+    private TableColumn<?, ?> TBV_friday1;
+    @FXML
+    private TableColumn<?, ?> TBV_Attendance1;
    
-    
+    public CommandManager cm;
     
     public TeacherController()
     {
+        cm = CommandManager.getInstance();
         bllu = new BLLutilities();
         lu = LoggedInUser.getInstance();
         Am = new AttendanceModel();
@@ -118,6 +138,7 @@ public class TeacherController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
        Bn_gencode.setDisable(true);
+       btn_undo.setVisible(false);
     }    
     private void settingTableView() {
         Lb_loginas.setText(lu.getUserName());
@@ -153,6 +174,7 @@ public class TeacherController implements Initializable {
 
     @FXML
     private void handle_attendancecode(ActionEvent event) throws IOException {
+        btn_undo.setVisible(true);
        Bn_gencode.setDisable(true);
         Parent root1;
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/attendance/v1/gui/view/generatedCode.fxml"));
@@ -220,7 +242,7 @@ public class TeacherController implements Initializable {
         Bn_gencode.setDisable(false);
        if(!bllu.hasOneDayPass(bm.getLatestSubjectsHeldDate(lu.getSelectedSubjectKey())))
        Bn_gencode.setDisable(true);
-       // TBV_attendance.setItems(Am.getDBOSattendance()); */
+       TBV_attendance.setItems(Am.getDBOSattendance()); */
     }
 
     @FXML
@@ -278,6 +300,13 @@ public class TeacherController implements Initializable {
         
         addStage.setScene(addScene);
         addStage.show();
+    }
+
+    @FXML
+    private void undo(ActionEvent event) {
+        cm.undo();
+        btn_undo.setVisible(false);
+        Bn_gencode.setDisable(false);
     }
     
 }
