@@ -135,6 +135,8 @@ public class DalManager implements IDAL {
         }
         return null;
     }
+    
+    
     public User getLoggedInUser(String email){
         try {
             return userDBDao.getLoggedInUser(email);
@@ -148,6 +150,17 @@ public class DalManager implements IDAL {
     public User getUser(int userKey) {
         try {
             return userDBDao.getUser(userKey);
+        } catch (SQLException ex) {
+            Logger.getLogger(DalManager.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
+    }
+
+    
+    @Override
+    public String getUserNameFromKey(int studentKey) {
+        try {
+            return userDBDao.getUserNameFromKey(studentKey);
         } catch (SQLException ex) {
             Logger.getLogger(DalManager.class.getName()).log(Level.SEVERE, null, ex);
         }
