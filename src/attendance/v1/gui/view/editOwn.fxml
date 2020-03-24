@@ -8,7 +8,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane id="AnchorPane" prefHeight="296.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="attendance.v1.gui.controller.EditOwnController">
+<AnchorPane id="AnchorPane" prefHeight="366.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="attendance.v1.gui.controller.EditOwnController">
    <children>
       <ImageView fx:id="Lb_profilepic" fitHeight="214.0" fitWidth="217.0" layoutX="14.0" layoutY="42.0" pickOnBounds="true" preserveRatio="true">
          <image>
@@ -25,7 +25,7 @@
             <Font size="16.0" />
          </font>
       </Text>
-      <Text layoutX="239.0" layoutY="129.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Confirm Password:" wrappingWidth="74.6484375">
+      <Text layoutX="236.0" layoutY="130.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Confirm Password:" wrappingWidth="82.9453125">
          <font>
             <Font size="16.0" />
          </font>
@@ -35,7 +35,7 @@
             <Font size="16.0" />
          </font>
       </Text>
-      <Text layoutX="239.0" layoutY="218.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Mobile Nr:">
+      <Text layoutX="238.0" layoutY="229.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Mobile Nr:">
          <font>
             <Font size="16.0" />
          </font>
@@ -45,7 +45,19 @@
       <JFXTextField fx:id="TF_confirmPassword" layoutX="360.0" layoutY="121.0" />
       <JFXTextField fx:id="TF_email" layoutX="360.0" layoutY="165.0" />
       <JFXTextField fx:id="TF_mobileNr" layoutX="360.0" layoutY="199.0" prefHeight="26.0" prefWidth="135.0" />
-      <JFXButton fx:id="Bn_save" buttonType="RAISED" layoutX="475.0" layoutY="249.0" onAction="#handle_save" style="-fx-background-color: white;" text="save" />
-      <JFXButton fx:id="Bn_close" buttonType="RAISED" layoutX="531.0" layoutY="249.0" onAction="#handle_close" style="-fx-background-color: white;" text="close" />
+      <JFXButton fx:id="Bn_save" buttonType="RAISED" layoutX="478.0" layoutY="305.0" onAction="#handle_save" style="-fx-background-color: white;" text="save" />
+      <JFXButton fx:id="Bn_close" buttonType="RAISED" layoutX="535.0" layoutY="305.0" onAction="#handle_close" style="-fx-background-color: white;" text="close" />
+      <Text layoutX="236.0" layoutY="262.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Post Code:">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </Text>
+      <JFXTextField fx:id="TF_PostCode" layoutX="360.0" layoutY="231.0" prefHeight="26.0" prefWidth="135.0" />
+      <Text layoutX="238.0" layoutY="292.0" strokeType="OUTSIDE" strokeWidth="0.0" text="City:">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </Text>
+      <JFXTextField fx:id="TF_City" layoutX="360.0" layoutY="263.0" prefHeight="26.0" prefWidth="135.0" />
    </children>
 </AnchorPane>

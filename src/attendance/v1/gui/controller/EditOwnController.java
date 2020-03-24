@@ -5,6 +5,7 @@
  */
 package attendance.v1.gui.controller;
 
+import com.jfoenix.controls.JFXTextField;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
@@ -40,6 +41,10 @@ public class EditOwnController implements Initializable {
     private ImageView Lb_profilepic;
     
     private StudentController Sc;
+    @FXML
+    private JFXTextField TF_PostCode;
+    @FXML
+    private JFXTextField TF_City;
     /**
      * Initializes the controller class.
      */
