@@ -12,7 +12,7 @@ package attendance.v1.bll;
 /**
  *
  * @author Trigger, Filip, Cecillia and Alan
-       ...with a little help from Sandeep V Tamhankar from Apache  
+      
  */
 
 public class InputValidators  implements Serializable {
@@ -32,7 +32,7 @@ public class InputValidators  implements Serializable {
 
     
     
-    protected boolean isValidEmail(String email) {
+    public boolean isValidEmail(String email) {
     //  Returns true if email is less than 64 chars long and follows the email pattern
         if (email == null || email.length() > MAX_EMAIL_LENGTH) {
             return false;
@@ -41,7 +41,7 @@ public class InputValidators  implements Serializable {
     }
 
     
-    protected boolean isValidPhoneNumber(String phoneNumber) {
+    public boolean isValidPhoneNumber(String phoneNumber) {
     //  Returns true if phoneNumber is 8 chars long and contains only numbers
         if (phoneNumber.length() != PHONE_NUMBER_LENGTH) {
             return false;
@@ -56,7 +56,7 @@ public class InputValidators  implements Serializable {
     }
      
     
-    protected boolean isValidAddress(String address) {
+    public boolean isValidAddress(String address) {
     //  Returns true if address is between 4 and 64 chars long and contains at least 2 letters (numbers are not essential)
         int hasLetters = 0;
         if ((address.length() < MIN_ADDRESS_LENGTH) && (address.length() > MAX_ADDRESS_LENGTH)) {
@@ -79,7 +79,7 @@ public class InputValidators  implements Serializable {
     }
     
     
-    protected boolean isValidPostCode(String postCode) {
+    public boolean isValidPostCode(String postCode) {
     //  Returns true if postCode is 4 chars long and contains only numbers
         if (postCode.length() != POSTCODE_LENGTH) {
             return false;
@@ -94,7 +94,7 @@ public class InputValidators  implements Serializable {
     }
 
     
-    protected boolean isValidCity(String city) {
+    public boolean isValidCity(String city) {
     //  Returns true if city is between 2 and 64 chars long and contains only letters
         if (city.length() < MIN_CITY_LENGTH) {
             return false;
