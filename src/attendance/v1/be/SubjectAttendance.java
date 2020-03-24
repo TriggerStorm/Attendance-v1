@@ -13,6 +13,7 @@ package attendance.v1.be;
 
 public class SubjectAttendance {
     private String name;
+    private int userKey;
     private int monday;
     private int tuesday;
     private int wednesday;
@@ -20,7 +21,8 @@ public class SubjectAttendance {
     private int friday;
     private String percent;
 
-    public SubjectAttendance(String name,int monday,int tuesday,int wednesday,int thursday,int friday, String percent) {
+    public SubjectAttendance(int userKey, String name,int monday,int tuesday,int wednesday,int thursday,int friday, String percent) {
+        this.userKey = userKey;
         this.name = name;
         this.monday = monday;
         this.tuesday = tuesday;
@@ -40,7 +42,13 @@ public class SubjectAttendance {
         
     }
       
-      
+    public int getUserKey(){
+        return userKey;
+    }
+    
+    public void setUserKey(int userKey) {
+        this.userKey = userKey;
+    }
     
     public String getName() {
         return name;

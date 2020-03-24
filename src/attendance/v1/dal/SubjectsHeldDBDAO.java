@@ -24,32 +24,32 @@ import java.util.logging.Logger;
  */
 public class SubjectsHeldDBDAO {
      private DBConnection db;
-     
-     
-     public List<SubjectsHeld> getALLSubjectsHeld() throws SQLException 
+
+
+     public List<SubjectsHeld> getALLSubjectsHeld() throws SQLException
     {
         db = new DBConnection();
         List<SubjectsHeld> allsubjectsHeld = new ArrayList();
-           
+
         try(Connection con = db.getConnection()){
             String SQLStmt = "SELECT * FROM SUBJECTSHELD;";
-            
+
             Statement statement = con.createStatement();
             ResultSet rs = statement.executeQuery(SQLStmt);
-            
-            while(rs.next()) 
+
+            while(rs.next())
             {
                 int subjectKey = rs.getInt("subjectKey");
                 String date = rs.getString("date");
                 String secretCode = rs.getString("secretCode");
                 SubjectsHeld p = new SubjectsHeld(subjectKey,date,secretCode);
                 allsubjectsHeld.add(p);
-            }    
+            }
         }
        return allsubjectsHeld;
     }
-    
-     public SubjectsHeld editSubjectsHeld(SubjectsHeld subjectsHeld, String date, String secretCode) throws SQLException 
+
+     public SubjectsHeld editSubjectsHeld(SubjectsHeld subjectsHeld, String date, String secretCode) throws SQLException
     {
         db = new DBConnection();
         try(Connection con = db.getConnection()){
@@ -63,10 +63,10 @@ public class SubjectsHeldDBDAO {
         }
         return new SubjectsHeld(subjectsHeld.getSubjectKey(),date,secretCode);
     }
-    
-     
+
+
      public SubjectsHeld getSpecificSubjectsHeld(int skey) throws SQLException {
-        db = new DBConnection(); 
+        db = new DBConnection();
         try(Connection con = db.getConnection()) {
             String SQLStmt = "SELECT * FROM SUBJECTSHELD WHERE subjectKey = '"+skey+"';";
             Statement statement = con.createStatement();
@@ -75,14 +75,14 @@ public class SubjectsHeldDBDAO {
                 String date = rs.getString("date");
                 String secretCode = rs.getString("secretCode");
                 return new SubjectsHeld(subjectKey,date,secretCode);
-        }  
+        }
     }
 
-     
+
     public List<SubjectsHeld> getAllSubjectsHeldForASubject(int subjectKey) throws SQLException {
         //List<SubjectsHeld> allSubjectsHeld = getALLSubjectsHeld();
         List<SubjectsHeld> allSubjectsHeldForASubject = new ArrayList<>();
-                db = new DBConnection(); 
+                db = new DBConnection();
         try(Connection con = db.getConnection()) {
             String SQLStmt = "SELECT * FROM SUBJECTSHELD WHERE subjectKey = '"+subjectKey+"';";
             Statement statement = con.createStatement();
@@ -94,9 +94,9 @@ public class SubjectsHeldDBDAO {
                 String secretCode = rs.getString("secretCode");
                 allSubjectsHeldForASubject.add( new SubjectsHeld(subtKey,date,secretCode));
             }
-        }  
-        
-        
+        }
+
+
         /*for (int i = 0; i < allSubjectsHeld.size(); i++) {
             SubjectsHeld testSubjectsHeld = allSubjectsHeld.get(i);
             if (testSubjectsHeld.getSubjectKey() == subjectKey) {
@@ -105,28 +105,28 @@ public class SubjectsHeldDBDAO {
         }*/
         return allSubjectsHeldForASubject;
     }
-     
-     
+
+
     public SubjectsHeld addSubjectsHeld(int skey, String date, String secretCode) throws SQLException {
         db = new DBConnection();
         try(Connection con = db.getConnection()){
-            
-            String sqlIf = "INSERT INTO SUBJECTSHELD (subjectKey, date, secretCode) VALUES (?, ?, ?);"; 
+
+            String sqlIf = "INSERT INTO SUBJECTSHELD (subjectKey, date, secretCode) VALUES (?, ?, ?);";
             PreparedStatement pstmt = con.prepareStatement(sqlIf);
             pstmt.setInt(1,skey);
             pstmt.setString(2,date);
             pstmt.setString(3,secretCode);
-            pstmt.execute(); 
+            pstmt.execute();
             return new SubjectsHeld(skey,date,secretCode);
-        } 
+        }
     }
-     
-     
+
+
      public SubjectsHeld editSubjectsHeld(SubjectsHeld subjectsHeld,int skey, String date, String secretCode) throws SQLException
      {
          db = new DBConnection();
         try(Connection con = db.getConnection()){
-        
+
             String sqlIf = "UPDATE SUBJECTSHELD SET subjectKey = ?, secretCode = ?, date = ? WHERE subjectKey = ?;";
              PreparedStatement pstmt = con.prepareStatement(sqlIf);
             pstmt.setInt(1,skey);
@@ -134,7 +134,7 @@ public class SubjectsHeldDBDAO {
             pstmt.setString(3,secretCode);
             pstmt.setInt(4,subjectsHeld.getSubjectKey());
             pstmt.execute();
-            
+
             return new SubjectsHeld(skey,date,secretCode);
         }
      }
@@ -142,21 +142,22 @@ public class SubjectsHeldDBDAO {
      {
           db = new DBConnection();
         try(Connection con = db.getConnection()){
-            String sqlStatement = "DELETE FROM SUBJECTSHELD WHERE subjectKey = ? AND date=?;";
+
+            String sqlStatement = "DELETE FROM SUBJECTSHELD WHERE subjectKey = ? and dateHeld = ?";
             PreparedStatement pstmt = con.prepareStatement(sqlStatement);
             pstmt.setInt(1,subjectsHeld.getSubjectKey());
             pstmt.setString(2, subjectsHeld.getDateHeld());
             int affectedRows = pstmt.executeUpdate();
             if (affectedRows == 0) {
                 return false;
-                
+
             }
             else
                 return true;
         }
      }
-     
-     
+
+
 
 
 
@@ -169,8 +170,8 @@ public class SubjectsHeldDBDAO {
             PreparedStatement stmt = con.prepareStatement(sql, PreparedStatement.RETURN_GENERATED_KEYS);
             stmt.setInt(1, SubjectKey);
             stmt.setString(2, Date);
-            stmt.setString(3, SecretCode); 
-            
+            stmt.setString(3, SecretCode);
+
             }    catch (SQLException ex) {
             Logger.getLogger(AttendanceDBDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -180,24 +181,24 @@ public class SubjectsHeldDBDAO {
     public List<SubjectsHeld> getSecretCode () throws SQLException
     {
         List<SubjectsHeld> SecretCode = new ArrayList<>();
-        
+
         try ( Connection con = db.getConnection()) {
             String sql = "SELECT * FROM SubjectsHeld";
             Statement stmt = con.createStatement();
             ResultSet rs = stmt.executeQuery(sql);
             while (rs.next()){
                 String Code = rs.getString("Code"); // string
-                
+
                 SecretCode.add(new SubjectsHeld(Code));
             }
             return SecretCode;
         }
-        
+
     }
     public String getLatestSubjectsHeld(int skey) throws SQLException
-    {     
+    {
         String date ="";
-          db = new DBConnection(); 
+          db = new DBConnection();
         try(Connection con = db.getConnection()) {
             String SQLStmt = "SELECT TOP 1 * FROM SUBJECTSHELD WHERE subjectKey = '"+skey+"'ORDER BY date DESC;";
             Statement statement = con.createStatement();
@@ -206,7 +207,7 @@ public class SubjectsHeldDBDAO {
            {
              date = rs.getString("date");
            }
-                
+
         }
         return date;
 }
