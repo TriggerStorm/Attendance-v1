@@ -20,6 +20,7 @@ import java.util.logging.Logger;
 import attendance.v1.be.User;
 import attendance.v1.be.StudentSubject;
 import attendance.v1.be.SubjectsHeld;
+
 /**
  *
  * @author Trigger, Filip, Cecillia and Alan
@@ -67,34 +68,59 @@ public class UserDBDAO {
         
     
     public User getUser(int userKey) throws SQLException {
-        List<User> allUsers = getAllUsers();
-        User user;
-        for (int i = 0; i < allUsers.size(); i++) {
-            user = allUsers.get(i);
-            int testKey = user.getUserKey();
-            if (testKey == userKey)  {
-            return user;
-            }
+        User user = null;
+        try(Connection con = dbc.getConnection()) {
+            String SQLStmt = "SELECT userName, password, email, phonenr, address, postCode, city, teacher, userIMG FROM USERS WHERE userKey ='" + userKey + "'";
+            Statement statement = con.createStatement();
+            ResultSet rs = statement.executeQuery(SQLStmt);
+            while(rs.next()) //While you have something in the results
+            {
+                String userName = rs.getString("userName");
+                String password = rs.getString("password");
+                String email = rs.getString("email");
+                int phoneNr = rs.getInt("phonenr");
+                String address = rs.getString("address");
+                int postCode = rs.getInt("postCode");
+                String city = rs.getString("city");
+                int isteacher = rs.getInt("teacher");
+                boolean teacher = false;
+                if(isteacher == 1)
+                    teacher = true;
+                String userIMG =  rs.getString("userIMG");
+               user = new User(userKey, userName, password, email, phoneNr, address, postCode, city, teacher, userIMG); 
+            }    
         }
-        return null;  // User does not exist
-    }
-
-
+        return user;
+    }   
+ 
+    
     public User getLoggedInUser(String email) throws SQLException {
-        List<User> allUsers = getAllUsers();
-        User user;
-        for (int i = 0; i < allUsers.size(); i++) {
-            user = allUsers.get(i);
-            String testEmail = user.getEmail();
-            if (testEmail == email)  {
-            int userKey = user.getUserKey();
-            return user;
-            }
+        User user = null;
+        try(Connection con = dbc.getConnection()) {
+            String SQLStmt = "SELECT userKey, userName, password, phonenr, address, postCode, city, teacher, userIMG FROM USERS WHERE email ='" + email + "'";
+            Statement statement = con.createStatement();
+            ResultSet rs = statement.executeQuery(SQLStmt);
+            while(rs.next()) //While you have something in the results
+            {                
+                int userKey = rs.getInt("userKey");
+                String userName = rs.getString("userName");
+                String password = rs.getString("password");
+                int phoneNr = rs.getInt("phonenr");
+                String address = rs.getString("address");
+                int postCode = rs.getInt("postCode");
+                String city = rs.getString("city");
+                int isteacher = rs.getInt("teacher");
+                boolean teacher = false;
+                if(isteacher == 1)
+                    teacher = true;
+                String userIMG =  rs.getString("userIMG");
+               user = new User(userKey, userName, password, email, phoneNr, address, postCode, city, teacher, userIMG); 
+            }    
         }
-        return null;  // User does not exist
-    }
-
-                
+        return user;
+    }   
+ 
+    
      public User addNewUserToDB(String userName, String password, String email, int phoneNr, String address, int postCode, String city, boolean teacher, String userIMG) { 
         String sql = "INSERT INTO Users(userName, password, email, phoneNr, address, postCode, city, teacher, userIMG) VALUES (?,?,?,?,?,?,?,?,?)";
         User newUser = new User(postCode, userName, password, email, phoneNr, address, postCode, city, teacher, userIMG);
@@ -219,63 +245,23 @@ public class UserDBDAO {
                     lUser.setCity(tempLogin.getCity());
                     lUser.setTeacher(tempLogin.getTeacher());
                     lUser.setUserIMG(tempLogin.getUserIMG());
-
-                    if(tempLogin.getTeacher() == true)
-                    {
+                    if(tempLogin.getTeacher() == true) {
                         return 1; //user and password match = true
                     }
-                    else if(tempLogin.getTeacher() == false)
-                    {
+                    else if(tempLogin.getTeacher() == false) {
                         return 2;
                     }
                 }
-            }
-            else
-            {
+            } else {
                 return 0;
             }
         }
         return 4; //this should never happen.
-        
-        
-        /* List<User> allUsers = getAllUsers();
-        for (int i = 0; i < allUsers.size(); i++) {
-            User userToCheck = allUsers.get(i);
-            if ((userToCheck.getEmail().equals(email)) && (userToCheck.getPassword().equals(password))) {
-  /*              loggedInUser.setUserKey(userToCheck.getUserKey());
-                loggedInUser.setUserName(userToCheck.getUserName());
-                loggedInUser.setEmail(email);
-                loggedInUser.setPassword(password);
-                loggedInUser.setPhoneNr(userToCheck.getPhoneNr());
-                loggedInUser.setPostCode(userToCheck.getPostCode());
-                loggedInUser.setCity(userToCheck.getCity());
-                loggedInUser.setTeacher(userToCheck.getTeacher());
-                loggedInUser.setUserIMG(userToCheck.getUserIMG());
-                System.out.println("");
-                System.out.println("key" + loggedInUser.getUserKey());
-                System.out.println("");
-                System.out.println("setUserName" + loggedInUser.getUserName());
-                System.out.println("");
-                System.out.println("setEmail" + loggedInUser.getEmail());
-                System.out.println("");
-                System.out.println("setPassword" + loggedInUser.getPassword());
-                System.out.println("");
-                System.out.println("setPhoneNr" + loggedInUser.getPhoneNr());
-                System.out.println("");
-                System.out.println("setPostCode" + loggedInUser.getPostCode());
-                System.out.println("");
-                System.out.println("setCity" + loggedInUser.getCity());
-                System.out.println("");
-                System.out.println("setTeacher" + loggedInUser.getTeacher());
-                System.out.println("");
-                System.out.println("setUserIMG" + loggedInUser.getUserIMG());
-
-*/
-}
+    }
     
     
     public boolean checkIfTeacher(String email) throws SQLException {
-        
+    //  Returns true if the user is a teacher    
         try(Connection con = dbc.getConnection()){
             boolean teacher = false;
             String SQLStmt = "SELECT teacher FROM Users WHERE  email='" + email + "'";
@@ -283,32 +269,15 @@ public class UserDBDAO {
             ResultSet rs = statement.executeQuery(SQLStmt);
             while(rs.next()) //While you have something in the results
             {
-                
                 int isTeacher =  rs.getInt("teacher");
-                if(isTeacher == 1)
-                {
+                if(isTeacher == 1) {
                     teacher=true;
-                }
-                else if(isTeacher == 0)
-                {
+                } else if(isTeacher == 0) {
                     teacher = false;
                 }
-               
             }
             return teacher;
         }
-        /*List<User> allUsers = getAllUsers();
-        for (int i = 0; i < allUsers.size(); i++) {
-            User userToCheck = allUsers.get(i);
-            if (userToCheck.getEmail().equals(email)) {
-                if (userToCheck.getTeacher()) {
-                return true; //user is a teacher
-            } else {
-                    return false;  // user is not a teacher
-                }
-            }
-        } */
-        //return false;  // user is not in allUsers
     }
         
     
@@ -320,21 +289,10 @@ public class UserDBDAO {
             ResultSet rs = statement.executeQuery(SQLStmt);
             while(rs.next()) //While you have something in the results
             {
-                
                 userName =  rs.getString("userName");
-               
             }
             return userName;
         }
-        
-        /*  List<User> allUsers = getAllUsers();
-        for (int i = 0; i < allUsers.size(); i++) {
-            User testUser = allUsers.get(i);
-            if (testUser.getUserKey() == studentKey) {
-                return testUser.getUserName();
-            }
-        }
-        return null;*/
     }
         
     
@@ -346,7 +304,6 @@ public class UserDBDAO {
             PreparedStatement pstmt = con.prepareStatement(stmt);
             pstmt.setInt(1,subjectKey);
             ResultSet rs = pstmt.executeQuery();
-            
             while(rs.next())
             {
                 int userKey = rs.getInt("userKey");
@@ -367,17 +324,6 @@ public class UserDBDAO {
         } catch (SQLException ex) {
             System.out.println("Exception " + ex);
         }
-        
-        
-      /*  for (int i = 0; i < allStudentSubjects.size(); i++) {
-            StudentSubject testStudentSubject = allStudentSubjects.get(i);
-            if (testStudentSubject.getSubjectKey() == subjectKey) {
-                int studentKeyInSubject = testStudentSubject.getUserKey();
-                User studentInSubject = getUser(studentKeyInSubject);
-                studentsInSubject.add(studentInSubject);   
-            }
-            
-        }*/
         return studentsInSubject;
     }
     
