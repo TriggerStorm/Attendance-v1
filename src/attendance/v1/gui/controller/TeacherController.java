@@ -138,7 +138,7 @@ public class TeacherController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
        Bn_gencode.setDisable(true);
-       //btn_undo.setVisible(false); // I had to outcomment this line, or the teacher version wouldnt' run? Can't find out what the issue is though? C.
+       btn_undo.setVisible(false); 
     }    
     private void settingTableView() {
         Lb_loginas.setText(lu.getUserName());

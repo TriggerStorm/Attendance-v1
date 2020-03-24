@@ -142,7 +142,7 @@ public class SubjectsHeldDBDAO {
      {
           db = new DBConnection();
         try(Connection con = db.getConnection()){
-            String sqlStatement = "DELETE FROM SUBJECTSHELD WHERE subjectKey = ? AND dateHeld=?;";
+            String sqlStatement = "DELETE FROM SUBJECTSHELD WHERE subjectKey = ? AND date=?;";
             PreparedStatement pstmt = con.prepareStatement(sqlStatement);
             pstmt.setInt(1,subjectsHeld.getSubjectKey());
             pstmt.setString(2, subjectsHeld.getDateHeld());
