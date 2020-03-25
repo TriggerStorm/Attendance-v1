@@ -12,7 +12,7 @@ package attendance.v1.bll;
 /**
  *
  * @author Trigger, Filip, Cecillia and Alan
-       ...with a little help from Sandeep V Tamhankar from Apache  
+      
  */
 
 public class InputValidators  implements Serializable {
@@ -126,6 +126,34 @@ public class InputValidators  implements Serializable {
         return true;
     }
     
+     public boolean IsValidWordWithNumbers(String word) {  // not yet used
+       //  Returns true if word is between 1 and 64 chars long and contains only letters and/or numbers
+        if ((word.length() < 1) && (word.length() > MAX_EMAIL_LENGTH)) {
+            return false;
+        }
+        for (int i = 0; i < word.length(); i++) {
+            char ch = word.charAt(i);
+              if (!Character.isLetterOrDigit(ch)){
+            return false;
+            }
+        }
+        return true;
+    }
+    
+    
+     public boolean IsValidWordWith(String word) {  // not yet used
+       //  Returns true if word is between 1 and 64 chars long and contains only letters
+        if ((word.length() < 1) && (word.length() > MAX_EMAIL_LENGTH)) {
+            return false;
+        }
+        for (int i = 0; i < word.length(); i++) {
+            char ch = word.charAt(i);
+              if (!Character.isLetter(ch)){
+            return false;
+            }
+        }
+        return true;
+    }
     
     public boolean IsValidWordWithNumbers(String word) {  // not yet used
        //  Returns true if word is between 1 and 64 chars long and contains only letters and/or numbers
