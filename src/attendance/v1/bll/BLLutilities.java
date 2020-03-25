@@ -55,13 +55,13 @@ public class BLLutilities {
  
     
 // Time Converters
-    public  boolean hasOneDayPass(String dateSubjectsHeld)
-    {
+    public  boolean hasOneDayPass(String dateSubjectsHeld) {
         LocalDateTime dateToString = stringToLocalDateTime(dateSubjectsHeld);
         LocalDateTime oneDayAgo = LocalDateTime.now().minusHours(12);
         boolean oneDayPassed = oneDayAgo.isAfter(dateToString);
         return oneDayPassed;
-     }
+    }
+    
     
     public static boolean hasFourHoursPass (String dateTimeHeldString) {
         LocalDateTime dateTimeHeld = stringToLocalDateTime(dateTimeHeldString);
@@ -76,11 +76,13 @@ public class BLLutilities {
         return later;
     }
      
+    
     public static String localDateTimeToString(LocalDateTime dateTime) {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd['T'HH:mm:ss[Z]]");
         String dateTimeString = dateTime.format(formatter);
         return dateTimeString;
     } 
+    
     
     public List<Subject> subjectsForGui() throws SQLException {
         List<Subject> list = new ArrayList();
@@ -91,6 +93,7 @@ public class BLLutilities {
         return list;
     }
     
+    
     public String locaDateNowToString() {
         LocalDate now = LocalDate.now();
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd LLLL yyyy");
@@ -99,9 +102,13 @@ public class BLLutilities {
     } 
     
 
-
+    public int convertStringToInt(String string) {
+        int intValue = Integer.parseInt(string);  
+        return intValue;
+    }
     
-//  Average calculators (NO LNGER IN HERE. In AttendanceDBDAO
+    
+//  Average calculators (NO LONGER IN HERE. In AttendanceDBDAO)
     
  
 }
