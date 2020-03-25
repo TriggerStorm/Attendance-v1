@@ -245,6 +245,7 @@ public class UserDBDAO {
                     lUser.setCity(tempLogin.getCity());
                     lUser.setTeacher(tempLogin.getTeacher());
                     lUser.setUserIMG(tempLogin.getUserIMG());
+                    lUser.setAddress(tempLogin.getAddress());
                     if(tempLogin.getTeacher() == true) {
                         return 1; //user and password match = true
                     }

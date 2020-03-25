@@ -5,6 +5,7 @@
  */
 package attendance.v1.gui.controller;
 
+import attendance.v1.be.LoggedInUser;
 import com.jfoenix.controls.JFXButton;
 import java.io.IOException;
 import java.net.URL;
@@ -33,16 +34,18 @@ public class UserController implements Initializable {
     @FXML
     private Button Bn_cansel; // done
     private JFXButton bn_edit; // this is a mock butten need to be remove
+    private LoggedInUser lu;
 
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        // TODO
+        lu = LoggedInUser.getInstance();
     }    
     public void checkMail(String email) throws IOException{
        String name = TF_email.getText();
+       lu.setEmailToCheck(email);
        if( email.equals(name) == email.equals("student@test.com"))
        {
            editUser();
@@ -56,7 +59,10 @@ public class UserController implements Initializable {
 
     @FXML
     private void handle_ok(ActionEvent event) throws IOException {
+      
        String name = TF_email.getText();
+       lu.setEmailToCheck(name);
+        System.out.println("@@@@@@@@@@@@@@@@"+name);
        checkMail(name);
     }
     

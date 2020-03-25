@@ -138,9 +138,7 @@ public class TeacherController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
        Bn_gencode.setDisable(true);
-       btn_undo.setVisible(false); // I had to outcomment this line, or the teacher version wouldnt' run? Can't find out what the issue is though? C.
-    }    
-    private void settingTableView() {
+       btn_undo.setVisible(false);
         Lb_loginas.setText(lu.getUserName());
             Lb_logInUser.setText(lu.getUserName());
                Image image3 = new Image(lu.getUserIMG(), 50, 50, false, false);
@@ -148,6 +146,10 @@ public class TeacherController implements Initializable {
                
         miniImg.setImage(image2);
         img.setImage(image3);
+       
+    }
+    private void settingTableView() {
+       
       if(!bllu.hasOneDayPass(bm.getLatestSubjectsHeldDate(lu.getSelectedSubjectKey())))
        Bn_gencode.setDisable(true);
  

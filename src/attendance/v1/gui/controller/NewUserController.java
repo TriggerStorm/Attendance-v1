@@ -5,6 +5,8 @@
  */
 package attendance.v1.gui.controller;
 
+import attendance.v1.be.LoggedInUser;
+import attendance.v1.bll.BllManager;
 import attendance.v1.gui.model.AttendanceModel;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -24,19 +26,17 @@ import javafx.stage.Stage;
 public class NewUserController implements Initializable {
 
     @FXML
-    private TextField TF_mobile;
-    @FXML
     private TextField TF_passWord;
     @FXML
     private TextField TF_name;
-    @FXML
-    private ChoiceBox<String> CB_classes;
     @FXML
     private Button Bn_Save; //need to save new user info from TF as a new mock user // filp
     @FXML
     private Button Bn_cansel;
     
     private AttendanceModel Am;
+    private BllManager bm;
+    private LoggedInUser lu;
     /**
      * Initializes the controller class.
      */
@@ -45,13 +45,17 @@ public class NewUserController implements Initializable {
         setCB();
     }    
     public void setCB(){
+        lu = LoggedInUser.getInstance();
         Am = new AttendanceModel();
+        bm = new BllManager();
         //CB_classes.setItems(Am.course());
         
     }
 
     @FXML
     private void handle_save(ActionEvent event) {
+       
+        bm.addNewUserToDB(TF_name.getText(),TF_passWord.getText(),lu.getEmailToCheck(), 0, "", 0,"",false,"");
         Stage stage = (Stage) Bn_Save.getScene().getWindow();
         stage.close();
     }

@@ -27,6 +27,7 @@ public class LoggedInUser{
     private SubjectsHeld sbh;
     private boolean attBoolean;
     private int selectedSubjectKey;
+    private String emailToCheck;
 
     private LoggedInUser(){
      SubjectsHeld sbh = new SubjectsHeld(0,"","");
@@ -42,6 +43,14 @@ public class LoggedInUser{
         }
         
         return instance;
+    }
+
+    public String getEmailToCheck() {
+        return emailToCheck;
+    }
+
+    public void setEmailToCheck(String emailToCheck) {
+        this.emailToCheck = emailToCheck;
     }
 
 
