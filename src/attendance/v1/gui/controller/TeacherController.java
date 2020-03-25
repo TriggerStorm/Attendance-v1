@@ -100,7 +100,7 @@ public class TeacherController implements Initializable {
     private ImageView img;
     @FXML
     private ImageView miniImg;
-    
+
     private BllManager bm;
     private BLLutilities bllu;
     @FXML
@@ -121,9 +121,9 @@ public class TeacherController implements Initializable {
     private TableColumn<?, ?> TBV_friday1;
     @FXML
     private TableColumn<?, ?> TBV_Attendance1;
-   
+
     public CommandManager cm;
-    
+
     public TeacherController()
     {
         cm = CommandManager.getInstance();
@@ -139,11 +139,14 @@ public class TeacherController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
        Bn_gencode.setDisable(true);
        btn_undo.setVisible(false);
+
+   
+
         Lb_loginas.setText(lu.getUserName());
             Lb_logInUser.setText(lu.getUserName());
                Image image3 = new Image(lu.getUserIMG(), 50, 50, false, false);
                Image image2 = new Image(lu.getUserIMG(), 10, 10, false, false);
-               
+
         miniImg.setImage(image2);
         img.setImage(image3);
        
@@ -152,24 +155,24 @@ public class TeacherController implements Initializable {
        
       if(!bllu.hasOneDayPass(bm.getLatestSubjectsHeldDate(lu.getSelectedSubjectKey())))
        Bn_gencode.setDisable(true);
- 
+
     }
     @FXML
     private void handle_editown(ActionEvent event) throws IOException {
         Parent root1;
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/attendance/v1/gui/view/editOwn.fxml"));
         root1 = (Parent) fxmlLoader.load();
-        
+
         fxmlLoader.<StudentController>getController();
 
         Stage addStage = new Stage();
         Scene addScene = new Scene(root1);
 
-        
+
         addStage.setScene(addScene);
         addStage.show();
-        
-        
+
+
     }
 
 
@@ -181,13 +184,13 @@ public class TeacherController implements Initializable {
         Parent root1;
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/attendance/v1/gui/view/generatedCode.fxml"));
         root1 = (Parent) fxmlLoader.load();
-        
+
         fxmlLoader.<StudentController>getController();
 
         Stage addStage = new Stage();
         Scene addScene = new Scene(root1);
 
-        
+
         addStage.setScene(addScene);
         addStage.show();
     }
@@ -197,17 +200,17 @@ public class TeacherController implements Initializable {
         Parent root1;
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/attendance/v1/gui/view/user.fxml"));
         root1 = (Parent) fxmlLoader.load();
-        
+
         fxmlLoader.<StudentController>getController();
 
         Stage addStage = new Stage();
         Scene addScene = new Scene(root1);
 
-        
+
         addStage.setScene(addScene);
         addStage.show();
-        
-        
+
+
     }
 
     @FXML
@@ -217,11 +220,11 @@ public class TeacherController implements Initializable {
         TBV_tuesday.setCellValueFactory(new PropertyValueFactory<SubjectAttendance, String>("tuesday"));
         tbv_wednesday.setCellValueFactory(new PropertyValueFactory<SubjectAttendance, String>("wednesday"));
         TBV_thursday.setCellValueFactory(new PropertyValueFactory<SubjectAttendance, String>("thursday"));
-        TBV_friday.setCellValueFactory(new PropertyValueFactory<SubjectAttendance, String>("friday"));       
-        TBV_student.setCellValueFactory(new PropertyValueFactory<SubjectAttendance, String>("Name"));        
-        TBV_Attendance.setCellValueFactory(new PropertyValueFactory<SubjectAttendance, String>("percent"));        
+        TBV_friday.setCellValueFactory(new PropertyValueFactory<SubjectAttendance, String>("friday"));
+        TBV_student.setCellValueFactory(new PropertyValueFactory<SubjectAttendance, String>("Name"));
+        TBV_Attendance.setCellValueFactory(new PropertyValueFactory<SubjectAttendance, String>("percent"));
        // TBV_attendance.setItems(Am.getSCOattendance());
-       LB_AttendanceRate.setText(bm.getAverageOfAllStudentAttendancesInASubjectAsAString(1)); 
+       LB_AttendanceRate.setText(bm.getAverageOfAllStudentAttendancesInASubjectAsAString(1));
        Lb_subjet.setText("SCO");
         lu.setSelectedSubjectKey(1); // YOU NEED TO GIVE SUBJECTS KEY HERE MANUALLY SO IT WONT BE 1 FOR SDE/ITO etc.
        Bn_gencode.setDisable(false);
@@ -236,10 +239,10 @@ public class TeacherController implements Initializable {
         TBV_tuesday.setCellValueFactory(new PropertyValueFactory<>("tuesday"));
         tbv_wednesday.setCellValueFactory(new PropertyValueFactory<>("wednesday"));
         TBV_thursday.setCellValueFactory(new PropertyValueFactory<>("thursday"));
-        TBV_friday.setCellValueFactory(new PropertyValueFactory<>("friday"));       
-        TBV_student.setCellValueFactory(new PropertyValueFactory<>("Name"));        
-        TBV_Attendance.setCellValueFactory(new PropertyValueFactory<>("percent"));        
-        Lb_subjet.setText("DB/OS");     
+        TBV_friday.setCellValueFactory(new PropertyValueFactory<>("friday"));
+        TBV_student.setCellValueFactory(new PropertyValueFactory<>("Name"));
+        TBV_Attendance.setCellValueFactory(new PropertyValueFactory<>("percent"));
+        Lb_subjet.setText("DB/OS");
         lu.setSelectedSubjectKey(17);
         Bn_gencode.setDisable(false);
        if(!bllu.hasOneDayPass(bm.getLatestSubjectsHeldDate(lu.getSelectedSubjectKey())))
@@ -254,11 +257,11 @@ public class TeacherController implements Initializable {
         TBV_tuesday.setCellValueFactory(new PropertyValueFactory<SubjectAttendance, String>("tuesday"));
         tbv_wednesday.setCellValueFactory(new PropertyValueFactory<SubjectAttendance, String>("wednesday"));
         TBV_thursday.setCellValueFactory(new PropertyValueFactory<SubjectAttendance, String>("thursday"));
-        TBV_friday.setCellValueFactory(new PropertyValueFactory<SubjectAttendance, String>("friday"));       
-        TBV_student.setCellValueFactory(new PropertyValueFactory<SubjectAttendance, String>("Name"));        
-        TBV_Attendance.setCellValueFactory(new PropertyValueFactory<SubjectAttendance, String>("percent"));          
+        TBV_friday.setCellValueFactory(new PropertyValueFactory<SubjectAttendance, String>("friday"));
+        TBV_student.setCellValueFactory(new PropertyValueFactory<SubjectAttendance, String>("Name"));
+        TBV_Attendance.setCellValueFactory(new PropertyValueFactory<SubjectAttendance, String>("percent"));
         LB_AttendanceRate.setText(bm.getAverageOfAllStudentAttendancesInASubjectAsAString(9));
-        Lb_subjet.setText("ITO");        
+        Lb_subjet.setText("ITO");
         lu.setSelectedSubjectKey(9);
         Bn_gencode.setDisable(false);
        if(!bllu.hasOneDayPass(bm.getLatestSubjectsHeldDate(lu.getSelectedSubjectKey())))
@@ -273,11 +276,11 @@ public class TeacherController implements Initializable {
         TBV_tuesday.setCellValueFactory(new PropertyValueFactory<SubjectAttendance, String>("tuesday"));
         tbv_wednesday.setCellValueFactory(new PropertyValueFactory<SubjectAttendance, String>("wednesday"));
         TBV_thursday.setCellValueFactory(new PropertyValueFactory<SubjectAttendance, String>("thursday"));
-        TBV_friday.setCellValueFactory(new PropertyValueFactory<SubjectAttendance, String>("friday"));       
-        TBV_student.setCellValueFactory(new PropertyValueFactory<SubjectAttendance, String>("Name"));        
-        TBV_Attendance.setCellValueFactory(new PropertyValueFactory<SubjectAttendance, String>("percent"));         
+        TBV_friday.setCellValueFactory(new PropertyValueFactory<SubjectAttendance, String>("friday"));
+        TBV_student.setCellValueFactory(new PropertyValueFactory<SubjectAttendance, String>("Name"));
+        TBV_Attendance.setCellValueFactory(new PropertyValueFactory<SubjectAttendance, String>("percent"));
         LB_AttendanceRate.setText(bm.getAverageOfAllStudentAttendancesInASubjectAsAString(5));
-        Lb_subjet.setText("SDE");        
+        Lb_subjet.setText("SDE");
         lu.setSelectedSubjectKey(5);
         Bn_gencode.setDisable(false);
        if(!bllu.hasOneDayPass(bm.getLatestSubjectsHeldDate(lu.getSelectedSubjectKey())))
@@ -289,17 +292,17 @@ public class TeacherController implements Initializable {
 
     @FXML
     private void handle_showcode(ActionEvent event) throws IOException {
-      
+
         Parent root1;
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/attendance/v1/gui/view/generatedCode.fxml"));
         root1 = (Parent) fxmlLoader.load();
-        
+
         fxmlLoader.<StudentController>getController();
 
         Stage addStage = new Stage();
         Scene addScene = new Scene(root1);
 
-        
+
         addStage.setScene(addScene);
         addStage.show();
     }
@@ -310,5 +313,5 @@ public class TeacherController implements Initializable {
         btn_undo.setVisible(false);
         Bn_gencode.setDisable(false);
     }
-    
+
 }
