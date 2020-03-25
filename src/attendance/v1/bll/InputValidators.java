@@ -74,7 +74,7 @@ public class InputValidators  implements Serializable {
     }
      
     
-    public boolean isValidAddress(String address) {
+   public boolean isValidAddress(String address) {
     //  Returns true if address is between 4 and 64 chars long and contains at least 2 letters (numbers are not essential)
         int hasLetters = 0;
         if ((address.length() < MIN_ADDRESS_LENGTH) && (address.length() > MAX_ADDRESS_LENGTH)) {
@@ -82,7 +82,7 @@ public class InputValidators  implements Serializable {
         }
         for (int i = 0; i < address.length(); i++) {
             char ch = address.charAt(i);
-            if (!Character.isLetterOrDigit(ch) || (!Character.isSpaceChar(ch))) {
+            if ((!Character.isLetterOrDigit(ch)) || (!Character.isSpaceChar(ch))) {
                 return false;
             } else {
                 if (Character.isLetter(ch)) {
