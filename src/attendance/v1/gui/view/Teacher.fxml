@@ -133,7 +133,7 @@
                                 <tabs>
                                   <Tab text="2019">
                                        <content>
-                                          <TableView fx:id="TBV_attendance" prefHeight="200.0" prefWidth="200.0">
+                                          <TableView fx:id="TBV_attendance" onMouseClicked="#handle_getUser" prefHeight="200.0" prefWidth="200.0">
                                             <columns>
                                                 <TableColumn fx:id="TBV_student" prefWidth="75.0" text="Student" />
                                               <TableColumn fx:id="TBV_monday" prefWidth="75.0" text="Monday" />

@@ -313,4 +313,11 @@ public class TeacherController implements Initializable {
         Bn_gencode.setDisable(false);
     }
 
+    @FXML
+    private void handle_getUser(MouseEvent event) {
+         sa = TBV_attendance.getSelectionModel().getSelectedItem();
+         LB_Cprocent.setText(bm.getAverageAttendanceOfAStudentsForAllSubjects(sa.getUserKey()));
+         
+    }
+
 }
