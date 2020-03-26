@@ -11,6 +11,7 @@ import attendance.v1.bll.BllManager;
 import attendance.v1.bll.CommandManager;
 import attendance.v1.dal.DalManager;
 import attendance.v1.gui.model.AttendanceModel;
+import attendance.v1.gui.model.TeacherModel;
 import com.jfoenix.controls.JFXButton;
 import java.io.File;
 import java.io.IOException;
@@ -104,6 +105,7 @@ public class TeacherController implements Initializable {
     private BllManager bm;
     private BLLutilities bllu;
     private SubjectAttendance sa;
+    private TeacherModel tm;
     @FXML
     private JFXButton btn_undo;
     @FXML
@@ -136,6 +138,7 @@ public class TeacherController implements Initializable {
         lu = LoggedInUser.getInstance();
         Am = new AttendanceModel();
         bm = new BllManager();
+        tm = new TeacherModel();
     }
     /**
      * Initializes the controller class.
@@ -144,10 +147,8 @@ public class TeacherController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
        Bn_gencode.setDisable(true);
        btn_undo.setVisible(false);
-
-   
-
-        Lb_loginas.setText(lu.getUserName());
+        
+       Lb_loginas.setText(lu.getUserName());
             Lb_logInUser.setText(lu.getUserName());
                Image image3 = new Image(lu.getUserIMG(), 50, 50, false, false);
                Image image2 = new Image(lu.getUserIMG(), 10, 10, false, false);
@@ -219,7 +220,9 @@ public class TeacherController implements Initializable {
 
     @FXML
     private void handle_SCO(ActionEvent event) {
-        ObservableList<SubjectAttendance> scoList = FXCollections.observableArrayList(bm.getSubjectAttendanceListForAllStudentsInThatSubject(1));
+        
+        
+        //ObservableList<SubjectAttendance> scoList = FXCollections.observableArrayList(bm.getSubjectAttendanceListForAllStudentsInThatSubject(1));
         TBV_monday.setCellValueFactory(new PropertyValueFactory<SubjectAttendance, String>("monday"));
         TBV_tuesday.setCellValueFactory(new PropertyValueFactory<SubjectAttendance, String>("tuesday"));
         tbv_wednesday.setCellValueFactory(new PropertyValueFactory<SubjectAttendance, String>("wednesday"));
@@ -234,7 +237,7 @@ public class TeacherController implements Initializable {
        Bn_gencode.setDisable(false);
        if(!bllu.hasOneDayPass(bm.getLatestSubjectsHeldDate(lu.getSelectedSubjectKey())))
        Bn_gencode.setDisable(true);
-       TBV_attendance.setItems(scoList);
+      // TBV_attendance.setItems(scoList);
     }
 
     @FXML
@@ -256,7 +259,7 @@ public class TeacherController implements Initializable {
 
     @FXML
     private void handle_ITO(ActionEvent event) {
-        ObservableList<SubjectAttendance> itoList = FXCollections.observableArrayList(bm.getSubjectAttendanceListForAllStudentsInThatSubject(9));
+        //ObservableList<SubjectAttendance> itoList = FXCollections.observableArrayList(bm.getSubjectAttendanceListForAllStudentsInThatSubject(9));
         TBV_monday.setCellValueFactory(new PropertyValueFactory<SubjectAttendance, String>("monday"));
         TBV_tuesday.setCellValueFactory(new PropertyValueFactory<SubjectAttendance, String>("tuesday"));
         tbv_wednesday.setCellValueFactory(new PropertyValueFactory<SubjectAttendance, String>("wednesday"));
@@ -270,12 +273,12 @@ public class TeacherController implements Initializable {
         Bn_gencode.setDisable(false);
        if(!bllu.hasOneDayPass(bm.getLatestSubjectsHeldDate(lu.getSelectedSubjectKey())))
        Bn_gencode.setDisable(true);
-       TBV_attendance.setItems(itoList);
+       //TBV_attendance.setItems(itoList);
     }
 
     @FXML
     private void handle_SDE(ActionEvent event) {
-        ObservableList<SubjectAttendance> sdeList = FXCollections.observableArrayList(bm.getSubjectAttendanceListForAllStudentsInThatSubject(5));
+        //ObservableList<SubjectAttendance> sdeList = FXCollections.observableArrayList(bm.getSubjectAttendanceListForAllStudentsInThatSubject(5));
         TBV_monday.setCellValueFactory(new PropertyValueFactory<SubjectAttendance, String>("monday"));
         TBV_tuesday.setCellValueFactory(new PropertyValueFactory<SubjectAttendance, String>("tuesday"));
         tbv_wednesday.setCellValueFactory(new PropertyValueFactory<SubjectAttendance, String>("wednesday"));
@@ -290,7 +293,7 @@ public class TeacherController implements Initializable {
        if(!bllu.hasOneDayPass(bm.getLatestSubjectsHeldDate(lu.getSelectedSubjectKey())))
        Bn_gencode.setDisable(true);
 
-        TBV_attendance.setItems(sdeList);
+       //TBV_attendance.setItems(sdeList);
 
     }
 
@@ -324,5 +327,7 @@ public class TeacherController implements Initializable {
          LB_Cprocent.setText(bm.getAverageAttendanceOfAStudentsForAllSubjects(sa.getUserKey()));
          
     }
+
+    
 
 }
