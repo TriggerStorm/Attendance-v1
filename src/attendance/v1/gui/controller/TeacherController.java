@@ -103,6 +103,7 @@ public class TeacherController implements Initializable {
 
     private BllManager bm;
     private BLLutilities bllu;
+    private SubjectAttendance sa;
     @FXML
     private JFXButton btn_undo;
     @FXML
@@ -123,6 +124,10 @@ public class TeacherController implements Initializable {
     private TableColumn<?, ?> TBV_Attendance1;
 
     public CommandManager cm;
+    @FXML
+    private Label LB_CTxt;
+    @FXML
+    private Label LB_Cprocent;
 
     public TeacherController()
     {
@@ -169,9 +174,8 @@ public class TeacherController implements Initializable {
 
 
     }
-
-
-
+     
+     
     @FXML
     private void handle_attendancecode(ActionEvent event) throws IOException {
         btn_undo.setVisible(true);
