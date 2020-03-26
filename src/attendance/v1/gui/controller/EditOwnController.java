@@ -17,6 +17,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
 
@@ -63,6 +64,18 @@ public class EditOwnController implements Initializable {
         Sc = new StudentController();
         lu = LoggedInUser.getInstance();
         iv = new InputValidators();
+        TF_name.setText(lu.getUserName());
+        TF_editPassword.setText(lu.getPassword());
+        TF_confirmPassword.setText(lu.getPassword());
+        TF_email.setText(lu.getEmail());
+        TF_Address.setText(lu.getAddress());
+        TF_City.setText(lu.getCity());
+        TF_mobileNr.setText(Integer.toString(lu.getPhoneNr()));
+        TF_PostCode.setText(Integer.toString(lu.getPostCode()));
+        Image img = new Image(lu.getUserIMG(),214,268,false,false);
+        Lb_profilepic.setImage(img);
+       
+        
     }    
 
     @FXML
@@ -83,7 +96,8 @@ public class EditOwnController implements Initializable {
         String postCode = TF_PostCode.getText();
         int userkey = lu.getUserKey();
         
-        if(iv.isValidPostCode(postCode) && iv.isValidPhoneNumber(phoneNr) && iv.isValidEmail(email))
+
+        if (iv.isValidEmail(email) && iv.isValidAddress(addres) && iv.isValidCity(city) && iv.isValidPhoneNumber(phoneNr) && iv.isValidPostCode(postCode))
         {
            // bm.editUser(bm.getLoggedInUser(lu.getEmail()), name, pass, email, Integer.parseInt(phoneNr), addres,Integer.parseInt(postCode), city,lu.getTeacher(),lu.getUserIMG());
         Stage stage = (Stage) Bn_save.getScene().getWindow();

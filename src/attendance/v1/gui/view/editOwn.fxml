@@ -10,7 +10,7 @@
 
 <AnchorPane id="AnchorPane" prefHeight="410.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="attendance.v1.gui.controller.EditOwnController">
    <children>
-      <ImageView fx:id="Lb_profilepic" fitHeight="329.0" fitWidth="214.0" layoutX="14.0" layoutY="42.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="Lb_profilepic" fitHeight="268.0" fitWidth="214.0" layoutX="14.0" layoutY="42.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../assets/avatar-placeholder.jpg" />
          </image>

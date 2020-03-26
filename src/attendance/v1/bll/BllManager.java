@@ -197,5 +197,10 @@ public class BllManager implements IBLL {
         return dalManager.getLatestSubjectsHeld(skey);
     }
 
+    @Override
+    public boolean checkIfUserExist(String email) {
+        return dalManager.checkIfUserExist(email);   
+    }
+
     
 }

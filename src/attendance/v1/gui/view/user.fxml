@@ -17,12 +17,12 @@
             <Font size="24.0" />
          </font>
       </Text>
-      <TextField fx:id="TF_email" layoutX="32.0" layoutY="57.0" prefHeight="30.0" prefWidth="170.0" text="yaoy@easv.dk">
+      <TextField fx:id="TF_email" layoutX="32.0" layoutY="57.0" prefHeight="30.0" prefWidth="170.0">
          <font>
             <Font size="14.0" />
          </font>
       </TextField>
       <JFXButton fx:id="Bn_ok" buttonType="RAISED" layoutX="217.0" layoutY="59.0" onAction="#handle_ok" style="-fx-background-color: white;" text="OK" />
-      <JFXButton fx:id="Bn_cansel" buttonType="RAISED" layoutX="265.0" layoutY="59.0" onAction="#Handle_cansel" style="-fx-background-color: white;" text="Cansel" />
+      <JFXButton fx:id="Bn_cansel" buttonType="RAISED" layoutX="265.0" layoutY="59.0" onAction="#Handle_cansel" style="-fx-background-color: white;" text="Cancel" />
    </children>
 </AnchorPane>
