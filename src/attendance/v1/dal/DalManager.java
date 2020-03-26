@@ -306,6 +306,16 @@ public class DalManager implements IDAL {
             return attendanceDBDao.getSubjectAttendanceForAStudent(studentKey, subjectHeld);
         }*/
 
+    @Override
+    public boolean checkIfUserExist(String email) {
+        try {
+            return userDBDao.checkIfUserExist(email);
+        } catch (SQLException ex) {
+            Logger.getLogger(DalManager.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return false;
+    }
+
    
 
 }

@@ -163,7 +163,7 @@ public class UserDBDAO {
         try (//Get a connection to the database.
             Connection con = dbc.getConnection()) {
             //Create a prepared statement.
-            String sql = "UPDATE Users SET userName = ?, password = ?, email = ?, phoneNr = ? , address = ? , postCode = ? , city = ? , teacher = ?, userIMG = ? WHERE id = ?";
+            String sql = "UPDATE Users SET userName = ?, password = ?, email = ?, phoneNr = ? , address = ? , postCode = ? , city = ? , teacher = ?, userIMG = ? WHERE email = ?";
             PreparedStatement pstmt = con.prepareStatement(sql);
             //Set parameter values.
            pstmt.setString(1, userName);
@@ -178,7 +178,7 @@ public class UserDBDAO {
                 isteacher = 1;
             pstmt.setInt(8, isteacher);
             pstmt.setString(9, userIMG);
-            pstmt.setInt(10, userToEdit.getUserKey());
+            pstmt.setString(10, email);
             //Execute SQL query.
             pstmt.executeUpdate();
             userToEdit.setUserName(userName);
@@ -261,6 +261,7 @@ public class UserDBDAO {
     }
     
     
+    
     public boolean checkIfTeacher(String email) throws SQLException {
     //  Returns true if the user is a teacher    
         try(Connection con = dbc.getConnection()){
@@ -280,8 +281,20 @@ public class UserDBDAO {
             return teacher;
         }
     }
-        
+    public boolean checkIfUserExist(String email) throws SQLException {
     
+        try(Connection con = dbc.getConnection()){
+            String SQLStmt = "SELECT * FROM Users WHERE email='" + email + "'";
+            Statement statement = con.createStatement();
+            ResultSet rs = statement.executeQuery(SQLStmt);
+           while(rs.next())
+           {
+               return true;
+           }
+        }
+        return false;
+    }
+       
     public String getUserNameFromKey(int studentKey) throws SQLException {
         try(Connection con = dbc.getConnection()){
             String userName = null;
