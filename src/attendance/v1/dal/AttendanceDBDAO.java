@@ -225,7 +225,7 @@ public class AttendanceDBDAO {
     public String getAverageOfAllStudentAttendancesInASubjectAsAString(int subjectKey) throws SQLException {
     //  Returns the String of the total average of all students in a subject   
         double totalOfAllStudentAttendancesInASubject = 0;
-        double averageOfAllStudentAttendancesInASubject
+        double averageOfAllStudentAttendancesInASubject;
         List<User> allstudentsInASubject = tempUserDBDao.getAllStudentsInASubject(subjectKey);
         int numberOfStudentsInASubject = allstudentsInASubject.size();
     // maybe need an if (numberOfStudentsInASubject > 0) ...
