@@ -139,6 +139,7 @@ public class TeacherController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
        Bn_gencode.setDisable(true);
        btn_undo.setVisible(false);
+       bn_Showcode.setVisible(false);
 
    
 
@@ -179,6 +180,7 @@ public class TeacherController implements Initializable {
 
     @FXML
     private void handle_attendancecode(ActionEvent event) throws IOException {
+        bn_Showcode.setVisible(true);
         btn_undo.setVisible(true);
        Bn_gencode.setDisable(true);
         Parent root1;
@@ -292,7 +294,7 @@ public class TeacherController implements Initializable {
 
     @FXML
     private void handle_showcode(ActionEvent event) throws IOException {
-
+        bn_Showcode.setVisible(false);
         Parent root1;
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/attendance/v1/gui/view/generatedCode.fxml"));
         root1 = (Parent) fxmlLoader.load();
@@ -312,6 +314,7 @@ public class TeacherController implements Initializable {
         cm.undo();
         btn_undo.setVisible(false);
         Bn_gencode.setDisable(false);
+        bn_Showcode.setVisible(false);
     }
 
 }
