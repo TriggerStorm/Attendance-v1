@@ -64,6 +64,11 @@ public interface IBLL {
 // subjectDBDAO methods
     public Subject getSpecificSubjects(int subjectKey);
 
-
+    
+//AbsenceDBDAO methods
+    public void submitAbsence (int studentKey, String date);
+    
+    
+    
 }
 

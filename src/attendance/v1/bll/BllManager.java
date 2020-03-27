@@ -203,4 +203,13 @@ public class BllManager implements IBLL {
     }
 
     
+    
+//AbsenceDBDAO methods
+    
+    @Override
+    public void submitAbsence(int studentKey, String date) {
+        dalManager.submitAbsence(studentKey, date);   
+    }
+
+    
 }

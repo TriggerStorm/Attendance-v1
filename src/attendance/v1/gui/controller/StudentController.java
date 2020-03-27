@@ -30,6 +30,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.chart.BarChart;
@@ -49,6 +50,10 @@ import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import javax.imageio.ImageIO;
 import javax.swing.JLabel;
+import javafx.scene.control.skin.DatePickerSkin;
+import javafx.scene.control.DatePicker;
+import java.time.LocalDate;
+import java.util.Date;
 
 /**
  * FXML Controller class
@@ -93,7 +98,8 @@ public class StudentController implements Initializable {
     private TextField TF_code;
     @FXML
     private Button Bn_submit;
-    
+    @FXML
+    private Button Bn_DatePick;
     
     @FXML
     private Label TF_logInAss;
@@ -163,11 +169,45 @@ public class StudentController implements Initializable {
         
         addStage.setScene(addScene);
         addStage.show();
-        
-        
-
     }
 
+    
+    @FXML
+    private void handle_DatePick (ActionEvent event) {
+   //      public void start(Stage primaryStage) {
+        try {
+            Parent root1;
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/attendance/v1/gui/view/datePick.fxml"));
+            root1 = (Parent) fxmlLoader.load();
+            fxmlLoader.<StudentController>getController();
+            
+            Stage addStage = new Stage();
+            Scene addScene = new Scene(root1, 400, 400);
+            
+            addScene.getStylesheets().add(getClass().getResource("Attendance.css").toExternalForm());
+            DatePicker datePick = new DatePicker(LocalDate.now());
+            DatePickerSkin datePickerSkin = new DatePickerSkin(datePick);
+            Node popupContent = datePickerSkin.getPopupContent();
+             //         root1.setCenter(popupContent);
+            addStage.setScene(addScene);
+            addStage.show();
+            LocalDate datePicked = datePick.getValue();
+            String datePickedString = bllu.locaDateToString(datePicked);
+            
+System.out.println("");
+System.out.println(" Controller date picked = " + datePickedString);
+            Am.submitAbsence(lu.getUserKey(), datePickedString);
+
+  
+   
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    
+        
+    }
+    
+    
     @FXML
     private void handle_SCO(ActionEvent event) throws SQLException {
         lu.setSelectedSubjectKey(1);
@@ -274,5 +314,26 @@ public class StudentController implements Initializable {
     }
     
     
+      @FXML
+    private void submitAbsence(ActionEvent event)  // work in progress. Possibly not needed
+    {
+        String selectedSubject = Lb_subjet.getText();
+        String code = TF_code.getText();
+        Am.submitAbsence(lu.getUserKey(), selectedSubject);
+ /*       if(lu.getAttendanceSubmitted())
+        {
+             Alert a = new Alert(AlertType.INFORMATION); 
+         a.setContentText("Absence Submitted");
+         a.show();
+        }
+        else
+        {
+            Alert a = new Alert(AlertType.INFORMATION); 
+         a.setContentText("Error either code is invalid or it expired");
+         a.show();
+        }
+        lu.setBooleanToFalse();
+*/
+    }
     
 }
