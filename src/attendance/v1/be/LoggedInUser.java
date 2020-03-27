@@ -28,11 +28,20 @@ public class LoggedInUser{
     private boolean attBoolean;
     private int selectedSubjectKey;
     private String emailToCheck;
-
+    private String lastCode;
     private LoggedInUser(){
+        lastCode ="";
      SubjectsHeld sbh = new SubjectsHeld(0,"","");
      attBoolean = false;
      
+    }
+
+    public String getLastCode() {
+        return lastCode;
+    }
+
+    public void setLastCode(String lastCode) {
+        this.lastCode = lastCode;
     }
    
     public static LoggedInUser getInstance()

@@ -48,12 +48,16 @@ public class GeneratedCodeController implements Initializable {
         cm = CommandManager.getInstance();
         lu = LoggedInUser.getInstance();
         bm = new BllManager();
+        if(lu.getLastCode().length() < 3)
         setcode();
+        else
+        TF_code.setText(lu.getLastCode());
     }    
     public void setcode (){
         String code = "";
             code = am.getCode();
         TF_code.setText(code);
+        lu.setLastCode(code);
       cm.execute(new Action1(code),code);
        
     }
