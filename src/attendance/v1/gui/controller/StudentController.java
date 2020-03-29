@@ -54,6 +54,7 @@ import javafx.scene.control.skin.DatePickerSkin;
 import javafx.scene.control.DatePicker;
 import java.time.LocalDate;
 import java.util.Date;
+import javax.xml.datatype.DatatypeFactory;
 
 /**
  * FXML Controller class
@@ -117,6 +118,9 @@ public class StudentController implements Initializable {
     private ImageView img;
     @FXML
     private ImageView miniImg;
+    
+    DatePicker datePicker = new DatePicker();//(LocalDate.now());
+
     private BLLutilities bllu;
     private BllManager bm;
   
@@ -173,38 +177,54 @@ public class StudentController implements Initializable {
 
     
     @FXML
-    private void handle_DatePick (ActionEvent event) {
+    public void handle_DatePick (ActionEvent event) {
    //      public void start(Stage primaryStage) {
+              datePicker.setValue(LocalDate.of(2016, 7, 25)); //temporary
+
         try {
             Parent root1;
-            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/attendance/v1/gui/view/datePick.fxml"));
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/attendance/v1/gui/view/Student.fxml"));
             root1 = (Parent) fxmlLoader.load();
             fxmlLoader.<StudentController>getController();
-            
             Stage addStage = new Stage();
+            addStage.setTitle("DatePicker (o7planning.org)");
+
             Scene addScene = new Scene(root1, 400, 400);
             
-            addScene.getStylesheets().add(getClass().getResource("Attendance.css").toExternalForm());
-            DatePicker datePick = new DatePicker(LocalDate.now());
-            DatePickerSkin datePickerSkin = new DatePickerSkin(datePick);
-            Node popupContent = datePickerSkin.getPopupContent();
-             //         root1.setCenter(popupContent);
+            addScene.getStylesheets().add(getClass().getResource("/attendance/v1/gui/css/Attendance.css").toExternalForm());
+   //         DatePicker datePicker = new DatePicker(LocalDate.now());
+   //         DatePickerSkin datePickerSkin = new DatePickerSkin(datePicker);
+   //         Node popupContent = datePickerSkin.getPopupContent();
+   //         root1.setCenter(popupContent);
             addStage.setScene(addScene);
             addStage.show();
-            LocalDate datePicked = datePick.getValue();
+   //         if (datePicker.getValue() == (null)) {
+  //System.out.println("x");
+    //        } else {
+           String test1 = String.valueOf(datePicker.accessibleTextProperty()); //temporary
+System.out.println("");
+System.out.println("date pick = " + datePicker.getValue()); 
+System.out.println("");
+System.out.println("test  = " + test1); 
+           LocalDate datePicked = datePicker.getValue();
+
+           
+           datePicked = datePicker.getValue();
+
             String datePickedString = bllu.locaDateToString(datePicked);
             
-System.out.println("");
+  System.out.println("");
 System.out.println(" Controller date picked = " + datePickedString);
-            Am.submitAbsence(lu.getUserKey(), datePickedString);
+         addStage.close();
 
+            Am.submitAbsence(lu.getUserKey(), datePickedString);
+     //       }
   
    
         } catch (Exception e) {
             e.printStackTrace();
         }
     
-        
     }
     
     

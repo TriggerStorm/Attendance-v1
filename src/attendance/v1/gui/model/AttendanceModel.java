@@ -68,6 +68,8 @@ public class AttendanceModel {
    
     
     public void submitAbsence (int studentKey, String date) {   // work in progress
+       System.out.println("");
+System.out.println(" Model date picked = " + date);
         bllManager.submitAbsence(studentKey, date);
     }
     
