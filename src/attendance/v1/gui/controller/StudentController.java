@@ -298,7 +298,7 @@ public class StudentController implements Initializable {
 
     @FXML
     private void changeView(Event event) throws SQLException {
-        if(!cal) // to make calendar only once 
+        if(!cal) // to make calendar only once unless subject changed
         {
             String date =  bllu.dateForCalendar(); //get current date
        String[] ymd = date.split(" "); // split values from each others
@@ -313,7 +313,7 @@ public class StudentController implements Initializable {
       ObservableList<Attendance> list = FXCollections.observableArrayList(bm.getStudentAttendanceForSubject(lu.getUserKey(),lu.getSelectedSubjectKey()));
        for(int i = 0; i< list.size();i++)
        {
-         String dayS = list.get(i).getDateHeld();  // getting date as string
+         String dayS = list.get(i).getDateHeld();  // getting date as string from list
          String sub = dayS.substring(0, 10);  //cutting time part
          String[] oday = sub.split("-");   // again split
         int onlyday = Integer.parseInt(oday[2]);
@@ -360,7 +360,7 @@ public class StudentController implements Initializable {
        for(int i = 0; i<attList.size();i++)
        {
            int number = attList.get(i);
-           if(number < day-2)  // for every day from list of days from db setting its corresponding pane, color to Green
+           if(number < day-2)  // for every day from list of days from db setting its corresponding pane color to Green
            gridPane.getChildren().get(number-1).setStyle("-fx-background-color: black, green ;\n" + "    -fx-background-insets: 0, 0 0 1 1 ;");
        }
        cal = true; 
