@@ -21,6 +21,7 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.sql.SQLException;
 import java.time.YearMonth;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
@@ -296,10 +297,10 @@ public class StudentController implements Initializable {
     }
 
     @FXML
-    private void changeView(Event event) {
+    private void changeView(Event event) throws SQLException {
         if(!cal)
         {
-       String date =  bllu.dateForCalendar();
+            String date =  bllu.dateForCalendar();
        String[] ymd = date.split(" ");
        int year = Integer.parseInt(ymd[2]);
        int month = Integer.parseInt(ymd[1]);
@@ -307,7 +308,23 @@ public class StudentController implements Initializable {
        YearMonth yearMonthObject = YearMonth.of(year,month);
        int daysInMonth = yearMonthObject.lengthOfMonth();
        int text = 0;
-       System.out.println(day);
+            int monthFromDb, yearFromDb ;
+            ArrayList<Integer> attList = new ArrayList<>();
+      ObservableList<Attendance> list = FXCollections.observableArrayList(bm.getStudentAttendanceForSubject(lu.getUserKey(),lu.getSelectedSubjectKey()));
+       for(int i = 0; i< list.size();i++)
+       {
+         String dayS = list.get(i).getDateHeld();
+         String sub = dayS.substring(0, 10);
+         String[] oday = sub.split("-");
+        int onlyday = Integer.parseInt(oday[2]);
+        monthFromDb = Integer.parseInt(oday[1]);
+        yearFromDb = Integer.parseInt(oday[0]);
+        
+           if(month == monthFromDb && year == yearFromDb)
+         attList.add(onlyday);
+           
+       }
+       
        for(int i = 0;i <= daysInMonth/7;i++)
        {
            for(int j = 0;j<= daysInMonth/5;j++)
@@ -325,6 +342,9 @@ public class StudentController implements Initializable {
                 stack.getChildren().add(label[text]);
                 stack.setStyle("-fx-background-color: black, white ;\n" +
                 "    -fx-background-insets: 0,0 0 1 1 ;");
+                if(text< day-1)
+                    stack.setStyle("-fx-background-color: black, red ;\n" +
+                "    -fx-background-insets: 0,0 0 1 1 ;");
                 if(text == day)
                 {
                 gridPane.getChildren().get(text-1).setStyle("-fx-background-color: black, cyan ;\n" +
@@ -337,6 +357,13 @@ public class StudentController implements Initializable {
                
            }
         }
+       for(int i = 0; i<attList.size();i++)
+       {
+           int number = attList.get(i);
+           System.out.println("ELEMENTY LIST "+attList.get(i));
+           if(number < day-2)
+           gridPane.getChildren().get(number-1).setStyle("-fx-background-color: black, green ;\n" + "    -fx-background-insets: 0, 0 0 1 1 ;");
+       }
        cal = true;
         }
     }
