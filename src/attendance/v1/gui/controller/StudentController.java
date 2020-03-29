@@ -20,6 +20,7 @@ import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.sql.SQLException;
+import java.time.YearMonth;
 import java.util.Arrays;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
@@ -27,9 +28,11 @@ import java.util.logging.Logger;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
+import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.geometry.Insets;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.chart.BarChart;
@@ -46,6 +49,14 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.Background;
+import javafx.scene.layout.BackgroundFill;
+import javafx.scene.layout.Border;
+import javafx.scene.layout.CornerRadii;
+import javafx.scene.layout.GridPane;
+import javafx.scene.layout.StackPane;
+import javafx.scene.paint.Color;
+import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
 import javax.imageio.ImageIO;
 import javax.swing.JLabel;
@@ -88,6 +99,7 @@ public class StudentController implements Initializable {
     @FXML
     private TableColumn<SubjectAttendance, String> TBV_friday;
     
+    @FXML
     private Button Bn_EditOwn;
     @FXML
     private TextField TF_code;
@@ -113,6 +125,11 @@ public class StudentController implements Initializable {
     private ImageView miniImg;
     private BLLutilities bllu;
     private BllManager bm;
+    @FXML
+    private AnchorPane pane;
+    @FXML
+    private GridPane gridPane;
+    boolean cal = false;
   
     /**
      * Initializes the controller class.
@@ -271,6 +288,57 @@ public class StudentController implements Initializable {
          a.show();
         }
         lu.setBooleanToFalse();
+    }
+
+    @FXML
+    private void handle_pane(MouseEvent event) {
+  
+    }
+
+    @FXML
+    private void changeView(Event event) {
+        if(!cal)
+        {
+       String date =  bllu.dateForCalendar();
+       String[] ymd = date.split(" ");
+       int year = Integer.parseInt(ymd[2]);
+       int month = Integer.parseInt(ymd[1]);
+       int day = Integer.parseInt(ymd[0]);
+       YearMonth yearMonthObject = YearMonth.of(year,month);
+       int daysInMonth = yearMonthObject.lengthOfMonth();
+       int text = 0;
+       System.out.println(day);
+       for(int i = 0;i <= daysInMonth/7;i++)
+       {
+           for(int j = 0;j<= daysInMonth/5;j++)
+           {
+               
+               
+                Label[] label = new Label[45];
+                label[text] = new Label();
+                label[text].setText(Integer.toString(text+1));
+                
+                StackPane stack = new StackPane();
+               gridPane.setStyle("-fx-background-color: black, white ;\n" +
+             "  -fx-background-insets: 0, 1 1 0 0 ;\n" + "-fx-padding: 1 ;\n");
+               if(text<daysInMonth)
+                stack.getChildren().add(label[text]);
+                stack.setStyle("-fx-background-color: black, white ;\n" +
+                "    -fx-background-insets: 0,0 0 1 1 ;");
+                if(text == day)
+                {
+                gridPane.getChildren().get(text-1).setStyle("-fx-background-color: black, cyan ;\n" +
+"    -fx-background-insets: 0, 0 0 1 1 ;");
+                }
+                gridPane.add(stack, j,i);
+                text++;
+                
+                  
+               
+           }
+        }
+       cal = true;
+        }
     }
     
     

@@ -107,6 +107,12 @@ public class BLLutilities {
         return intValue;
     }
     
+    public String dateForCalendar() {
+        LocalDate now = LocalDate.now();
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd MM yyyy");
+        String dateNowString = now.format(formatter);
+        return dateNowString;
+    } 
     
 //  Average calculators (NO LONGER IN HERE. In AttendanceDBDAO)
     
