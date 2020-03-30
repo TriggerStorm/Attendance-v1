@@ -20,6 +20,8 @@ import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.sql.SQLException;
+import java.time.YearMonth;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
@@ -27,10 +29,12 @@ import java.util.logging.Logger;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
+import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
+import javafx.geometry.Insets;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.chart.BarChart;
@@ -47,6 +51,14 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.Background;
+import javafx.scene.layout.BackgroundFill;
+import javafx.scene.layout.Border;
+import javafx.scene.layout.CornerRadii;
+import javafx.scene.layout.GridPane;
+import javafx.scene.layout.StackPane;
+import javafx.scene.paint.Color;
+import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
 import javax.imageio.ImageIO;
 import javax.swing.JLabel;
@@ -125,6 +137,11 @@ public class StudentController implements Initializable {
     private BLLutilities bllu;
     private BllManager bm;
     
+    @FXML
+    private AnchorPane pane;
+    @FXML
+    private GridPane gridPane;
+    boolean cal = false;
   
     /**
      * Initializes the controller class.
@@ -303,6 +320,82 @@ public class StudentController implements Initializable {
          a.show();
         }
         lu.setBooleanToFalse();
+    }
+
+    @FXML
+    private void handle_pane(MouseEvent event) {
+  
+    }
+
+    @FXML
+    private void changeView(Event event) throws SQLException {
+        if(!cal) // to make calendar only once unless subject changed
+        {
+            String date =  bllu.dateForCalendar(); //get current date
+       String[] ymd = date.split(" "); // split values from each others
+       int year = Integer.parseInt(ymd[2]);
+       int month = Integer.parseInt(ymd[1]);
+       int day = Integer.parseInt(ymd[0]); // converting day, month, year from date to ints
+       YearMonth yearMonthObject = YearMonth.of(year,month);
+       int daysInMonth = yearMonthObject.lengthOfMonth(); // getting how many days is in current month
+       int text = 0;
+            int monthFromDb, yearFromDb ;
+            ArrayList<Integer> attList = new ArrayList<>();  // list below is list with subjectsHeld for logged student
+      ObservableList<Attendance> list = FXCollections.observableArrayList(bm.getStudentAttendanceForSubject(lu.getUserKey(),lu.getSelectedSubjectKey()));
+       for(int i = 0; i< list.size();i++)
+       {
+         String dayS = list.get(i).getDateHeld();  // getting date as string from list
+         String sub = dayS.substring(0, 10);  //cutting time part
+         String[] oday = sub.split("-");   // again split
+        int onlyday = Integer.parseInt(oday[2]);
+        monthFromDb = Integer.parseInt(oday[1]);
+        yearFromDb = Integer.parseInt(oday[0]);   // again converting date to ints
+        
+           if(month == monthFromDb && year == yearFromDb) // chceck for right month and year from db
+         attList.add(onlyday);  // adding day value to list
+           
+       }
+       
+       for(int i = 0;i <= daysInMonth/7;i++)
+       {
+           for(int j = 0;j<= daysInMonth/5;j++)  // creating gridpane 7x5
+           {
+               
+               
+                Label[] label = new Label[45];  
+                label[text] = new Label();    //  text is used as text for labels as well as number of index for them
+                label[text].setText(Integer.toString(text+1)); // creating array of labels with text strarting from 1
+                
+                StackPane stack = new StackPane();
+               gridPane.setStyle("-fx-background-color: black, white ;\n" +   //creating empty gridpane
+             "  -fx-background-insets: 0, 1 1 0 0 ;\n" + "-fx-padding: 1 ;\n");
+               if(text<daysInMonth)  // adding labels until end of month
+                stack.getChildren().add(label[text]);      // adding label to stackpane
+                stack.setStyle("-fx-background-color: black, white ;\n" +   // creating empty stackpanes with labels
+                "    -fx-background-insets: 0,0 0 1 1 ;");
+                if(text< day-1) // adding absences to ALL days before current day
+                    stack.setStyle("-fx-background-color: black, red ;\n" +
+                "    -fx-background-insets: 0,0 0 1 1 ;");
+                if(text == day)  // change color of current day
+                {
+                gridPane.getChildren().get(text-1).setStyle("-fx-background-color: black, cyan ;\n" +
+"    -fx-background-insets: 0, 0 0 1 1 ;");
+                }
+                gridPane.add(stack, j,i); // adding pane with label to gridpane 
+                text++;
+                
+                  
+               
+           }
+        }
+       for(int i = 0; i<attList.size();i++)
+       {
+           int number = attList.get(i);
+           if(number < day-2)  // for every day from list of days from db setting its corresponding pane color to Green
+           gridPane.getChildren().get(number-1).setStyle("-fx-background-color: black, green ;\n" + "    -fx-background-insets: 0, 0 0 1 1 ;");
+       }
+       cal = true; 
+        }
     }
     
     
