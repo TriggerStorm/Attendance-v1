@@ -30,14 +30,14 @@ public class DatePickController {
     private BllManager bm;
     private LoggedInUser lu;
 
-    DatePicker datePick = new DatePicker(LocalDate.now());
+    DatePicker datePick;
 
        @FXML
     private Button Bn_DatePick;  
         
     
-    @FXML
-    public void handle_DatePick (ActionEvent event) {
+ /*   @FXML
+    public void handle_DatePick (ActionEvent event) {  // Probably not needed
    //      public void start(Stage primaryStage) {
         try {
             Parent root1;
@@ -59,11 +59,10 @@ public class DatePickController {
 
             } else {
            LocalDate datePicked = datePick.getValue();
-            String datePickedString = bllu.locaDateToString(datePicked);
+  //          String datePickedString = bllu.locaDateToString(datePicked);
             
   System.out.println("");
-System.out.println(" Controller date picked = " + datePickedString);
-            Am.submitAbsence(lu.getUserKey(), datePickedString);
+            Am.submitAbsence(lu.getUserKey(), datePicked);
             }
   
    
@@ -71,5 +70,5 @@ System.out.println(" Controller date picked = " + datePickedString);
             e.printStackTrace();
         }
     
-    }
+    }*/
 }

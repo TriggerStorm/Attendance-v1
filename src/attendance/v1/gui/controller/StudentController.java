@@ -54,6 +54,8 @@ import javafx.scene.control.skin.DatePickerSkin;
 import javafx.scene.control.DatePicker;
 import java.time.LocalDate;
 import java.util.Date;
+import javafx.scene.control.DateCell;
+import javafx.util.Callback;
 import javax.xml.datatype.DatatypeFactory;
 
 /**
@@ -94,13 +96,12 @@ public class StudentController implements Initializable {
     @FXML
     private TableColumn<SubjectAttendance, String> TBV_friday;
     
+    @FXML
     private Button Bn_EditOwn;
     @FXML
     private TextField TF_code;
     @FXML
     private Button Bn_submit;
-    @FXML
-    private Button Bn_DatePick;
     
     @FXML
     private Label TF_logInAss;
@@ -118,11 +119,12 @@ public class StudentController implements Initializable {
     private ImageView img;
     @FXML
     private ImageView miniImg;
-    
-    DatePicker datePicker = new DatePicker();//(LocalDate.now());
+    @FXML
+    private DatePicker datepick;
 
     private BLLutilities bllu;
     private BllManager bm;
+    
   
     /**
      * Initializes the controller class.
@@ -177,54 +179,24 @@ public class StudentController implements Initializable {
 
     
     @FXML
-    public void handle_DatePick (ActionEvent event) {
-   //      public void start(Stage primaryStage) {
-              datePicker.setValue(LocalDate.of(2016, 7, 25)); //temporary
-
-        try {
+    public void handle_DatePick (ActionEvent event) throws IOException {
             Parent root1;
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/attendance/v1/gui/view/Student.fxml"));
             root1 = (Parent) fxmlLoader.load();
             fxmlLoader.<StudentController>getController();
             Stage addStage = new Stage();
-            addStage.setTitle("DatePicker (o7planning.org)");
+            addStage.setTitle("Enter Day of Absence");
 
             Scene addScene = new Scene(root1, 400, 400);
-            
             addScene.getStylesheets().add(getClass().getResource("/attendance/v1/gui/css/Attendance.css").toExternalForm());
-   //         DatePicker datePicker = new DatePicker(LocalDate.now());
-   //         DatePickerSkin datePickerSkin = new DatePickerSkin(datePicker);
-   //         Node popupContent = datePickerSkin.getPopupContent();
-   //         root1.setCenter(popupContent);
+   
             addStage.setScene(addScene);
             addStage.show();
-   //         if (datePicker.getValue() == (null)) {
-  //System.out.println("x");
-    //        } else {
-           String test1 = String.valueOf(datePicker.accessibleTextProperty()); //temporary
-System.out.println("");
-System.out.println("date pick = " + datePicker.getValue()); 
-System.out.println("");
-System.out.println("test  = " + test1); 
-           LocalDate datePicked = datePicker.getValue();
 
-           
-           datePicked = datePicker.getValue();
-
-            String datePickedString = bllu.locaDateToString(datePicked);
-            
-  System.out.println("");
-System.out.println(" Controller date picked = " + datePickedString);
-         addStage.close();
-
-            Am.submitAbsence(lu.getUserKey(), datePickedString);
-     //       }
-  
-   
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    
+           LocalDate datePicked = datepick.getValue();
+   //        String datePickedString = datepick.getEditor().getText();
+           addStage.close();
+           Am.submitAbsence(lu.getUserKey(), datePicked);
     }
     
     
@@ -334,26 +306,6 @@ System.out.println(" Controller date picked = " + datePickedString);
     }
     
     
-      @FXML
-    private void submitAbsence(ActionEvent event)  // work in progress. Possibly not needed
-    {
-        String selectedSubject = Lb_subjet.getText();
-        String code = TF_code.getText();
-        Am.submitAbsence(lu.getUserKey(), selectedSubject);
- /*       if(lu.getAttendanceSubmitted())
-        {
-             Alert a = new Alert(AlertType.INFORMATION); 
-         a.setContentText("Absence Submitted");
-         a.show();
-        }
-        else
-        {
-            Alert a = new Alert(AlertType.INFORMATION); 
-         a.setContentText("Error either code is invalid or it expired");
-         a.show();
-        }
-        lu.setBooleanToFalse();
-*/
-    }
+   
     
 }

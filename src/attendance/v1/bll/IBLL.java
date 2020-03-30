@@ -12,6 +12,7 @@ import attendance.v1.be.SubjectAttendance;
 import attendance.v1.be.SubjectsHeld;
 import attendance.v1.be.User;
 import java.sql.SQLException;
+import java.time.LocalDate;
 import java.util.List;
 
 /**
@@ -66,7 +67,7 @@ public interface IBLL {
 
     
 //AbsenceDBDAO methods
-    public void submitAbsence (int studentKey, String date);
+    public void submitAbsence (int studentKey, LocalDate datePicked);
     
     
     

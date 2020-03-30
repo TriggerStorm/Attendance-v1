@@ -5,17 +5,20 @@
  */
 package attendance.v1.dal;
 
+import java.time.LocalDate;
+
 /**
  *
  * @author admin
  */
 public class CalendarDBDAO {
     
-    public void submitAbsence (int studentKey, String date) {  // just a test for now
+    public void submitAbsence (int studentKey, LocalDate datePicked ) {  // just a test for now
+
 System.out.println("");
 System.out.println("DBDAO student = " + studentKey); 
 System.out.println("");
-System.out.println("DBDAO date picked = " + date);
+System.out.println("DBDAO date picked = " + datePicked);
      
     }
     

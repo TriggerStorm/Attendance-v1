@@ -64,7 +64,7 @@ public interface IDAL {
     public Subject getSpecificSubjects(int subjectKey);
 
 //AbsenceDBDAO methods
-    public void submitAbsence (int studentKey, String date);
+    public void submitAbsence (int studentKey, LocalDate datePicked);
     
     
 }

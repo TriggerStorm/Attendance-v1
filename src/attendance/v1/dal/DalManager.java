@@ -13,6 +13,7 @@ import attendance.v1.be.Subject;
 import attendance.v1.be.SubjectsHeld;
 import java.sql.SQLException;
 import java.text.ParseException;
+import java.time.LocalDate;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -323,8 +324,8 @@ public class DalManager implements IDAL {
     //AbsenceDBDAO methods
 
     @Override
-    public void submitAbsence(int studentKey, String date) {
-        calendarDBDao.submitAbsence(studentKey, date);   
+    public void submitAbsence(int studentKey, LocalDate datePicked) {
+        calendarDBDao.submitAbsence(studentKey, datePicked);   
     }
 
    

@@ -109,7 +109,7 @@ public class BLLutilities {
     } 
     
 
-    public int convertStringToInt(String string) {
+    public int convertStringToInt(String string) {  // Written for Absence conversion. Not used any more
         int intValue = Integer.parseInt(string);  
         return intValue;
     }
