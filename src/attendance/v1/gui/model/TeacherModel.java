@@ -15,7 +15,7 @@ import javafx.collections.ObservableList;
  *
  * @author Trigger
  */
-public class TeacherModel {
+public class TeacherModel implements Runnable {
 private BllManager bm;
 private ObservableList<SubjectAttendance> scoList;
 private ObservableList<SubjectAttendance> sdeList;
@@ -25,10 +25,23 @@ private ObservableList<SubjectAttendance> dbosList;
 
     public TeacherModel() {
         bm = new BllManager();
-        getScoList();
-        getSdeList();
-        getItoList();
-        getDBOSList();
+        //Thread t1 = new Thread((Runnable) this.getSco());
+        //Thread t2 = new Thread((Runnable) this.getSdeList());
+       // Thread t3 = new Thread((Runnable) this.getItoList());
+        //Thread t4 = new Thread((Runnable) this.getDBOSList());
+       //t1.start();
+        //t2.start();
+        //t3.start();
+        //t4.start();
+    }
+
+    public TeacherModel(List sco) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    public List getSco(){
+        List<SubjectAttendance> sco = bm.getSubjectAttendanceListForAllStudentsInThatSubject(1);
+        return sco;
     }
     
     public ObservableList<SubjectAttendance> getScoList(){
@@ -53,6 +66,24 @@ private ObservableList<SubjectAttendance> dbosList;
     List<SubjectAttendance> dbos = bm.getSubjectAttendanceListForAllStudentsInThatSubject(13);
       dbosList = FXCollections.observableArrayList(dbos);
       return dbosList;
+    }
+    
+    public ObservableList<SubjectAttendance> getScoOList(){
+        return scoList;
+    }
+    public ObservableList<SubjectAttendance> getSdeOList(){
+        return sdeList;
+    }
+    public ObservableList<SubjectAttendance> getItoOList(){
+        return itoList;
+    }
+    public ObservableList<SubjectAttendance> getDBOSOList(){
+        return dbosList;
+    }
+
+    @Override
+    public void run() {
+        getScoList();
     }
     
 }
