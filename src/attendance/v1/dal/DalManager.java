@@ -32,7 +32,7 @@ public class DalManager implements IDAL {
     private SubjectsHeldDBDAO subjectsHeldDBDao;
     private SecretCodeDBDAO secretCodeDBDAO;
     private SubjectDBDAO subjectDBdao;
-    private CalendarDBDAO calendarDBDao;
+    private AbsenceDBDAO absenceDBDao;
     
     
     public DalManager() {
@@ -42,7 +42,7 @@ public class DalManager implements IDAL {
           userDBDao = new UserDBDAO();
           subjectsHeldDBDao = new SubjectsHeldDBDAO();
           secretCodeDBDAO = new SecretCodeDBDAO();
-          calendarDBDao = new CalendarDBDAO();
+          absenceDBDao = new AbsenceDBDAO();
     } 
     
     
@@ -325,7 +325,7 @@ public class DalManager implements IDAL {
 
     @Override
     public void submitAbsence(int studentKey, LocalDate datePicked) {
-        calendarDBDao.submitAbsence(studentKey, datePicked);   
+        absenceDBDao.submitAbsence(studentKey, datePicked);   
     }
 
    

@@ -228,18 +228,14 @@ public class AttendanceDBDAO {
         double averageOfAllStudentAttendancesInASubject;
         List<User> allstudentsInASubject = tempUserDBDao.getAllStudentsInASubject(subjectKey);
         int numberOfStudentsInASubject = allstudentsInASubject.size();
-    // maybe need an if (numberOfStudentsInASubject > 0) ...
         for (int i = 0; i < numberOfStudentsInASubject; i++) {
             User testUser = allstudentsInASubject.get(i);
             int userKey = testUser.getUserKey();
             totalOfAllStudentAttendancesInASubject += calculateAverageOfAStudentsAttendanceInASubject(subjectKey, userKey);
         }
-        if(numberOfStudentsInASubject == 0)
-        {
+        if (numberOfStudentsInASubject == 0) {
             averageOfAllStudentAttendancesInASubject = 0;
-        }
-        else
-        {
+        } else {
             averageOfAllStudentAttendancesInASubject = totalOfAllStudentAttendancesInASubject / numberOfStudentsInASubject;
         }
         String averageOfAllStudentAttendancesInASubjectString = convertDoubleToPercentageString(averageOfAllStudentAttendancesInASubject);
@@ -281,7 +277,7 @@ public class AttendanceDBDAO {
     
 // Time Converters
 
-    public String dateNowToString() {
+    public String dateNowToString() {  // not needed?
         LocalDateTime now = LocalDateTime.now();
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd['T'HH:mm:ss[Z]]");
         String dateNowString = now.format(formatter);
@@ -289,7 +285,7 @@ public class AttendanceDBDAO {
     } 
     
     
-    public String localDateToString(LocalDateTime date) {
+    public String localDateToString(LocalDateTime date) {  // not needed?
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd['T'HH:mm:ss[Z]]");
         String dateString = date.format(formatter);
         return dateString;
