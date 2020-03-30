@@ -52,6 +52,8 @@ public class LogInController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
       lu = LoggedInUser.getInstance();
+ //     bllManager.deleteExpiredAbsences();  // TEST
+
     }    
 
     @FXML

@@ -202,5 +202,10 @@ public class BllManager implements IBLL {
         dalManager.submitAbsence(studentKey, datePicked);   
     }
 
+    @Override
+    public void deleteExpiredAbsences() {
+        dalManager.deleteExpiredAbsences();
+    }
+
     
 }

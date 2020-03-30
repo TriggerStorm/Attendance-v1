@@ -23,8 +23,9 @@ import java.util.logging.Logger;
 
 /**
  *
- * @author admin
+ * @author Trigger, Filip, Cecillia and Alan
  */
+
 public class AbsenceDBDAO {
     private DBConnection dbc;
 
@@ -34,13 +35,12 @@ public class AbsenceDBDAO {
     }
     
     
-    public void submitAbsence (int studentKey, LocalDate datePicked ) {  // just a test for now
-     
+    public void submitAbsence (int studentKey, LocalDate datePicked ) throws SQLException {  // just a test for now
+    //  Adds an absence to the DB (from DatePicker) 
 System.out.println("");
 System.out.println("DBDAO student = " + studentKey); 
 System.out.println("");
 System.out.println("DBDAO date picked = " + datePicked);
-
         String sql = "INSERT INTO ABSENCE(studentKey, date) VALUES (?,?)";
         java.sql.Date sqlDate = java.sql.Date.valueOf( datePicked );
         try (Connection con = dbc.getConnection()) {
@@ -57,10 +57,22 @@ System.out.println("DBDAO date picked = " + datePicked);
             Logger.getLogger(AttendanceDBDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
   //      return BE entity (studentKey, datePicked)??
+
     }
     
-    private void deleteExpiredAbsences() {
-        
+    public void deleteExpiredAbsences() throws SQLException {
+    //  Deletes all absences odd than today
+        dbc = new DBConnection();//
+
+        java.sql.Date sqlExpiryDate = java.sql.Date.valueOf(LocalDate.now());
+System.out.println("");
+System.out.println("sqlExpiryDate = " + sqlExpiryDate);
+        String SQLStmt = "DELETE * FROM ABSENCE WHERE DATE < ?;";
+         try (Connection con = dbc.getConnection()) {
+            PreparedStatement pstmt = con.prepareStatement(SQLStmt);
+            pstmt.setDate(1, sqlExpiryDate);
+            pstmt.executeUpdate();
+        }
     }
     
     

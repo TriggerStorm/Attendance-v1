@@ -65,6 +65,7 @@ public interface IDAL {
 
 //AbsenceDBDAO methods
     public void submitAbsence (int studentKey, LocalDate datePicked);
-    
+    public void deleteExpiredAbsences();
+
     
 }

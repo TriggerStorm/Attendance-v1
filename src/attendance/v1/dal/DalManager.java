@@ -325,7 +325,20 @@ public class DalManager implements IDAL {
 
     @Override
     public void submitAbsence(int studentKey, LocalDate datePicked) {
-        absenceDBDao.submitAbsence(studentKey, datePicked);   
+        try {   
+            absenceDBDao.submitAbsence(studentKey, datePicked);
+        } catch (SQLException ex) {
+            Logger.getLogger(DalManager.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    @Override
+    public void deleteExpiredAbsences() {
+        try {
+            absenceDBDao.deleteExpiredAbsences();
+        } catch (SQLException ex) {
+            Logger.getLogger(DalManager.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
    

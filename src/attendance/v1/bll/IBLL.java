@@ -68,7 +68,8 @@ public interface IBLL {
     
 //AbsenceDBDAO methods
     public void submitAbsence (int studentKey, LocalDate datePicked);
-    
+    public void deleteExpiredAbsences();
+
     
     
 }
