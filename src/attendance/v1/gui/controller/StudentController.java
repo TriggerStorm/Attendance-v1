@@ -5,6 +5,7 @@
  */
 package attendance.v1.gui.controller;
 import attendance.v1.be.Attendance;
+import attendance.v1.be.Absence;
 import attendance.v1.be.LoggedInUser;
 import attendance.v1.be.SubjectAttendance;
 import attendance.v1.bll.BLLutilities;
@@ -207,7 +208,7 @@ public class StudentController implements Initializable {
         Scene datePickerScene = new Scene(root1, 400, 400);  // creates datePickerScene
         datePickerScene.getStylesheets().add(getClass().getResource("/attendance/v1/gui/css/Attendance.css").toExternalForm());  // gets Attendance.css
         datePickerStage.setScene(datePickerScene);
-     // block out past days. Not workng       
+     // block out past days. Not workng yet
         final Callback<DatePicker, DateCell> dayCellFactory = new Callback<DatePicker, DateCell>() {
                 @Override
                 public DateCell call(final DatePicker datePicker) {
@@ -230,7 +231,10 @@ public class StudentController implements Initializable {
            datePickerStage.show();  // opens DatePicker
            LocalDate datePicked = datepick.getValue();  // gets DatePicker value
            datePickerStage.close();  // closes DatePicker
-           Am.submitAbsence(lu.getUserKey(), datePicked);  //  passes date picked to the Attendance Model
+           Absence absence = new Absence(lu.getUserKey(), datePicked);
+           absence.setStudentKey(lu.getUserKey());
+           absence.setDate(datePicked);
+           Am.submitAbsence(absence);  //  passes date picked to the Attendance Model
     }
     
     

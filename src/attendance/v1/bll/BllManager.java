@@ -5,6 +5,7 @@
  */
 package attendance.v1.bll;
 
+import attendance.v1.be.Absence;
 import attendance.v1.be.LoggedInUser;
 import attendance.v1.be.Attendance;
 import attendance.v1.be.StudentSubject;
@@ -198,8 +199,8 @@ public class BllManager implements IBLL {
 //AbsenceDBDAO methods
     
     @Override
-    public void submitAbsence(int studentKey, LocalDate datePicked) {
-        dalManager.submitAbsence(studentKey, datePicked);   
+    public void submitAbsence(Absence absence) {
+        dalManager.submitAbsence(absence);   
     }
 
     @Override
