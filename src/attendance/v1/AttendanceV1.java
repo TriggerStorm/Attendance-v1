@@ -18,11 +18,11 @@ import javafx.stage.Stage;
  * @author Bruger
  */
 public class AttendanceV1 extends Application {
-    private TeacherModel tm;
+    //private TeacherModel tm;
 
-    public AttendanceV1(TeacherModel tm) {
-        this.tm = tm;
-    }
+    /*public AttendanceV1(TeacherModel tm) {
+        //this.tm = tm;
+    }*/
     
     @Override
     public void start(Stage stage) throws Exception {
@@ -37,13 +37,13 @@ public class AttendanceV1 extends Application {
     /**
      * @param args the command line arguments
      */
-    public static void main(String[] args) {
+   /* public static void main(String[] args) {
         
         launch(args);
         Runnable obj1 = new TeacherModel();
         Thread t1;
         t1 = new Thread(obj1);
         t1.start();
-    }
+    }*/
     
 }
