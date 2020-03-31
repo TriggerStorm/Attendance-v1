@@ -6,6 +6,7 @@
 package attendance.v1.gui.controller;
 import attendance.v1.be.Attendance;
 import attendance.v1.be.LoggedInUser;
+import attendance.v1.be.Months;
 import attendance.v1.be.SubjectAttendance;
 import attendance.v1.bll.BLLutilities;
 import attendance.v1.bll.BllManager;
@@ -41,6 +42,7 @@ import javafx.scene.chart.PieChart;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
@@ -131,12 +133,20 @@ public class StudentController implements Initializable {
     @FXML
     private GridPane gridPane;
     boolean cal = false;
+    @FXML
+    private ComboBox<Months> month_box;
+    private Months m;
+    
   
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        Months m = new Months();
+        month_box.setItems(m.getList());
+        month_box.setVisible(false);
+                
 /*        settingTableView();
          System.out.println("");
                 System.out.println("Loggeg in as UserName" + UserDBDAO.loggedInUser.getUserName());
@@ -206,6 +216,7 @@ public class StudentController implements Initializable {
  //      ObservableList<Attendance> list = FXCollections.observableArrayList(bm.getStudentAttendanceForSubject(lu.getUserKey(),bllu.subjectsForGui().get(1).getSubjectKey()));
       //   bm.getStudentAttendanceForSubject(lu.getUserKey(),bllu.subjectsForGui().get(1).getSubjectKey());
         TBV_attendance.setItems(attendance);
+        setCalendar(month_box.getValue().getMonthNumber());
 
     }
 
@@ -228,6 +239,7 @@ public class StudentController implements Initializable {
         Lb_subjet.setText("SDE");       
                 
        TBV_attendance.setItems(attendance);
+       setCalendar(month_box.getValue().getMonthNumber());
     }
 
   @FXML
@@ -265,7 +277,7 @@ public class StudentController implements Initializable {
  */       Lb_subjet.setText("ITO");        
         LB_AttendanceRate.setText(sAttendance.getPercent());
         TBV_attendance.setItems(attendance);
-
+setCalendar(month_box.getValue().getMonthNumber());
       
 
      }
@@ -298,17 +310,35 @@ public class StudentController implements Initializable {
 
     @FXML
     private void changeView(Event event) throws SQLException {
-        if(!cal) // to make calendar only once unless subject changed
+           String date =  bllu.dateForCalendar(); 
+       String[] ymd = date.split(" ");  
+       int month = Integer.parseInt(ymd[1]);
+        month_box.setVisible(true);
+        setCalendar(month);
+       
+    }
+
+    @FXML
+    private void changeMonth(ActionEvent event) {
+        gridPane.getChildren().clear();
+        cal = false;
+        setCalendar(month_box.getValue().getMonthNumber());
+    }
+    
+    
+    private void setCalendar(int month)
+    {
+         if(!cal) // to make calendar only once unless subject changed
         {
             String date =  bllu.dateForCalendar(); //get current date
        String[] ymd = date.split(" "); // split values from each others
        int year = Integer.parseInt(ymd[2]);
-       int month = Integer.parseInt(ymd[1]);
+      // int month = Integer.parseInt(ymd[1]);
        int day = Integer.parseInt(ymd[0]); // converting day, month, year from date to ints
        YearMonth yearMonthObject = YearMonth.of(year,month);
        int daysInMonth = yearMonthObject.lengthOfMonth(); // getting how many days is in current month
        int text = 0;
-            int monthFromDb, yearFromDb ;
+            int monthFromDb = 0, yearFromDb = 0;
             ArrayList<Integer> attList = new ArrayList<>();  // list below is list with subjectsHeld for logged student
       ObservableList<Attendance> list = FXCollections.observableArrayList(bm.getStudentAttendanceForSubject(lu.getUserKey(),lu.getSelectedSubjectKey()));
        for(int i = 0; i< list.size();i++)
@@ -345,7 +375,7 @@ public class StudentController implements Initializable {
                 if(text< day-1) // adding absences to ALL days before current day
                     stack.setStyle("-fx-background-color: black, red ;\n" +
                 "    -fx-background-insets: 0,0 0 1 1 ;");
-                if(text == day)  // change color of current day
+                if(text == day && month == monthFromDb)  // change color of current day
                 {
                 gridPane.getChildren().get(text-1).setStyle("-fx-background-color: black, cyan ;\n" +
 "    -fx-background-insets: 0, 0 0 1 1 ;");
@@ -362,11 +392,10 @@ public class StudentController implements Initializable {
            int number = attList.get(i);
            if(number < day-2)  // for every day from list of days from db setting its corresponding pane color to Green
            gridPane.getChildren().get(number-1).setStyle("-fx-background-color: black, green ;\n" + "    -fx-background-insets: 0, 0 0 1 1 ;");
+           System.out.println(attList.get(i)+"@@@@@@@@");
        }
        cal = true; 
         }
     }
-    
-    
     
 }
