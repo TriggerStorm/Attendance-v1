@@ -225,7 +225,6 @@ public class AttendanceDBDAO {
     public String getAverageOfAllStudentAttendancesInASubjectAsAString(int subjectKey) throws SQLException {
     //  Returns the String of the total average of all students in a subject   
         double totalOfAllStudentAttendancesInASubject = 0;
-        double averageOfAllStudentAttendancesInASubject;
         List<User> allstudentsInASubject = tempUserDBDao.getAllStudentsInASubject(subjectKey);
         int numberOfStudentsInASubject = allstudentsInASubject.size();
     // maybe need an if (numberOfStudentsInASubject > 0) ...
@@ -234,14 +233,7 @@ public class AttendanceDBDAO {
             int userKey = testUser.getUserKey();
             totalOfAllStudentAttendancesInASubject += calculateAverageOfAStudentsAttendanceInASubject(subjectKey, userKey);
         }
-        if(numberOfStudentsInASubject == 0)
-        {
-            averageOfAllStudentAttendancesInASubject = 0;
-        }
-        else
-        {
-            averageOfAllStudentAttendancesInASubject = totalOfAllStudentAttendancesInASubject / numberOfStudentsInASubject;
-        }
+        double averageOfAllStudentAttendancesInASubject = totalOfAllStudentAttendancesInASubject / numberOfStudentsInASubject;
         String averageOfAllStudentAttendancesInASubjectString = convertDoubleToPercentageString(averageOfAllStudentAttendancesInASubject);
         return averageOfAllStudentAttendancesInASubjectString;
     }
@@ -256,15 +248,9 @@ public class AttendanceDBDAO {
         System.out.print(allOfAStudentsAttendanceForASubject.size());
         double allOfStudentAttendanceInSubject = allOfAStudentsAttendanceForASubject.size();
         double totalAttendanceForSubject = allSubjectsHeldForASubject.size();
-        if(totalAttendanceForSubject == 0)
-        {
-            return 100;
-        }
-        else
-        {
-            averageOfAStudentsAttendanceInASubject = allOfStudentAttendanceInSubject/totalAttendanceForSubject;
-            return averageOfAStudentsAttendanceInASubject;
-        }
+        
+        averageOfAStudentsAttendanceInASubject = allOfStudentAttendanceInSubject/totalAttendanceForSubject;
+        return averageOfAStudentsAttendanceInASubject;
     }
         
     

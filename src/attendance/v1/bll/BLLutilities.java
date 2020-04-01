@@ -101,19 +101,18 @@ public class BLLutilities {
         return dateNowString;
     } 
     
-    
-    public String locaDateToString(LocalDate date) {
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd LLLL yyyy");
-        String dateNowString = date.format(formatter);
-        return dateNowString;
-    } 
-    
 
     public int convertStringToInt(String string) {
         int intValue = Integer.parseInt(string);  
         return intValue;
     }
     
+    public String dateForCalendar() {
+        LocalDate now = LocalDate.now();
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd MM yyyy");
+        String dateNowString = now.format(formatter);
+        return dateNowString;
+    } 
     
 //  Average calculators (NO LONGER IN HERE. In AttendanceDBDAO)
     

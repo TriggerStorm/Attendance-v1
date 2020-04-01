@@ -66,10 +66,4 @@ public class AttendanceModel {
        return null;
    }*/
    
-    
-    public void submitAbsence (int studentKey, String date) {   // work in progress
-        bllManager.submitAbsence(studentKey, date);
-    }
-    
-    
 }

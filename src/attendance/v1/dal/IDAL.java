@@ -60,11 +60,8 @@ public interface IDAL {
     public SubjectsHeld checkCode(int sKey, String code);
       public boolean deleteSubjectsHeld(SubjectsHeld subjectsHeld);
 
-// subjectDBDAO methods
+// subjectDBDAO
     public Subject getSpecificSubjects(int subjectKey);
 
-//AbsenceDBDAO methods
-    public void submitAbsence (int studentKey, String date);
-    
-    
+
 }

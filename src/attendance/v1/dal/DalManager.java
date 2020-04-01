@@ -31,7 +31,7 @@ public class DalManager implements IDAL {
     private SubjectsHeldDBDAO subjectsHeldDBDao;
     private SecretCodeDBDAO secretCodeDBDAO;
     private SubjectDBDAO subjectDBdao;
-    private CalendarDBDAO calendarDBDao;
+    
     
     
     public DalManager() {
@@ -41,7 +41,6 @@ public class DalManager implements IDAL {
           userDBDao = new UserDBDAO();
           subjectsHeldDBDao = new SubjectsHeldDBDAO();
           secretCodeDBDAO = new SecretCodeDBDAO();
-          calendarDBDao = new CalendarDBDAO();
     } 
     
     
@@ -315,16 +314,6 @@ public class DalManager implements IDAL {
             Logger.getLogger(DalManager.class.getName()).log(Level.SEVERE, null, ex);
         }
         return false;
-    }
-
-    
-    
-    
-    //AbsenceDBDAO methods
-
-    @Override
-    public void submitAbsence(int studentKey, String date) {
-        calendarDBDao.submitAbsence(studentKey, date);   
     }
 
    
