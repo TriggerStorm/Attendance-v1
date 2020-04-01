@@ -42,7 +42,7 @@ public interface IBLL {
     public boolean checkIfUserExist(String email);
 
 
- // AttendanceDBDAO methods
+// AttendanceDBDAO methods
     public List<Attendance> getAllAttendances();
     public List<Attendance> getStudentAttendanceForSubject(int studentKey, int subjectKey);
     public SubjectAttendance addNewAttendanceToDB(int studentKey, SubjectsHeld subjectHeld);
@@ -63,13 +63,14 @@ public interface IBLL {
    public boolean deleteSubjectsHeld(SubjectsHeld subjectsHeld);
    
    
-// subjectDBDAO methods
+// SubjectDBDAO methods
     public Subject getSpecificSubjects(int subjectKey);
 
     
 //AbsenceDBDAO methods
     public void submitAbsence (Absence absence);
     public void deleteExpiredAbsences();
+    public List<Absence> getAllAbsencesOnAGivenDate(LocalDate date);
 
     
     

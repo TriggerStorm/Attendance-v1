@@ -16,8 +16,8 @@ public class Absence {
     private LocalDate date;
     
     public  Absence(int studentKey, LocalDate date) {
-        this.studentKey = this.studentKey;
-        this.date = this.date;
+        this.studentKey = studentKey;
+        this.date = date;
     }
 
     

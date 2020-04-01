@@ -49,16 +49,18 @@ public class AbsenceDBDAO {
             {
                 int userKey = rs.getInt("studentKey");
                 allAbsencesForADate.add(new Absence(userKey, date)); 
+//System.out.println("");
+//System.out.println("Found entry");
             }    
         }
-// TEST        
+// TEST   
+/*System.out.println("");
+System.out.println("List of Absences on " + date);
         for (int i = 0; i < allAbsencesForADate.size(); i++) {
         Absence absence = allAbsencesForADate.get(i);
 System.out.println("");
-System.out.println("List of Absences on " + date);
-System.out.println("");
-System.out.println(i + ": Studentkey= "+ absence.getStudentKey() + "  Date: " + absence.getDate());
-        }
+System.out.println(i + ": Studentkey= "+ absence.getStudentKey() + "  Date: " + absence.getDate()); 
+        } */
         return allAbsencesForADate;
     }
         
