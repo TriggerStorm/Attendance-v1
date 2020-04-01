@@ -208,7 +208,7 @@ public class StudentController implements Initializable {
     @FXML
     private void handle_SCO(ActionEvent event) throws SQLException {
         lu.setSelectedSubjectKey(1);
-
+       cal = false;
        SubjectAttendance sAttendance = bm.getSubjectAttendanceForAStudent(lu.getUserKey(), 1);
        ObservableList<SubjectAttendance> attendance = FXCollections.observableArrayList(sAttendance);
         TBV_monday.setCellValueFactory(new PropertyValueFactory<SubjectAttendance, String>("monday"));
@@ -232,6 +232,7 @@ public class StudentController implements Initializable {
     @FXML
     private void handle_SDE(ActionEvent event) throws SQLException {
        lu.setSelectedSubjectKey(5);
+       cal = false;
         SubjectAttendance sAttendance = bm.getSubjectAttendanceForAStudent(lu.getUserKey(), 5);
        ObservableList<SubjectAttendance> attendance = FXCollections.observableArrayList(sAttendance);
         TBV_monday.setCellValueFactory(new PropertyValueFactory<SubjectAttendance, String>("monday"));
@@ -270,7 +271,7 @@ public class StudentController implements Initializable {
   @FXML
     private void handle_ITO(ActionEvent event) {
         lu.setSelectedSubjectKey(9);
-
+        cal = false;
         SubjectAttendance sAttendance = bm.getSubjectAttendanceForAStudent(lu.getUserKey(),9);
        ObservableList<SubjectAttendance> attendance = FXCollections.observableArrayList(sAttendance);
         TBV_monday.setCellValueFactory(new PropertyValueFactory<SubjectAttendance, String>("monday"));
