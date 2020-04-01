@@ -101,11 +101,19 @@ public class BLLutilities {
         return dateNowString;
     } 
     
+    
+    public String locaDateToString(LocalDate date) {  // Written for Absence conversion. Not used any more
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd LLLL yyyy");
+        String dateNowString = date.format(formatter);
+        return dateNowString;
+    } 
+    
 
-    public int convertStringToInt(String string) {
+    public int convertStringToInt(String string) { 
         int intValue = Integer.parseInt(string);  
         return intValue;
     }
+    
     
     public String dateForCalendar() {
         LocalDate now = LocalDate.now();

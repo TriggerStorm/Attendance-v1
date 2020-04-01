@@ -38,6 +38,7 @@ import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
 import javafx.geometry.Insets;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -67,6 +68,13 @@ import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
 import javax.imageio.ImageIO;
 import javax.swing.JLabel;
+import javafx.scene.control.skin.DatePickerSkin;
+import javafx.scene.control.DatePicker;
+import java.time.LocalDate;
+import java.util.Date;
+import javafx.scene.control.DateCell;
+import javafx.util.Callback;
+import javax.xml.datatype.DatatypeFactory;
 
 /**
  * FXML Controller class
@@ -113,7 +121,6 @@ public class StudentController implements Initializable {
     @FXML
     private Button Bn_submit;
     
-    
     @FXML
     private Label TF_logInAss;
     @FXML
@@ -130,8 +137,12 @@ public class StudentController implements Initializable {
     private ImageView img;
     @FXML
     private ImageView miniImg;
+    @FXML
+    private DatePicker datepick;
+
     private BLLutilities bllu;
     private BllManager bm;
+    
     @FXML
     private AnchorPane pane;
     @FXML
@@ -200,11 +211,48 @@ public class StudentController implements Initializable {
         
         addStage.setScene(addScene);
         addStage.show();
-        
-        
-
     }
 
+    
+    @FXML
+    public void handle_DatePick (ActionEvent event) throws IOException {
+    //  Shows a DatePicker and passes date picked to the Attendance Model
+        Parent root1;  // Student controller
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/attendance/v1/gui/view/Student.fxml"));
+        root1 = (Parent) fxmlLoader.load();  // loads StudentController
+        fxmlLoader.<StudentController>getController();  // loads StudentController
+        Stage datePickerStage = new Stage();  // New new stage for DatePicker
+        datePickerStage.setTitle("Enter Day of Absence");  // not working yet
+        Scene datePickerScene = new Scene(root1, 400, 400);  // creates datePickerScene
+        datePickerScene.getStylesheets().add(getClass().getResource("/attendance/v1/gui/css/Attendance.css").toExternalForm());  // gets Attendance.css
+        datePickerStage.setScene(datePickerScene);
+     // block out past days. Not workng       
+        final Callback<DatePicker, DateCell> dayCellFactory = new Callback<DatePicker, DateCell>() {
+                @Override
+                public DateCell call(final DatePicker datePicker) {
+                    return new DateCell() {
+                        @Override
+                        public void updateItem(LocalDate item, boolean empty) {
+                            super.updateItem(item, empty);
+                           
+                            if (item.isBefore(LocalDate.now()));
+          //                          checkInDatePicker.getValue().plusDays(1))) 
+                            {
+                                    setDisable(true);
+                                    setStyle("-fx-background-color: #ffc0cb;");
+                            }   
+                    }
+                };
+            }
+        };
+     // end of block out past days.       
+           datePickerStage.show();  // opens DatePicker
+           LocalDate datePicked = datepick.getValue();  // gets DatePicker value
+           datePickerStage.close();  // closes DatePicker
+           Am.submitAbsence(lu.getUserKey(), datePicked);  //  passes date picked to the Attendance Model
+    }
+    
+    
     @FXML
     private void handle_SCO(ActionEvent event) throws SQLException {
         lu.setSelectedSubjectKey(1);
@@ -419,4 +467,5 @@ setCalendar(month_box.getValue().getMonthNumber());
         }
     }
     
+
 }

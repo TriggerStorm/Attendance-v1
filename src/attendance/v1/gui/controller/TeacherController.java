@@ -108,6 +108,7 @@ public class TeacherController implements Initializable {
 
     private BllManager bm;
     private BLLutilities bllu;
+    private SubjectAttendance sa;
     @FXML
     private JFXButton btn_undo;
     @FXML
@@ -131,6 +132,12 @@ public class TeacherController implements Initializable {
     private boolean cal = false;
     @FXML
     private GridPane gridPane;
+
+    @FXML
+    private Label LB_CTxt;
+    @FXML
+    private Label LB_Cprocent;
+
 
     public TeacherController()
     {
@@ -187,9 +194,8 @@ public class TeacherController implements Initializable {
 
 
     }
-
-
-
+     
+     
     @FXML
     private void handle_attendancecode(ActionEvent event) throws IOException {
         bn_Showcode.setVisible(true);
@@ -249,19 +255,21 @@ public class TeacherController implements Initializable {
 
     @FXML
     private void handle_DBOS(ActionEvent event) {
-       /* TBV_monday.setCellValueFactory(new PropertyValueFactory<>("monday"));
-        TBV_tuesday.setCellValueFactory(new PropertyValueFactory<>("tuesday"));
-        tbv_wednesday.setCellValueFactory(new PropertyValueFactory<>("wednesday"));
-        TBV_thursday.setCellValueFactory(new PropertyValueFactory<>("thursday"));
-        TBV_friday.setCellValueFactory(new PropertyValueFactory<>("friday"));
-        TBV_student.setCellValueFactory(new PropertyValueFactory<>("Name"));
-        TBV_Attendance.setCellValueFactory(new PropertyValueFactory<>("percent"));
+        ObservableList<SubjectAttendance> itoList = FXCollections.observableArrayList(bm.getSubjectAttendanceListForAllStudentsInThatSubject(69));
+        TBV_monday.setCellValueFactory(new PropertyValueFactory<SubjectAttendance, String>("monday"));
+        TBV_tuesday.setCellValueFactory(new PropertyValueFactory<SubjectAttendance, String>("tuesday"));
+        tbv_wednesday.setCellValueFactory(new PropertyValueFactory<SubjectAttendance, String>("wednesday"));
+        TBV_thursday.setCellValueFactory(new PropertyValueFactory<SubjectAttendance, String>("thursday"));
+        TBV_friday.setCellValueFactory(new PropertyValueFactory<SubjectAttendance, String>("friday"));
+        TBV_student.setCellValueFactory(new PropertyValueFactory<SubjectAttendance, String>("Name"));
+        TBV_Attendance.setCellValueFactory(new PropertyValueFactory<SubjectAttendance, String>("percent"));
+        LB_AttendanceRate.setText(bm.getAverageOfAllStudentAttendancesInASubjectAsAString(9));
         Lb_subjet.setText("DB/OS");
-        lu.setSelectedSubjectKey(17);
+        lu.setSelectedSubjectKey(69);
         Bn_gencode.setDisable(false);
        if(!bllu.hasOneDayPass(bm.getLatestSubjectsHeldDate(lu.getSelectedSubjectKey())))
        Bn_gencode.setDisable(true);
-       TBV_attendance.setItems(Am.getDBOSattendance()); */
+       TBV_attendance.setItems(itoList);
     }
 
     @FXML
@@ -398,6 +406,13 @@ public class TeacherController implements Initializable {
 //       }
        cal = true; 
         }
+    }
+
+    @FXML
+    private void handle_getUser(MouseEvent event) {
+         sa = TBV_attendance.getSelectionModel().getSelectedItem();
+         LB_Cprocent.setText(bm.getAverageAttendanceOfAStudentsForAllSubjects(sa.getUserKey()));
+         
     }
 
 }

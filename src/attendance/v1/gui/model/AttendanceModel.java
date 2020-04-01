@@ -17,6 +17,7 @@ import attendance.v1.be.LoggedInUser;
 import attendance.v1.be.SubjectsHeld;
 import attendance.v1.bll.BLLutilities;
 import java.sql.SQLException;
+import java.time.LocalDate;
 
 /**
  *
@@ -66,4 +67,11 @@ public class AttendanceModel {
        return null;
    }*/
    
+    
+    public void submitAbsence (int studentKey, LocalDate datePicked) {   // work in progress
+     
+        bllManager.submitAbsence(studentKey, datePicked);
+    }
+    
+    
 }

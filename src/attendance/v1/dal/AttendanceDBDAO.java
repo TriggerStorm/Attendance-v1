@@ -225,15 +225,19 @@ public class AttendanceDBDAO {
     public String getAverageOfAllStudentAttendancesInASubjectAsAString(int subjectKey) throws SQLException {
     //  Returns the String of the total average of all students in a subject   
         double totalOfAllStudentAttendancesInASubject = 0;
+        double averageOfAllStudentAttendancesInASubject;
         List<User> allstudentsInASubject = tempUserDBDao.getAllStudentsInASubject(subjectKey);
         int numberOfStudentsInASubject = allstudentsInASubject.size();
-    // maybe need an if (numberOfStudentsInASubject > 0) ...
         for (int i = 0; i < numberOfStudentsInASubject; i++) {
             User testUser = allstudentsInASubject.get(i);
             int userKey = testUser.getUserKey();
             totalOfAllStudentAttendancesInASubject += calculateAverageOfAStudentsAttendanceInASubject(subjectKey, userKey);
         }
-        double averageOfAllStudentAttendancesInASubject = totalOfAllStudentAttendancesInASubject / numberOfStudentsInASubject;
+        if (numberOfStudentsInASubject == 0) {
+            averageOfAllStudentAttendancesInASubject = 0;
+        } else {
+            averageOfAllStudentAttendancesInASubject = totalOfAllStudentAttendancesInASubject / numberOfStudentsInASubject;
+        }
         String averageOfAllStudentAttendancesInASubjectString = convertDoubleToPercentageString(averageOfAllStudentAttendancesInASubject);
         return averageOfAllStudentAttendancesInASubjectString;
     }
@@ -248,9 +252,15 @@ public class AttendanceDBDAO {
         System.out.print(allOfAStudentsAttendanceForASubject.size());
         double allOfStudentAttendanceInSubject = allOfAStudentsAttendanceForASubject.size();
         double totalAttendanceForSubject = allSubjectsHeldForASubject.size();
-        
-        averageOfAStudentsAttendanceInASubject = allOfStudentAttendanceInSubject/totalAttendanceForSubject;
-        return averageOfAStudentsAttendanceInASubject;
+        if(totalAttendanceForSubject == 0)
+        {
+            return 100;
+        }
+        else
+        {
+            averageOfAStudentsAttendanceInASubject = allOfStudentAttendanceInSubject/totalAttendanceForSubject;
+            return averageOfAStudentsAttendanceInASubject;
+        }
     }
         
     
@@ -267,7 +277,7 @@ public class AttendanceDBDAO {
     
 // Time Converters
 
-    public String dateNowToString() {
+    public String dateNowToString() {  // not needed?
         LocalDateTime now = LocalDateTime.now();
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd['T'HH:mm:ss[Z]]");
         String dateNowString = now.format(formatter);
@@ -275,7 +285,7 @@ public class AttendanceDBDAO {
     } 
     
     
-    public String localDateToString(LocalDateTime date) {
+    public String localDateToString(LocalDateTime date) {  // not needed?
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd['T'HH:mm:ss[Z]]");
         String dateString = date.format(formatter);
         return dateString;
