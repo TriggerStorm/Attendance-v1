@@ -153,7 +153,7 @@ public class StudentController implements Initializable {
        int month = Integer.parseInt(ymd[1]);
         Months m = new Months();
         month_box.setItems(m.getList());
-        month_box.getSelectionModel().select(month-1);
+        month_box.getSelectionModel().select(month-1); // select current month as default
         month_box.setVisible(false);
                 
 /*        settingTableView();
@@ -370,19 +370,19 @@ setCalendar(month_box.getValue().getMonthNumber());
            for(int j = 0;j<= daysInMonth/5;j++)  // creating gridpane 7x5
            {
                String dateTimeString ="";
-               if(text<daysInMonth)
-               {  String str = Integer.toString(text+1)+"-"+Integer.toString(month)+"-"+Integer.toString(year);
+               if(text<daysInMonth) // process below goal is to get weekday name from string for every day basing on localdatetime
+               {  String str = Integer.toString(text+1)+"-"+Integer.toString(month)+"-"+Integer.toString(year); // creating string using selected year month and day
                DateTimeFormatter dtf = DateTimeFormatter.ofPattern("d-M-yyyy",Locale.ENGLISH);
-               LocalDateTime localDateTime = LocalDate.parse(str, dtf).atStartOfDay();
+               LocalDateTime localDateTime = LocalDate.parse(str, dtf).atStartOfDay(); // parsing string as  localdate
          DateTimeFormatter formattter = DateTimeFormatter.ofPattern("EEEE");
         String dateTimeStringg = localDateTime.format(formattter);
-               dateTimeString = dateTimeStringg;}
+               dateTimeString = dateTimeStringg;} // getting name of day from date
                
                 Label[] weekDay = new Label[45];
                 Label[] label = new Label[45];  
-                weekDay[text] = new Label();
+                //weekDay[text] = new Label();
                 label[text] = new Label();    //  text is used as text for labels as well as number of index for them
-                label[text].setText(Integer.toString(text+1)+"\n"+"\n"+"\n"+dateTimeString); // creating array of labels with text strarting from 1
+                label[text].setText(Integer.toString(text+1)+"\n"+"\n"+"\n"+dateTimeString); // sets day number as label text as well as day name
               //  weekDay[text].setText(dateTimeString);
                 StackPane stack = new StackPane();
                gridPane.setStyle("-fx-background-color: black, white ;\n" +   //creating empty gridpane
