@@ -21,9 +21,13 @@ import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.sql.SQLException;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.YearMonth;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Locale;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -143,8 +147,13 @@ public class StudentController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+         bllu = new BLLutilities();
+        String date =  bllu.dateForCalendar(); //get current date
+       String[] ymd = date.split(" "); // split values from each others
+       int month = Integer.parseInt(ymd[1]);
         Months m = new Months();
         month_box.setItems(m.getList());
+        month_box.getSelectionModel().select(month-1);
         month_box.setVisible(false);
                 
 /*        settingTableView();
@@ -156,7 +165,7 @@ public class StudentController implements Initializable {
      String dateString = "todays date";
      //   date = new JLabel(dateString);
 */      
-         bllu = new BLLutilities();
+        
             lu = LoggedInUser.getInstance();
          bm = new BllManager();
            // System.out.println(bllu.subjectsForGui().get(1).getSubjectKey());
@@ -333,7 +342,7 @@ setCalendar(month_box.getValue().getMonthNumber());
             String date =  bllu.dateForCalendar(); //get current date
        String[] ymd = date.split(" "); // split values from each others
        int year = Integer.parseInt(ymd[2]);
-      // int month = Integer.parseInt(ymd[1]);
+      int monthNow = Integer.parseInt(ymd[1]);
        int day = Integer.parseInt(ymd[0]); // converting day, month, year from date to ints
        YearMonth yearMonthObject = YearMonth.of(year,month);
        int daysInMonth = yearMonthObject.lengthOfMonth(); // getting how many days is in current month
@@ -359,23 +368,35 @@ setCalendar(month_box.getValue().getMonthNumber());
        {
            for(int j = 0;j<= daysInMonth/5;j++)  // creating gridpane 7x5
            {
+               String dateTimeString ="";
+               if(text<daysInMonth)
+               {  String str = Integer.toString(text+1)+"-"+Integer.toString(month)+"-"+Integer.toString(year);
+               DateTimeFormatter dtf = DateTimeFormatter.ofPattern("d-M-yyyy",Locale.ENGLISH);
+               LocalDateTime localDateTime = LocalDate.parse(str, dtf).atStartOfDay();
+         DateTimeFormatter formattter = DateTimeFormatter.ofPattern("EEEE");
+        String dateTimeStringg = localDateTime.format(formattter);
+               dateTimeString = dateTimeStringg;}
                
-               
+                Label[] weekDay = new Label[45];
                 Label[] label = new Label[45];  
+                weekDay[text] = new Label();
                 label[text] = new Label();    //  text is used as text for labels as well as number of index for them
-                label[text].setText(Integer.toString(text+1)); // creating array of labels with text strarting from 1
-                
+                label[text].setText(Integer.toString(text+1)+"\n"+"\n"+"\n"+dateTimeString); // creating array of labels with text strarting from 1
+              //  weekDay[text].setText(dateTimeString);
                 StackPane stack = new StackPane();
                gridPane.setStyle("-fx-background-color: black, white ;\n" +   //creating empty gridpane
              "  -fx-background-insets: 0, 1 1 0 0 ;\n" + "-fx-padding: 1 ;\n");
                if(text<daysInMonth)  // adding labels until end of month
-                stack.getChildren().add(label[text]);      // adding label to stackpane
+                stack.getChildren().add(label[text]); // adding label to stackpane    ,weekDay[text] 
                 stack.setStyle("-fx-background-color: black, white ;\n" +   // creating empty stackpanes with labels
                 "    -fx-background-insets: 0,0 0 1 1 ;");
-                if(text< day-1) // adding absences to ALL days before current day
+                if(text< day-1 || (monthNow != month && text<daysInMonth && month < monthNow)) // adding absences to ALL days before current day
                     stack.setStyle("-fx-background-color: black, red ;\n" +
                 "    -fx-background-insets: 0,0 0 1 1 ;");
-                if(text == day && month == monthFromDb)  // change color of current day
+           //     if(text< day-1 && monthNow == month)
+            //        stack.setStyle("-fx-background-color: black, red ;\n" +
+            //    "    -fx-background-insets: 0,0 0 1 1 ;");
+                if(text == day && monthNow == month_box.getValue().getMonthNumber())  // change color of current day
                 {
                 gridPane.getChildren().get(text-1).setStyle("-fx-background-color: black, cyan ;\n" +
 "    -fx-background-insets: 0, 0 0 1 1 ;");
@@ -390,9 +411,9 @@ setCalendar(month_box.getValue().getMonthNumber());
        for(int i = 0; i<attList.size();i++)
        {
            int number = attList.get(i);
-           if(number < day-2)  // for every day from list of days from db setting its corresponding pane color to Green
+           if(number < day-2 || monthNow != month)  // for every day from list of days from db setting its corresponding pane color to Green
            gridPane.getChildren().get(number-1).setStyle("-fx-background-color: black, green ;\n" + "    -fx-background-insets: 0, 0 0 1 1 ;");
-           System.out.println(attList.get(i)+"@@@@@@@@");
+           // System.out.println(attList.get(i)+"@@@@@@@@");
        }
        cal = true; 
         }
