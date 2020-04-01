@@ -5,6 +5,7 @@
  */
 package attendance.v1.gui.controller;
 import attendance.v1.be.Attendance;
+import attendance.v1.be.Absence;
 import attendance.v1.be.LoggedInUser;
 import attendance.v1.be.Months;
 import attendance.v1.be.SubjectAttendance;
@@ -202,6 +203,47 @@ public class StudentController implements Initializable {
         addStage.show();
         
         
+
+
+    @FXML
+    public void handle_DatePick (ActionEvent event) throws IOException {
+    //  Shows a DatePicker and passes date picked to the Attendance Model
+        Parent root1;  // Student controller
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/attendance/v1/gui/view/Student.fxml"));
+        root1 = (Parent) fxmlLoader.load();  // loads StudentController
+        fxmlLoader.<StudentController>getController();  // loads StudentController
+        Stage datePickerStage = new Stage();  // New new stage for DatePicker
+        datePickerStage.setTitle("Enter Day of Absence");  // not working yet
+        Scene datePickerScene = new Scene(root1, 400, 400);  // creates datePickerScene
+        datePickerScene.getStylesheets().add(getClass().getResource("/attendance/v1/gui/css/Attendance.css").toExternalForm());  // gets Attendance.css
+        datePickerStage.setScene(datePickerScene);
+     // block out past days. Not workng yet
+        final Callback<DatePicker, DateCell> dayCellFactory = new Callback<DatePicker, DateCell>() {
+                @Override
+                public DateCell call(final DatePicker datePicker) {
+                    return new DateCell() {
+                        @Override
+                        public void updateItem(LocalDate item, boolean empty) {
+                            super.updateItem(item, empty);
+                           
+                            if (item.isBefore(LocalDate.now()));
+          //                          checkInDatePicker.getValue().plusDays(1))) 
+                            {
+                                    setDisable(true);
+                                    setStyle("-fx-background-color: #ffc0cb;");
+                            }   
+                    }
+                };
+            }
+        };
+     // end of block out past days.       
+           datePickerStage.show();  // opens DatePicker
+           LocalDate datePicked = datepick.getValue();  // gets DatePicker value
+           datePickerStage.close();  // closes DatePicker
+           Absence absence = new Absence(lu.getUserKey(), datePicked);
+           absence.setStudentKey(lu.getUserKey());
+           absence.setDate(datePicked);
+           Am.submitAbsence(absence);  //  passes date picked to the Attendance Model
 
     }
 

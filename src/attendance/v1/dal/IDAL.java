@@ -5,6 +5,7 @@
  */
 package attendance.v1.dal;
 
+import attendance.v1.be.Absence;
 import attendance.v1.be.Attendance;
 import attendance.v1.be.StudentSubject;
 import attendance.v1.be.Subject;
@@ -62,6 +63,11 @@ public interface IDAL {
 
 // subjectDBDAO
     public Subject getSpecificSubjects(int subjectKey);
+
+
+//AbsenceDBDAO methods
+    public void submitAbsence (Absence absence);
+    public void deleteExpiredAbsences();
 
 
 }

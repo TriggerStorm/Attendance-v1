@@ -27,14 +27,11 @@ public Attendance(int studentKey, int subjectKey, String dateHeld){
 
     public int getStudentKey() {
         return studentKey;
-
     }
     
 
-
     public void setStudentKey(int studentKey) {
         this.studentKey = studentKey;
-
     }
     
     
@@ -42,15 +39,14 @@ public Attendance(int studentKey, int subjectKey, String dateHeld){
         return subjectKey;
     }
 
-
     
     public void setSubjectKey(int subjectKey) {
         this.subjectKey = subjectKey;
     }
 
+    
     public String getDateHeld() {
         return dateHeld;
-
     }
 
     
@@ -58,6 +54,7 @@ public Attendance(int studentKey, int subjectKey, String dateHeld){
         this.dateHeld = dateHeld;
     }
         
+    
     @Override
     public String toString()
     {

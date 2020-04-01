@@ -5,6 +5,7 @@
  */
 package attendance.v1.gui.model;
 
+import attendance.v1.be.Absence;
 import attendance.v1.be.Attendance;
 import attendance.v1.be.SubjectAttendance;
 import attendance.v1.bll.BllManager;
@@ -56,14 +57,18 @@ public class AttendanceModel {
     public void submitAttendance(String code, String selectedSubjectName)
     {
         bllManager.submitAttendance(code, selectedSubjectName);
-  
-        
-    }
+  }
     
-   /*public SubjectAttendance getSubjectAttendanceForAStudent(int studentKey, SubjectsHeld subjectHeld)
-   {     
+   /*public SubjectAttendance getSubjectAttendanceForAStudent(int studentKey, SubjectsHeld subjectHeld) {     
        bllManager.getSubjectAttendanceForAStudent(studentKey, subjectHeld);
        return null;
    }*/
    
+
+    public void submitAbsence (Absence absence) {   // work in progress
+        bllManager.submitAbsence(absence);
+    }
+    
+    
+
 }
