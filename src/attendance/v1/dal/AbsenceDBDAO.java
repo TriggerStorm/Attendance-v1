@@ -37,31 +37,29 @@ public class AbsenceDBDAO {
     }
     
     
-    public void getAllAbsences() throws SQLException {
-    //  Gets a list of all attendances
-        List<Absence> allAbsences = new ArrayList(); //get a list to store the values.
+    public List<Absence> getAllAbsencesOnAGivenDate(LocalDate date) throws SQLException {
+    //  Gets a list of all attendances on a given date
+        List<Absence> allAbsencesForADate = new ArrayList(); //get a list to store the values.
+        java.sql.Date sqlDate = java.sql.Date.valueOf(date); // converts LocalDate date to sqlDate
         try(Connection con = dbc.getConnection()){
-            String SQLStmt = "SELECT * FROM ABSENCE;";
+            String SQLStmt = "SELECT * FROM ABSENCE WHERE DATE = '" + sqlDate + "'";
             Statement statement = con.createStatement();
             ResultSet rs = statement.executeQuery(SQLStmt);
             while(rs.next()) //While you have something in the results
             {
                 int userKey = rs.getInt("studentKey");
-                Date date = rs.getDate("date");
- System.out.println("");
-System.out.println( "frem rs.getDate: " + date);
-               
-                
-                LocalDate localDate = date.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();//sqlDate.toLocalDate(date);
-                allAbsences.add(new Absence(userKey, localDate)); 
+                allAbsencesForADate.add(new Absence(userKey, date)); 
             }    
         }
-        for (int i = 0; i < allAbsences.size(); i++) {
-        Absence absence = allAbsences.get(i);
+// TEST        
+        for (int i = 0; i < allAbsencesForADate.size(); i++) {
+        Absence absence = allAbsencesForADate.get(i);
+System.out.println("");
+System.out.println("List of Absences on " + date);
 System.out.println("");
 System.out.println(i + ": Studentkey= "+ absence.getStudentKey() + "  Date: " + absence.getDate());
         }
-  //      return allAbsences;
+        return allAbsencesForADate;
     }
         
     
@@ -110,10 +108,11 @@ System.out.println("DBDAO date picked = " + absence.getDate());
             Logger.getLogger(AttendanceDBDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
   //      return BE entity (studentKey, datePicked)??
-  //       getAllAbsences();
         }
-        deleteExpiredAbsences();  //TEST
+          getAllAbsencesOnAGivenDate(absence.getDate());  // TEST 
+ //       deleteExpiredAbsences();  //TEST
     }
+    
     
     public void deleteExpiredAbsences() throws SQLException {
     //  Deletes all absences odd than today
