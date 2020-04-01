@@ -218,7 +218,7 @@ public class UserDBDAO {
             String SQLStmt = "SELECT userKey, userName, phonenr, address, postCode, city, teacher, userIMG  FROM USERS WHERE email = '"+ email + "' AND password ='" + password + "'";
             Statement statement = con.createStatement();
             ResultSet rs = statement.executeQuery(SQLStmt);
-            if(rs.isBeforeFirst()) //If there is an entry
+            if(rs != null) //If there is an entry
             {
                 while(rs.next())
                 {
@@ -253,9 +253,7 @@ public class UserDBDAO {
                         return 2;
                     }
                 }
-            } 
-            else if(!rs.isBeforeFirst())
-            {
+            } else {
                 return 0;
             }
         }

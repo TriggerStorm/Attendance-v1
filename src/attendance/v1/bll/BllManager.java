@@ -18,7 +18,6 @@ import java.util.List;
 
 import attendance.v1.dal.DalManager;
 import java.sql.SQLException;
-import java.time.LocalDate;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -33,7 +32,17 @@ import java.util.logging.Logger;
 public class BllManager implements IBLL {
     private DalManager dalManager = new DalManager();
 
+    
   
+    
+
+ //   public SubjectAttendance addNewAttendanceToDB() {
+  //      LoggedInUser lUser = LoggedInUser.getInstance();
+ //       return dalManager.addNewAttendanceToDB(lUser.getUserKey(), lUser.getSelectedSubjectKey());
+  //  }
+ 
+
+
     
 // UserDBDAO methods
     
@@ -191,20 +200,6 @@ public class BllManager implements IBLL {
     @Override
     public boolean checkIfUserExist(String email) {
         return dalManager.checkIfUserExist(email);   
-    }
-
-    
-    
-//AbsenceDBDAO methods
-    
-    @Override
-    public void submitAbsence(int studentKey, LocalDate datePicked) {
-        dalManager.submitAbsence(studentKey, datePicked);   
-    }
-
-    @Override
-    public void deleteExpiredAbsences() {
-        dalManager.deleteExpiredAbsences();
     }
 
     
