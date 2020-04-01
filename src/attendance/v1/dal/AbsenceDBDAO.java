@@ -112,20 +112,30 @@ System.out.println("DBDAO date picked = " + absence.getDate());
   //      return BE entity (studentKey, datePicked)??
   //       getAllAbsences();
         }
+        deleteExpiredAbsences();  //TEST
     }
     
     public void deleteExpiredAbsences() throws SQLException {
     //  Deletes all absences odd than today
-        dbc = new DBConnection();//
-
+//        dbc = new DBConnection();//
         java.sql.Date sqlExpiryDate = java.sql.Date.valueOf(LocalDate.now());
 System.out.println("");
 System.out.println("sqlExpiryDate = " + sqlExpiryDate);
         String SQLStmt = "DELETE * FROM ABSENCE WHERE DATE < CURDATE();";
-         try (Connection con = dbc.getConnection()) {
+        try (Connection con = dbc.getConnection()) {
             PreparedStatement pstmt = con.prepareStatement(SQLStmt);
-      //      pstmt.setDate(1, sqlExpiryDate);
+            ResultSet rs = pstmt.executeQuery(SQLStmt);
+            while(rs.next()) //While you have something in the results
+            {
+            int userKey = rs.getInt("studentKey");  //TEST
+            Date date = rs.getDate("date");    //TEST
+            
+            pstmt.setInt(1, userKey);
+            pstmt.setDate(2, sqlExpiryDate);
+System.out.println("");
+System.out.println("Deleted user # " + userKey + " on " + sqlExpiryDate);
             pstmt.executeUpdate();
+            }
         }
     }
     
