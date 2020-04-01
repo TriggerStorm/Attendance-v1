@@ -4,7 +4,6 @@
  * and open the template in the editor.
  */
 package attendance.v1.dal;
-import attendance.v1.be.Absence;
 import attendance.v1.dal.SecretCodeDBDAO;
 import attendance.v1.be.SubjectAttendance;
 import attendance.v1.be.User;
@@ -316,30 +315,6 @@ public class DalManager implements IDAL {
         }
         return false;
     }
-
-
-    
-    
-    //AbsenceDBDAO methods
-
-    @Override
-    public void submitAbsence(Absence absence) {
-        try {   
-            absenceDBDao.submitAbsence(absence);
-        } catch (SQLException ex) {
-            Logger.getLogger(DalManager.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }
-
-    @Override
-    public void deleteExpiredAbsences() {
-        try {
-            absenceDBDao.deleteExpiredAbsences();
-        } catch (SQLException ex) {
-            Logger.getLogger(DalManager.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }
-
 
    
 
