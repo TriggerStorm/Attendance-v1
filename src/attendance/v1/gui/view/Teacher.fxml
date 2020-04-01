@@ -12,8 +12,11 @@
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
@@ -111,10 +114,8 @@
                                        </children></Pane>
                                     <Pane prefHeight="100.0" prefWidth="200.0">
                                        <children>
-                                          <Label fx:id="LB_AttendanceRate" layoutX="23.0" layoutY="59.0" prefHeight="64.0" prefWidth="105.0" style="-fx-background-color: #F5F5F5;" styleClass="h2" stylesheets="@../css/Attendance.css" text="69%" textAlignment="CENTER" />
-                                          <Label layoutX="21.0" layoutY="60.0" prefHeight="17.0" prefWidth="105.0" styleClass="textsm2" stylesheets="@../css/Attendance.css" text="  AVG. Rate" textAlignment="CENTER" />
-                                          <Label fx:id="LB_CTxt" layoutX="31.0" layoutY="10.0" prefHeight="17.0" prefWidth="92.0" text="Course AVG OF:" />
-                                          <Label fx:id="LB_Cprocent" layoutX="51.0" layoutY="28.0" style="-fx-background-color: #F5F5F5;" styleClass="h2" text="100%" />
+                                          <Label fx:id="LB_AttendanceRate" layoutX="23.0" layoutY="37.0" prefHeight="64.0" prefWidth="105.0" style="-fx-background-color: #F5F5F5;" styleClass="h2" stylesheets="@../css/Attendance.css" text="69%" textAlignment="CENTER" />
+                                          <Label layoutX="21.0" layoutY="31.0" prefHeight="17.0" prefWidth="105.0" styleClass="textsm2" stylesheets="@../css/Attendance.css" text="  AVG. Rate" textAlignment="CENTER" />
                                        </children>
                                     </Pane>
                                     <Pane prefHeight="78.0" prefWidth="123.0">
@@ -133,7 +134,7 @@
                                 <tabs>
                                   <Tab text="2019">
                                        <content>
-                                          <TableView fx:id="TBV_attendance" onMouseClicked="#handle_getUser" prefHeight="200.0" prefWidth="200.0">
+                                          <TableView fx:id="TBV_attendance" prefHeight="200.0" prefWidth="200.0">
                                             <columns>
                                                 <TableColumn fx:id="TBV_student" prefWidth="75.0" text="Student" />
                                               <TableColumn fx:id="TBV_monday" prefWidth="75.0" text="Monday" />
@@ -159,6 +160,32 @@
                                              </columns>
                                           </TableView>
                                        </content>
+                                    </Tab>
+                                    <Tab text="Calendar">
+                                      <content>
+                                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                                             <children>
+                                                <GridPane fx:id="gridPane" prefHeight="394.0" prefWidth="554.0">
+                                                   <columnConstraints>
+                                                      <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                                      <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                                      <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                                      <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                                      <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                                      <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                                      <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                                   </columnConstraints>
+                                                   <rowConstraints>
+                                                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                   </rowConstraints>
+                                                </GridPane>
+                                             </children>
+                                          </AnchorPane>
+                                      </content>
                                     </Tab>
                                 </tabs>
                               </TabPane>

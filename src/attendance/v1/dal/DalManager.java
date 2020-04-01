@@ -4,7 +4,6 @@
  * and open the template in the editor.
  */
 package attendance.v1.dal;
-import attendance.v1.be.Absence;
 import attendance.v1.dal.SecretCodeDBDAO;
 import attendance.v1.be.SubjectAttendance;
 import attendance.v1.be.User;
@@ -14,7 +13,6 @@ import attendance.v1.be.Subject;
 import attendance.v1.be.SubjectsHeld;
 import java.sql.SQLException;
 import java.text.ParseException;
-import java.time.LocalDate;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -33,7 +31,7 @@ public class DalManager implements IDAL {
     private SubjectsHeldDBDAO subjectsHeldDBDao;
     private SecretCodeDBDAO secretCodeDBDAO;
     private SubjectDBDAO subjectDBdao;
-    private AbsenceDBDAO absenceDBDao;
+    
     
     
     public DalManager() {
@@ -43,7 +41,6 @@ public class DalManager implements IDAL {
           userDBDao = new UserDBDAO();
           subjectsHeldDBDao = new SubjectsHeldDBDAO();
           secretCodeDBDAO = new SecretCodeDBDAO();
-          absenceDBDao = new AbsenceDBDAO();
     } 
     
     
@@ -317,29 +314,6 @@ public class DalManager implements IDAL {
             Logger.getLogger(DalManager.class.getName()).log(Level.SEVERE, null, ex);
         }
         return false;
-    }
-
-    
-    
-    
-    //AbsenceDBDAO methods
-
-    @Override
-    public void submitAbsence(Absence absence) {
-        try {   
-            absenceDBDao.submitAbsence(absence);
-        } catch (SQLException ex) {
-            Logger.getLogger(DalManager.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }
-
-    @Override
-    public void deleteExpiredAbsences() {
-        try {
-            absenceDBDao.deleteExpiredAbsences();
-        } catch (SQLException ex) {
-            Logger.getLogger(DalManager.class.getName()).log(Level.SEVERE, null, ex);
-        }
     }
 
    

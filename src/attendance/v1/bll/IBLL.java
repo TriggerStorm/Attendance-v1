@@ -5,7 +5,6 @@
  */
 package attendance.v1.bll;
 
-import attendance.v1.be.Absence;
 import attendance.v1.be.Attendance;
 import attendance.v1.be.StudentSubject;
 import attendance.v1.be.Subject;
@@ -13,7 +12,6 @@ import attendance.v1.be.SubjectAttendance;
 import attendance.v1.be.SubjectsHeld;
 import attendance.v1.be.User;
 import java.sql.SQLException;
-import java.time.LocalDate;
 import java.util.List;
 
 /**
@@ -66,12 +64,6 @@ public interface IBLL {
 // subjectDBDAO methods
     public Subject getSpecificSubjects(int subjectKey);
 
-    
-//AbsenceDBDAO methods
-    public void submitAbsence (Absence absence);
-    public void deleteExpiredAbsences();
 
-    
-    
 }
 
