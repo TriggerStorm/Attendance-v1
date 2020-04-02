@@ -175,8 +175,11 @@ public class AttendanceDBDAO {
     
     public int getAllAttendanceForSubjectByDate(int subjectKey, String date) throws SQLException
     {
+        String theDateTime ="";
         SubjectsHeld theSubject = tempSubjectsHeldDBDao.getSubjectHeldFromDate(subjectKey, date); //get the subjectHeld that we need
-        String theDateTime = theSubject.getDateHeld(); //fetch that one's full date and time.
+        if(theSubject != null)
+        theDateTime = theSubject.getDateHeld(); //fetch that one's full date and time.
+        System.out.println("%%%%%%%%%%"+theDateTime);
         int attendees = 0; //initialize the total amount of attnedees to 0.
         try(Connection con = dbc.getConnection())
         {
