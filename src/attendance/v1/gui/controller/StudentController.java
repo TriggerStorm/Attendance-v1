@@ -251,6 +251,10 @@ public class StudentController implements Initializable {
            absence.setStudentKey(lu.getUserKey());
            absence.setDate(datePicked);
            Am.submitAbsence(absence);  //  passes date picked to the Attendance Model
+           
+           gridPane.getChildren().clear();
+           cal = false;
+           setCalendar(month_box.getValue().getMonthNumber());
     }
     
 
