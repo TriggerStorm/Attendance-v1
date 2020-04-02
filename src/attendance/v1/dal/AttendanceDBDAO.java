@@ -179,7 +179,7 @@ public class AttendanceDBDAO {
         SubjectsHeld theSubject = tempSubjectsHeldDBDao.getSubjectHeldFromDate(subjectKey, date); //get the subjectHeld that we need
         if(theSubject != null)
         theDateTime = theSubject.getDateHeld(); //fetch that one's full date and time.
-        System.out.println("%%%%%%%%%%"+theDateTime);
+       // System.out.println("%%%%%%%%%%"+theDateTime);
         int attendees = 0; //initialize the total amount of attnedees to 0.
         try(Connection con = dbc.getConnection())
         {
@@ -264,9 +264,9 @@ public class AttendanceDBDAO {
         //  Returns the int value of the average attendance of a student in a subject
         double averageOfAStudentsAttendanceInASubject;
         List<SubjectsHeld> allSubjectsHeldForASubject = tempSubjectsHeldDBDao.getAllSubjectsHeldForASubject(subjectKey);
-        System.out.print(allSubjectsHeldForASubject.size());
+     //   System.out.print(allSubjectsHeldForASubject.size());
         List<Attendance> allOfAStudentsAttendanceForASubject = getAllOfAStudentsAttendanceForASubject(userKey, subjectKey);
-        System.out.print(allOfAStudentsAttendanceForASubject.size());
+     //   System.out.print(allOfAStudentsAttendanceForASubject.size());
         double allOfStudentAttendanceInSubject = allOfAStudentsAttendanceForASubject.size();
         double totalAttendanceForSubject = allSubjectsHeldForASubject.size();
         

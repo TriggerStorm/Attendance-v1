@@ -398,7 +398,7 @@ public class TeacherController implements Initializable {
               else
               {
                   newtext = Integer.toString(text+1);
-              }
+              } 
                subjectsHeldDate = Integer.toString(year)+"-"+newmonth+"-"+newtext;
                DateTimeFormatter dtf = DateTimeFormatter.ofPattern("d-M-yyyy",Locale.ENGLISH);
                LocalDateTime localDateTime = LocalDate.parse(str, dtf).atStartOfDay(); // parsing string as  localdate
