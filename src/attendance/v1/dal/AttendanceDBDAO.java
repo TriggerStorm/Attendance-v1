@@ -172,7 +172,25 @@ public class AttendanceDBDAO {
         }
         return allAttendanceInSubject;
     }
-
+    
+    public int getAllAttendanceForSubjectByDate(int subjectKey, String date) throws SQLException
+    {
+        SubjectsHeld theSubject = tempSubjectsHeldDBDao.getSubjectHeldFromDate(subjectKey, date); //get the subjectHeld that we need
+        String theDateTime = theSubject.getDateHeld(); //fetch that one's full date and time.
+        int attendees = 0; //initialize the total amount of attnedees to 0.
+        try(Connection con = dbc.getConnection())
+        {
+            String sqlStmt = "Select studentKey from Attendance where dateHeld= '" + theDateTime + "';"; //the sql Query.
+            Statement statement = con.createStatement();
+            ResultSet rs = statement.executeQuery(sqlStmt);
+            while(rs.next())
+            {
+                attendees++;//add one to the attendees.
+            }
+        }
+        return attendees; //return the total number.
+    }
+    
        
     public String getAverageAttendanceOfAStudentsForAllSubjects (int studentKey) throws SQLException {
     //  Returns the String of the total average of a students attendance for all subjects
