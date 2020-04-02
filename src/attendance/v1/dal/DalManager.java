@@ -384,6 +384,16 @@ public class DalManager implements IDAL {
         return null;
     }
 
+    @Override
+    public int[] getTotalOfAbsencesInAMonthByDay(int monthInt) {
+        try {
+            return absenceDBDao.getTotalOfAbsencesInAMonthByDay(monthInt);
+        } catch (SQLException ex) {
+            Logger.getLogger(DalManager.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
+    }
+
    
 
 }

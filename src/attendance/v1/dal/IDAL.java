@@ -71,4 +71,5 @@ public interface IDAL {
     public void deleteExpiredAbsences();
     public List<Absence> getAllAbsencesOnAGivenDate(LocalDate date);
     public List<String> getMonthlyAbsencesForAStudent(int studentKey, int monthInt);
+    public int[] getTotalOfAbsencesInAMonthByDay(int monthInt);
 }
