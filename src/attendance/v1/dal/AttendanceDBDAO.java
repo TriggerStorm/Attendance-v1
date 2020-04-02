@@ -111,14 +111,29 @@ public class AttendanceDBDAO {
    
         
    public List<SubjectAttendance> getSubjectAttendanceListForAllStudentsInThatSubject( int subjectKey) throws SQLException {
-       List<SubjectAttendance> allStudentDailyAttendance = new ArrayList<>();
-       List<User> allStudentsInASubject = tempUserDBDao.getAllStudentsInASubject(subjectKey);
-       for (int i = 0; i < allStudentsInASubject.size(); i++) {
-           int userKey = allStudentsInASubject.get(i).getUserKey();
-           SubjectAttendance studentsDailyAttendance = getSubjectAttendanceForAStudent(userKey, subjectKey);
-           allStudentDailyAttendance.add(studentsDailyAttendance);
-       }
-       return allStudentDailyAttendance;
+        List<SubjectAttendance> allStudentDailyAttendance = new ArrayList<>();
+
+        try(Connection con = dbc.getConnection()){
+            String SQLStmt = "SELECT userKey FROM Student_Subjects WHERE subjectKey = ?;"; ///To get all the users in that subject.
+            PreparedStatement statement = con.prepareStatement(SQLStmt);
+     
+            statement.setInt(1,subjectKey);
+     
+            ResultSet rs = statement.executeQuery();
+     
+            while(rs.next()) //While you have something in the results
+            {
+                int userKey = rs.getInt("userKey");
+                SubjectAttendance tempSubjectA = getSubjectAttendanceForAStudent(userKey, subjectKey); //Fetch the attendance for each of those students.
+                allStudentDailyAttendance.add(tempSubjectA); 
+            }    
+        }catch (SQLServerException ex) {
+            Logger.getLogger(AttendanceDBDAO.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+            Logger.getLogger(AttendanceDBDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+ 
+        return allStudentDailyAttendance;
    }
    
    
