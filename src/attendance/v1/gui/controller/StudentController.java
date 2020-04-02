@@ -28,6 +28,7 @@ import java.time.YearMonth;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 import java.util.Locale;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
@@ -397,7 +398,7 @@ public class StudentController implements Initializable {
        int daysInMonth = yearMonthObject.lengthOfMonth(); // getting how many days is in current month
        int text = 0;
             int monthFromDb = 0, yearFromDb = 0;
-            ArrayList<Integer> attList = new ArrayList<>();  // list below is list with subjectsHeld for logged student
+            ArrayList<Integer> attList = new ArrayList<>();// list below is list with subjectsHeld for logged student
       ObservableList<Attendance> list = FXCollections.observableArrayList(bm.getStudentAttendanceForSubject(lu.getUserKey(),lu.getSelectedSubjectKey()));
        for(int i = 0; i< list.size();i++)
        {
@@ -452,13 +453,23 @@ public class StudentController implements Initializable {
                 }
                 if(text > day && monthNow == month_box.getValue().getMonthNumber())
                 {
+                    
+                   List<String> absList = bm.getMonthlyAbsencesForAStudent(lu.getUserKey(),month);
+                     for(int l = 0;l < absList.size();l++)
+                     {
+                         if(Integer.toString(text).equals(absList.get(l)))
                     gridPane.getChildren().get(text-1).setStyle("-fx-background-color: black, yellow ;\n" +
 "    -fx-background-insets: 0, 0 0 1 1 ;");
+                     }
                 }
                 if(monthNow < month_box.getValue().getMonthNumber())
                 {
+                      List<String> absList = bm.getMonthlyAbsencesForAStudent(lu.getUserKey(), month);
+                     for(int l = 0;l < absList.size();l++)
+                     {
+                         if(Integer.toString(text).equals(absList.get(l)))
                     gridPane.getChildren().get(text-1).setStyle("-fx-background-color: black, yellow ;\n" +
-"    -fx-background-insets: 0, 0 0 1 1 ;");
+"    -fx-background-insets: 0, 0 0 1 1 ;");}
                 }
                 gridPane.add(stack, j,i); // adding pane with label to gridpane 
                 text++;
@@ -474,6 +485,35 @@ public class StudentController implements Initializable {
            gridPane.getChildren().get(number-1).setStyle("-fx-background-color: black, green ;\n" + "    -fx-background-insets: 0, 0 0 1 1 ;");
            // System.out.println(attList.get(i)+"@@@@@@@@");
        }
+//       if(text > day && monthNow == month_box.getValue().getMonthNumber())
+//                {
+//                    System.out.println("@@@@@@@@@@@@@@");
+//                   List<String> absList = bm.getMonthlyAbsencesForAStudent(text, month);
+//                     ArrayList<String> arrlistofOptions = new ArrayList<String>(absList);
+//                     for(int l = 0;l < arrlistofOptions.size();l++)
+//                     {
+//                         System.out.println(Integer.toString(day)+"=======?????"+arrlistofOptions.get(l));
+//                         if(Integer.toString(day).equals(arrlistofOptions.get(l)))
+//                    gridPane.getChildren().get(text-1).setStyle("-fx-background-color: black, yellow ;\n" +
+//"    -fx-background-insets: 0, 0 0 1 1 ;");
+//                     }
+//                }
+//                if(monthNow < month_box.getValue().getMonthNumber())
+//                {
+//                      List<String> absList = bm.getMonthlyAbsencesForAStudent(text, month);
+//                     ArrayList<String> arrlistofOptions = new ArrayList<String>(absList);
+//                     for(int l = 0;l < arrlistofOptions.size();l++)
+//                     {
+//                         if(Integer.toString(day).equals(arrlistofOptions.get(l)))
+//                    gridPane.getChildren().get(text-1).setStyle("-fx-background-color: black, yellow ;\n" +
+//"    -fx-background-insets: 0, 0 0 1 1 ;");}
+//                }
+       
+       
+       
+       
+       
+       
        cal = true; 
         }
     }
