@@ -405,7 +405,7 @@ public class TeacherController implements Initializable {
          DateTimeFormatter formattter = DateTimeFormatter.ofPattern("EEEE");
         String dateTimeStringg = localDateTime.format(formattter);
                dateTimeString = dateTimeStringg;} // getting name of day from date
-               System.out.println(subjectsHeldDate);
+          //     System.out.println(subjectsHeldDate);
                 Label[] weekDay = new Label[45];
                 Label[] label = new Label[45];  
                 //weekDay[text] = new Label();
