@@ -402,6 +402,16 @@ public class StudentController implements Initializable {
                 gridPane.getChildren().get(text-1).setStyle("-fx-background-color: black, cyan ;\n" +
 "    -fx-background-insets: 0, 0 0 1 1 ;");
                 }
+                if(text > day && monthNow == month_box.getValue().getMonthNumber())
+                {
+                    gridPane.getChildren().get(text-1).setStyle("-fx-background-color: black, yellow ;\n" +
+"    -fx-background-insets: 0, 0 0 1 1 ;");
+                }
+                if(monthNow < month_box.getValue().getMonthNumber())
+                {
+                    gridPane.getChildren().get(text-1).setStyle("-fx-background-color: black, yellow ;\n" +
+"    -fx-background-insets: 0, 0 0 1 1 ;");
+                }
                 gridPane.add(stack, j,i); // adding pane with label to gridpane 
                 text++;
                 
