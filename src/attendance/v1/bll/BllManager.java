@@ -202,5 +202,15 @@ public class BllManager implements IBLL {
         return dalManager.checkIfUserExist(email);   
     }
 
+    @Override
+    public int getAllAttendanceForSubjectByDate(int subjectKey, String date) {
+     return dalManager.getAllAttendanceForSubjectByDate(subjectKey, date);
+    }
+
+    @Override
+    public List<SubjectsHeld> getAllSubjectsHeldForASubject(int subjectKey) {
+       return dalManager.getAllSubjectsHeldForASubject(subjectKey);
+    }
+
     
 }

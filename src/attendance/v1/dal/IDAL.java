@@ -47,6 +47,7 @@ public interface IDAL {
     public SubjectAttendance getSubjectAttendanceForAStudent(int studentKey, int subjectKey);
     public String getAverageOfAllStudentAttendancesInASubjectAsAString(int subjectKey);
     public String getAverageAttendanceOfAStudentsForAllSubjects (int studentKey);
+    public int getAllAttendanceForSubjectByDate(int subjectKey, String date);
 
 
 // StudentSubjectDBDAO methods
@@ -59,6 +60,7 @@ public interface IDAL {
    public String getLatestSubjectsHeld(int skey);
     public SubjectsHeld checkCode(int sKey, String code);
       public boolean deleteSubjectsHeld(SubjectsHeld subjectsHeld);
+      public List<SubjectsHeld> getAllSubjectsHeldForASubject(int subjectKey);
 
 // subjectDBDAO
     public Subject getSpecificSubjects(int subjectKey);

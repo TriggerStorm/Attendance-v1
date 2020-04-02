@@ -287,7 +287,7 @@ public class StudentController implements Initializable {
  */       Lb_subjet.setText("ITO");        
         LB_AttendanceRate.setText(sAttendance.getPercent());
         TBV_attendance.setItems(attendance);
-setCalendar(month_box.getValue().getMonthNumber());
+        setCalendar(month_box.getValue().getMonthNumber());
       
 
      }

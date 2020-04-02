@@ -316,6 +316,26 @@ public class DalManager implements IDAL {
         return false;
     }
 
+    @Override
+    public int getAllAttendanceForSubjectByDate(int subjectKey, String date) {
+        try {
+            return attendanceDBDao.getAllAttendanceForSubjectByDate(subjectKey, date);
+        } catch (SQLException ex) {
+            Logger.getLogger(DalManager.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return 0;
+    }
+
+    @Override
+    public List<SubjectsHeld> getAllSubjectsHeldForASubject(int subjectKey) {
+        try {
+            return subjectsHeldDBDao.getAllSubjectsHeldForASubject(subjectKey);
+        } catch (SQLException ex) {
+            Logger.getLogger(DalManager.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
+    }
+
    
 
 }

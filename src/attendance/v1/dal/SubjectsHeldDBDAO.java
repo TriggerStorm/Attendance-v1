@@ -221,6 +221,7 @@ public class SubjectsHeldDBDAO {
             String tempdate = tempHeld.getDateHeld(); //the date of the subjectHeld we are working with.
             String[] tempDate2 = tempdate.split("T"); //Split the string into date and time
             boolean myIf = tempDate2[0].equalsIgnoreCase(date); //check that the date of the subjectHeld we are working with, equals the date we have been passed.
+            System.out.println(tempDate2[0]+"=========??????"+date);
             if(myIf) //if it matches...
             {
                 theSubjectHeld = allHeld.get(i); //the the subject.
