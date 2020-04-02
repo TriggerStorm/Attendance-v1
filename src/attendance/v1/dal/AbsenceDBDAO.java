@@ -13,11 +13,14 @@ import java.sql.PreparedStatement;
 import java.sql.Statement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
 import static java.time.temporal.TemporalQueries.localDate;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import java.util.logging.Level;
@@ -87,6 +90,30 @@ System.out.println( "New Absence submitted");
     }
         
      
+    public List<String> getMonthlyAbsencesForAStudent(int studentKey, int monthInt) throws SQLException {
+    // Returns a list of strings representingthe days absent in a given month (as an int)
+        Calendar calendar = Calendar.getInstance();
+        List<String> studentsAbsencePerMonth = new ArrayList<>();
+        String dayString;
+        java.sql.Date startDate = convertMonthIntToSQLDate(monthInt);
+        java.sql.Date endDate = convertMonthIntToSQLDate(monthInt + 1);       
+        try(Connection con = dbc.getConnection()) {
+            String SQLStmt = "SELECT * FROM ABSENCE WHERE StudentKey = '" + studentKey + "' AND Date >= '" + startDate + "' AND Date < '" + endDate + "';";
+            Statement statement = con.createStatement();
+            ResultSet rs = statement.executeQuery(SQLStmt);
+            while(rs.next()) //While you have something in the results
+            {
+                java.sql.Date sqlDate = rs.getDate("date");
+                calendar.setTime(sqlDate);
+                int day = calendar.get(Calendar.DAY_OF_MONTH);
+                dayString = String.valueOf(day);
+                studentsAbsencePerMonth.add(dayString);
+            }
+        return studentsAbsencePerMonth;
+        }
+    }
+     
+     
     public void submitAbsence (Absence absence) throws SQLException {  // just a test for now
     //  Adds an absence to the DB (from DatePicker) 
 System.out.println("");
@@ -111,8 +138,9 @@ System.out.println("DBDAO date picked = " + absence.getDate());
         }
   //      return BE entity (studentKey, datePicked)??
         }
-        getAllAbsencesOnAGivenDate(absence.getDate());  // TEST 
+ //       getAllAbsencesOnAGivenDate(absence.getDate());  // TEST 
         deleteExpiredAbsences();  //TEST
+ //       getMonthlyAbsencesForAStudent(594, 4);  //TEST
     }
     
 
@@ -127,4 +155,19 @@ System.out.println("DBDAO date picked = " + absence.getDate());
     }
     
         
+    private java.sql.Date convertMonthIntToSQLDate (int monthInt) {
+    // Converts an int month to the first day of that month in sql date form
+        Calendar calendar = Calendar.getInstance();
+        String yearString = String.valueOf(calendar.getInstance().get(Calendar.YEAR));
+        String MonthString = String.valueOf(monthInt);
+        if (monthInt < 10) {
+            MonthString = "0" + MonthString;
+        }
+        String firstDayOfMonthString = yearString + "-" + MonthString + "-01"; 
+       LocalDate date = LocalDate.parse(firstDayOfMonthString);
+       java.sql.Date sqlDate = java.sql.Date.valueOf(date);
+       return sqlDate;
+    }
+     
+         
 }

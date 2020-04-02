@@ -367,7 +367,17 @@ public class DalManager implements IDAL {
     public List<SubjectsHeld> getAllSubjectsHeldForASubject(int subjectKey) {
         try {
             return subjectsHeldDBDao.getAllSubjectsHeldForASubject(subjectKey);
+        } catch (SQLException ex) {
+            Logger.getLogger(DalManager.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
+    }
 
+    
+    @Override
+    public List<String> getMonthlyAbsencesForAStudent(int studentKey, int monthInt) {
+        try {
+            return absenceDBDao.getMonthlyAbsencesForAStudent(studentKey, monthInt);
         } catch (SQLException ex) {
             Logger.getLogger(DalManager.class.getName()).log(Level.SEVERE, null, ex);
         }

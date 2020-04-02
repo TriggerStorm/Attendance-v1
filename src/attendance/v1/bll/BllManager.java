@@ -234,6 +234,11 @@ public class BllManager implements IBLL {
     public List<Absence> getAllAbsencesOnAGivenDate(LocalDate date) {
         return dalManager.getAllAbsencesOnAGivenDate(date);
     }
+
+    @Override
+    public List<String> getMonthlyAbsencesForAStudent(int studentKey, int monthInt) {
+        return dalManager.getMonthlyAbsencesForAStudent(studentKey, monthInt);
+    }
     
     
 }
