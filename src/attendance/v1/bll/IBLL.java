@@ -50,6 +50,7 @@ public interface IBLL {
     public SubjectAttendance getSubjectAttendanceForAStudent(int studentKey, int subjectKey);
     public String getAverageOfAllStudentAttendancesInASubjectAsAString(int subjectKey);
     public String getAverageAttendanceOfAStudentsForAllSubjects (int studentKey);
+    public int getAllAttendanceForSubjectByDate(int subjectKey, String date);
 
 
 // StudentSubjectDBDAO methods
@@ -61,6 +62,7 @@ public interface IBLL {
     public SubjectsHeld newSubjectsHeld(int sKey, String date, String secretCode);
    public String getLatestSubjectsHeldDate(int skey);
    public boolean deleteSubjectsHeld(SubjectsHeld subjectsHeld);
+   public List<SubjectsHeld> getAllSubjectsHeldForASubject(int subjectKey);
    
    
 // SubjectDBDAO methods

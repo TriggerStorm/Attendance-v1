@@ -209,6 +209,26 @@ public class SubjectsHeldDBDAO {
 
         }
         return date;
-}
+    }
+    
+    public SubjectsHeld getSubjectHeldFromDate(int subjectKey, String date) throws SQLException
+    {
+        List<SubjectsHeld> allHeld = getAllSubjectsHeldForASubject(subjectKey); //First we ned all the subjects held.
+        SubjectsHeld theSubjectHeld = null;        //initiating the subject we want as Null.
+        for(int i = 0; i < allHeld.size(); i++) //Going throught he list.
+        {
+            SubjectsHeld tempHeld = allHeld.get(i); //The one we are working with.
+            String tempdate = tempHeld.getDateHeld(); //the date of the subjectHeld we are working with.
+            String[] tempDate2 = tempdate.split("T"); //Split the string into date and time
+            boolean myIf = tempDate2[0].equalsIgnoreCase(date); //check that the date of the subjectHeld we are working with, equals the date we have been passed.
+            System.out.println(tempDate2[0]+"=========??????"+date);
+            if(myIf) //if it matches...
+            {
+                theSubjectHeld = allHeld.get(i); //the the subject.
+                return theSubjectHeld;//return the subject, as we don't need to keep looking.
+            }
+        }
+        return theSubjectHeld;//if we dont' find it, return the null value.
+    }
 
 }
