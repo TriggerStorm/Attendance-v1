@@ -154,6 +154,7 @@ public class StudentController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
          bllu = new BLLutilities();
+         date.setText(bllu.locaDateNowToString());
         String date =  bllu.dateForCalendar(); //get current date
        String[] ymd = date.split(" "); // split values from each others
        int month = Integer.parseInt(ymd[1]);
