@@ -4,6 +4,7 @@
  * and open the template in the editor.
  */
 package attendance.v1.dal;
+import attendance.v1.be.Absence;
 import attendance.v1.dal.SecretCodeDBDAO;
 import attendance.v1.be.SubjectAttendance;
 import attendance.v1.be.User;
@@ -13,6 +14,7 @@ import attendance.v1.be.Subject;
 import attendance.v1.be.SubjectsHeld;
 import java.sql.SQLException;
 import java.text.ParseException;
+import java.time.LocalDate;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -31,7 +33,7 @@ public class DalManager implements IDAL {
     private SubjectsHeldDBDAO subjectsHeldDBDao;
     private SecretCodeDBDAO secretCodeDBDAO;
     private SubjectDBDAO subjectDBdao;
-    
+    private AbsenceDBDAO absenceDBDao;
     
     
     public DalManager() {
@@ -41,6 +43,7 @@ public class DalManager implements IDAL {
           userDBDao = new UserDBDAO();
           subjectsHeldDBDao = new SubjectsHeldDBDAO();
           secretCodeDBDAO = new SecretCodeDBDAO();
+          absenceDBDao = new AbsenceDBDAO();
     } 
     
     
@@ -57,6 +60,7 @@ public class DalManager implements IDAL {
         return null;
     }
     
+    
     @Override
     public SubjectAttendance getSubjectAttendanceForAStudent(int studentKey, int subjectKey){
         try {
@@ -66,6 +70,7 @@ public class DalManager implements IDAL {
         }
         return null;
     }
+    
     
     @Override
     public List<Attendance> getStudentAttendanceForSubject(int studentKey, int subjectKey) { /// ????
@@ -77,8 +82,6 @@ public class DalManager implements IDAL {
         return null;
     }
 
-    
-  
     
     @Override
     public SubjectAttendance addNewAttendanceToDB(int studentKey, SubjectsHeld subjectHeld) {
@@ -101,6 +104,7 @@ public class DalManager implements IDAL {
     return null;
     }
 
+    
     @Override
     public String getAverageOfAllStudentAttendancesInASubjectAsAString(int subjectKey)
     {
@@ -112,6 +116,7 @@ public class DalManager implements IDAL {
         return null;
     }
  
+    
     @Override
     public String getAverageAttendanceOfAStudentsForAllSubjects(int studentKey) {
         try {
@@ -145,6 +150,7 @@ public class DalManager implements IDAL {
         }
         return null;
     }
+    
     
     @Override
     public User getUser(int userKey) {
@@ -207,9 +213,6 @@ public class DalManager implements IDAL {
         return false;
     }
 
-
-
-    
     
     
 // StudentSubjectDBDAO methods
@@ -251,6 +254,8 @@ public class DalManager implements IDAL {
         }
         return null;
     }
+    
+    
     @Override
       public boolean deleteSubjectsHeld(SubjectsHeld subjectsHeld) {
         try {
@@ -261,7 +266,9 @@ public class DalManager implements IDAL {
         return false;
       }
     
-    //SecretCode Methods
+      
+      
+//SecretCode Methods
     
     @Override
     public SubjectsHeld checkCode(int sKey, String code)
@@ -278,7 +285,7 @@ public class DalManager implements IDAL {
 
     
     
-    // SubjectDBDAO methods
+// SubjectDBDAO methods
     
     public Subject getSpecificSubjects(int subjectKey){
          
@@ -290,22 +297,18 @@ public class DalManager implements IDAL {
              return null;
          }
 
+    
     @Override
-   public String getLatestSubjectsHeld(int skey) {
-       
+    public String getLatestSubjectsHeld(int skey) {
         try {
             return subjectsHeldDBDao.getLatestSubjectsHeld(skey);
         } catch (SQLException ex) {
             Logger.getLogger(DalManager.class.getName()).log(Level.SEVERE, null, ex);
         }
         return null;
-        } 
+    } 
         
     
-    /*public SubjectAttendance getSubjectAttendanceForAStudent(int studentKey, SubjectsHeld subjectHeld) {
-            return attendanceDBDao.getSubjectAttendanceForAStudent(studentKey, subjectHeld);
-        }*/
-
     @Override
     public boolean checkIfUserExist(String email) {
         try {
@@ -316,7 +319,41 @@ public class DalManager implements IDAL {
         return false;
     }
 
+
+    
+    
+//AbsenceDBDAO methods
+
     @Override
+    public void submitAbsence(Absence absence) {
+        try {   
+            absenceDBDao.submitAbsence(absence);
+        } catch (SQLException ex) {
+            Logger.getLogger(DalManager.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    
+    @Override
+    public void deleteExpiredAbsences() {
+        try {
+            absenceDBDao.deleteExpiredAbsences();
+        } catch (SQLException ex) {
+            Logger.getLogger(DalManager.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    
+    @Override
+    public List<Absence> getAllAbsencesOnAGivenDate(LocalDate date) {
+        try {
+            return absenceDBDao.getAllAbsencesOnAGivenDate(date);
+        } catch (SQLException ex) {
+            Logger.getLogger(DalManager.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
+    }
+
     public int getAllAttendanceForSubjectByDate(int subjectKey, String date) {
         try {
             return attendanceDBDao.getAllAttendanceForSubjectByDate(subjectKey, date);
@@ -330,6 +367,7 @@ public class DalManager implements IDAL {
     public List<SubjectsHeld> getAllSubjectsHeldForASubject(int subjectKey) {
         try {
             return subjectsHeldDBDao.getAllSubjectsHeldForASubject(subjectKey);
+
         } catch (SQLException ex) {
             Logger.getLogger(DalManager.class.getName()).log(Level.SEVERE, null, ex);
         }

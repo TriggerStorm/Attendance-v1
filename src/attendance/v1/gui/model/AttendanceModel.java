@@ -5,6 +5,7 @@
  */
 package attendance.v1.gui.model;
 
+import attendance.v1.be.Absence;
 import attendance.v1.be.Attendance;
 import attendance.v1.be.SubjectAttendance;
 import attendance.v1.bll.BllManager;
@@ -33,7 +34,7 @@ public class AttendanceModel {
         bllManager.getAllAttendances();
 
     }
-    public String getCode(){ // need to be move to Teatcher model.
+    public String getCode() { // need to be move to Teatcher model.
      String password = new Random().ints(10, 33, 122).mapToObj(i -> String.valueOf((char)i)).collect(Collectors.joining());
         String SALTCHARS = "ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890";
         StringBuilder salt = new StringBuilder();
@@ -53,11 +54,8 @@ public class AttendanceModel {
         return liste;
     }*/
     
-    public void submitAttendance(String code, String selectedSubjectName)
-    {
+    public void submitAttendance(String code, String selectedSubjectName) {
         bllManager.submitAttendance(code, selectedSubjectName);
-  
-        
     }
     
    /*public SubjectAttendance getSubjectAttendanceForAStudent(int studentKey, SubjectsHeld subjectHeld)
@@ -65,5 +63,11 @@ public class AttendanceModel {
        bllManager.getSubjectAttendanceForAStudent(studentKey, subjectHeld);
        return null;
    }*/
-   
+     
+    
+    public void submitAbsence (Absence absence) {   // work in progress
+        bllManager.submitAbsence(absence);
+    }
+    
+
 }

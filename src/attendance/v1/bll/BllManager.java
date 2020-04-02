@@ -5,6 +5,7 @@
  */
 package attendance.v1.bll;
 
+import attendance.v1.be.Absence;
 import attendance.v1.be.LoggedInUser;
 import attendance.v1.be.Attendance;
 import attendance.v1.be.StudentSubject;
@@ -18,6 +19,7 @@ import java.util.List;
 
 import attendance.v1.dal.DalManager;
 import java.sql.SQLException;
+import java.time.LocalDate;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -32,17 +34,7 @@ import java.util.logging.Logger;
 public class BllManager implements IBLL {
     private DalManager dalManager = new DalManager();
 
-    
   
-    
-
- //   public SubjectAttendance addNewAttendanceToDB() {
-  //      LoggedInUser lUser = LoggedInUser.getInstance();
- //       return dalManager.addNewAttendanceToDB(lUser.getUserKey(), lUser.getSelectedSubjectKey());
-  //  }
- 
-
-
     
 // UserDBDAO methods
     
@@ -110,31 +102,37 @@ public class BllManager implements IBLL {
         return dalManager.getAllAttendances();
     }
     
+    
     @Override
     public SubjectAttendance getSubjectAttendanceForAStudent(int studentKey, int subjectKey){
         return dalManager.getSubjectAttendanceForAStudent(studentKey, subjectKey);
     }
 
+    
     @Override
     public List<Attendance> getStudentAttendanceForSubject(int studentKey, int subjectKey) {
         return dalManager.getStudentAttendanceForSubject(studentKey, subjectKey);
     }
    
+    
     @Override
     public SubjectAttendance addNewAttendanceToDB(int studentKey, SubjectsHeld subjectHeld) {
         return dalManager.addNewAttendanceToDB(studentKey, subjectHeld);
     }
 
+    
     @Override
     public List<SubjectAttendance> getSubjectAttendanceListForAllStudentsInThatSubject(int subjectKey) {
         return dalManager.getSubjectAttendanceListForAllStudentsInThatSubject(subjectKey);
     }
+    
     
     @Override
     public String getAverageOfAllStudentAttendancesInASubjectAsAString(int subjectKey) {
         return dalManager.getAverageOfAllStudentAttendancesInASubjectAsAString(subjectKey);
     }
 
+    
     @Override
     public String getAverageAttendanceOfAStudentsForAllSubjects(int studentKey) {
         return dalManager.getAverageAttendanceOfAStudentsForAllSubjects(studentKey);
@@ -158,12 +156,15 @@ public class BllManager implements IBLL {
         return dalManager.addSubjectsHeld(skey, date, secretCode);
     }
 
+    
     public SubjectsHeld newSubjectsHeld(int sKey, String date, String secretCode) {
-       return dalManager.addSubjectsHeld(sKey,date,secretCode);
+        return dalManager.addSubjectsHeld(sKey,date,secretCode);
     }
-      public boolean deleteSubjectsHeld(SubjectsHeld subjectsHeld) {
-          return dalManager.deleteSubjectsHeld(subjectsHeld);
-      }
+    
+    
+    public boolean deleteSubjectsHeld(SubjectsHeld subjectsHeld) {
+        return dalManager.deleteSubjectsHeld(subjectsHeld);
+    }
 
     
     
@@ -175,8 +176,7 @@ public class BllManager implements IBLL {
     
 
     public void submitAttendance(String code, String selectedSubjectName) {
-        if(checkCode(code) != null)
-        {
+        if(checkCode(code) != null) {
             LoggedInUser lUser = LoggedInUser.getInstance();
             SubjectsHeld subjectSelected = checkCode(code);
             SubjectAttendance subjectAttendance = dalManager.addNewAttendanceToDB(lUser.getUserKey() , subjectSelected);
@@ -192,11 +192,13 @@ public class BllManager implements IBLL {
         return dalManager.checkCode(lUser.getSelectedSubjectKey(), code);
     }
 
+    
     @Override
     public String getLatestSubjectsHeldDate(int skey) {
         return dalManager.getLatestSubjectsHeld(skey);
     }
 
+    
     @Override
     public boolean checkIfUserExist(String email) {
         return dalManager.checkIfUserExist(email);   
@@ -212,5 +214,26 @@ public class BllManager implements IBLL {
        return dalManager.getAllSubjectsHeldForASubject(subjectKey);
     }
 
+    
+    
+//AbsenceDBDAO methods
+    
+    @Override
+    public void submitAbsence(Absence absence) {
+        dalManager.submitAbsence(absence);   
+    }
+
+    
+    @Override
+    public void deleteExpiredAbsences() {
+        dalManager.deleteExpiredAbsences();
+    }
+
+    
+    @Override
+    public List<Absence> getAllAbsencesOnAGivenDate(LocalDate date) {
+        return dalManager.getAllAbsencesOnAGivenDate(date);
+    }
+    
     
 }

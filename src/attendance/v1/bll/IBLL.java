@@ -5,6 +5,7 @@
  */
 package attendance.v1.bll;
 
+import attendance.v1.be.Absence;
 import attendance.v1.be.Attendance;
 import attendance.v1.be.StudentSubject;
 import attendance.v1.be.Subject;
@@ -12,6 +13,7 @@ import attendance.v1.be.SubjectAttendance;
 import attendance.v1.be.SubjectsHeld;
 import attendance.v1.be.User;
 import java.sql.SQLException;
+import java.time.LocalDate;
 import java.util.List;
 
 /**
@@ -40,7 +42,7 @@ public interface IBLL {
     public boolean checkIfUserExist(String email);
 
 
- // AttendanceDBDAO methods
+// AttendanceDBDAO methods
     public List<Attendance> getAllAttendances();
     public List<Attendance> getStudentAttendanceForSubject(int studentKey, int subjectKey);
     public SubjectAttendance addNewAttendanceToDB(int studentKey, SubjectsHeld subjectHeld);
@@ -63,9 +65,16 @@ public interface IBLL {
    public List<SubjectsHeld> getAllSubjectsHeldForASubject(int subjectKey);
    
    
-// subjectDBDAO methods
+// SubjectDBDAO methods
     public Subject getSpecificSubjects(int subjectKey);
 
+    
+//AbsenceDBDAO methods
+    public void submitAbsence (Absence absence);
+    public void deleteExpiredAbsences();
+    public List<Absence> getAllAbsencesOnAGivenDate(LocalDate date);
 
+    
+    
 }
 
