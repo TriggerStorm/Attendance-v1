@@ -73,7 +73,8 @@ public interface IBLL {
     public void submitAbsence (Absence absence);
     public void deleteExpiredAbsences();
     public List<Absence> getAllAbsencesOnAGivenDate(LocalDate date);
-
+    public List<String> getMonthlyAbsencesForAStudent(int studentKey, int monthInt);
+    public int[] getTotalOfAbsencesInAMonthByDay(int monthInt);
     
     
 }

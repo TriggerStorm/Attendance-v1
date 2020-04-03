@@ -13,11 +13,14 @@ import java.sql.PreparedStatement;
 import java.sql.Statement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
 import static java.time.temporal.TemporalQueries.localDate;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import java.util.logging.Level;
@@ -65,27 +68,51 @@ System.out.println(i + ": Studentkey= "+ absence.getStudentKey() + "  Date: " + 
     }
         
     
-    
-     public boolean checkForAbsenceInDB(Absence absence) throws SQLException {
-    //  Checks if student has already submitted absence on picked date, to prevent sql duplication error
-        int studentKey = absence.getStudentKey();
-        java.sql.Date sqlDate = java.sql.Date.valueOf(absence.getDate()); // converts LocalDate date to sqlDate
-        try(Connection con = dbc.getConnection()){
-            String SQLStmt = "SELECT * FROM ABSENCE WHERE StudentKey = '" + studentKey + "' AND DATE = '" + sqlDate+"';";
-            Statement stmt = con.createStatement();
-            ResultSet rs = stmt.executeQuery(SQLStmt);
-            while(rs.next())
-            {
-System.out.println("");
-System.out.println("ERROR - Absence already submitted");             
-                return true;
-            }
+    public int[] getTotalOfAbsencesInAMonthByDay(int monthInt) throws SQLException {
+        int[] totalOfAbsencesInAMonthByDay = new int[31];
+        java.sql.Date sqlStartDate = convertMonthIntToSQLDate(monthInt);
+        LocalDate startDate = sqlStartDate.toLocalDate();
+        LocalDate thisDate;
+        for (int i = 0; i < 31; i++) {
+ /*         java.sql.Date thisSQLDate = java.sql.Date.valueOf(thisDate); // converts LocalDate date to sqlDate
+            try (Connection con = dbc.getConnection()) {
+                String SQLStmt = "SELECT * FROM ABSENCE WHERE Date = '" + thisSQLDate + "';";
+                Statement statement = con.createStatement();
+                ResultSet rs = statement.executeQuery(SQLStmt);
+                while(rs.next()) //While you have something in the results
+                {
+                }  */
+            thisDate = startDate.plusDays(i);
+            List<Absence> absences = getAllAbsencesOnAGivenDate(thisDate);
+            totalOfAbsencesInAMonthByDay[i] = absences.size();
         }
-System.out.println("");
-System.out.println( "New Absence submitted");  
-        return false;
+        return totalOfAbsencesInAMonthByDay;
     }
-        
+    
+    
+    public List<String> getMonthlyAbsencesForAStudent(int studentKey, int monthInt) throws SQLException {
+    // Returns a list of strings representingthe days absent in a given month (as an int)
+        Calendar calendar = Calendar.getInstance();
+        List<String> studentsAbsencePerMonth = new ArrayList<>();
+        String dayString;
+        java.sql.Date startDate = convertMonthIntToSQLDate(monthInt);
+        java.sql.Date endDate = convertMonthIntToSQLDate(monthInt + 1);       
+        try (Connection con = dbc.getConnection()) {
+            String SQLStmt = "SELECT * FROM ABSENCE WHERE StudentKey = '" + studentKey + "' AND Date >= '" + startDate + "' AND Date < '" + endDate + "';";
+            Statement statement = con.createStatement();
+            ResultSet rs = statement.executeQuery(SQLStmt);
+            while (rs.next()) //While you have something in the results
+            {
+                java.sql.Date sqlDate = rs.getDate("date");
+                calendar.setTime(sqlDate);
+                int day = calendar.get(Calendar.DAY_OF_MONTH);
+                dayString = String.valueOf(day);
+                studentsAbsencePerMonth.add(dayString);
+            }
+        return studentsAbsencePerMonth;
+        }
+    }
+     
      
     public void submitAbsence (Absence absence) throws SQLException {  // just a test for now
     //  Adds an absence to the DB (from DatePicker) 
@@ -111,29 +138,63 @@ System.out.println("DBDAO date picked = " + absence.getDate());
         }
   //      return BE entity (studentKey, datePicked)??
         }
-        getAllAbsencesOnAGivenDate(absence.getDate());  // TEST 
+ //       getAllAbsencesOnAGivenDate(absence.getDate());  // TEST 
         deleteExpiredAbsences();  //TEST
+ //       getMonthlyAbsencesForAStudent(594, 4);  //TEST
+        int testmonth = 4;
+        int[] test = getTotalOfAbsencesInAMonthByDay(testmonth);
+        for (int i = 0; i < test.length; i++) {
+System.out.println("");
+System.out.println("m: " + testmonth + " d: " + i + " absences = " + test[i]);             
+        }
     }
     
 
     public void deleteExpiredAbsences() throws SQLException {
     //  Deletes all absences odd than today
-//        dbc = new DBConnection();//
         java.sql.Date sqlExpiryDate = java.sql.Date.valueOf(LocalDate.now());
-System.out.println("");
-System.out.println("sqlExpiryDate = " + sqlExpiryDate);
         String SQLStmt = "DELETE FROM ABSENCE WHERE DATE < '" + sqlExpiryDate + "';";
         try (Connection con = dbc.getConnection()) {
             Statement statement = con.createStatement();
-        //    statement.executeQuery(SQLStmt);
-      statement.executeUpdate(SQLStmt);      
-System.out.println("");
-//System.out.println("Deleted user # " + userKey + " on " + sqlExpiryDate);
-  System.out.println("");
-//System.out.println("Total Deleted = " + total);
-  //          }
+            statement.executeUpdate(SQLStmt);      
         }
     }
     
+            
+    public boolean checkForAbsenceInDB(Absence absence) throws SQLException {
+    //  Checks if student has already submitted absence on picked date, to prevent sql duplication error
+        int studentKey = absence.getStudentKey();
+        java.sql.Date sqlDate = java.sql.Date.valueOf(absence.getDate()); // converts LocalDate date to sqlDate
+        try(Connection con = dbc.getConnection()){
+            String SQLStmt = "SELECT * FROM ABSENCE WHERE StudentKey = '" + studentKey + "' AND DATE = '" + sqlDate+"';";
+            Statement stmt = con.createStatement();
+            ResultSet rs = stmt.executeQuery(SQLStmt);
+            while(rs.next())
+            {
+System.out.println("");
+System.out.println("ERROR - Absence already submitted");             
+                return true;
+            }
+        }
+System.out.println("");
+System.out.println( "New Absence submitted");  
+        return false;
+    }
         
+     
+    private java.sql.Date convertMonthIntToSQLDate (int monthInt) {
+    // Converts an int month to the first day of that month in sql date form
+        Calendar calendar = Calendar.getInstance();
+        String yearString = String.valueOf(calendar.getInstance().get(Calendar.YEAR));
+        String MonthString = String.valueOf(monthInt);
+        if (monthInt < 10) {
+            MonthString = "0" + MonthString;
+        }
+        String firstDayOfMonthString = yearString + "-" + MonthString + "-01"; 
+       LocalDate date = LocalDate.parse(firstDayOfMonthString);
+       java.sql.Date sqlDate = java.sql.Date.valueOf(date);
+       return sqlDate;
+    }
+     
+         
 }
