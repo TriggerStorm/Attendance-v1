@@ -115,7 +115,7 @@
                                        </children></Pane>
                                     <Pane prefHeight="100.0" prefWidth="200.0">
                                        <children>
-                                          <Label fx:id="LB_AttendanceRate" layoutX="23.0" layoutY="37.0" prefHeight="64.0" prefWidth="105.0" style="-fx-background-color: #F5F5F5;" styleClass="h2" stylesheets="@../css/Attendance.css" text="69%" textAlignment="CENTER" />
+                                          <Label fx:id="LB_AttendanceRate" layoutX="23.0" layoutY="37.0" prefHeight="64.0" prefWidth="105.0" style="-fx-background-color: #F5F5F5;" styleClass="h2" stylesheets="@../css/Attendance.css" text="0%" textAlignment="CENTER" />
                                           <Label layoutX="21.0" layoutY="31.0" prefHeight="17.0" prefWidth="105.0" styleClass="textsm2" stylesheets="@../css/Attendance.css" text="  AVG. Rate" textAlignment="CENTER" />
                                        </children>
                                     </Pane>
@@ -133,7 +133,7 @@
                            <children>
                               <TabPane prefHeight="427.0" prefWidth="554.0" tabClosingPolicy="UNAVAILABLE">
                                 <tabs>
-                                  <Tab text="2019">
+                                  <Tab text="2020">
                                        <content>
                                           <TableView fx:id="TBV_attendance" prefHeight="200.0" prefWidth="200.0">
                                             <columns>
@@ -147,21 +147,6 @@
                                             </columns>
                                           </TableView>
                                        </content></Tab>
-                                    <Tab text="2020">
-                                       <content>
-                                          <TableView fx:id="TBV_attendance1" prefHeight="200.0" prefWidth="200.0">
-                                             <columns>
-                                                <TableColumn fx:id="TBV_student1" prefWidth="75.0" text="Student" />
-                                                <TableColumn fx:id="TBV_monday1" prefWidth="75.0" text="Monday" />
-                                                <TableColumn fx:id="TBV_tuesday1" prefWidth="75.0" text="Tuesday" />
-                                                <TableColumn fx:id="tbv_wednesday1" prefWidth="75.0" text="Wednesday" />
-                                                <TableColumn fx:id="TBV_thursday1" prefWidth="75.0" text="Thursday" />
-                                                <TableColumn fx:id="TBV_friday1" prefWidth="75.0" text="Friday" />
-                                                <TableColumn fx:id="TBV_Attendance1" prefWidth="104.0" text="Attendance %" />
-                                             </columns>
-                                          </TableView>
-                                       </content>
-                                    </Tab>
                                     <Tab onSelectionChanged="#changeview" text="Calendar">
                                       <content>
                                         <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">

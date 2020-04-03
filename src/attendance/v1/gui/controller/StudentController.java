@@ -445,7 +445,7 @@ public class StudentController implements Initializable {
                 stack.getChildren().add(label[text]); // adding label to stackpane    ,weekDay[text] 
                 stack.setStyle("-fx-background-color: black, white ;\n" +   // creating empty stackpanes with labels
                 "    -fx-background-insets: 0,0 0 1 1 ;");
-                if(text< day-1 || (monthNow != month && text<daysInMonth && month < monthNow)) // adding absences to ALL days before current day
+                if((monthNow ==month && text< day-1) || (monthNow != month && text<daysInMonth && month < monthNow)) // adding absences to ALL days before current day
                     stack.setStyle("-fx-background-color: black, red ;\n" +
                 "    -fx-background-insets: 0,0 0 1 1 ;");
            //     if(text< day-1 && monthNow == month)
