@@ -154,6 +154,7 @@ public class TeacherController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        date.setText(bllu.locaDateNowToString());
          String date =  bllu.dateForCalendar(); //get current date
        String[] ymd = date.split(" "); // split values from each others
        int month = Integer.parseInt(ymd[1]);
@@ -358,6 +359,8 @@ public class TeacherController implements Initializable {
        YearMonth yearMonthObject = YearMonth.of(year,month);
        int daysInMonth = yearMonthObject.lengthOfMonth(); // getting how many days is in current month
        int text = 0;
+       int[] futureAbsences = bm.getTotalOfAbsencesInAMonthByDay(month);
+       
    //         int monthFromDb = 0, yearFromDb = 0;
   //          ArrayList<Integer> attList = new ArrayList<>();  // list below is list with subjectsHeld for logged student
   //    ObservableList<Attendance> list = FXCollections.observableArrayList(bm.getStudentAttendanceForSubject(lu.getUserKey(),lu.getSelectedSubjectKey()));
@@ -398,19 +401,30 @@ public class TeacherController implements Initializable {
               else
               {
                   newtext = Integer.toString(text+1);
-              }
+              } 
                subjectsHeldDate = Integer.toString(year)+"-"+newmonth+"-"+newtext;
                DateTimeFormatter dtf = DateTimeFormatter.ofPattern("d-M-yyyy",Locale.ENGLISH);
                LocalDateTime localDateTime = LocalDate.parse(str, dtf).atStartOfDay(); // parsing string as  localdate
          DateTimeFormatter formattter = DateTimeFormatter.ofPattern("EEEE");
         String dateTimeStringg = localDateTime.format(formattter);
                dateTimeString = dateTimeStringg;} // getting name of day from date
-               System.out.println(subjectsHeldDate);
+          //     System.out.println(subjectsHeldDate);
                 Label[] weekDay = new Label[45];
                 Label[] label = new Label[45];  
                 //weekDay[text] = new Label();
                 label[text] = new Label();    //  text is used as text for labels as well as number of index for them
-                label[text].setText(Integer.toString(text+1)+"\n"+bm.getAllAttendanceForSubjectByDate(lu.getSelectedSubjectKey(), subjectsHeldDate)+" Presences"+"\n"+dateTimeString); // sets day number as label text as well as day name
+                String attendance = bm.getAllAttendanceForSubjectByDate(lu.getSelectedSubjectKey(), subjectsHeldDate)+" Presences";
+                if(text > day-1 && monthNow == month_box.getValue().getMonthNumber() && text <31)
+                {
+                   
+                    label[text].setText(Integer.toString(text+1)+"\n"+futureAbsences[text]+" Absences"+"\n"+dateTimeString);
+                }
+               else if(monthNow < month_box.getValue().getMonthNumber() && text<31)
+                {
+                    label[text].setText(Integer.toString(text+1)+"\n"+futureAbsences[text]+"Absences"+"\n"+dateTimeString);
+                }
+                else
+                label[text].setText(Integer.toString(text+1)+"\n"+attendance+"\n"+dateTimeString); // sets day number as label text as well as day name
               //  weekDay[text].setText(dateTimeString);
                 StackPane stack = new StackPane();
                gridPane.setStyle("-fx-background-color: black, white ;\n" +   //creating empty gridpane
@@ -425,11 +439,11 @@ public class TeacherController implements Initializable {
            //     if(text< day-1 && monthNow == month)
             //        stack.setStyle("-fx-background-color: black, red ;\n" +
             //    "    -fx-background-insets: 0,0 0 1 1 ;");
-//                if(text == day && monthNow == month_box.getValue().getMonthNumber())  // change color of current day
-//                {
-//                gridPane.getChildren().get(text-1).setStyle("-fx-background-color: black, cyan ;\n" +
-//"    -fx-background-insets: 0, 0 0 1 1 ;");
-//                }
+                if(text == day && monthNow == month_box.getValue().getMonthNumber())  // change color of current day
+                {
+               gridPane.getChildren().get(text-1).setStyle("-fx-background-color: black, cyan ;\n" +
+"    -fx-background-insets: 0, 0 0 1 1 ;");
+                }
                 gridPane.add(stack, j,i); // adding pane with label to gridpane 
                 text++;
                 
