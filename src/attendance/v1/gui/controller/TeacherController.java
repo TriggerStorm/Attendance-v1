@@ -206,7 +206,7 @@ public class TeacherController implements Initializable {
     private void handle_attendancecode(ActionEvent event) throws IOException {
         bn_Showcode.setVisible(true);
         btn_undo.setVisible(true);
-       Bn_gencode.setDisable(true);
+        Bn_gencode.setDisable(true);
         Parent root1;
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/attendance/v1/gui/view/generatedCode.fxml"));
         root1 = (Parent) fxmlLoader.load();
@@ -354,7 +354,7 @@ public class TeacherController implements Initializable {
             String date =  bllu.dateForCalendar(); //get current date
        String[] ymd = date.split(" "); // split values from each others
        int year = Integer.parseInt(ymd[2]);
-      int monthNow = Integer.parseInt(ymd[1]);
+       int monthNow = Integer.parseInt(ymd[1]);
        int day = Integer.parseInt(ymd[0]); // converting day, month, year from date to ints
        YearMonth yearMonthObject = YearMonth.of(year,month);
        int daysInMonth = yearMonthObject.lengthOfMonth(); // getting how many days is in current month
