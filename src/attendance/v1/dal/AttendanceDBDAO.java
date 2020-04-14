@@ -57,7 +57,11 @@ public class AttendanceDBDAO {
         lu = LoggedInUser.getInstance();
     }
     
-    
+    /**
+     *
+     * @return
+     * @throws SQLException
+     */
     public List<Attendance> getAllAttendances() throws SQLException{
     //  Gets a list of all attendances
         List<Attendance> allAttendance = new ArrayList(); //get a list to store the values.
@@ -76,8 +80,14 @@ public class AttendanceDBDAO {
         return allAttendance;
     }
      
-     
-   public SubjectAttendance addNewAttendanceToDB(int studentKey, SubjectsHeld subjectHeld) throws SQLException { 
+    /**
+     *
+     * @param studentKey
+     * @param subjectHeld
+     * @return
+     * @throws SQLException
+     */
+    public SubjectAttendance addNewAttendanceToDB(int studentKey, SubjectsHeld subjectHeld) throws SQLException { 
  // can this method be passed a subjectheld????       
        int subjectKey = subjectHeld.getSubjectKey();
         String dateHeld = subjectHeld.getDateHeld();
