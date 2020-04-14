@@ -115,22 +115,6 @@ public class TeacherController implements Initializable {
     private BLLutilities bllu;
     @FXML
     private JFXButton btn_undo;
-    @FXML
-    private TableView<?> TBV_attendance1;
-    @FXML
-    private TableColumn<?, ?> TBV_student1;
-    @FXML
-    private TableColumn<?, ?> TBV_monday1;
-    @FXML
-    private TableColumn<?, ?> TBV_tuesday1;
-    @FXML
-    private TableColumn<?, ?> tbv_wednesday1;
-    @FXML
-    private TableColumn<?, ?> TBV_thursday1;
-    @FXML
-    private TableColumn<?, ?> TBV_friday1;
-    @FXML
-    private TableColumn<?, ?> TBV_Attendance1;
 
     public CommandManager cm;
     private boolean cal = false;
@@ -324,7 +308,7 @@ public class TeacherController implements Initializable {
 
     @FXML
     private void handle_showcode(ActionEvent event) throws IOException {
-        bn_Showcode.setVisible(false);
+       // bn_Showcode.setVisible(false);
         Parent root1;
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/attendance/v1/gui/view/generatedCode.fxml"));
         root1 = (Parent) fxmlLoader.load();

@@ -114,7 +114,7 @@
                                     <Pane prefHeight="67.0" prefWidth="105.0" />
                                     <Pane prefHeight="100.0" prefWidth="200.0">
                                        <children>
-                                          <Label fx:id="LB_AttendanceRate" layoutX="33.0" layoutY="18.0" prefHeight="64.0" prefWidth="95.0" style="-fx-background-color: #F5F5F5;" styleClass="h2" stylesheets="@../css/Attendance.css" text="69%" textAlignment="CENTER" />
+                                          <Label fx:id="LB_AttendanceRate" layoutX="33.0" layoutY="18.0" prefHeight="64.0" prefWidth="95.0" style="-fx-background-color: #F5F5F5;" styleClass="h2" stylesheets="@../css/Attendance.css" text="0%" textAlignment="CENTER" />
                                           <Label layoutX="32.0" layoutY="11.0" prefHeight="17.0" prefWidth="95.0" styleClass="textsm2" stylesheets="@../css/Attendance.css" text="Attendance Rate" textAlignment="CENTER" />
                                        </children>
                                     </Pane>
