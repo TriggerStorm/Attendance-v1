@@ -13,9 +13,9 @@ package attendance.v1.be;
 
 
 public class SubjectsHeld {
-        private int subjectKey;
-        private String dateHeld;
-        private String SecretCode;
+    private int subjectKey;
+    private String dateHeld;
+    private String SecretCode;
 
 public SubjectsHeld (int subjectKey, String dateHeld, String SecretCode)
 {

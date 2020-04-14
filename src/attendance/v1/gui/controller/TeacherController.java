@@ -247,7 +247,9 @@ public class TeacherController implements Initializable {
 
     @FXML
     private void handle_DBOS(ActionEvent event) {
-       /* TBV_monday.setCellValueFactory(new PropertyValueFactory<>("monday"));
+        cal = false;
+        ObservableList<SubjectAttendance> dbosList = FXCollections.observableArrayList(bm.getSubjectAttendanceListForAllStudentsInThatSubject(69));
+       TBV_monday.setCellValueFactory(new PropertyValueFactory<>("monday"));
         TBV_tuesday.setCellValueFactory(new PropertyValueFactory<>("tuesday"));
         tbv_wednesday.setCellValueFactory(new PropertyValueFactory<>("wednesday"));
         TBV_thursday.setCellValueFactory(new PropertyValueFactory<>("thursday"));
@@ -255,12 +257,12 @@ public class TeacherController implements Initializable {
         TBV_student.setCellValueFactory(new PropertyValueFactory<>("Name"));
         TBV_Attendance.setCellValueFactory(new PropertyValueFactory<>("percent"));
         Lb_subjet.setText("DB/OS");
-        lu.setSelectedSubjectKey(17);
+        lu.setSelectedSubjectKey(69);  // was 17
         Bn_gencode.setDisable(false);
        if(!bllu.hasOneDayPass(bm.getLatestSubjectsHeldDate(lu.getSelectedSubjectKey())))
        Bn_gencode.setDisable(true);
-       TBV_attendance.setItems(Am.getDBOSattendance()); */
-    }
+       TBV_attendance.setItems(dbosList);
+       setCalendar(month_box.getValue().getMonthNumber());    }
 
     @FXML
     private void handle_ITO(ActionEvent event) {
