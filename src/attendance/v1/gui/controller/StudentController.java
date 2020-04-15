@@ -233,11 +233,7 @@ public class StudentController implements Initializable {
        cal = false;
        SubjectAttendance sAttendance = bm.getSubjectAttendanceForAStudent(lu.getUserKey(), 1);
        ObservableList<SubjectAttendance> attendance = FXCollections.observableArrayList(sAttendance);
-        TBV_monday.setCellValueFactory(new PropertyValueFactory<SubjectAttendance, String>("monday"));
-        TBV_tuesday.setCellValueFactory(new PropertyValueFactory<SubjectAttendance, String>("tuesday"));
-        tbv_wednesday.setCellValueFactory(new PropertyValueFactory<SubjectAttendance, String>("wednesday"));
-        TBV_thursday.setCellValueFactory(new PropertyValueFactory<SubjectAttendance, String>("thursday"));
-        TBV_friday.setCellValueFactory(new PropertyValueFactory<SubjectAttendance, String>("friday"));
+       setCells();
         LB_AttendanceRate.setText(sAttendance.getPercent());
        Lb_subjet.setText("SCO");    
         TBV_attendance.setItems(attendance);
@@ -250,12 +246,8 @@ public class StudentController implements Initializable {
        lu.setSelectedSubjectKey(5);
        cal = false;
         SubjectAttendance sAttendance = bm.getSubjectAttendanceForAStudent(lu.getUserKey(), 5);
-       ObservableList<SubjectAttendance> attendance = FXCollections.observableArrayList(sAttendance);
-        TBV_monday.setCellValueFactory(new PropertyValueFactory<SubjectAttendance, String>("monday"));
-        TBV_tuesday.setCellValueFactory(new PropertyValueFactory<SubjectAttendance, String>("tuesday"));
-        tbv_wednesday.setCellValueFactory(new PropertyValueFactory<SubjectAttendance, String>("wednesday"));
-        TBV_thursday.setCellValueFactory(new PropertyValueFactory<SubjectAttendance, String>("thursday"));
-        TBV_friday.setCellValueFactory(new PropertyValueFactory<SubjectAttendance, String>("friday"));
+        ObservableList<SubjectAttendance> attendance = FXCollections.observableArrayList(sAttendance);
+        setCells();
         LB_AttendanceRate.setText(sAttendance.getPercent());
         Lb_subjet.setText("SDE");       
                 
@@ -284,12 +276,8 @@ public class StudentController implements Initializable {
         lu.setSelectedSubjectKey(9);
         cal = false;
         SubjectAttendance sAttendance = bm.getSubjectAttendanceForAStudent(lu.getUserKey(),9);
-       ObservableList<SubjectAttendance> attendance = FXCollections.observableArrayList(sAttendance);
-        TBV_monday.setCellValueFactory(new PropertyValueFactory<SubjectAttendance, String>("monday"));
-        TBV_tuesday.setCellValueFactory(new PropertyValueFactory<SubjectAttendance, String>("tuesday"));
-        tbv_wednesday.setCellValueFactory(new PropertyValueFactory<SubjectAttendance, String>("wednesday"));
-        TBV_thursday.setCellValueFactory(new PropertyValueFactory<SubjectAttendance, String>("thursday"));
-        TBV_friday.setCellValueFactory(new PropertyValueFactory<SubjectAttendance, String>("friday"));       
+        ObservableList<SubjectAttendance> attendance = FXCollections.observableArrayList(sAttendance);
+        setCells();
         Lb_subjet.setText("ITO");        
         LB_AttendanceRate.setText(sAttendance.getPercent());
         TBV_attendance.setItems(attendance);
@@ -346,27 +334,27 @@ public class StudentController implements Initializable {
     {
          if(!cal) // to make calendar only once unless subject changed
         {
-            String date =  bllu.dateForCalendar(); //get current date
+       String date =  bllu.dateForCalendar(); //get current date
        String[] ymd = date.split(" "); // split values from each others
        int year = Integer.parseInt(ymd[2]);
-      int monthNow = Integer.parseInt(ymd[1]);
+       int monthNow = Integer.parseInt(ymd[1]);
        int day = Integer.parseInt(ymd[0]); // converting day, month, year from date to ints
        YearMonth yearMonthObject = YearMonth.of(year,month);
        int daysInMonth = yearMonthObject.lengthOfMonth(); // getting how many days is in current month
        int text = 0;
-            int monthFromDb = 0, yearFromDb = 0;
-            ArrayList<Integer> attList = new ArrayList<>();// list below is list with subjectsHeld for logged student
-      ObservableList<Attendance> list = FXCollections.observableArrayList(bm.getStudentAttendanceForSubject(lu.getUserKey(),lu.getSelectedSubjectKey()));
+       int monthFromDb = 0, yearFromDb = 0;
+       ArrayList<Integer> attList = new ArrayList<>();// list below is list with subjectsHeld for logged student
+       ObservableList<Attendance> list = FXCollections.observableArrayList(bm.getStudentAttendanceForSubject(lu.getUserKey(),lu.getSelectedSubjectKey()));
        for(int i = 0; i< list.size();i++)
        {
          String dayS = list.get(i).getDateHeld();  // getting date as string from list
          String sub = dayS.substring(0, 10);  //cutting time part
          String[] oday = sub.split("-");   // again split
-        int onlyday = Integer.parseInt(oday[2]);
-        monthFromDb = Integer.parseInt(oday[1]);
-        yearFromDb = Integer.parseInt(oday[0]);   // again converting date to ints
+         int onlyday = Integer.parseInt(oday[2]);
+         monthFromDb = Integer.parseInt(oday[1]);
+         yearFromDb = Integer.parseInt(oday[0]);   // again converting date to ints
         
-           if(month == monthFromDb && year == yearFromDb) // chceck for right month and year from db
+         if(month == monthFromDb && year == yearFromDb) // chceck for right month and year from db
          attList.add(onlyday);  // adding day value to list
            
        }
@@ -380,8 +368,8 @@ public class StudentController implements Initializable {
                {  String str = Integer.toString(text+1)+"-"+Integer.toString(month)+"-"+Integer.toString(year); // creating string using selected year month and day
                DateTimeFormatter dtf = DateTimeFormatter.ofPattern("d-M-yyyy",Locale.ENGLISH);
                LocalDateTime localDateTime = LocalDate.parse(str, dtf).atStartOfDay(); // parsing string as  localdate
-         DateTimeFormatter formattter = DateTimeFormatter.ofPattern("EEEE");
-        String dateTimeStringg = localDateTime.format(formattter);
+               DateTimeFormatter formattter = DateTimeFormatter.ofPattern("EEEE");
+               String dateTimeStringg = localDateTime.format(formattter);
                dateTimeString = dateTimeStringg;} // getting name of day from date
                
                 Label[] weekDay = new Label[45];
@@ -390,7 +378,7 @@ public class StudentController implements Initializable {
                 label[text].setText(Integer.toString(text+1)+"\n"+"\n"+"\n"+dateTimeString); // sets day number as label text as well as day name
                 StackPane stack = new StackPane();
                gridPane.setStyle("-fx-background-color: black, white ;\n" +   //creating empty gridpane
-             "  -fx-background-insets: 0, 1 1 0 0 ;\n" + "-fx-padding: 1 ;\n");
+               "  -fx-background-insets: 0, 1 1 0 0 ;\n" + "-fx-padding: 1 ;\n");
                if(text<daysInMonth)  // adding labels until end of month
                 stack.getChildren().add(label[text]); // adding label to stackpane    ,weekDay[text] 
                 stack.setStyle("-fx-background-color: black, white ;\n" +   // creating empty stackpanes with labels
@@ -401,7 +389,7 @@ public class StudentController implements Initializable {
                 if(text == day && monthNow == month_box.getValue().getMonthNumber())  // change color of current day
                 {
                 gridPane.getChildren().get(text-1).setStyle("-fx-background-color: black, cyan ;\n" +
-"    -fx-background-insets: 0, 0 0 1 1 ;");
+                "    -fx-background-insets: 0, 0 0 1 1 ;");
                 }
                 if(text > day && monthNow == month_box.getValue().getMonthNumber())
                 {
@@ -411,7 +399,7 @@ public class StudentController implements Initializable {
                      {
                          if(Integer.toString(text).equals(absList.get(l)))
                     gridPane.getChildren().get(text-1).setStyle("-fx-background-color: black, yellow ;\n" +
-"    -fx-background-insets: 0, 0 0 1 1 ;");
+                    "    -fx-background-insets: 0, 0 0 1 1 ;");
                      }
                 }
                 if(monthNow < month_box.getValue().getMonthNumber())
@@ -421,7 +409,7 @@ public class StudentController implements Initializable {
                      {
                          if(Integer.toString(text).equals(absList.get(l)))
                     gridPane.getChildren().get(text-1).setStyle("-fx-background-color: black, yellow ;\n" +
-"    -fx-background-insets: 0, 0 0 1 1 ;");}
+                    "    -fx-background-insets: 0, 0 0 1 1 ;");}
                 }
                 gridPane.add(stack, j,i); // adding pane with label to gridpane 
                 text++;
@@ -439,6 +427,14 @@ public class StudentController implements Initializable {
 
        cal = true; 
         }
+    }
+    private void setCells()
+    {
+         TBV_monday.setCellValueFactory(new PropertyValueFactory<SubjectAttendance, String>("monday"));
+        TBV_tuesday.setCellValueFactory(new PropertyValueFactory<SubjectAttendance, String>("tuesday"));
+        tbv_wednesday.setCellValueFactory(new PropertyValueFactory<SubjectAttendance, String>("wednesday"));
+        TBV_thursday.setCellValueFactory(new PropertyValueFactory<SubjectAttendance, String>("thursday"));
+        TBV_friday.setCellValueFactory(new PropertyValueFactory<SubjectAttendance, String>("friday"));
     }
     
 }
