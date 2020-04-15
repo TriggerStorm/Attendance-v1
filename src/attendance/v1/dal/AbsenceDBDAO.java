@@ -6,22 +6,15 @@
 package attendance.v1.dal;
 
 import attendance.v1.be.Absence;
-import attendance.v1.be.Attendance;
 import com.microsoft.sqlserver.jdbc.SQLServerException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.Statement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.time.LocalDate;
-import java.time.ZoneId;
-import java.time.format.DateTimeFormatter;
-import static java.time.temporal.TemporalQueries.localDate;
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Date;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -52,18 +45,8 @@ public class AbsenceDBDAO {
             {
                 int userKey = rs.getInt("studentKey");
                 allAbsencesForADate.add(new Absence(userKey, date)); 
-//System.out.println("");
-//System.out.println("Found entry");
             }    
         }
-// TEST   
-/*System.out.println("");
-System.out.println("List of Absences on " + date);
-        for (int i = 0; i < allAbsencesForADate.size(); i++) {
-        Absence absence = allAbsencesForADate.get(i);
-System.out.println("");
-System.out.println(i + ": Studentkey= "+ absence.getStudentKey() + "  Date: " + absence.getDate()); 
-        } */
         return allAbsencesForADate;
     }
         
@@ -74,14 +57,6 @@ System.out.println(i + ": Studentkey= "+ absence.getStudentKey() + "  Date: " + 
         LocalDate startDate = sqlStartDate.toLocalDate();
         LocalDate thisDate;
         for (int i = 0; i < 31; i++) {
- /*         java.sql.Date thisSQLDate = java.sql.Date.valueOf(thisDate); // converts LocalDate date to sqlDate
-            try (Connection con = dbc.getConnection()) {
-                String SQLStmt = "SELECT * FROM ABSENCE WHERE Date = '" + thisSQLDate + "';";
-                Statement statement = con.createStatement();
-                ResultSet rs = statement.executeQuery(SQLStmt);
-                while(rs.next()) //While you have something in the results
-                {
-                }  */
             thisDate = startDate.plusDays(i);
             List<Absence> absences = getAllAbsencesOnAGivenDate(thisDate);
             totalOfAbsencesInAMonthByDay[i] = absences.size();
@@ -136,11 +111,10 @@ System.out.println("DBDAO date picked = " + absence.getDate());
         } catch (SQLException ex) {
             Logger.getLogger(AttendanceDBDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
-  //      return BE entity (studentKey, datePicked)??
+
         }
- //       getAllAbsencesOnAGivenDate(absence.getDate());  // TEST 
+
         deleteExpiredAbsences();  //TEST
- //       getMonthlyAbsencesForAStudent(594, 4);  //TEST
         int testmonth = 4;
         int[] test = getTotalOfAbsencesInAMonthByDay(testmonth);
         for (int i = 0; i < test.length; i++) {

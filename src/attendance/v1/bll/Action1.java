@@ -16,7 +16,6 @@ import java.time.format.DateTimeFormatter;
  */
 
 public class Action1 implements Action {
-    private AttendanceModel Am;
     private BllManager bm;
     private LoggedInUser lu;
 
@@ -30,7 +29,6 @@ public class Action1 implements Action {
     @Override
     public void execute(String secretCode) {
         bm = new BllManager();
-      Am = new AttendanceModel();
        LocalDateTime date = LocalDateTime.now();
          DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd['T'HH:mm:ss[Z]]");
         String dateString = date.format(formatter);

@@ -5,9 +5,6 @@
  */
 package attendance.v1.bll;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
 import java.util.Stack;
 
 
@@ -50,7 +47,6 @@ public class CommandManager {
 
     public void redo() {
         Action cmd = redoStack.pop();
-     //   cmd.execute();
         undoStack.push(cmd);
 
     }

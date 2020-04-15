@@ -6,7 +6,6 @@
 package attendance.v1.gui.controller;
 
 import attendance.v1.be.LoggedInUser;
-import attendance.v1.be.User;
 import attendance.v1.dal.UserDBDAO;
 import attendance.v1.be.Subject;
 import attendance.v1.be.User;
@@ -60,9 +59,6 @@ public class LogInController implements Initializable {
        userModle = new UserModel();
        String loginmail = TF_email.getText().trim();
        String passw = TF_password.getText().trim();
-     //  UserDBDAO udb = new UserDBDAO();
-//       lu.setEmail(udb.getUserByEmail(loginmail).getEmail());
-     //  lu.setUserName(udb.getUserByEmail(loginmail).getUserName());
        int loginstate = userModle.CheckUser(loginmail, passw);//returns an int, as it also checks if it is a teacher or a student.
         switch (loginstate) {
             case 1:  teacherLogin(loginmail, passw); //teacher login needs creation and then place make something like teacherLogin method in stead.
@@ -92,9 +88,7 @@ public class LogInController implements Initializable {
         addStage.setScene(addScene);
         addStage.show();
         
-//        bllManager.getLoggedInUser(TF_email.getText());
-   //     bllManager.getSubjectsOfAStudent(user.getUserKey());
-    //    bllManager.getSpecificSubjects(subject.getSubjectKey());
+
         
         Stage stage = (Stage) Bn_login.getScene().getWindow();
         stage.close();

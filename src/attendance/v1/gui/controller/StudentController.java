@@ -11,15 +11,8 @@ import attendance.v1.be.Months;
 import attendance.v1.be.SubjectAttendance;
 import attendance.v1.bll.BLLutilities;
 import attendance.v1.bll.BllManager;
-import attendance.v1.dal.StudentSubjectDBDAO;
 import attendance.v1.gui.model.AttendanceModel;
-import attendance.v1.dal.UserDBDAO;
-import static attendance.v1.dal.UserDBDAO.loggedInUser;
-import com.jfoenix.controls.JFXButton;
-import java.awt.image.RenderedImage;
-import java.io.File;
 import java.io.IOException;
-import java.net.MalformedURLException;
 import java.net.URL;
 import java.sql.SQLException;
 import java.time.LocalDate;
@@ -27,12 +20,9 @@ import java.time.LocalDateTime;
 import java.time.YearMonth;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Locale;
 import java.util.ResourceBundle;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -40,11 +30,8 @@ import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.geometry.Insets;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.chart.BarChart;
-import javafx.scene.chart.PieChart;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
@@ -59,17 +46,9 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.Background;
-import javafx.scene.layout.BackgroundFill;
-import javafx.scene.layout.Border;
-import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.StackPane;
-import javafx.scene.paint.Color;
-import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
-import javax.imageio.ImageIO;
-import javax.swing.JLabel;
 
 /**
  * FXML Controller class
@@ -163,21 +142,10 @@ public class StudentController implements Initializable {
         month_box.getSelectionModel().select(month-1); // select current month as default
         month_box.setVisible(false);
                 
-/*        settingTableView();
-         System.out.println("");
-                System.out.println("Loggeg in as UserName" + UserDBDAO.loggedInUser.getUserName());
-        Lb_logInUser.setText(UserDBDAO.loggedInUser.getUserName());
-        TF_logInAss.setText(UserDBDAO.loggedInUser.getUserName());
-    }    
-     String dateString = "todays date";
-     //   date = new JLabel(dateString);
-*/      
+
         
             lu = LoggedInUser.getInstance();
          bm = new BllManager();
-           // System.out.println(bllu.subjectsForGui().get(1).getSubjectKey());
-       
-          // LB_AttendanceRate.setText(arg0);
             settingTableView();
             TF_logInAss.setText(lu.getUserName());
             Lb_logInUser.setText(lu.getUserName());
@@ -270,14 +238,8 @@ public class StudentController implements Initializable {
         tbv_wednesday.setCellValueFactory(new PropertyValueFactory<SubjectAttendance, String>("wednesday"));
         TBV_thursday.setCellValueFactory(new PropertyValueFactory<SubjectAttendance, String>("thursday"));
         TBV_friday.setCellValueFactory(new PropertyValueFactory<SubjectAttendance, String>("friday"));
-//        TBV_tuesday.setCellValueFactory(new PropertyValueFactory<>("tuesday"));
-//        tbv_wednesday.setCellValueFactory(new PropertyValueFactory<>("wednesday"));
-//        TBV_thursday.setCellValueFactory(new PropertyValueFactory<>("thursday"));
-//        TBV_friday.setCellValueFactory(new PropertyValueFactory<>("friday"));
         LB_AttendanceRate.setText(sAttendance.getPercent());
        Lb_subjet.setText("SCO");    
- //      ObservableList<Attendance> list = FXCollections.observableArrayList(bm.getStudentAttendanceForSubject(lu.getUserKey(),bllu.subjectsForGui().get(1).getSubjectKey()));
-      //   bm.getStudentAttendanceForSubject(lu.getUserKey(),bllu.subjectsForGui().get(1).getSubjectKey());
         TBV_attendance.setItems(attendance);
         setCalendar(month_box.getValue().getMonthNumber());
 
@@ -294,11 +256,6 @@ public class StudentController implements Initializable {
         tbv_wednesday.setCellValueFactory(new PropertyValueFactory<SubjectAttendance, String>("wednesday"));
         TBV_thursday.setCellValueFactory(new PropertyValueFactory<SubjectAttendance, String>("thursday"));
         TBV_friday.setCellValueFactory(new PropertyValueFactory<SubjectAttendance, String>("friday"));
-      //  TBV_tuesday.setCellValueFactory(new PropertyValueFactory<>("tuesday"));
-      //  tbv_wednesday.setCellValueFactory(new PropertyValueFactory<>("wednesday"));
-      //  TBV_thursday.setCellValueFactory(new PropertyValueFactory<>("thursdag"));
-      //  TBV_friday.setCellValueFactory(new PropertyValueFactory<>("friday")); 
-  //     ObservableList<Attendance> list = FXCollections.observableArrayList(bm.getStudentAttendanceForSubject(lu.getUserKey(),bllu.subjectsForGui().get(0).getSubjectKey()));
         LB_AttendanceRate.setText(sAttendance.getPercent());
         Lb_subjet.setText("SDE");       
                 
@@ -332,13 +289,8 @@ public class StudentController implements Initializable {
         TBV_tuesday.setCellValueFactory(new PropertyValueFactory<SubjectAttendance, String>("tuesday"));
         tbv_wednesday.setCellValueFactory(new PropertyValueFactory<SubjectAttendance, String>("wednesday"));
         TBV_thursday.setCellValueFactory(new PropertyValueFactory<SubjectAttendance, String>("thursday"));
-        TBV_friday.setCellValueFactory(new PropertyValueFactory<SubjectAttendance, String>("friday"));
-        /*TBV_monday.setCellValueFactory(new PropertyValueFactory<>("monday"));
-        TBV_tuesday.setCellValueFactory(new PropertyValueFactory<>("tuesday"));
-        tbv_wednesday.setCellValueFactory(new PropertyValueFactory<>("wednesday"));
-        TBV_thursday.setCellValueFactory(new PropertyValueFactory<>("thursdag"));
-        TBV_friday.setCellValueFactory(new PropertyValueFactory<>("friday"));       
- */       Lb_subjet.setText("ITO");        
+        TBV_friday.setCellValueFactory(new PropertyValueFactory<SubjectAttendance, String>("friday"));       
+        Lb_subjet.setText("ITO");        
         LB_AttendanceRate.setText(sAttendance.getPercent());
         TBV_attendance.setItems(attendance);
         setCalendar(month_box.getValue().getMonthNumber());
@@ -434,10 +386,8 @@ public class StudentController implements Initializable {
                
                 Label[] weekDay = new Label[45];
                 Label[] label = new Label[45];  
-                //weekDay[text] = new Label();
                 label[text] = new Label();    //  text is used as text for labels as well as number of index for them
                 label[text].setText(Integer.toString(text+1)+"\n"+"\n"+"\n"+dateTimeString); // sets day number as label text as well as day name
-              //  weekDay[text].setText(dateTimeString);
                 StackPane stack = new StackPane();
                gridPane.setStyle("-fx-background-color: black, white ;\n" +   //creating empty gridpane
              "  -fx-background-insets: 0, 1 1 0 0 ;\n" + "-fx-padding: 1 ;\n");
@@ -448,9 +398,6 @@ public class StudentController implements Initializable {
                 if((monthNow ==month && text< day-1) || (monthNow != month && text<daysInMonth && month < monthNow)) // adding absences to ALL days before current day
                     stack.setStyle("-fx-background-color: black, red ;\n" +
                 "    -fx-background-insets: 0,0 0 1 1 ;");
-           //     if(text< day-1 && monthNow == month)
-            //        stack.setStyle("-fx-background-color: black, red ;\n" +
-            //    "    -fx-background-insets: 0,0 0 1 1 ;");
                 if(text == day && monthNow == month_box.getValue().getMonthNumber())  // change color of current day
                 {
                 gridPane.getChildren().get(text-1).setStyle("-fx-background-color: black, cyan ;\n" +
@@ -488,37 +435,8 @@ public class StudentController implements Initializable {
            int number = attList.get(i);
            if(number < day-2 || monthNow != month)  // for every day from list of days from db setting its corresponding pane color to Green
            gridPane.getChildren().get(number-1).setStyle("-fx-background-color: black, green ;\n" + "    -fx-background-insets: 0, 0 0 1 1 ;");
-           // System.out.println(attList.get(i)+"@@@@@@@@");
        }
-//       if(text > day && monthNow == month_box.getValue().getMonthNumber())
-//                {
-//                    System.out.println("@@@@@@@@@@@@@@");
-//                   List<String> absList = bm.getMonthlyAbsencesForAStudent(text, month);
-//                     ArrayList<String> arrlistofOptions = new ArrayList<String>(absList);
-//                     for(int l = 0;l < arrlistofOptions.size();l++)
-//                     {
-//                         System.out.println(Integer.toString(day)+"=======?????"+arrlistofOptions.get(l));
-//                         if(Integer.toString(day).equals(arrlistofOptions.get(l)))
-//                    gridPane.getChildren().get(text-1).setStyle("-fx-background-color: black, yellow ;\n" +
-//"    -fx-background-insets: 0, 0 0 1 1 ;");
-//                     }
-//                }
-//                if(monthNow < month_box.getValue().getMonthNumber())
-//                {
-//                      List<String> absList = bm.getMonthlyAbsencesForAStudent(text, month);
-//                     ArrayList<String> arrlistofOptions = new ArrayList<String>(absList);
-//                     for(int l = 0;l < arrlistofOptions.size();l++)
-//                     {
-//                         if(Integer.toString(day).equals(arrlistofOptions.get(l)))
-//                    gridPane.getChildren().get(text-1).setStyle("-fx-background-color: black, yellow ;\n" +
-//"    -fx-background-insets: 0, 0 0 1 1 ;");}
-//                }
-       
-       
-       
-       
-       
-       
+
        cal = true; 
         }
     }

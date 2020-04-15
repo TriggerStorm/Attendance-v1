@@ -8,9 +8,7 @@ package attendance.v1.dal;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
-import java.sql.Statement;
 import java.time.LocalDateTime;
-import java.util.AbstractList;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
@@ -20,12 +18,9 @@ import com.microsoft.sqlserver.jdbc.SQLServerException;
 import java.sql.ResultSet;
 import java.sql.Statement;
 
-import attendance.v1.be.SubjectAttendance;
 import attendance.v1.be.User;
 import attendance.v1.be.Attendance;
 import attendance.v1.be.LoggedInUser;
-import attendance.v1.bll.BllManager;
-import attendance.v1.be.Subject;
 import attendance.v1.be.SubjectsHeld;
 import attendance.v1.be.StudentSubject;
 import attendance.v1.be.SubjectAttendance;
@@ -204,7 +199,6 @@ public class AttendanceDBDAO {
         SubjectsHeld theSubject = tempSubjectsHeldDBDao.getSubjectHeldFromDate(subjectKey, date); //get the subjectHeld that we need
         if(theSubject != null)
         theDateTime = theSubject.getDateHeld(); //fetch that one's full date and time.
-       // System.out.println("%%%%%%%%%%"+theDateTime);
         int attendees = 0; //initialize the total amount of attnedees to 0.
         try(Connection con = dbc.getConnection())
         {
@@ -273,7 +267,6 @@ public class AttendanceDBDAO {
         double totalOfAllStudentAttendancesInASubject = 0;
         List<User> allstudentsInASubject = tempUserDBDao.getAllStudentsInASubject(subjectKey);
         int numberOfStudentsInASubject = allstudentsInASubject.size();
-    // maybe need an if (numberOfStudentsInASubject > 0) ...
         for (int i = 0; i < numberOfStudentsInASubject; i++) {
             User testUser = allstudentsInASubject.get(i);
             int userKey = testUser.getUserKey();
@@ -289,9 +282,7 @@ public class AttendanceDBDAO {
         //  Returns the int value of the average attendance of a student in a subject
         double averageOfAStudentsAttendanceInASubject;
         List<SubjectsHeld> allSubjectsHeldForASubject = tempSubjectsHeldDBDao.getAllSubjectsHeldForASubject(subjectKey);
-     //   System.out.print(allSubjectsHeldForASubject.size());
         List<Attendance> allOfAStudentsAttendanceForASubject = getAllOfAStudentsAttendanceForASubject(userKey, subjectKey);
-     //   System.out.print(allOfAStudentsAttendanceForASubject.size());
         double allOfStudentAttendanceInSubject = allOfAStudentsAttendanceForASubject.size();
         double totalAttendanceForSubject = allSubjectsHeldForASubject.size();
         

@@ -11,15 +11,12 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import attendance.v1.be.User;
 import attendance.v1.be.LoggedInUser;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import attendance.v1.be.User;
-import attendance.v1.be.StudentSubject;
-import attendance.v1.be.SubjectsHeld;
 
 /**
  *
@@ -312,7 +309,6 @@ public class UserDBDAO {
     
     public List<User> getAllStudentsInASubject(int subjectKey) throws SQLException {
         List<User> studentsInSubject = new ArrayList<>();
-        //List<StudentSubject> allStudentSubjects = studentSubjectDBDao.getAllStudentSubjects();
         String stmt = "Select u.userKey, u.userName, u.password, u.email, u.email,u.phonenr, u.address, u.teacher, u.userIMG, u.postCode, u.city FROM Users u JOIN Student_Subjects s On u.userKey = s.userKey WHERE s.subjectKey = ?";
         try (Connection con = dbc.getConnection()) {
             PreparedStatement pstmt = con.prepareStatement(stmt);
