@@ -143,8 +143,9 @@ public class TeacherController implements Initializable {
        bn_Showcode.setVisible(false);
 
    
-
-        Lb_loginas.setText(lu.getUserName());
+            String str = lu.getUserName();
+            String[] splited = str.split("\\s+");
+        Lb_loginas.setText(splited[0]);
             Lb_logInUser.setText(lu.getUserName());
                Image image3 = new Image(lu.getUserIMG(), 50, 50, false, false);
                Image image2 = new Image(lu.getUserIMG(), 10, 10, false, false);

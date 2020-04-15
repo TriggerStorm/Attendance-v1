@@ -147,7 +147,9 @@ public class StudentController implements Initializable {
             lu = LoggedInUser.getInstance();
          bm = new BllManager();
             settingTableView();
-            TF_logInAss.setText(lu.getUserName());
+            String str = lu.getUserName();
+            String[] splited = str.split("\\s+");
+            TF_logInAss.setText(splited[0]);
             Lb_logInUser.setText(lu.getUserName());
                Image image3 = new Image(lu.getUserIMG(), 50, 50, false, false);
                Image image2 = new Image(lu.getUserIMG(), 10, 10, false, false);
