@@ -109,7 +109,6 @@ public class AbsenceDBDAO {
                 Logger.getLogger(AttendanceDBDAO.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
-        deleteExpiredAbsences();  //TEST
         int testmonth = 4;
         int[] test = getTotalOfAbsencesInAMonthByDay(testmonth);
         for (int i = 0; i < test.length; i++) {

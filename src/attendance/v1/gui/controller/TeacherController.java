@@ -138,6 +138,7 @@ public class TeacherController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+       bm.deleteExpiredAbsences();
         date.setText(bllu.locaDateNowToString());
          String date =  bllu.dateForCalendar(); //get current date
        String[] ymd = date.split(" "); // split values from each others

@@ -156,6 +156,7 @@ public class StudentController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        
         bllu = new BLLutilities();
         date.setText(bllu.locaDateNowToString());
         String date =  bllu.dateForCalendar(); //get current date

@@ -32,7 +32,7 @@ public class AttendanceModel {
     public AttendanceModel() {
         bllManager = new BllManager();
         bllManager.getAllAttendances();
-
+        bllManager.deleteExpiredAbsences();
     }
     
     

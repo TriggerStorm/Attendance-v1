@@ -47,7 +47,7 @@ public class AttendanceDBDAO {
     public LoggedInUser lu;
     public UserDBDAO tempUserDBDao;
     public SubjectsHeldDBDAO tempSubjectsHeldDBDao;
-   public StudentSubjectDBDAO tempStudentSubjectDBDao;
+    public StudentSubjectDBDAO tempStudentSubjectDBDao;
     
     public AttendanceDBDAO() {
         tempUserDBDao = new UserDBDAO();
@@ -59,7 +59,7 @@ public class AttendanceDBDAO {
     
     
     public List<Attendance> getAllAttendances() throws SQLException{
-    //  Gets a list of all attendances
+    //  Gets a list of all attendances from the DB
         List<Attendance> allAttendance = new ArrayList(); //get a list to store the values.
         try(Connection con = dbc.getConnection()){
             String SQLStmt = "SELECT * FROM ATTENDANCE;";
@@ -77,12 +77,11 @@ public class AttendanceDBDAO {
     }
      
      
-   public SubjectAttendance addNewAttendanceToDB(int studentKey, SubjectsHeld subjectHeld) throws SQLException { 
- // can this method be passed a subjectheld????       
-       int subjectKey = subjectHeld.getSubjectKey();
+    public SubjectAttendance addNewAttendanceToDB(int studentKey, SubjectsHeld subjectHeld) throws SQLException { 
+    //  Adds a new attendance to the DB, and returns the users updated attendance information to the GUI as a SubjectAttendance data object
+        int subjectKey = subjectHeld.getSubjectKey();
         String dateHeld = subjectHeld.getDateHeld();
         String sql = "INSERT INTO ATTENDANCE(studentKey, SubjectKey, DateHeld) VALUES (?,?,?)";
-        
         Attendance newAttendance = new Attendance(studentKey, subjectKey, dateHeld);
         try (Connection con = dbc.getConnection()) {
             PreparedStatement stmt = con.prepareStatement(sql, PreparedStatement.RETURN_GENERATED_KEYS);
@@ -110,17 +109,14 @@ public class AttendanceDBDAO {
     }
    
         
-   public List<SubjectAttendance> getSubjectAttendanceListForAllStudentsInThatSubject( int subjectKey) throws SQLException {
+    public List<SubjectAttendance> getSubjectAttendanceListForAllStudentsInThatSubject(int subjectKey) throws SQLException {
+    //  Returns a list of SubjectAttendance of all students in a given subject. Used to calculate the total subject attendance average for all students in a subject
         List<SubjectAttendance> allStudentDailyAttendance = new ArrayList<>();
-
         try(Connection con = dbc.getConnection()){
             String SQLStmt = "SELECT userKey FROM Student_Subjects WHERE subjectKey = ?;"; ///To get all the users in that subject.
             PreparedStatement statement = con.prepareStatement(SQLStmt);
-     
             statement.setInt(1,subjectKey);
-     
             ResultSet rs = statement.executeQuery();
-     
             while(rs.next()) //While you have something in the results
             {
                 int userKey = rs.getInt("userKey");
@@ -132,7 +128,6 @@ public class AttendanceDBDAO {
         } catch (SQLException ex) {
             Logger.getLogger(AttendanceDBDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
- 
         return allStudentDailyAttendance;
    }
    
@@ -172,7 +167,7 @@ public class AttendanceDBDAO {
 
  
     public List<Attendance> getAllAttendanceForSubject(int subjectKey) throws SQLException {
-     //  Returns all attendances for a student in a subject   
+    //  Returns all attendances for a student in a subject   
         List<Attendance> allAttendanceInSubject = new ArrayList<>();
         try(Connection con = dbc.getConnection()){
             String SQLStmt = "SELECT studentKey, DateHeld FROM ATTENDANCE WHERE subjectKey ='" + subjectKey + "'";
@@ -188,13 +183,12 @@ public class AttendanceDBDAO {
         return allAttendanceInSubject;
     }
     
-    public int getAllAttendanceForSubjectByDate(int subjectKey, String date) throws SQLException
-    {
+    public int getAllAttendanceForSubjectByDate(int subjectKey, String date) throws SQLException {
+    //  Returns an int value of the number of students who attended a given subject on a give day 
         String theDateTime ="";
         SubjectsHeld theSubject = tempSubjectsHeldDBDao.getSubjectHeldFromDate(subjectKey, date); //get the subjectHeld that we need
         if(theSubject != null)
         theDateTime = theSubject.getDateHeld(); //fetch that one's full date and time.
-       // System.out.println("%%%%%%%%%%"+theDateTime);
         int attendees = 0; //initialize the total amount of attnedees to 0.
         try(Connection con = dbc.getConnection())
         {
@@ -263,7 +257,7 @@ public class AttendanceDBDAO {
         double totalOfAllStudentAttendancesInASubject = 0;
         List<User> allstudentsInASubject = tempUserDBDao.getAllStudentsInASubject(subjectKey);
         int numberOfStudentsInASubject = allstudentsInASubject.size();
-    // maybe need an if (numberOfStudentsInASubject > 0) ...
+        // maybe need an if (numberOfStudentsInASubject > 0) ...
         for (int i = 0; i < numberOfStudentsInASubject; i++) {
             User testUser = allstudentsInASubject.get(i);
             int userKey = testUser.getUserKey();
@@ -276,15 +270,12 @@ public class AttendanceDBDAO {
      
     
     private double calculateAverageOfAStudentsAttendanceInASubject(int subjectKey, int userKey) throws SQLException {
-        //  Returns the int value of the average attendance of a student in a subject
+    //  Returns the int value of the average attendance of a student in a subject
         double averageOfAStudentsAttendanceInASubject;
         List<SubjectsHeld> allSubjectsHeldForASubject = tempSubjectsHeldDBDao.getAllSubjectsHeldForASubject(subjectKey);
-     //   System.out.print(allSubjectsHeldForASubject.size());
         List<Attendance> allOfAStudentsAttendanceForASubject = getAllOfAStudentsAttendanceForASubject(userKey, subjectKey);
-     //   System.out.print(allOfAStudentsAttendanceForASubject.size());
         double allOfStudentAttendanceInSubject = allOfAStudentsAttendanceForASubject.size();
         double totalAttendanceForSubject = allSubjectsHeldForASubject.size();
-        
         averageOfAStudentsAttendanceInASubject = allOfStudentAttendanceInSubject/totalAttendanceForSubject;
         return averageOfAStudentsAttendanceInASubject;
     }
@@ -325,9 +316,9 @@ public class AttendanceDBDAO {
     }
     
      
-// This is an old method called from the gui and interface. No longer needed???
-     public List<Attendance> getStudentAttendanceForSubject(int studentKey, int subjectKey) throws SQLException {
-        List<Attendance> allAttendances = getAllAttendances();
+    public List<Attendance> getStudentAttendanceForSubject(int studentKey, int subjectKey) throws SQLException {
+    //  Returns a list of Attendances of a given student for a give subject
+         List<Attendance> allAttendances = getAllAttendances();
         List<Attendance> studentAttendanceInSubject = new ArrayList<>();
         Attendance testAttendance;
         for (int i = 0; i < allAttendances.size(); i++) {
