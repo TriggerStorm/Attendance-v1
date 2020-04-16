@@ -5,15 +5,12 @@
  */
 package attendance.v1.be;
 
-import java.util.List;
-
 /**
  *
- * @author Trigger, Filip, Cecillia and Alan
+ * @author cille
  */
-
-
-public class User {
+public class LoggedInUser{
+    private static LoggedInUser instance = null;
     private int userKey;
     private String userName;
     private String password;
@@ -24,27 +21,55 @@ public class User {
     private String city;
     private boolean teacher;
     private String userIMG;
+    private SubjectsHeld sbh;
+    private boolean attBoolean;
+    private int selectedSubjectKey;
+    private String emailToCheck;
+    private String lastCode;
+    private LoggedInUser(){
+        lastCode ="";
+     SubjectsHeld sbh = new SubjectsHeld(0,"","");
+     attBoolean = false;
+    }
+
+    public String getLastCode() {
+        return lastCode;
+    }
+
+    public void setLastCode(String lastCode) {
+        this.lastCode = lastCode;
+    }
+   
+    public static LoggedInUser getInstance()
+    {
+        if(instance == null)
+        {
+            instance = new LoggedInUser();
+        }
+        
+        return instance;
+    }
+
+    public String getEmailToCheck() {
+        return emailToCheck;
+    }
+
+    public void setEmailToCheck(String emailToCheck) {
+        this.emailToCheck = emailToCheck;
+    }
+
+
+    public int getSelectedSubjectKey()
+    {
+        return selectedSubjectKey;
+    }
     
+    public void setSelectedSubjectKey(int subjectKey)
+    {
+        selectedSubjectKey = subjectKey;
+    }
+
     
- public User (int userKey, String userName, String password, String email, int phoneNr, String address, int zipCode, String city, boolean teacher, String userIMG) { /*, List<SubjectAttendance> attendance*/
-
- 
- 
-     this.userKey = userKey;
-     this.userName = userName;
-     this.password = password;
-     this.email = email;
-     this.phoneNr = phoneNr;
-     this.address = address;
-     this.postCode = zipCode;
-     this.city = city;
-     this.teacher = teacher;
-     this.userIMG = userIMG;
-
-     
- }
-
-
     public int getUserKey() {
         return userKey;
     }
@@ -123,7 +148,24 @@ public class User {
     public void setUserIMG(String userIMG) {
         this.userIMG = userIMG;
     }
-    
-   
- 
+    public void setSelectedSubjectsHeld(SubjectsHeld subjectsHeld)
+    {
+        this.sbh = subjectsHeld;
+    }
+    public SubjectsHeld getSelectedSubjectsHeld()
+    {
+        return sbh;
+    }
+    public void setAttendanceSubmitted()
+    {
+       this.attBoolean = true;
+    }
+    public boolean getAttendanceSubmitted()
+    {
+        return attBoolean;
+    }
+    public void setBooleanToFalse()
+    {
+        this.attBoolean = false;
+    }
 }

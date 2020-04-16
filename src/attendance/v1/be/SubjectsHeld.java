@@ -7,19 +7,23 @@ package attendance.v1.be;
 
 /**
  *
- * @author Trigger
+ * @author Trigger, Filip, Cecillia and Alan
  */
+
+
+
 public class SubjectsHeld {
-       
-    
-        private int subjectKey;
-        private String dateHeld;
-        private String SecretCode;
+    private int subjectKey;
+    private String dateHeld;
+    private String SecretCode;
 
 public SubjectsHeld (int subjectKey, String dateHeld, String SecretCode)
 {
     this.subjectKey = subjectKey;
     this.dateHeld = dateHeld;
+    this.SecretCode = SecretCode;
+}
+public SubjectsHeld(String SecretCode){
     this.SecretCode = SecretCode;
 }
 
@@ -48,7 +52,6 @@ public SubjectsHeld (int subjectKey, String dateHeld, String SecretCode)
     }
         
         
-public SubjectsHeld(String SecretCode){
-    this.SecretCode = SecretCode;
+
 }
-}
+

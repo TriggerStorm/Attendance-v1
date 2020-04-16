@@ -17,8 +17,9 @@ import java.util.logging.Logger;
 
 /**
  *
- * @author admin
+ * @author Trigger, Filip, Cecillia and Alan
  */
+
 class DBConnection {
      
     private static final String PROP_FILE = "assets/DBProperties.properties";

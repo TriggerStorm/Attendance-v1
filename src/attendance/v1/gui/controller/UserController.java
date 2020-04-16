@@ -5,7 +5,8 @@
  */
 package attendance.v1.gui.controller;
 
-import com.jfoenix.controls.JFXButton;
+import attendance.v1.be.LoggedInUser;
+import attendance.v1.bll.BllManager;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -32,18 +33,21 @@ public class UserController implements Initializable {
     private Button Bn_ok; // go to edit or new user scean //filp
     @FXML
     private Button Bn_cansel; // done
-    private JFXButton bn_edit; // this is a mock butten need to be remove
+    private LoggedInUser lu;
+    private BllManager bm;
 
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        // TODO
+        lu = LoggedInUser.getInstance();
+        bm = new BllManager();
     }    
     public void checkMail(String email) throws IOException{
        String name = TF_email.getText();
-       if( email.equals(name) == email.equals("student@test.com"))
+       lu.setEmailToCheck(name);
+       if(bm.checkIfUserExist(name))
        {
            editUser();
        }
@@ -56,7 +60,10 @@ public class UserController implements Initializable {
 
     @FXML
     private void handle_ok(ActionEvent event) throws IOException {
+      
        String name = TF_email.getText();
+       lu.setEmailToCheck(name);
+        
        checkMail(name);
     }
     
@@ -93,7 +100,7 @@ public class UserController implements Initializable {
         addStage.setScene(addScene);
         addStage.show();
         
-        Stage stage = (Stage) bn_edit.getScene().getWindow();
+        Stage stage = (Stage) Bn_ok.getScene().getWindow();
         stage.close();
     }
 

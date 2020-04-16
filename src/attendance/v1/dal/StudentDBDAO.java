@@ -6,13 +6,12 @@
 package attendance.v1.dal;
 import attendance.v1.dal.DBConnection;
 import attendance.v1.be.Subject;
-import attendance.v1.be.StudentSubjects;
+import attendance.v1.be.StudentSubject;
 import attendance.v1.be.User;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
 import java.util.List;
 import java.util.ArrayList;
 import java.sql.Statement;
@@ -23,21 +22,46 @@ import java.sql.Statement;
  */
 public class StudentDBDAO {
    private DBConnection db;
-     public List<Subject> getSubjects() throws SQLException 
+
+    
+     
+     public StudentSubject newAssignStudentCourse(User user ,int course) throws SQLException
+    {
+        for(int i = 0; i < getSubjectsSPECIFIC(course).size();i++)
+            
+        {db = new DBConnection();
+        
+           int ukey = user.getUserKey();
+           int skey = getSubjectsSPECIFIC(course).get(i).getSubjectKey();
+           try(Connection con = db.getConnection()){
+            String SQLStmt = "INSERT INTO  STUDENT_SUBJECTS(subjectKey,userKey) VALUES (?,?); ";
+            PreparedStatement pstmt = con.prepareStatement(SQLStmt);
+            
+             pstmt.setInt(1,ukey);
+             pstmt.setInt(2, skey);
+             pstmt.execute();
+        }
+       return new StudentSubject(ukey,skey);
+        } 
+      return null;
+}
+      public List<Subject> getSubjectsSPECIFIC(int course) throws SQLException 
+
     {
         db = new DBConnection();
         List<Subject> allclasses = new ArrayList();
            
         try(Connection con = db.getConnection()){
-            String SQLStmt = "SELECT * FROM SUBJECTS;";
-            
+            String SQLStmt = "SELECT * FROM SUBJECTS WHERE AssociatedCourse = ?;";
+             PreparedStatement pstmt = con.prepareStatement(SQLStmt);   
+             pstmt.setInt(1,course);
+             pstmt.execute();
             Statement statement = con.createStatement();
             ResultSet rs = statement.executeQuery(SQLStmt);
             
             while(rs.next()) 
             {
                
-                
                 int subjectKey = rs.getInt("SubjectKey");
                 String subjectName = rs.getString("SubjectName");
                 String subjectIMG = rs.getString("SubjectIMG");
@@ -50,7 +74,10 @@ public class StudentDBDAO {
        return allclasses;
     }
      
-     public StudentSubjects assignStudentCourse(Subject subject, User user) throws SQLException 
+
+
+     public StudentSubject assignStudentCourse(Subject subject, User user) throws SQLException 
+
     {
         db = new DBConnection();
         
@@ -65,7 +92,8 @@ public class StudentDBDAO {
              pstmt.setInt(2,ckey);
             pstmt.setInt(3,ckey);
         }
-        return new StudentSubjects(ukey,ckey);
+        return new StudentSubject(ukey,ckey);
 }
+
 }
 

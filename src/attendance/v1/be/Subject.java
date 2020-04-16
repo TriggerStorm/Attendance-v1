@@ -19,7 +19,9 @@ public class Subject {
     private String associatedTeacher;
     
     
+
     public Subject (int subjectKey, String subjectName,String subjectIMG, String associatedCourse, String associatedTeacher ){
+
     
         this.subjectKey = subjectKey;
         this.subjectName = subjectName;

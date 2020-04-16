@@ -5,11 +5,16 @@
  */
 package attendance.v1.gui.controller;
 
+import attendance.v1.be.LoggedInUser;
+import attendance.v1.dal.UserDBDAO;
+import attendance.v1.be.Subject;
 import attendance.v1.be.User;
+import attendance.v1.bll.BllManager;
 import attendance.v1.gui.model.UserModel;
 import com.jfoenix.controls.JFXButton;
 import java.io.IOException;
 import java.net.URL;
+import java.sql.SQLException;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -26,6 +31,7 @@ import javafx.stage.Stage;
  * @author Trigger
  */
 public class LogInController implements Initializable {
+    private LoggedInUser lu;
 
     @FXML
     private TextField TF_email;
@@ -33,20 +39,23 @@ public class LogInController implements Initializable {
     private TextField TF_password;
     @FXML
     private JFXButton Bn_login;
-
+    
+    private BllManager bllManager;
     private UserModel userModle;
     private User user;
+    private UserDBDAO udb;
+    private Subject subject;
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        // TODO
+      lu = LoggedInUser.getInstance();
     }    
 
     @FXML
 
-    private void handle_login(ActionEvent event) throws IOException{
+    private void handle_login(ActionEvent event) throws IOException, SQLException{
        userModle = new UserModel();
        String loginmail = TF_email.getText().trim();
        String passw = TF_password.getText().trim();
@@ -57,46 +66,36 @@ public class LogInController implements Initializable {
             case 2:  studentLogin(loginmail, passw); //student login 
                     break;
             default: System.out.println("Sorry wrong authentication"); //Might want to make a popup here in stead....
-       }
-
+        }
     }
-    private void studentLogin(String mail, String password) throws IOException
-    {
-                
-
+    
+    
+    private void studentLogin(String mail, String password) throws IOException {
         Parent root1;
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/attendance/v1/gui/view/Student.fxml"));
         root1 = (Parent) fxmlLoader.load();
-        
         fxmlLoader.<StudentController>getController();
-
         Stage addStage = new Stage();
         Scene addScene = new Scene(root1);
-
-        
         addStage.setScene(addScene);
         addStage.show();
-        
+
         Stage stage = (Stage) Bn_login.getScene().getWindow();
         stage.close();
+        
+        
     }
-
 
     
     private void teacherLogin(String mail, String password) throws IOException {
         Parent root1;
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/attendance/v1/gui/view/Teacher.fxml"));
         root1 = (Parent) fxmlLoader.load();
-        
         fxmlLoader.<StudentController>getController();
-
         Stage addStage = new Stage();
         Scene addScene = new Scene(root1);
-
-        
         addStage.setScene(addScene);
         addStage.show();
-        
         Stage stage = (Stage) Bn_login.getScene().getWindow();
         stage.close();
     }

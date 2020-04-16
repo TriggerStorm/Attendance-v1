@@ -11,11 +11,12 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import attendance.v1.be.User;
+import attendance.v1.be.LoggedInUser;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import attendance.v1.be.User;
 
 /**
  *
@@ -24,14 +25,19 @@ import java.util.logging.Logger;
 
 
 public class UserDBDAO {
-        private DBConnection dbc;
-
+    public static User loggedInUser;
+    private DBConnection dbc;
+    StudentSubjectDBDAO studentSubjectDBDao;
+    
     public UserDBDAO() {
+        loggedInUser = new User(-1,"","","",0,"",0,"", false, "");
         dbc = new DBConnection();
+        studentSubjectDBDao = new StudentSubjectDBDAO();
     }
         
    
-    public List<User> getAllUsers() throws SQLException{
+    public List<User> getAllUsers() throws SQLException {
+    //  Returns a list of all users and their information as a User data object
         List<User> allUsers = new ArrayList(); //get a list to store the values.
         try(Connection con = dbc.getConnection()){
             String SQLStmt = "SELECT userKey, userName, password, email, phonenr, address, postCode, city, teacher, userIMG  FROM USERS;";
@@ -49,14 +55,8 @@ public class UserDBDAO {
                 String city = rs.getString("city");
                 int isteacher = rs.getInt("teacher");
                 boolean teacher = false;
-                if(isteacher == 0)
-                {
-                    teacher = false;
-                }
-                else if(isteacher==1)
-                {
+                if(isteacher == 1)
                     teacher = true;
-                }
                 String userIMG =  rs.getString("userIMG");
                allUsers.add(new User(userKey, userName, password, email, phoneNr, address, postCode, city, teacher, userIMG)); 
             }    
@@ -66,20 +66,64 @@ public class UserDBDAO {
         
     
     public User getUser(int userKey) throws SQLException {
-        List<User> allUsers = getAllUsers();
-        User user;
-        for (int i = 0; i < allUsers.size(); i++) {
-            user = allUsers.get(i);
-            int testKey = user.getUserKey();
-            if (testKey == userKey)  {
-            return user;
-            }
+    //  Returns a spacific user data object given their user id
+        User user = null;
+        try(Connection con = dbc.getConnection()) {
+            String SQLStmt = "SELECT userName, password, email, phonenr, address, postCode, city, teacher, userIMG FROM USERS WHERE userKey ='" + userKey + "'";
+            Statement statement = con.createStatement();
+            ResultSet rs = statement.executeQuery(SQLStmt);
+            while(rs.next()) //While you have something in the results
+            {
+                String userName = rs.getString("userName");
+                String password = rs.getString("password");
+                String email = rs.getString("email");
+                int phoneNr = rs.getInt("phonenr");
+                String address = rs.getString("address");
+                int postCode = rs.getInt("postCode");
+                String city = rs.getString("city");
+                int isteacher = rs.getInt("teacher");
+                boolean teacher = false;
+                if(isteacher == 1)
+                    teacher = true;
+                String userIMG =  rs.getString("userIMG");
+               user = new User(userKey, userName, password, email, phoneNr, address, postCode, city, teacher, userIMG); 
+            }    
         }
-        return null;  // User does not exist
-    }
+        return user;
+    }   
+ 
     
+    public User getLoggedInUser(String email) throws SQLException {
+    //  Returns a spacific user data object given their user email. Used for LoggedInUser
+
+        User user = null;
+        try(Connection con = dbc.getConnection()) {
+            String SQLStmt = "SELECT userKey, userName, password, phonenr, address, postCode, city, teacher, userIMG FROM USERS WHERE email ='" + email + "'";
+            Statement statement = con.createStatement();
+            ResultSet rs = statement.executeQuery(SQLStmt);
+            while(rs.next()) //While you have something in the results
+            {                
+                int userKey = rs.getInt("userKey");
+                String userName = rs.getString("userName");
+                String password = rs.getString("password");
+                int phoneNr = rs.getInt("phonenr");
+                String address = rs.getString("address");
+                int postCode = rs.getInt("postCode");
+                String city = rs.getString("city");
+                int isteacher = rs.getInt("teacher");
+                boolean teacher = false;
+                if(isteacher == 1)
+                    teacher = true;
+                String userIMG =  rs.getString("userIMG");
+               user = new User(userKey, userName, password, email, phoneNr, address, postCode, city, teacher, userIMG); 
+            }    
+        }
+        return user;
+    }   
+ 
     
-     public User addNewUserToDB(String userName, String password, String email, int phoneNr, String address, int postCode, String city, boolean teacher, String userIMG) { 
+    public User addNewUserToDB(String userName, String password, String email, int phoneNr, String address, int postCode, String city, boolean teacher, String userIMG) { 
+    //  Adds a new user to the User table of the database given the users details. Generated an id key    
         String sql = "INSERT INTO Users(userName, password, email, phoneNr, address, postCode, city, teacher, userIMG) VALUES (?,?,?,?,?,?,?,?,?)";
         User newUser = new User(postCode, userName, password, email, phoneNr, address, postCode, city, teacher, userIMG);
         try (Connection con = dbc.getConnection()) {
@@ -93,13 +137,7 @@ public class UserDBDAO {
             stmt.setString(7, city);
             int isteacher = 0;
             if(teacher == true)
-            {
                 isteacher =1;
-            }
-            else if (teacher=false)
-            {
-                isteacher=1;
-            }
             stmt.setInt(8, isteacher);
             stmt.setString(9, userIMG);
             int affectedRows = stmt.executeUpdate();
@@ -124,10 +162,11 @@ public class UserDBDAO {
      
      
     public User editUser (User userToEdit, String userName, String password, String email, int phoneNr, String address, int postCode, String city, boolean teacher, String userIMG) { 
+    //  Edits a user in the User table of the database given the users new details.  
         try (//Get a connection to the database.
             Connection con = dbc.getConnection()) {
             //Create a prepared statement.
-            String sql = "UPDATE Users SET userName = ?, password = ?, email = ?, phoneNr = ? , address = ? , postCode = ? , city = ? , teacher = ?, userIMG = ? WHERE id = ?";
+            String sql = "UPDATE Users SET userName = ?, password = ?, email = ?, phoneNr = ? , address = ? , postCode = ? , city = ? , teacher = ?, userIMG = ? WHERE email = ?";
             PreparedStatement pstmt = con.prepareStatement(sql);
             //Set parameter values.
            pstmt.setString(1, userName);
@@ -139,16 +178,10 @@ public class UserDBDAO {
             pstmt.setString(7, city);
             int isteacher = 0;
             if(teacher == true)
-            {
-                isteacher =1;
-            }
-            else if (teacher=false)
-            {
-                isteacher=1;
-            }
+                isteacher = 1;
             pstmt.setInt(8, isteacher);
             pstmt.setString(9, userIMG);
-            pstmt.setInt(10, userToEdit.getUserKey());
+            pstmt.setString(10, email);
             //Execute SQL query.
             pstmt.executeUpdate();
             userToEdit.setUserName(userName);
@@ -171,10 +204,12 @@ public class UserDBDAO {
 
        
     public void removeUserFromDB(User userToDelete) {
-        String stat = "DELETE FROM Users WHERE id =?";      // USE ID HERE??????
+    //  Removes a user from the User table of the database given a User data object
+
+        String stat = "DELETE FROM Users WHERE id =?";
         try (Connection con = dbc.getConnection()) {
             PreparedStatement stmt = con.prepareStatement(stat);
-            stmt.setInt(1,userToDelete.getUserKey());                      // IS THIS 0 ??
+            stmt.setInt(1,userToDelete.getUserKey());
             stmt.execute();
         } catch (SQLException ex) {
             System.out.println("Exception " + ex);
@@ -182,58 +217,138 @@ public class UserDBDAO {
     }
       
     
-    public int checkUserLogin(String email, String password) throws SQLException {  // Why an int???
-        List<User> allUsers = getAllUsers();
-        for (int i = 0; i < allUsers.size(); i++) {
-            User userToCheck = allUsers.get(i);
-            if ((userToCheck.getEmail().equals(email)) && (userToCheck.getPassword().equals(password))) {
-                if(userToCheck.getTeacher() == true)
+    public int checkUserLogin(String email, String password) throws SQLException { 
+    //  Confirms the validity of a user given their email and password. Returns a int value denoting their user type: 0 = invalid user, 1 = teacher, 2 = student
+        User tempLogin = null;
+        try(Connection con = dbc.getConnection()){
+            String SQLStmt = "SELECT userKey, userName, phonenr, address, postCode, city, teacher, userIMG  FROM USERS WHERE email = '"+ email + "' AND password ='" + password + "'";
+            Statement statement = con.createStatement();
+            ResultSet rs = statement.executeQuery(SQLStmt);
+            if(rs != null) //If there is an entry
+            {
+                while(rs.next())
                 {
-                    return 1; //user and password match = true
+                    int userKey = rs.getInt("userKey");
+                    String userName = rs.getString("userName");
+                    int phoneNr = rs.getInt("phonenr");
+                    String address = rs.getString("address");
+                    int postCode = rs.getInt("postCode");
+                    String city = rs.getString("city");
+                    int isteacher = rs.getInt("teacher");
+                    boolean teacher = false;
+                    if(isteacher == 1)
+                        teacher = true;
+                    String userIMG =  rs.getString("userIMG");
+                    tempLogin = new User(userKey, userName, password, email, phoneNr, address, postCode, city, teacher, userIMG);
+
+                    LoggedInUser lUser = LoggedInUser.getInstance();
+                    lUser.setUserKey(tempLogin.getUserKey());
+                    lUser.setUserName(tempLogin.getUserName());
+                    lUser.setEmail(email);
+                    lUser.setPassword(password);
+                    lUser.setPhoneNr(tempLogin.getPhoneNr());
+                    lUser.setPostCode(tempLogin.getPostCode());
+                    lUser.setCity(tempLogin.getCity());
+                    lUser.setTeacher(tempLogin.getTeacher());
+                    lUser.setUserIMG(tempLogin.getUserIMG());
+                    lUser.setAddress(tempLogin.getAddress());
+                    if(tempLogin.getTeacher() == true) {
+                        return 1; //user and password match = true
+                    }
+                    else if(tempLogin.getTeacher() == false) {
+                        return 2;
+                    }
                 }
-                else if(userToCheck.getTeacher() == false)
-                {
-                    return 2;
-                }
+            } else {
+                return 0;
             }
         }
-        return 0;// fail log in
+        return 4; //this should never happen.
     }
     
     
     public boolean checkIfTeacher(String email) throws SQLException {
-        List<User> allUsers = getAllUsers();
-        for (int i = 0; i < allUsers.size(); i++) {
-            User userToCheck = allUsers.get(i);
-            if (userToCheck.getEmail().equals(email)) {
-                if (userToCheck.getTeacher()) {
-                return true; //user is a teacher
-            } else {
-                    return false;  // user is not a teacher
+    //  Returns true if the user is a teacher    
+        try(Connection con = dbc.getConnection()){
+            boolean teacher = false;
+            String SQLStmt = "SELECT teacher FROM Users WHERE  email='" + email + "'";
+            Statement statement = con.createStatement();
+            ResultSet rs = statement.executeQuery(SQLStmt);
+            while(rs.next()) //While you have something in the results
+            {
+                int isTeacher =  rs.getInt("teacher");
+                if(isTeacher == 1) {
+                    teacher=true;
+                } else if(isTeacher == 0) {
+                    teacher = false;
                 }
             }
+            return teacher;
         }
-        return false;  // user is not in allUsers
-    }
-        
-        
-    public String getUserNameFromKey(int studentKey) throws SQLException {
-        List<User> allUsers = getAllUsers();
-        for (int i = 0; i < allUsers.size(); i++) {
-            User testUser = allUsers.get(i);
-            if (testUser.getUserKey() == studentKey) {
-                return testUser.getUserName();
-            }
-        }
-        return null;
-    }
-   
-   
-    public String getAllStudentsInASubject(int studentKey) throws SQLException {
 
-        
-        return null;
- 
-    
     }
+    public boolean checkIfUserExist(String email) throws SQLException {
+    //  Returns true is users email is found in the User table of the DB
+        try(Connection con = dbc.getConnection()){
+            String SQLStmt = "SELECT * FROM Users WHERE email='" + email + "'";
+            Statement statement = con.createStatement();
+            ResultSet rs = statement.executeQuery(SQLStmt);
+           while(rs.next())
+           {
+               return true;
+           }
+        }
+        return false;
+    }
+       
+    
+    public String getUserNameFromKey(int studentKey) throws SQLException {
+    // Returns the name of a student given their user key
+        try(Connection con = dbc.getConnection()){
+            String userName = null;
+            String SQLStmt = "SELECT userName FROM Users WHERE  userKey='" + studentKey + "'";
+            Statement statement = con.createStatement();
+            ResultSet rs = statement.executeQuery(SQLStmt);
+            while(rs.next()) //While you have something in the results
+            {
+                userName =  rs.getString("userName");
+            }
+            return userName;
+        }
+    }
+        
+    
+    public List<User> getAllStudentsInASubject(int subjectKey) throws SQLException {
+    //  Returns a list of all students ( User data objects) in a given subject
+        List<User> studentsInSubject = new ArrayList<>();
+        String stmt = "Select u.userKey, u.userName, u.password, u.email, u.email,u.phonenr, u.address, u.teacher, u.userIMG, u.postCode, u.city FROM Users u JOIN Student_Subjects s On u.userKey = s.userKey WHERE s.subjectKey = ?";
+        try (Connection con = dbc.getConnection()) {
+            PreparedStatement pstmt = con.prepareStatement(stmt);
+            pstmt.setInt(1,subjectKey);
+            ResultSet rs = pstmt.executeQuery();
+            while(rs.next())
+            {
+                int userKey = rs.getInt("userKey");
+                String userName = rs.getString("userName");
+                String password = rs.getString("password");
+                String email = rs.getString("email");
+                int phoneNr = rs.getInt("phonenr");
+                String address = rs.getString("address");
+                int postCode = rs.getInt("postCode");
+                String city = rs.getString("city");
+                int isteacher = rs.getInt("teacher");
+                boolean teacher = false;
+                if(isteacher == 1)
+                    teacher = true;
+                String userIMG =  rs.getString("userIMG");
+               studentsInSubject.add(new User(userKey, userName, password, email, phoneNr, address, postCode, city, teacher, userIMG)); 
+            }
+        } catch (SQLException ex) {
+            System.out.println("Exception " + ex);
+        }
+        return studentsInSubject;
+    }
+    
+    
 }
+

@@ -3,6 +3,8 @@
 <?import com.jfoenix.controls.JFXButton?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.SplitPane?>
 <?import javafx.scene.control.Tab?>
@@ -13,10 +15,14 @@
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
 
 <AnchorPane id="AnchorPane" prefHeight="638.0" prefWidth="722.0" style="-fx-background-color: whitesmoke;" stylesheets="@attendance.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="attendance.v1.gui.controller.StudentController">
     <children>
@@ -24,20 +30,21 @@
          <children>
             <AnchorPane prefHeight="30.0" prefWidth="700.0">
                <children>
-                    <Label fx:id="date" layoutX="518.0" layoutY="8.0" minHeight="16" minWidth="69" text="Logged in as" AnchorPane.leftAnchor="518.0">
+                    <Label fx:id="date" layoutX="539.0" layoutY="8.0" minHeight="16" minWidth="69" text="Logged in as" AnchorPane.leftAnchor="539.0">
                      <font>
                         <Font name="AdobeKaitiStd-Regular" size="12.0" />
                      </font>
                   </Label>
-                  <Label fx:id="TF_logInAss" layoutX="603.0" layoutY="7.0" text="MockUser" textFill="#1c08f8">
+                  <Label fx:id="TF_logInAss" layoutX="621.0" layoutY="7.0" text="MockUser" textFill="#1c08f8">
                      <font>
                         <Font size="14.0" />
                      </font>
                   </Label>
-                  <Label fx:id="date" layoutX="264.0" layoutY="7.0" prefHeight="18.0" prefWidth="182.0" styleClass="textsm2" text="Wednesday 24th February" />
+                  <Label fx:id="date" layoutX="307.0" layoutY="7.0" prefHeight="18.0" prefWidth="182.0" styleClass="textsm2" text="Wednesday 24th February" />
+                  <Text fill="#e11919" layoutX="690.0" layoutY="40.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Edit" />
                   <Button fx:id="Bn_EditOwn" layoutX="680.0" layoutY="1.0" mnemonicParsing="false" onAction="#handle_editown" prefHeight="12.0" prefWidth="10.0" style="-fx-background-color: whie;">
                      <graphic>
-                        <ImageView fitHeight="25.0" fitWidth="27.0" pickOnBounds="true" preserveRatio="true">
+                        <ImageView fx:id="miniImg" fitHeight="25.0" fitWidth="27.0" pickOnBounds="true" preserveRatio="true">
                            <image>
                               <Image url="@../assets/usericon30x30.png" />
                            </image>
@@ -65,22 +72,22 @@
                   </HBox>
                </children>
             </AnchorPane>
-            <AnchorPane prefHeight="90.0" prefWidth="700.0">
+            <AnchorPane onMouseClicked="#handle_pane" prefHeight="90.0" prefWidth="700.0">
                <children>
-                  <Label fx:id="Lb_logInUser" layoutX="52.0" layoutY="64.0" text="MockUser" textFill="#1c08f8">
+                  <Label fx:id="Lb_logInUser" layoutX="34.0" layoutY="64.0" text="MockUser" textFill="#1c08f8">
                      <font>
                         <Font size="14.0" />
                      </font>
                   </Label>
-                  <ImageView layoutX="53.0" layoutY="14.0">
+                  <ImageView fx:id="img" layoutX="53.0" layoutY="14.0">
                      <image>
                         <Image url="@../assets/Untitled-1.png" />
                      </image>
                   </ImageView>
-                  <JFXButton fx:id="Bn_SCO" buttonType="RAISED" layoutX="172.0" layoutY="23.0" onAction="#handle_SCO" styleClass="coursebtn" stylesheets="@../css/Attendance.css" text="SCO" />
-                  <JFXButton fx:id="Bn_SDE" buttonType="RAISED" layoutX="300.0" layoutY="23.0" onAction="#handle_SDE" styleClass="coursebtn" stylesheets="@../css/Attendance.css" text="SDE" />
-                  <JFXButton fx:id="Bn_DBOS" buttonType="RAISED" layoutX="425.0" layoutY="23.0" onAction="#handle_DBOS" styleClass="coursebtn" stylesheets="@../css/Attendance.css" text="DB/OS" />
-                  <JFXButton fx:id="Bn_ITO" buttonType="RAISED" layoutX="569.0" layoutY="23.0" onAction="#handle_ITO" styleClass="coursebtn" stylesheets="@../css/Attendance.css" text="ITO" />
+                  <JFXButton fx:id="Bn_SCO" buttonType="RAISED" layoutX="175.0" layoutY="23.0" onAction="#handle_SCO" prefHeight="55.0" prefWidth="84.0" styleClass="coursebtn" stylesheets="@../css/Attendance.css" text="SCO" />
+                  <JFXButton fx:id="Bn_SDE" buttonType="RAISED" layoutX="305.0" layoutY="23.0" onAction="#handle_SDE" prefHeight="55.0" prefWidth="84.0" styleClass="coursebtn" stylesheets="@../css/Attendance.css" text="SDE" />
+                  <JFXButton fx:id="Bn_DBOS" buttonType="RAISED" layoutX="437.0" layoutY="23.0" onAction="#handle_DBOS" prefHeight="55.0" prefWidth="84.0" styleClass="coursebtn" stylesheets="@../css/Attendance.css" text="DB/OS" />
+                  <JFXButton fx:id="Bn_ITO" buttonType="RAISED" layoutX="569.0" layoutY="23.0" onAction="#handle_ITO" prefHeight="55.0" prefWidth="84.0" styleClass="coursebtn" stylesheets="@../css/Attendance.css" text="ITO" />
                </children></AnchorPane>
             <AnchorPane fx:id="body1" prefHeight="429.0" prefWidth="700.0" styleClass="label1">
                <children>
@@ -103,13 +110,13 @@
                                     <Pane prefHeight="100.0" prefWidth="200.0">
                                        <children>
                                           <TextField fx:id="TF_code" layoutX="33.0" layoutY="14.0" prefHeight="25.0" prefWidth="95.0" promptText="Enter Code" />
-                                          <Button fx:id="Bn_submit" layoutX="34.0" layoutY="50.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="95.0" text="Submit" />
+                                          <Button fx:id="Bn_submit" layoutX="34.0" layoutY="50.0" mnemonicParsing="false" onAction="#submitAttendance" prefHeight="25.0" prefWidth="95.0" text="Submit" />
                                        </children>
                                     </Pane>
                                     <Pane prefHeight="67.0" prefWidth="105.0" />
                                     <Pane prefHeight="100.0" prefWidth="200.0">
                                        <children>
-                                          <Label fx:id="LB_AttendanceRate" layoutX="33.0" layoutY="18.0" prefHeight="64.0" prefWidth="95.0" style="-fx-background-color: #F5F5F5;" styleClass="h2" stylesheets="@../css/Attendance.css" text="69%" textAlignment="CENTER" />
+                                          <Label fx:id="LB_AttendanceRate" layoutX="33.0" layoutY="18.0" prefHeight="64.0" prefWidth="95.0" style="-fx-background-color: #F5F5F5;" styleClass="h2" stylesheets="@../css/Attendance.css" text="0%" textAlignment="CENTER" />
                                           <Label layoutX="32.0" layoutY="11.0" prefHeight="17.0" prefWidth="95.0" styleClass="textsm2" stylesheets="@../css/Attendance.css" text="Attendance Rate" textAlignment="CENTER" />
                                        </children>
                                     </Pane>
@@ -122,7 +129,7 @@
                            <children>
                               <TabPane prefHeight="427.0" prefWidth="554.0" tabClosingPolicy="UNAVAILABLE">
                                 <tabs>
-                                  <Tab text="Calendar">
+                                  <Tab text="Table">
                                        <content>
                                           <TableView fx:id="TBV_attendance" prefHeight="200.0" prefWidth="200.0">
                                             <columns>
@@ -135,6 +142,31 @@
                                             </columns>
                                           </TableView>
                                        </content></Tab>
+                                    <Tab onSelectionChanged="#changeView" text="Calendar">
+                                      <content>
+                                        <AnchorPane fx:id="pane" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                                             <children>
+                                                <GridPane fx:id="gridPane" layoutX="156.0" layoutY="99.0" prefHeight="394.0" prefWidth="554.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                                  <columnConstraints>
+                                                      <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                                      <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                                      <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                                      <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                                      <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                                    <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                                    <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                                  </columnConstraints>
+                                                  <rowConstraints>
+                                                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                  </rowConstraints>
+                                                </GridPane>
+                                             </children></AnchorPane>
+                                      </content>
+                                    </Tab>
                                 </tabs>
                               </TabPane>
                            </children>
@@ -143,7 +175,11 @@
                   </HBox>
                </children>
             </AnchorPane>
-            <AnchorPane prefHeight="55.0" prefWidth="700.0" />
+            <AnchorPane prefHeight="55.0" prefWidth="700.0">
+               <children>
+                  <ComboBox fx:id="month_box" layoutX="148.0" layoutY="14.0" onAction="#changeMonth" prefWidth="150.0" promptText="Current Month" />
+                  <DatePicker fx:id="datepick" layoutX="507.0" layoutY="14.0" onAction="#handle_DatePick" promptText="Absence ---&gt;" />
+               </children></AnchorPane>
          </children>
       </VBox>
     </children>

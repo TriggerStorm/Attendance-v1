@@ -5,9 +5,13 @@
  */
 package attendance.v1.gui.controller;
 
+import attendance.v1.be.LoggedInUser;
+import attendance.v1.bll.BllManager;
 import attendance.v1.gui.model.AttendanceModel;
 import java.net.URL;
+import java.util.Random;
 import java.util.ResourceBundle;
+import java.util.stream.Collectors;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -37,11 +41,15 @@ public class EditUserController implements Initializable {
     private Button Bn_save; // need to add edit stuff to user. // filp
     
     private AttendanceModel Am;
+    private LoggedInUser lu;
+    private BllManager bm;
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        bm = new BllManager();
+        lu = LoggedInUser.getInstance();
         setCB();
     }    
     public void setCB(){
@@ -51,12 +59,27 @@ public class EditUserController implements Initializable {
     }
     @FXML
     private void handle_save(ActionEvent event) {
+        lu.getEmailToCheck();
+        bm.editUser(bm.getLoggedInUser(lu.getEmailToCheck()),TF_name.getText(),TF_showPassWord.getText(),lu.getEmailToCheck(), 0, "", 0, "", false, "");
         Stage stage = (Stage) Bn_save.getScene().getWindow();
         stage.close();
     }
 
     @FXML
     private void handle_resetpassword(ActionEvent event) {
+        
+     String password = new Random().ints(10, 33, 122).mapToObj(i -> String.valueOf((char)i)).collect(Collectors.joining());
+        String SALTCHARS = "ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890";
+        StringBuilder salt = new StringBuilder();
+        Random rnd = new Random();
+        while (salt.length() < 8) { // length of the random string.
+            int index = (int) (rnd.nextFloat() * SALTCHARS.length());
+            salt.append(SALTCHARS.charAt(index));
+        }
+        String saltStr = salt.toString();
+ 
+      TF_showPassWord.setText(saltStr);
+    
     }
 
     @FXML

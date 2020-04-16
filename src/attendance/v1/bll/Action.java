@@ -3,13 +3,18 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package attendance.v1.dal;
+package attendance.v1.bll;
 
-import attendance.v1.be.Student_Classes;
 /**
  *
- * @author admin
+ * @author macos
  */
-public class Student_SubjectDBDAO {
-    
+
+public interface Action {
+
+    void execute(String secretCode);
+
+    void undo();
+
+    String getName();
 }
