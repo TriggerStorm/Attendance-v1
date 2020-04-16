@@ -30,17 +30,17 @@
          <children>
             <AnchorPane prefHeight="30.0" prefWidth="700.0">
                <children>
-                    <Label fx:id="date" layoutX="539.0" layoutY="8.0" minHeight="16" minWidth="69" text="Logged in as" AnchorPane.leftAnchor="539.0">
+                    <Label fx:id="date" layoutX="539.0" layoutY="13.0" minHeight="16" minWidth="69" text="Logged in as" AnchorPane.leftAnchor="539.0">
                      <font>
                         <Font name="AdobeKaitiStd-Regular" size="12.0" />
                      </font>
                   </Label>
-                  <Label fx:id="TF_logInAss" layoutX="621.0" layoutY="7.0" text="MockUser" textFill="#1c08f8">
+                  <Label fx:id="TF_logInAss" layoutX="621.0" layoutY="12.0" text="MockUser" textFill="#1c08f8">
                      <font>
                         <Font size="14.0" />
                      </font>
                   </Label>
-                  <Label fx:id="date" layoutX="307.0" layoutY="7.0" prefHeight="18.0" prefWidth="182.0" styleClass="textsm2" text="Wednesday 24th February" />
+                  <Label fx:id="date" layoutX="307.0" layoutY="12.0" prefHeight="18.0" prefWidth="182.0" styleClass="textsm2" text="Wednesday 24th February" />
                   <Text fill="#e11919" layoutX="690.0" layoutY="40.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Edit" />
                   <Button fx:id="Bn_EditOwn" layoutX="680.0" layoutY="1.0" mnemonicParsing="false" onAction="#handle_editown" prefHeight="12.0" prefWidth="10.0" style="-fx-background-color: whie;">
                      <graphic>
