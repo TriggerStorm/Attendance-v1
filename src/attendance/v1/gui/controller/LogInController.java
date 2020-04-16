@@ -6,7 +6,6 @@
 package attendance.v1.gui.controller;
 
 import attendance.v1.be.LoggedInUser;
-import attendance.v1.be.User;
 import attendance.v1.dal.UserDBDAO;
 import attendance.v1.be.Subject;
 import attendance.v1.be.User;
@@ -57,11 +56,10 @@ public class LogInController implements Initializable {
     @FXML
 
     private void handle_login(ActionEvent event) throws IOException, SQLException{
-    //    bllManager.deleteExpiredAbsences();  // Not working here
-        userModle = new UserModel();
-        String loginmail = TF_email.getText().trim();
-        String passw = TF_password.getText().trim();
-        int loginstate = userModle.CheckUser(loginmail, passw);//returns an int, as it also checks if it is a teacher or a student.
+       userModle = new UserModel();
+       String loginmail = TF_email.getText().trim();
+       String passw = TF_password.getText().trim();
+       int loginstate = userModle.CheckUser(loginmail, passw);//returns an int, as it also checks if it is a teacher or a student.
         switch (loginstate) {
             case 1:  teacherLogin(loginmail, passw); //teacher login needs creation and then place make something like teacherLogin method in stead.
                     break;
@@ -81,6 +79,7 @@ public class LogInController implements Initializable {
         Scene addScene = new Scene(root1);
         addStage.setScene(addScene);
         addStage.show();
+
         Stage stage = (Stage) Bn_login.getScene().getWindow();
         stage.close();
         

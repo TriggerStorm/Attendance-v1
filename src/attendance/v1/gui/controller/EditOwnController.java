@@ -99,7 +99,7 @@ public class EditOwnController implements Initializable {
 
         if (iv.isValidEmail(email) && iv.isValidAddress(addres) && iv.isValidCity(city) && iv.isValidPhoneNumber(phoneNr) && iv.isValidPostCode(postCode))
         {
-           // bm.editUser(bm.getLoggedInUser(lu.getEmail()), name, pass, email, Integer.parseInt(phoneNr), addres,Integer.parseInt(postCode), city,lu.getTeacher(),lu.getUserIMG());
+          bm.editUser(bm.getLoggedInUser(lu.getEmail()), name, pass, email, Integer.parseInt(phoneNr), addres,Integer.parseInt(postCode), city,lu.getTeacher(),lu.getUserIMG());
         Stage stage = (Stage) Bn_save.getScene().getWindow();
         stage.close();
         }

@@ -7,7 +7,6 @@ package attendance.v1.gui.controller;
 
 import attendance.v1.be.LoggedInUser;
 import attendance.v1.bll.BllManager;
-import com.jfoenix.controls.JFXButton;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;

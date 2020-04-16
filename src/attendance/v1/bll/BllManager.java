@@ -10,19 +10,14 @@ import attendance.v1.be.LoggedInUser;
 import attendance.v1.be.Attendance;
 import attendance.v1.be.StudentSubject;
 import attendance.v1.be.Subject;
-import attendance.v1.be.SubjectAttendance;
 import attendance.v1.be.SubjectsHeld;
 import attendance.v1.be.User;
 import attendance.v1.be.SubjectAttendance;
 
-import java.util.List;
 
 import attendance.v1.dal.DalManager;
-import java.sql.SQLException;
 import java.time.LocalDate;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 
 /**

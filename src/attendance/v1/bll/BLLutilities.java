@@ -5,14 +5,9 @@
  */
 package attendance.v1.bll;
 
-import attendance.v1.be.Attendance;
 import attendance.v1.be.LoggedInUser;
-import attendance.v1.be.StudentSubject;
 import attendance.v1.be.Subject;
-import attendance.v1.be.SubjectsHeld;
-import attendance.v1.be.User;
 import attendance.v1.bll.BllManager;
-import attendance.v1.bll.IBLL;
 import attendance.v1.dal.AttendanceDBDAO;
 import attendance.v1.dal.StudentSubjectDBDAO;
 import attendance.v1.dal.SubjectDBDAO;
@@ -24,7 +19,6 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
-import java.text.DecimalFormat;
 
 
 /**
@@ -122,7 +116,7 @@ public class BLLutilities {
         return dateNowString;
     } 
     
-//  Average calculators (NO LONGER IN HERE. In AttendanceDBDAO)
+
     
  
 }

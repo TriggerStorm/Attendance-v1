@@ -11,15 +11,8 @@ import attendance.v1.be.Months;
 import attendance.v1.be.SubjectAttendance;
 import attendance.v1.bll.BLLutilities;
 import attendance.v1.bll.BllManager;
-import attendance.v1.dal.StudentSubjectDBDAO;
 import attendance.v1.gui.model.AttendanceModel;
-import attendance.v1.dal.UserDBDAO;
-import static attendance.v1.dal.UserDBDAO.loggedInUser;
-import com.jfoenix.controls.JFXButton;
-import java.awt.image.RenderedImage;
-import java.io.File;
 import java.io.IOException;
-import java.net.MalformedURLException;
 import java.net.URL;
 import java.sql.SQLException;
 import java.time.LocalDate;
@@ -27,12 +20,9 @@ import java.time.LocalDateTime;
 import java.time.YearMonth;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Locale;
 import java.util.ResourceBundle;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -40,11 +30,8 @@ import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.geometry.Insets;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.chart.BarChart;
-import javafx.scene.chart.PieChart;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
@@ -59,17 +46,9 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.Background;
-import javafx.scene.layout.BackgroundFill;
-import javafx.scene.layout.Border;
-import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.StackPane;
-import javafx.scene.paint.Color;
-import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
-import javax.imageio.ImageIO;
-import javax.swing.JLabel;
 
 /**
  * FXML Controller class
@@ -166,13 +145,17 @@ public class StudentController implements Initializable {
         month_box.setItems(m.getList());
         month_box.getSelectionModel().select(month-1); // select current month as default
         month_box.setVisible(false);
-        lu = LoggedInUser.getInstance();
-        bm = new BllManager();
-        settingTableView();
-        TF_logInAss.setText(lu.getUserName());
-        Lb_logInUser.setText(lu.getUserName());
-        Image image3 = new Image(lu.getUserIMG(), 50, 50, false, false);
-        Image image2 = new Image(lu.getUserIMG(), 10, 10, false, false);
+
+         lu = LoggedInUser.getInstance();
+         bm = new BllManager();
+            settingTableView();
+            String str = lu.getUserName();
+            String[] splited = str.split("\\s+");
+            TF_logInAss.setText(splited[0]);
+            Lb_logInUser.setText(lu.getUserName());
+               Image image3 = new Image(lu.getUserIMG(), 50, 50, false, false);
+               Image image2 = new Image(lu.getUserIMG(), 10, 10, false, false);
+
         miniImg.setImage(image2);
         img.setImage(image3);
     }
@@ -224,16 +207,12 @@ public class StudentController implements Initializable {
     @FXML
     private void handle_SCO(ActionEvent event) throws SQLException {
         lu.setSelectedSubjectKey(1);
-        cal = false;
-        SubjectAttendance sAttendance = bm.getSubjectAttendanceForAStudent(lu.getUserKey(), 1);
-        ObservableList<SubjectAttendance> attendance = FXCollections.observableArrayList(sAttendance);
-        TBV_monday.setCellValueFactory(new PropertyValueFactory<SubjectAttendance, String>("monday"));
-        TBV_tuesday.setCellValueFactory(new PropertyValueFactory<SubjectAttendance, String>("tuesday"));
-        tbv_wednesday.setCellValueFactory(new PropertyValueFactory<SubjectAttendance, String>("wednesday"));
-        TBV_thursday.setCellValueFactory(new PropertyValueFactory<SubjectAttendance, String>("thursday"));
-        TBV_friday.setCellValueFactory(new PropertyValueFactory<SubjectAttendance, String>("friday"));
+       cal = false;
+       SubjectAttendance sAttendance = bm.getSubjectAttendanceForAStudent(lu.getUserKey(), 1);
+       ObservableList<SubjectAttendance> attendance = FXCollections.observableArrayList(sAttendance);
+       setCells();
         LB_AttendanceRate.setText(sAttendance.getPercent());
-        Lb_subjet.setText("SCO");    
+       Lb_subjet.setText("SCO");    
         TBV_attendance.setItems(attendance);
         setCalendar(month_box.getValue().getMonthNumber());
     }
@@ -245,11 +224,7 @@ public class StudentController implements Initializable {
         cal = false;
         SubjectAttendance sAttendance = bm.getSubjectAttendanceForAStudent(lu.getUserKey(), 5);
         ObservableList<SubjectAttendance> attendance = FXCollections.observableArrayList(sAttendance);
-        TBV_monday.setCellValueFactory(new PropertyValueFactory<SubjectAttendance, String>("monday"));
-        TBV_tuesday.setCellValueFactory(new PropertyValueFactory<SubjectAttendance, String>("tuesday"));
-        tbv_wednesday.setCellValueFactory(new PropertyValueFactory<SubjectAttendance, String>("wednesday"));
-        TBV_thursday.setCellValueFactory(new PropertyValueFactory<SubjectAttendance, String>("thursday"));
-        TBV_friday.setCellValueFactory(new PropertyValueFactory<SubjectAttendance, String>("friday"));
+        setCells();
         LB_AttendanceRate.setText(sAttendance.getPercent());
         Lb_subjet.setText("SDE");       
         TBV_attendance.setItems(attendance);
@@ -281,11 +256,7 @@ public class StudentController implements Initializable {
         cal = false;
         SubjectAttendance sAttendance = bm.getSubjectAttendanceForAStudent(lu.getUserKey(),9);
         ObservableList<SubjectAttendance> attendance = FXCollections.observableArrayList(sAttendance);
-        TBV_monday.setCellValueFactory(new PropertyValueFactory<SubjectAttendance, String>("monday"));
-        TBV_tuesday.setCellValueFactory(new PropertyValueFactory<SubjectAttendance, String>("tuesday"));
-        tbv_wednesday.setCellValueFactory(new PropertyValueFactory<SubjectAttendance, String>("wednesday"));
-        TBV_thursday.setCellValueFactory(new PropertyValueFactory<SubjectAttendance, String>("thursday"));
-        TBV_friday.setCellValueFactory(new PropertyValueFactory<SubjectAttendance, String>("friday"));
+        setCells();
         Lb_subjet.setText("ITO");        
         LB_AttendanceRate.setText(sAttendance.getPercent());
         TBV_attendance.setItems(attendance);
@@ -339,94 +310,109 @@ public class StudentController implements Initializable {
     {
         if(!cal) // to make calendar only once unless subject changed
         {
-            String date =  bllu.dateForCalendar(); //get current date
-            String[] ymd = date.split(" "); // split values from each others
-            int year = Integer.parseInt(ymd[2]);
-            int monthNow = Integer.parseInt(ymd[1]);
-            int day = Integer.parseInt(ymd[0]); // converting day, month, year from date to ints
-            YearMonth yearMonthObject = YearMonth.of(year,month);
-            int daysInMonth = yearMonthObject.lengthOfMonth(); // getting how many days is in current month
-            int text = 0;
-            int monthFromDb = 0, yearFromDb = 0;
-            ArrayList<Integer> attList = new ArrayList<>();// list below is list with subjectsHeld for logged student
-            ObservableList<Attendance> list = FXCollections.observableArrayList(bm.getStudentAttendanceForSubject(lu.getUserKey(),lu.getSelectedSubjectKey()));
-            for (int i = 0; i < list.size();i++)
-            {
-                String dayS = list.get(i).getDateHeld();  // getting date as string from list
-                String sub = dayS.substring(0, 10);  //cutting time part
-                String[] oday = sub.split("-");   // again split
-                int onlyday = Integer.parseInt(oday[2]);
-                monthFromDb = Integer.parseInt(oday[1]);
-                yearFromDb = Integer.parseInt(oday[0]);   // again converting date to ints
-                if(month == monthFromDb && year == yearFromDb) // chceck for right month and year from db
-                    attList.add(onlyday);  // adding day value to list
-            }
-            for (int i = 0; i <= daysInMonth/7;i++)
-            {
-                for (int j = 0;j<= daysInMonth/5;j++)  // creating gridpane 7x5
+
+       String date =  bllu.dateForCalendar(); //get current date
+       String[] ymd = date.split(" "); // split values from each others
+       int year = Integer.parseInt(ymd[2]);
+       int monthNow = Integer.parseInt(ymd[1]);
+       int day = Integer.parseInt(ymd[0]); // converting day, month, year from date to ints
+       YearMonth yearMonthObject = YearMonth.of(year,month);
+       int daysInMonth = yearMonthObject.lengthOfMonth(); // getting how many days is in current month
+       int text = 0;
+       int monthFromDb = 0, yearFromDb = 0;
+       ArrayList<Integer> attList = new ArrayList<>();// list below is list with subjectsHeld for logged student
+       ObservableList<Attendance> list = FXCollections.observableArrayList(bm.getStudentAttendanceForSubject(lu.getUserKey(),lu.getSelectedSubjectKey()));
+       for(int i = 0; i< list.size();i++)
+       {
+         String dayS = list.get(i).getDateHeld();  // getting date as string from list
+         String sub = dayS.substring(0, 10);  //cutting time part
+         String[] oday = sub.split("-");   // again split
+         int onlyday = Integer.parseInt(oday[2]);
+         monthFromDb = Integer.parseInt(oday[1]);
+         yearFromDb = Integer.parseInt(oday[0]);   // again converting date to ints
+        
+         if(month == monthFromDb && year == yearFromDb) // chceck for right month and year from db
+         attList.add(onlyday);  // adding day value to list
+           
+       }
+       
+       for(int i = 0;i <= daysInMonth/7;i++)
+       {
+           for(int j = 0;j<= daysInMonth/5;j++)  // creating gridpane 7x5
+           {
+               String dateTimeString ="";
+               if(text<daysInMonth) // process below goal is to get weekday name from string for every day basing on localdatetime
+               {  String str = Integer.toString(text+1)+"-"+Integer.toString(month)+"-"+Integer.toString(year); // creating string using selected year month and day
+               DateTimeFormatter dtf = DateTimeFormatter.ofPattern("d-M-yyyy",Locale.ENGLISH);
+               LocalDateTime localDateTime = LocalDate.parse(str, dtf).atStartOfDay(); // parsing string as  localdate
+               DateTimeFormatter formattter = DateTimeFormatter.ofPattern("EEEE");
+               String dateTimeStringg = localDateTime.format(formattter);
+               dateTimeString = dateTimeStringg;} // getting name of day from date
+               
+                Label[] weekDay = new Label[45];
+                Label[] label = new Label[45];  
+                label[text] = new Label();    //  text is used as text for labels as well as number of index for them
+                label[text].setText(Integer.toString(text+1)+"\n"+"\n"+"\n"+dateTimeString); // sets day number as label text as well as day name
+                StackPane stack = new StackPane();
+               gridPane.setStyle("-fx-background-color: black, white ;\n" +   //creating empty gridpane
+               "  -fx-background-insets: 0, 1 1 0 0 ;\n" + "-fx-padding: 1 ;\n");
+               if(text<daysInMonth)  // adding labels until end of month
+                stack.getChildren().add(label[text]); // adding label to stackpane    ,weekDay[text] 
+                stack.setStyle("-fx-background-color: black, white ;\n" +   // creating empty stackpanes with labels
+                "    -fx-background-insets: 0,0 0 1 1 ;");
+                if((monthNow ==month && text< day-1) || (monthNow != month && text<daysInMonth && month < monthNow)) // adding absences to ALL days before current day
+                    stack.setStyle("-fx-background-color: black, red ;\n" +
+                "    -fx-background-insets: 0,0 0 1 1 ;");
+                if(text == day && monthNow == month_box.getValue().getMonthNumber())  // change color of current day
                 {
-                    String dateTimeString ="";
-                    if (text<daysInMonth) // process below goal is to get weekday name from string for every day basing on localdatetime
-                    {  
-                        String str = Integer.toString(text+1)+"-"+Integer.toString(month)+"-"+Integer.toString(year); // creating string using selected year month and day
-                        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("d-M-yyyy",Locale.ENGLISH);
-                        LocalDateTime localDateTime = LocalDate.parse(str, dtf).atStartOfDay(); // parsing string as  localdate
-                        DateTimeFormatter formattter = DateTimeFormatter.ofPattern("EEEE");
-                        String dateTimeStringg = localDateTime.format(formattter);
-                        dateTimeString = dateTimeStringg;
-                    } // getting name of day from date
-                    Label[] weekDay = new Label[45];
-                    Label[] label = new Label[45];  //weekDay[text] = new Label();
-                    label[text] = new Label();    //  text is used as text for labels as well as number of index for them
-                    label[text].setText(Integer.toString(text+1)+"\n"+"\n"+"\n"+dateTimeString); // sets day number as label text as well as day name
-                    StackPane stack = new StackPane();
-                    gridPane.setStyle("-fx-background-color: black, white ;\n" +   //creating empty gridpane
-                    "  -fx-background-insets: 0, 1 1 0 0 ;\n" + "-fx-padding: 1 ;\n");
-                    if (text < daysInMonth)  // adding labels until end of month
-                        stack.getChildren().add(label[text]); // adding label to stackpane    ,weekDay[text] 
-                    stack.setStyle("-fx-background-color: black, white ;\n" +   // creating empty stackpanes with labels
-                    "    -fx-background-insets: 0,0 0 1 1 ;");
-                    if ((monthNow ==month && text< day-1) || (monthNow != month && text<daysInMonth && month < monthNow)) // adding absences to ALL days before current day
-                            stack.setStyle("-fx-background-color: black, red ;\n" +
-                            "    -fx-background-insets: 0,0 0 1 1 ;");
-                    if (text == day && monthNow == month_box.getValue().getMonthNumber())  // change color of current day
-                    {
-                        gridPane.getChildren().get(text-1).setStyle("-fx-background-color: black, cyan ;\n" +
-                        "    -fx-background-insets: 0, 0 0 1 1 ;");
-                    }
-                    if (text > day && monthNow == month_box.getValue().getMonthNumber())
-                    {
-                        List<String> absList = bm.getMonthlyAbsencesForAStudent(lu.getUserKey(),month);
-                        for (int l = 0;l < absList.size();l++)
-                        {
-                            if (Integer.toString(text).equals(absList.get(l)))
-                                gridPane.getChildren().get(text-1).setStyle("-fx-background-color: black, yellow ;\n" +
-                                "    -fx-background-insets: 0, 0 0 1 1 ;");
-                        }
-                    }
-                    if (monthNow < month_box.getValue().getMonthNumber())
-                    {
-                        List<String> absList = bm.getMonthlyAbsencesForAStudent(lu.getUserKey(), month);
-                        for (int l = 0; l < absList.size();l++)
-                        {
-                            if(Integer.toString(text).equals(absList.get(l)))
-                                gridPane.getChildren().get(text-1).setStyle("-fx-background-color: black, yellow ;\n" +
-                                "    -fx-background-insets: 0, 0 0 1 1 ;");
-                        }
-                    }
-                    gridPane.add(stack, j,i); // adding pane with label to gridpane 
-                    text++;
+                gridPane.getChildren().get(text-1).setStyle("-fx-background-color: black, cyan ;\n" +
+                "    -fx-background-insets: 0, 0 0 1 1 ;");
                 }
-            }
-            for(int i = 0; i<attList.size();i++)
-            {
-                int number = attList.get(i);
-                if(number < day-2 || monthNow != month)  // for every day from list of days from db setting its corresponding pane color to Green
-                gridPane.getChildren().get(number-1).setStyle("-fx-background-color: black, green ;\n" + "    -fx-background-insets: 0, 0 0 1 1 ;");
-            }
-        cal = true; 
+                if(text > day && monthNow == month_box.getValue().getMonthNumber())
+                {
+                    
+                   List<String> absList = bm.getMonthlyAbsencesForAStudent(lu.getUserKey(),month);
+                     for(int l = 0;l < absList.size();l++)
+                     {
+                         if(Integer.toString(text).equals(absList.get(l)))
+                    gridPane.getChildren().get(text-1).setStyle("-fx-background-color: black, yellow ;\n" +
+                    "    -fx-background-insets: 0, 0 0 1 1 ;");
+                     }
+                }
+                if(monthNow < month_box.getValue().getMonthNumber())
+                {
+                      List<String> absList = bm.getMonthlyAbsencesForAStudent(lu.getUserKey(), month);
+                     for(int l = 0;l < absList.size();l++)
+                     {
+                         if(Integer.toString(text).equals(absList.get(l)))
+                    gridPane.getChildren().get(text-1).setStyle("-fx-background-color: black, yellow ;\n" +
+                    "    -fx-background-insets: 0, 0 0 1 1 ;");}
+                }
+                gridPane.add(stack, j,i); // adding pane with label to gridpane 
+                text++;
+                
+                  
+               
+           }
+        }
+       for(int i = 0; i<attList.size();i++)
+       {
+           int number = attList.get(i);
+           if(number < day-2 || monthNow != month)  // for every day from list of days from db setting its corresponding pane color to Green
+           gridPane.getChildren().get(number-1).setStyle("-fx-background-color: black, green ;\n" + "    -fx-background-insets: 0, 0 0 1 1 ;");
+       }
+
+       cal = true; 
         }
     }
-   
+    private void setCells()
+    {
+        TBV_monday.setCellValueFactory(new PropertyValueFactory<SubjectAttendance, String>("monday"));
+        TBV_tuesday.setCellValueFactory(new PropertyValueFactory<SubjectAttendance, String>("tuesday"));
+        tbv_wednesday.setCellValueFactory(new PropertyValueFactory<SubjectAttendance, String>("wednesday"));
+        TBV_thursday.setCellValueFactory(new PropertyValueFactory<SubjectAttendance, String>("thursday"));
+        TBV_friday.setCellValueFactory(new PropertyValueFactory<SubjectAttendance, String>("friday"));
+    }
+
     
 }

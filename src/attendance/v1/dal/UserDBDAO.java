@@ -11,15 +11,12 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import attendance.v1.be.User;
 import attendance.v1.be.LoggedInUser;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import attendance.v1.be.User;
-import attendance.v1.be.StudentSubject;
-import attendance.v1.be.SubjectsHeld;
 
 /**
  *
