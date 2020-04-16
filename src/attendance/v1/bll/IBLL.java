@@ -60,9 +60,9 @@ public interface IBLL {
 // SubjectsHeldDBDAO methods
     public SubjectsHeld addSubjectsHeld(int skey, String date, String secretCode);
     public SubjectsHeld newSubjectsHeld(int sKey, String date, String secretCode);
-   public String getLatestSubjectsHeldDate(int skey);
-   public boolean deleteSubjectsHeld(SubjectsHeld subjectsHeld);
-   public List<SubjectsHeld> getAllSubjectsHeldForASubject(int subjectKey);
+    public String getLatestSubjectsHeldDate(int skey);
+    public boolean deleteSubjectsHeld(SubjectsHeld subjectsHeld);
+    public List<SubjectsHeld> getAllSubjectsHeldForASubject(int subjectKey);
    
    
 // SubjectDBDAO methods

@@ -6,22 +6,15 @@
 package attendance.v1.dal;
 
 import attendance.v1.be.Absence;
-import attendance.v1.be.Attendance;
 import com.microsoft.sqlserver.jdbc.SQLServerException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.Statement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.time.LocalDate;
-import java.time.ZoneId;
-import java.time.format.DateTimeFormatter;
-import static java.time.temporal.TemporalQueries.localDate;
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Date;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -52,36 +45,19 @@ public class AbsenceDBDAO {
             {
                 int userKey = rs.getInt("studentKey");
                 allAbsencesForADate.add(new Absence(userKey, date)); 
-//System.out.println("");
-//System.out.println("Found entry");
             }    
         }
-// TEST   
-/*System.out.println("");
-System.out.println("List of Absences on " + date);
-        for (int i = 0; i < allAbsencesForADate.size(); i++) {
-        Absence absence = allAbsencesForADate.get(i);
-System.out.println("");
-System.out.println(i + ": Studentkey= "+ absence.getStudentKey() + "  Date: " + absence.getDate()); 
-        } */
         return allAbsencesForADate;
     }
         
     
     public int[] getTotalOfAbsencesInAMonthByDay(int monthInt) throws SQLException {
+    // Returns an int array of size 31 to represent the absences of each day of a given month    
         int[] totalOfAbsencesInAMonthByDay = new int[31];
         java.sql.Date sqlStartDate = convertMonthIntToSQLDate(monthInt);
         LocalDate startDate = sqlStartDate.toLocalDate();
         LocalDate thisDate;
         for (int i = 0; i < 31; i++) {
- /*         java.sql.Date thisSQLDate = java.sql.Date.valueOf(thisDate); // converts LocalDate date to sqlDate
-            try (Connection con = dbc.getConnection()) {
-                String SQLStmt = "SELECT * FROM ABSENCE WHERE Date = '" + thisSQLDate + "';";
-                Statement statement = con.createStatement();
-                ResultSet rs = statement.executeQuery(SQLStmt);
-                while(rs.next()) //While you have something in the results
-                {
-                }  */
             thisDate = startDate.plusDays(i);
             List<Absence> absences = getAllAbsencesOnAGivenDate(thisDate);
             totalOfAbsencesInAMonthByDay[i] = absences.size();
@@ -114,44 +90,34 @@ System.out.println(i + ": Studentkey= "+ absence.getStudentKey() + "  Date: " + 
     }
      
      
-    public void submitAbsence (Absence absence) throws SQLException {  // just a test for now
+    public void submitAbsence (Absence absence) throws SQLException {
     //  Adds an absence to the DB (from DatePicker) 
-System.out.println("");
-System.out.println("DBDAO student = " + absence.getStudentKey()); 
-System.out.println("");
-System.out.println("DBDAO date picked = " + absence.getDate());
         if (!checkForAbsenceInDB(absence)) {
-        String sql = "INSERT INTO ABSENCE(studentKey, date) VALUES (?,?)";
-        java.sql.Date sqlDate = java.sql.Date.valueOf(absence.getDate()); // converts LocalDate date to sqlDate
-        try (Connection con = dbc.getConnection()) {
-            PreparedStatement stmt = con.prepareStatement(sql, PreparedStatement.RETURN_GENERATED_KEYS);
-            stmt.setInt(1, absence.getStudentKey());
-            stmt.setDate(2, sqlDate);
-            int affectedRows = stmt.executeUpdate();
-            if (affectedRows == 0) {
-                throw new SQLException("Creating absence failed, no rows affected.");
+            String sql = "INSERT INTO ABSENCE(studentKey, date) VALUES (?,?)";
+            java.sql.Date sqlDate = java.sql.Date.valueOf(absence.getDate()); // converts LocalDate date to sqlDate
+            try (Connection con = dbc.getConnection()) {
+                PreparedStatement stmt = con.prepareStatement(sql, PreparedStatement.RETURN_GENERATED_KEYS);
+                stmt.setInt(1, absence.getStudentKey());
+                stmt.setDate(2, sqlDate);
+                int affectedRows = stmt.executeUpdate();
+                if (affectedRows == 0) {
+                    throw new SQLException("Creating absence failed, no rows affected.");
+                }
+            } catch (SQLServerException ex) {
+                Logger.getLogger(AttendanceDBDAO.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (SQLException ex) {
+                Logger.getLogger(AttendanceDBDAO.class.getName()).log(Level.SEVERE, null, ex);
             }
-        } catch (SQLServerException ex) {
-            Logger.getLogger(AttendanceDBDAO.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (SQLException ex) {
-            Logger.getLogger(AttendanceDBDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
-  //      return BE entity (studentKey, datePicked)??
-        }
- //       getAllAbsencesOnAGivenDate(absence.getDate());  // TEST 
-        deleteExpiredAbsences();  //TEST
- //       getMonthlyAbsencesForAStudent(594, 4);  //TEST
         int testmonth = 4;
         int[] test = getTotalOfAbsencesInAMonthByDay(testmonth);
         for (int i = 0; i < test.length; i++) {
-System.out.println("");
-System.out.println("m: " + testmonth + " d: " + i + " absences = " + test[i]);             
         }
     }
     
 
     public void deleteExpiredAbsences() throws SQLException {
-    //  Deletes all absences odd than today
+    //  Deletes all absences older than today
         java.sql.Date sqlExpiryDate = java.sql.Date.valueOf(LocalDate.now());
         String SQLStmt = "DELETE FROM ABSENCE WHERE DATE < '" + sqlExpiryDate + "';";
         try (Connection con = dbc.getConnection()) {
@@ -171,14 +137,10 @@ System.out.println("m: " + testmonth + " d: " + i + " absences = " + test[i]);
             ResultSet rs = stmt.executeQuery(SQLStmt);
             while(rs.next())
             {
-System.out.println("");
-System.out.println("ERROR - Absence already submitted");             
-                return true;
+                return true;  // Absence found
             }
         }
-System.out.println("");
-System.out.println( "New Absence submitted");  
-        return false;
+        return false;  //  No Absence found
     }
         
      
@@ -193,7 +155,7 @@ System.out.println( "New Absence submitted");
         String firstDayOfMonthString = yearString + "-" + MonthString + "-01"; 
        LocalDate date = LocalDate.parse(firstDayOfMonthString);
        java.sql.Date sqlDate = java.sql.Date.valueOf(date);
-       return sqlDate;
+       return sqlDate;  // First day of the month given in SQL firmat
     }
      
          

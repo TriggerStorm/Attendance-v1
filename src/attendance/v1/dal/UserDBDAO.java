@@ -39,7 +39,8 @@ public class UserDBDAO {
     }
         
    
-    public List<User> getAllUsers() throws SQLException{
+    public List<User> getAllUsers() throws SQLException {
+    //  Returns a list of all users and their information as a User data object
         List<User> allUsers = new ArrayList(); //get a list to store the values.
         try(Connection con = dbc.getConnection()){
             String SQLStmt = "SELECT userKey, userName, password, email, phonenr, address, postCode, city, teacher, userIMG  FROM USERS;";
@@ -68,6 +69,7 @@ public class UserDBDAO {
         
     
     public User getUser(int userKey) throws SQLException {
+    //  Returns a spacific user data object given their user id
         User user = null;
         try(Connection con = dbc.getConnection()) {
             String SQLStmt = "SELECT userName, password, email, phonenr, address, postCode, city, teacher, userIMG FROM USERS WHERE userKey ='" + userKey + "'";
@@ -95,6 +97,8 @@ public class UserDBDAO {
  
     
     public User getLoggedInUser(String email) throws SQLException {
+    //  Returns a spacific user data object given their user email. Used for LoggedInUser
+
         User user = null;
         try(Connection con = dbc.getConnection()) {
             String SQLStmt = "SELECT userKey, userName, password, phonenr, address, postCode, city, teacher, userIMG FROM USERS WHERE email ='" + email + "'";
@@ -121,7 +125,8 @@ public class UserDBDAO {
     }   
  
     
-     public User addNewUserToDB(String userName, String password, String email, int phoneNr, String address, int postCode, String city, boolean teacher, String userIMG) { 
+    public User addNewUserToDB(String userName, String password, String email, int phoneNr, String address, int postCode, String city, boolean teacher, String userIMG) { 
+    //  Adds a new user to the User table of the database given the users details. Generated an id key    
         String sql = "INSERT INTO Users(userName, password, email, phoneNr, address, postCode, city, teacher, userIMG) VALUES (?,?,?,?,?,?,?,?,?)";
         User newUser = new User(postCode, userName, password, email, phoneNr, address, postCode, city, teacher, userIMG);
         try (Connection con = dbc.getConnection()) {
@@ -160,6 +165,7 @@ public class UserDBDAO {
      
      
     public User editUser (User userToEdit, String userName, String password, String email, int phoneNr, String address, int postCode, String city, boolean teacher, String userIMG) { 
+    //  Edits a user in the User table of the database given the users new details.  
         try (//Get a connection to the database.
             Connection con = dbc.getConnection()) {
             //Create a prepared statement.
@@ -201,7 +207,9 @@ public class UserDBDAO {
 
        
     public void removeUserFromDB(User userToDelete) {
-        String stat = "DELETE FROM Users WHERE id =?";      // USE ID HERE??????
+    //  Removes a user from the User table of the database given a User data object
+
+        String stat = "DELETE FROM Users WHERE id =?";
         try (Connection con = dbc.getConnection()) {
             PreparedStatement stmt = con.prepareStatement(stat);
             stmt.setInt(1,userToDelete.getUserKey());
@@ -212,7 +220,8 @@ public class UserDBDAO {
     }
       
     
-    public int checkUserLogin(String email, String password) throws SQLException {  // Why an int???
+    public int checkUserLogin(String email, String password) throws SQLException { 
+    //  Confirms the validity of a user given their email and password. Returns a int value denoting their user type: 0 = invalid user, 1 = teacher, 2 = student
         User tempLogin = null;
         try(Connection con = dbc.getConnection()){
             String SQLStmt = "SELECT userKey, userName, phonenr, address, postCode, city, teacher, userIMG  FROM USERS WHERE email = '"+ email + "' AND password ='" + password + "'";
@@ -261,7 +270,6 @@ public class UserDBDAO {
     }
     
     
-    
     public boolean checkIfTeacher(String email) throws SQLException {
     //  Returns true if the user is a teacher    
         try(Connection con = dbc.getConnection()){
@@ -282,7 +290,7 @@ public class UserDBDAO {
         }
     }
     public boolean checkIfUserExist(String email) throws SQLException {
-    
+    //  Returns true is users email is found in the User table of the DB
         try(Connection con = dbc.getConnection()){
             String SQLStmt = "SELECT * FROM Users WHERE email='" + email + "'";
             Statement statement = con.createStatement();
@@ -295,7 +303,9 @@ public class UserDBDAO {
         return false;
     }
        
+    
     public String getUserNameFromKey(int studentKey) throws SQLException {
+    // Returns the name of a student given their user key
         try(Connection con = dbc.getConnection()){
             String userName = null;
             String SQLStmt = "SELECT userName FROM Users WHERE  userKey='" + studentKey + "'";
@@ -311,8 +321,8 @@ public class UserDBDAO {
         
     
     public List<User> getAllStudentsInASubject(int subjectKey) throws SQLException {
+    //  Returns a list of all students ( User data objects) in a given subject
         List<User> studentsInSubject = new ArrayList<>();
-        //List<StudentSubject> allStudentSubjects = studentSubjectDBDao.getAllStudentSubjects();
         String stmt = "Select u.userKey, u.userName, u.password, u.email, u.email,u.phonenr, u.address, u.teacher, u.userIMG, u.postCode, u.city FROM Users u JOIN Student_Subjects s On u.userKey = s.userKey WHERE s.subjectKey = ?";
         try (Connection con = dbc.getConnection()) {
             PreparedStatement pstmt = con.prepareStatement(stmt);

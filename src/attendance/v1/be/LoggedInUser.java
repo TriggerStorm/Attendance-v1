@@ -10,10 +10,7 @@ package attendance.v1.be;
  * @author cille
  */
 public class LoggedInUser{
-    
-   
-     private static LoggedInUser instance = null;
-    
+    private static LoggedInUser instance = null;
     private int userKey;
     private String userName;
     private String password;
@@ -33,7 +30,6 @@ public class LoggedInUser{
         lastCode ="";
      SubjectsHeld sbh = new SubjectsHeld(0,"","");
      attBoolean = false;
-     
     }
 
     public String getLastCode() {

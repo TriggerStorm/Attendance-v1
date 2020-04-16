@@ -138,6 +138,7 @@ public class TeacherController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+       bm.deleteExpiredAbsences();
         date.setText(bllu.locaDateNowToString());
          String date =  bllu.dateForCalendar(); //get current date
        String[] ymd = date.split(" "); // split values from each others
@@ -247,7 +248,8 @@ public class TeacherController implements Initializable {
 
     @FXML
     private void handle_DBOS(ActionEvent event) {
-        ObservableList<SubjectAttendance> dbosList = FXCollections.observableArrayList(bm.getSubjectAttendanceListForAllStudentsInThatSubject(17));
+        cal = false;
+        ObservableList<SubjectAttendance> dbosList = FXCollections.observableArrayList(bm.getSubjectAttendanceListForAllStudentsInThatSubject(69));
        TBV_monday.setCellValueFactory(new PropertyValueFactory<>("monday"));
         TBV_tuesday.setCellValueFactory(new PropertyValueFactory<>("tuesday"));
         tbv_wednesday.setCellValueFactory(new PropertyValueFactory<>("wednesday"));
@@ -256,13 +258,14 @@ public class TeacherController implements Initializable {
         TBV_student.setCellValueFactory(new PropertyValueFactory<>("Name"));
         TBV_Attendance.setCellValueFactory(new PropertyValueFactory<>("percent"));
         Lb_subjet.setText("DB/OS");
-        lu.setSelectedSubjectKey(17);
+        lu.setSelectedSubjectKey(69);  // was 17
         Bn_gencode.setDisable(false);
        if(!bllu.hasOneDayPass(bm.getLatestSubjectsHeldDate(lu.getSelectedSubjectKey())))
        Bn_gencode.setDisable(true);
        TBV_attendance.setItems(dbosList);
        setCalendar(month_box.getValue().getMonthNumber());
     }
+
 
     @FXML
     private void handle_ITO(ActionEvent event) {
