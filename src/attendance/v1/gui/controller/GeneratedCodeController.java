@@ -6,24 +6,15 @@
 package attendance.v1.gui.controller;
 
 import attendance.v1.be.LoggedInUser;
-import attendance.v1.bll.Action;
 import attendance.v1.bll.Action1;
 import attendance.v1.bll.BllManager;
 import attendance.v1.bll.CommandManager;
 import attendance.v1.gui.model.AttendanceModel;
 import java.net.URL;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
 import java.util.ResourceBundle;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
 
 /**
  * FXML Controller class
@@ -34,8 +25,6 @@ public class GeneratedCodeController implements Initializable {
 
     @FXML
     private Label TF_code;
-    private AttendanceModel Am;
-    private BllManager bm;
     private LoggedInUser lu;
     private CommandManager cm;
     private AttendanceModel am;
@@ -47,7 +36,6 @@ public class GeneratedCodeController implements Initializable {
         am = new AttendanceModel();
         cm = CommandManager.getInstance();
         lu = LoggedInUser.getInstance();
-        bm = new BllManager();
         if(lu.getLastCode().length() < 3)
         setcode();
         else

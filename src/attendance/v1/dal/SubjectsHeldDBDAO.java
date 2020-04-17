@@ -80,7 +80,6 @@ public class SubjectsHeldDBDAO {
 
 
     public List<SubjectsHeld> getAllSubjectsHeldForASubject(int subjectKey) throws SQLException {
-        //List<SubjectsHeld> allSubjectsHeld = getALLSubjectsHeld();
         List<SubjectsHeld> allSubjectsHeldForASubject = new ArrayList<>();
                 db = new DBConnection();
         try(Connection con = db.getConnection()) {
@@ -97,12 +96,7 @@ public class SubjectsHeldDBDAO {
         }
 
 
-        /*for (int i = 0; i < allSubjectsHeld.size(); i++) {
-            SubjectsHeld testSubjectsHeld = allSubjectsHeld.get(i);
-            if (testSubjectsHeld.getSubjectKey() == subjectKey) {
-                allSubjectsHeldForASubject.add(testSubjectsHeld);
-            }
-        }*/
+        
         return allSubjectsHeldForASubject;
     }
 
@@ -221,7 +215,7 @@ public class SubjectsHeldDBDAO {
             String tempdate = tempHeld.getDateHeld(); //the date of the subjectHeld we are working with.
             String[] tempDate2 = tempdate.split("T"); //Split the string into date and time
             boolean myIf = tempDate2[0].equalsIgnoreCase(date); //check that the date of the subjectHeld we are working with, equals the date we have been passed.
-       //     System.out.println(tempDate2[0]+"=========??????"+date);
+
             if(myIf) //if it matches...
             {
                 theSubjectHeld = allHeld.get(i); //the the subject.

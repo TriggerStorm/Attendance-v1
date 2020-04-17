@@ -8,9 +8,7 @@ package attendance.v1.dal;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
-import java.sql.Statement;
 import java.time.LocalDateTime;
-import java.util.AbstractList;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
@@ -20,12 +18,9 @@ import com.microsoft.sqlserver.jdbc.SQLServerException;
 import java.sql.ResultSet;
 import java.sql.Statement;
 
-import attendance.v1.be.SubjectAttendance;
 import attendance.v1.be.User;
 import attendance.v1.be.Attendance;
 import attendance.v1.be.LoggedInUser;
-import attendance.v1.bll.BllManager;
-import attendance.v1.be.Subject;
 import attendance.v1.be.SubjectsHeld;
 import attendance.v1.be.StudentSubject;
 import attendance.v1.be.SubjectAttendance;
@@ -57,7 +52,11 @@ public class AttendanceDBDAO {
         lu = LoggedInUser.getInstance();
     }
     
-    
+    /**
+     *
+     * @return
+     * @throws SQLException
+     */
     public List<Attendance> getAllAttendances() throws SQLException{
     //  Gets a list of all attendances from the DB
         List<Attendance> allAttendance = new ArrayList(); //get a list to store the values.
@@ -76,7 +75,7 @@ public class AttendanceDBDAO {
         return allAttendance;
     }
      
-     
+
     public SubjectAttendance addNewAttendanceToDB(int studentKey, SubjectsHeld subjectHeld) throws SQLException { 
     //  Adds a new attendance to the DB, and returns the users updated attendance information to the GUI as a SubjectAttendance data object
         int subjectKey = subjectHeld.getSubjectKey();
@@ -257,7 +256,6 @@ public class AttendanceDBDAO {
         double totalOfAllStudentAttendancesInASubject = 0;
         List<User> allstudentsInASubject = tempUserDBDao.getAllStudentsInASubject(subjectKey);
         int numberOfStudentsInASubject = allstudentsInASubject.size();
-        // maybe need an if (numberOfStudentsInASubject > 0) ...
         for (int i = 0; i < numberOfStudentsInASubject; i++) {
             User testUser = allstudentsInASubject.get(i);
             int userKey = testUser.getUserKey();

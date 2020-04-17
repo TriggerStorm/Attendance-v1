@@ -20,6 +20,7 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
 
 <AnchorPane id="AnchorPane" prefHeight="638.0" prefWidth="722.0" style="-fx-background-color: whitesmoke;" stylesheets="@../css/Attendance.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="attendance.v1.gui.controller.TeacherController">
     <children>
@@ -27,17 +28,17 @@
          <children>
             <AnchorPane prefHeight="30.0" prefWidth="700.0">
                <children>
-                    <Label fx:id="date" layoutX="518.0" layoutY="8.0" minHeight="16" minWidth="69" text="Logged in as" AnchorPane.leftAnchor="518.0">
+                    <Label fx:id="date" layoutX="529.0" layoutY="13.0" minHeight="16" minWidth="69" text="Logged in as" AnchorPane.leftAnchor="529.0">
                      <font>
                         <Font name="AdobeKaitiStd-Regular" size="12.0" />
                      </font>
                   </Label>
-                  <Label fx:id="Lb_loginas" layoutX="603.0" layoutY="7.0" text="MockUser" textFill="#1c08f8">
+                  <Label fx:id="Lb_loginas" layoutX="612.0" layoutY="12.0" text="MockUser" textFill="#1c08f8">
                      <font>
                         <Font size="14.0" />
                      </font>
                   </Label>
-                  <Label fx:id="date" layoutX="264.0" layoutY="7.0" prefHeight="18.0" prefWidth="182.0" styleClass="textsm2" text="Wednesday 24th February" />
+                  <Label fx:id="date" layoutX="285.0" layoutY="12.0" prefHeight="18.0" prefWidth="182.0" styleClass="textsm2" text="Wednesday 24th February" />
                   <Button fx:id="Bn_EditOwn" layoutX="679.0" layoutY="1.0" mnemonicParsing="false" onAction="#handle_editown" prefHeight="12.0" prefWidth="10.0" style="-fx-background-color: #f5f5f5;">
                      <graphic>
                         <ImageView fx:id="miniImg" fitHeight="25.0" fitWidth="27.0" pickOnBounds="true" preserveRatio="true">
@@ -47,6 +48,7 @@
                         </ImageView>
                      </graphic>
                   </Button>
+                  <Text fill="#e11919" layoutX="689.0" layoutY="41.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Edit" />
                </children>
             </AnchorPane>
             <AnchorPane fx:id="header" prefHeight="50.0" prefWidth="700.0" styleClass="top-header">
@@ -70,7 +72,7 @@
             </AnchorPane>
             <AnchorPane prefHeight="90.0" prefWidth="700.0">
                <children>
-                  <Label fx:id="Lb_logInUser" layoutX="55.0" layoutY="64.0" text="MockUser" textFill="#1c08f8">
+                  <Label fx:id="Lb_logInUser" alignment="CENTER" contentDisplay="CENTER" layoutX="40.0" layoutY="64.0" text="MockUser" textFill="#1c08f8" AnchorPane.bottomAnchor="6.0" AnchorPane.leftAnchor="40.0" AnchorPane.rightAnchor="619.0" AnchorPane.topAnchor="64.0">
                      <font>
                         <Font size="14.0" />
                      </font>
@@ -80,10 +82,10 @@
                         <Image url="@../assets/Untitled-1.png" />
                      </image>
                   </ImageView>
-                  <JFXButton fx:id="Bn_SCO" buttonType="RAISED" layoutX="191.0" layoutY="17.0" onAction="#handle_SCO" styleClass="coursebtn" stylesheets="@../css/Attendance.css" text="SCO" />
-                  <JFXButton fx:id="Bn_DBOS" buttonType="RAISED" layoutX="430.0" layoutY="17.0" onAction="#handle_DBOS" styleClass="coursebtn" stylesheets="@../css/Attendance.css" text="DB/OS" />
-                  <JFXButton fx:id="Bn_ITO" buttonType="RAISED" layoutX="569.0" layoutY="17.0" onAction="#handle_ITO" styleClass="coursebtn" stylesheets="@../css/Attendance.css" text="ITO" />
-                  <JFXButton fx:id="Bn_SDE" buttonType="RAISED" layoutX="314.0" layoutY="17.0" onAction="#handle_SDE" styleClass="coursebtn" stylesheets="@../css/Attendance.css" text="SDE" />
+                  <JFXButton fx:id="Bn_SCO" buttonType="RAISED" layoutX="183.0" layoutY="17.0" onAction="#handle_SCO" prefHeight="55.0" prefWidth="84.0" styleClass="coursebtn" stylesheets="@../css/Attendance.css" text="SCO" />
+                  <JFXButton fx:id="Bn_DBOS" buttonType="RAISED" layoutX="436.0" layoutY="17.0" onAction="#handle_DBOS" prefHeight="55.0" prefWidth="84.0" styleClass="coursebtn" stylesheets="@../css/Attendance.css" text="DB/OS" />
+                  <JFXButton fx:id="Bn_ITO" buttonType="RAISED" layoutX="568.0" layoutY="17.0" onAction="#handle_ITO" prefHeight="55.0" prefWidth="84.0" styleClass="coursebtn" stylesheets="@../css/Attendance.css" text="ITO" />
+                  <JFXButton fx:id="Bn_SDE" buttonType="RAISED" layoutX="308.0" layoutY="17.0" onAction="#handle_SDE" prefHeight="55.0" prefWidth="84.0" styleClass="coursebtn" stylesheets="@../css/Attendance.css" text="SDE" />
                </children></AnchorPane>
             <AnchorPane fx:id="body1" prefHeight="429.0" prefWidth="700.0" styleClass="label1">
                <children>
@@ -137,13 +139,13 @@
                                        <content>
                                           <TableView fx:id="TBV_attendance" prefHeight="200.0" prefWidth="200.0">
                                             <columns>
-                                                <TableColumn fx:id="TBV_student" prefWidth="75.0" text="Student" />
-                                              <TableColumn fx:id="TBV_monday" prefWidth="75.0" text="Monday" />
-                                              <TableColumn fx:id="TBV_tuesday" prefWidth="75.0" text="Tuesday" />
-                                                <TableColumn fx:id="tbv_wednesday" prefWidth="75.0" text="Wednesday" />
-                                                <TableColumn fx:id="TBV_thursday" prefWidth="75.0" text="Thursday" />
-                                                <TableColumn fx:id="TBV_friday" prefWidth="75.0" text="Friday" />
-                                                <TableColumn fx:id="TBV_Attendance" prefWidth="104.0" text="Attendance %" />
+                                                <TableColumn fx:id="TBV_student" prefWidth="135.0" text="Student" />
+                                              <TableColumn fx:id="TBV_monday" prefWidth="64.0" text="Monday" />
+                                              <TableColumn fx:id="TBV_tuesday" prefWidth="57.0" text="Tuesday" />
+                                                <TableColumn fx:id="tbv_wednesday" prefWidth="79.0" text="Wednesday" />
+                                                <TableColumn fx:id="TBV_thursday" prefWidth="64.0" text="Thursday" />
+                                                <TableColumn fx:id="TBV_friday" prefWidth="69.0" text="Friday" />
+                                                <TableColumn fx:id="TBV_Attendance" prefWidth="86.0" text="Attendance %" />
                                             </columns>
                                           </TableView>
                                        </content></Tab>
