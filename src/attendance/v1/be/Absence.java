@@ -9,11 +9,13 @@ import java.time.LocalDate;
 
 /**
  *
- * @author admin
+ * @author Trigger, Filip, Cecillia and Alan
  */
+
 public class Absence {
     private int studentKey;
     private LocalDate date;
+    
     
     public  Absence(int studentKey, LocalDate date) {
         this.studentKey = studentKey;
