@@ -77,6 +77,7 @@ public class StudentController implements Initializable {
     @FXML
     private AnchorPane body1;
     @FXML
+
     private TableView<SubjectAttendance> TBV_attendance;
     @FXML
     private TableColumn<SubjectAttendance,String> TBV_monday;
@@ -89,6 +90,7 @@ public class StudentController implements Initializable {
     @FXML
     private TableColumn<SubjectAttendance, String> TBV_friday;
     
+
     @FXML
     private Button Bn_EditOwn;
     @FXML
@@ -105,8 +107,10 @@ public class StudentController implements Initializable {
     private Label LB_AttendanceRate;
     
     private AttendanceModel Am;
+
   
     private LoggedInUser lu;
+
     @FXML
     private Label Lb_logInUser;
     @FXML
@@ -205,6 +209,7 @@ public class StudentController implements Initializable {
     
 
     @FXML
+
     private void handle_SCO(ActionEvent event) throws SQLException {
         lu.setSelectedSubjectKey(1);
        cal = false;
@@ -216,6 +221,7 @@ public class StudentController implements Initializable {
         TBV_attendance.setItems(attendance);
         setCalendar(month_box.getValue().getMonthNumber());
     }
+
 
     
     @FXML
@@ -265,6 +271,7 @@ public class StudentController implements Initializable {
     
     
     @FXML
+
     private void submitAttendance(ActionEvent event) {
         String selectedSubject = Lb_subjet.getText();
         String code = TF_code.getText();
@@ -280,12 +287,15 @@ public class StudentController implements Initializable {
             a.show();
         }
         lu.setBooleanToFalse();
+
     }
 
     
     @FXML
+
     private void handle_pane(MouseEvent event) {
     }
+
 
     
     @FXML
@@ -299,6 +309,7 @@ public class StudentController implements Initializable {
 
     
     @FXML
+
     private void changeMonth(ActionEvent event) {
         gridPane.getChildren().clear();
         cal = false;
@@ -390,6 +401,7 @@ public class StudentController implements Initializable {
                 }
                 gridPane.add(stack, j,i); // adding pane with label to gridpane 
                 text++;
+
                 
                   
                

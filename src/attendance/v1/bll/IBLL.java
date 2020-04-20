@@ -75,6 +75,6 @@ public interface IBLL {
     public List<String> getMonthlyAbsencesForAStudent(int studentKey, int monthInt);
     public int[] getTotalOfAbsencesInAMonthByDay(int monthInt);
     
-    
+
 }
 

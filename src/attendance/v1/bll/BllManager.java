@@ -29,8 +29,6 @@ import java.util.List;
 public class BllManager implements IBLL {
     private DalManager dalManager = new DalManager();
 
-  
-    
 // UserDBDAO methods
     
     @Override
@@ -240,5 +238,5 @@ public class BllManager implements IBLL {
         return dalManager.getTotalOfAbsencesInAMonthByDay(monthInt);
     }
     
-    
+
 }

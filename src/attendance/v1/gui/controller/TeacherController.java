@@ -4,6 +4,7 @@
  * and open the template in the editor.
  */
 package attendance.v1.gui.controller;
+
 import attendance.v1.be.LoggedInUser;
 import attendance.v1.be.Months;
 import attendance.v1.be.SubjectAttendance;
@@ -237,13 +238,7 @@ public class TeacherController implements Initializable {
     private void handle_DBOS(ActionEvent event) {
         cal = false;
         ObservableList<SubjectAttendance> dbosList = FXCollections.observableArrayList(bm.getSubjectAttendanceListForAllStudentsInThatSubject(69));
-       TBV_monday.setCellValueFactory(new PropertyValueFactory<>("monday"));
-        TBV_tuesday.setCellValueFactory(new PropertyValueFactory<>("tuesday"));
-        tbv_wednesday.setCellValueFactory(new PropertyValueFactory<>("wednesday"));
-        TBV_thursday.setCellValueFactory(new PropertyValueFactory<>("thursday"));
-        TBV_friday.setCellValueFactory(new PropertyValueFactory<>("friday"));
-        TBV_student.setCellValueFactory(new PropertyValueFactory<>("Name"));
-        TBV_Attendance.setCellValueFactory(new PropertyValueFactory<>("percent"));
+        setCells();
         Lb_subjet.setText("DB/OS");
         lu.setSelectedSubjectKey(69);  // was 17
         Bn_gencode.setDisable(false);
@@ -280,6 +275,7 @@ public class TeacherController implements Initializable {
         Bn_gencode.setDisable(false);
        if(!bllu.hasOneDayPass(bm.getLatestSubjectsHeldDate(lu.getSelectedSubjectKey())))
        Bn_gencode.setDisable(true);
+
 
         TBV_attendance.setItems(sdeList);
         setCalendar(month_box.getValue().getMonthNumber());

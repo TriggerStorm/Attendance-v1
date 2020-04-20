@@ -4,6 +4,7 @@
  * and open the template in the editor.
  */
 package attendance.v1.dal;
+
 import attendance.v1.be.Absence;
 import attendance.v1.dal.SecretCodeDBDAO;
 import attendance.v1.be.SubjectAttendance;
@@ -61,6 +62,7 @@ public class DalManager implements IDAL {
     }
     
     
+
     @Override
     public SubjectAttendance getSubjectAttendanceForAStudent(int studentKey, int subjectKey){
         try {
@@ -115,6 +117,7 @@ public class DalManager implements IDAL {
         }
         return null;
     }
+
  
     
     @Override
@@ -245,10 +248,12 @@ public class DalManager implements IDAL {
 
     
     @Override
+
     public SubjectsHeld getSpecificSubjectsHeld(int skey)
     {
         try {
             return subjectsHeldDBDao.getSpecificSubjectsHeld(skey);
+
         } catch (SQLException ex) {
             Logger.getLogger(DalManager.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -297,11 +302,13 @@ public class DalManager implements IDAL {
              return null;
          }
 
+
     
     @Override
     public String getLatestSubjectsHeld(int skey) {
         try {
             return subjectsHeldDBDao.getLatestSubjectsHeld(skey);
+
         } catch (SQLException ex) {
             Logger.getLogger(DalManager.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -374,6 +381,7 @@ public class DalManager implements IDAL {
     }
 
     
+
     @Override
     public List<String> getMonthlyAbsencesForAStudent(int studentKey, int monthInt) {
         try {

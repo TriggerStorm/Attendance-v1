@@ -18,6 +18,7 @@ import com.microsoft.sqlserver.jdbc.SQLServerException;
 import java.sql.ResultSet;
 import java.sql.Statement;
 
+
 import attendance.v1.be.User;
 import attendance.v1.be.Attendance;
 import attendance.v1.be.LoggedInUser;
@@ -76,6 +77,7 @@ public class AttendanceDBDAO {
     }
      
 
+
     public SubjectAttendance addNewAttendanceToDB(int studentKey, SubjectsHeld subjectHeld) throws SQLException { 
     //  Adds a new attendance to the DB, and returns the users updated attendance information to the GUI as a SubjectAttendance data object
         int subjectKey = subjectHeld.getSubjectKey();
@@ -104,6 +106,7 @@ public class AttendanceDBDAO {
         } catch (SQLException ex) {
             Logger.getLogger(AttendanceDBDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
+
         return getSubjectAttendanceForAStudent(studentKey, subjectKey);
     }
    
@@ -148,6 +151,7 @@ public class AttendanceDBDAO {
     }
     
 
+
     public List<Attendance> getAllOfAStudentsAttendanceForASubject(int studentKey, int subjectKey) throws SQLException {
     //  Returns all attendances for all students in a subject   
         List<Attendance> studentAttendanceInSubject = new ArrayList<>();
@@ -163,6 +167,7 @@ public class AttendanceDBDAO {
         }
         return studentAttendanceInSubject;
     }
+
 
  
     public List<Attendance> getAllAttendanceForSubject(int subjectKey) throws SQLException {
@@ -329,7 +334,6 @@ public class AttendanceDBDAO {
         }
         return studentAttendanceInSubject;
     }
-
 
 }
 

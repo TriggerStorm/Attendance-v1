@@ -285,6 +285,7 @@ public class UserDBDAO {
             }
             return teacher;
         }
+
     }
     public boolean checkIfUserExist(String email) throws SQLException {
     //  Returns true is users email is found in the User table of the DB
@@ -350,3 +351,4 @@ public class UserDBDAO {
     
     
 }
+

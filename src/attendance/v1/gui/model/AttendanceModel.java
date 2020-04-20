@@ -5,6 +5,7 @@
  */
 package attendance.v1.gui.model;
 
+
 import attendance.v1.be.Absence;
 import attendance.v1.be.Attendance;
 import attendance.v1.be.SubjectAttendance;
